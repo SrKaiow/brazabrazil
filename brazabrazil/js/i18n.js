@@ -1,0 +1,224 @@
+/* ============================================================
+   BRAZABRAZIL — TRANSLATIONS
+   Languages: en (English UK) · pt-BR (Português Brasil)
+              pt-PT (Português Portugal) · es (Español)
+
+   Each key has one text per language. To change a text on the site,
+   find it here and edit it. HTML tags like <em> are allowed.
+   ============================================================ */
+window.LANGS = [
+  { code: "en",    label: "English",   short: "EN", flag: "gb" },
+  { code: "pt-BR", label: "Português (Brasil)",   short: "BR", flag: "br" },
+  { code: "pt-PT", label: "Português (Portugal)", short: "PT", flag: "pt" },
+  { code: "es",    label: "Español",   short: "ES", flag: "es" }
+];
+
+window.I18N = {
+  /* ---------- Page meta ---------- */
+  meta_title: {
+    en: "BrazaBrazil — Brazilian & Portuguese Butcher and Groceries in Epsom",
+    "pt-BR": "BrazaBrazil — Açougue e Mercearia Brasileira e Portuguesa em Epsom",
+    "pt-PT": "BrazaBrazil — Talho e Mercearia Brasileira e Portuguesa em Epsom",
+    es: "BrazaBrazil — Carnicería y Tienda Brasileña y Portuguesa en Epsom" },
+  meta_desc: {
+    en: "Brazilian and Portuguese butcher and groceries in Epsom, Surrey. Picanha, fraldinha, linguiça, churrasco boxes and more. Order online for collection or local delivery.",
+    "pt-BR": "Açougue e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, linguiça, kits de churrasco e muito mais. Peça online para retirar ou receber em casa.",
+    "pt-PT": "Talho e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, linguiça, caixas de churrasco e muito mais. Encomende online para levantar ou receber em casa.",
+    es: "Carnicería y tienda brasileña y portuguesa en Epsom, Surrey. Picanha, fraldinha, linguiça, cajas de churrasco y más. Pide online para recoger o recibir a domicilio." },
+
+  /* ---------- Top bar & header ---------- */
+  t_butcher: { en: "Brazilian &amp; Portuguese Butcher", "pt-BR": "Açougue Brasileiro &amp; Português", "pt-PT": "Talho Brasileiro &amp; Português", es: "Carnicería Brasileña &amp; Portuguesa" },
+  t_collect: { en: "Click &amp; Collect", "pt-BR": "Retire na loja", "pt-PT": "Levante na loja", es: "Recoge en tienda" },
+  t_delivery: { en: "Local Delivery", "pt-BR": "Entrega na região", "pt-PT": "Entrega na zona", es: "Entrega local" },
+  t_vip: { en: "🔥 Daily offers — join our VIP group", "pt-BR": "🔥 Ofertas diárias — entre no nosso grupo VIP", "pt-PT": "🔥 Ofertas diárias — junte-se ao nosso grupo VIP", es: "🔥 Ofertas diarias — únete a nuestro grupo VIP" },
+  brand_sub: { en: "Butcher &amp; Groceries", "pt-BR": "Açougue &amp; Mercearia", "pt-PT": "Talho &amp; Mercearia", es: "Carnicería &amp; Tienda" },
+  n_shop: { en: "Shop", "pt-BR": "Loja", "pt-PT": "Loja", es: "Tienda" },
+  n_boxes: { en: "BBQ Boxes", "pt-BR": "Kits de Churrasco", "pt-PT": "Caixas de Churrasco", es: "Cajas BBQ" },
+  n_cuts: { en: "Know your cuts", "pt-BR": "Guia de cortes", "pt-PT": "Guia de cortes", es: "Guía de cortes" },
+  n_about: { en: "About", "pt-BR": "Quem somos", "pt-PT": "Quem somos", es: "Nosotros" },
+  n_visit: { en: "Visit us", "pt-BR": "Visite-nos", "pt-PT": "Visite-nos", es: "Visítanos" },
+  basket: { en: "Basket", "pt-BR": "Carrinho", "pt-PT": "Cesto", es: "Cesta" },
+
+  /* ---------- Hero ---------- */
+  h_eyebrow: { en: "Epsom, Surrey · Since 2026", "pt-BR": "Epsom, Surrey · Desde 2026", "pt-PT": "Epsom, Surrey · Desde 2026", es: "Epsom, Surrey · Desde 2026" },
+  h_title: {
+    en: "The real taste of a <em>Brazilian churrasco</em>, cut fresh for you.",
+    "pt-BR": "O verdadeiro sabor do <em>churrasco brasileiro</em>, cortado na hora para você.",
+    "pt-PT": "O verdadeiro sabor do <em>churrasco brasileiro</em>, cortado na hora para si.",
+    es: "El auténtico sabor del <em>churrasco brasileño</em>, cortado al momento para ti." },
+  h_lead: {
+    en: "Picanha, fraldinha, linguiça and the finest Brazilian &amp; Portuguese groceries — hand-cut by butchers who grew up around the grill.",
+    "pt-BR": "Picanha, fraldinha, linguiça e os melhores produtos brasileiros e portugueses — cortados à mão por açougueiros que cresceram em volta da churrasqueira.",
+    "pt-PT": "Picanha, fraldinha, linguiça e os melhores produtos brasileiros e portugueses — cortados à mão por talhantes que cresceram à volta da grelha.",
+    es: "Picanha, fraldinha, linguiça y los mejores productos brasileños y portugueses — cortados a mano por carniceros que crecieron alrededor de la parrilla." },
+  h_cta1: { en: "Shop the counter", "pt-BR": "Ver os produtos", "pt-PT": "Ver os produtos", es: "Ver productos" },
+  h_cta2: { en: "Build a BBQ box", "pt-BR": "Monte seu churrasco", "pt-PT": "Monte o seu churrasco", es: "Arma tu BBQ" },
+  f1a: { en: "Hand-cut", "pt-BR": "Corte na hora", "pt-PT": "Corte na hora", es: "Cortado a mano" },
+  f1b: { en: "every day", "pt-BR": "todos os dias", "pt-PT": "todos os dias", es: "cada día" },
+  f2a: { en: "Brazilian &amp; Portuguese", "pt-BR": "Brasileiros &amp; portugueses", "pt-PT": "Brasileiros &amp; portugueses", es: "Brasileños &amp; portugueses" },
+  f2b: { en: "cuts", "pt-BR": "cortes e produtos", "pt-PT": "cortes e produtos", es: "cortes y productos" },
+  f3a: { en: "Collect", "pt-BR": "Retire", "pt-PT": "Levante", es: "Recoge" },
+  f3b: { en: "or local delivery", "pt-BR": "ou receba em casa", "pt-PT": "ou receba em casa", es: "o recíbelo en casa" },
+  chart_title: { en: "Brazilian beef cuts", "pt-BR": "Cortes bovinos brasileiros", "pt-PT": "Cortes de vaca brasileiros", es: "Cortes de res brasileños" },
+  chart_hint: { en: "Tap a cut to find it in the shop", "pt-BR": "Toque num corte para encontrá-lo na loja", "pt-PT": "Toque num corte para o encontrar na loja", es: "Toca un corte para verlo en la tienda" },
+
+  /* ---------- Shop ---------- */
+  s_eyebrow: { en: "The counter", "pt-BR": "O balcão", "pt-PT": "O balcão", es: "El mostrador" },
+  s_title: { en: "Fresh from our butchers", "pt-BR": "Fresquinho do nosso açougue", "pt-PT": "Fresquinho do nosso talho", es: "Fresco de nuestra carnicería" },
+  s_sub: {
+    en: "Choose your cuts, pick the weight and send your order — we’ll have it ready for collection or delivery.",
+    "pt-BR": "Escolha os cortes, selecione o peso e envie seu pedido — deixamos tudo pronto para retirada ou entrega.",
+    "pt-PT": "Escolha os cortes, selecione o peso e envie a sua encomenda — deixamos tudo pronto para levantar ou entregar.",
+    es: "Elige tus cortes, selecciona el peso y envía tu pedido — lo tendremos listo para recoger o entregar." },
+  s_search: { en: "Search picanha, linguiça…", "pt-BR": "Buscar picanha, linguiça…", "pt-PT": "Procurar picanha, linguiça…", es: "Buscar picanha, linguiça…" },
+  vip_title: { en: "Daily offers in our WhatsApp VIP group", "pt-BR": "Ofertas diárias no nosso grupo VIP do WhatsApp", "pt-PT": "Ofertas diárias no nosso grupo VIP do WhatsApp", es: "Ofertas diarias en nuestro grupo VIP de WhatsApp" },
+  vip_text: {
+    en: "Special prices on picanha, boxes and groceries — every day, only for members.",
+    "pt-BR": "Preços especiais em picanha, kits e mercearia — todos os dias, só para membros.",
+    "pt-PT": "Preços especiais em picanha, caixas e mercearia — todos os dias, só para membros.",
+    es: "Precios especiales en picanha, cajas y productos — cada día, solo para miembros." },
+  vip_join: { en: "Join free", "pt-BR": "Entrar grátis", "pt-PT": "Entrar grátis", es: "Únete gratis" },
+  price_note: {
+    en: "Meat sold by weight is cut to order; the final price is confirmed when weighed.",
+    "pt-BR": "Carnes vendidas por peso são cortadas na hora; o valor final é confirmado na pesagem.",
+    "pt-PT": "Carnes vendidas ao peso são cortadas na hora; o valor final é confirmado na pesagem.",
+    es: "La carne al peso se corta al momento; el precio final se confirma al pesarla." },
+
+  /* ---------- Boxes ---------- */
+  b_eyebrow: { en: "Churrasco made easy", "pt-BR": "Churrasco sem complicação", "pt-PT": "Churrasco sem complicações", es: "Churrasco fácil" },
+  b_title: { en: "Brazilian BBQ Boxes", "pt-BR": "Kits de Churrasco", "pt-PT": "Caixas de Churrasco", es: "Cajas de Churrasco" },
+  b_sub: {
+    en: "Never had a Brazilian barbecue? Start here. Everything you need, chosen by our butchers.",
+    "pt-BR": "Tudo o que você precisa para o churrasco, escolhido pelos nossos açougueiros.",
+    "pt-PT": "Tudo o que precisa para o churrasco, escolhido pelos nossos talhantes.",
+    es: "¿Nunca has probado un churrasco brasileño? Empieza aquí. Todo lo que necesitas, elegido por nuestros carniceros." },
+
+  /* ---------- Cuts guide ---------- */
+  c_eyebrow: { en: "Guide", "pt-BR": "Guia", "pt-PT": "Guia", es: "Guía" },
+  c_sub: {
+    en: "Brazilian butchery cuts the animal differently. Here’s how our cuts compare to what you know in the UK.",
+    "pt-BR": "No Reino Unido os cortes têm outros nomes. Veja como pedir cada corte brasileiro por aqui.",
+    "pt-PT": "No Reino Unido os cortes têm outros nomes. Veja a correspondência de cada corte brasileiro.",
+    es: "La carnicería brasileña corta la res de otra forma. Así se comparan nuestros cortes con los del Reino Unido." },
+  c_btn: { en: "Shop all beef", "pt-BR": "Ver carnes bovinas", "pt-PT": "Ver carne de vaca", es: "Ver toda la carne de res" },
+  c_h1: { en: "Brazilian", "pt-BR": "Brasileiro", "pt-PT": "Brasileiro", es: "Brasileño" },
+  c_h2: { en: "UK equivalent", "pt-BR": "Nome no Reino Unido", "pt-PT": "Nome no Reino Unido", es: "Equivalente en UK" },
+  c_h3: { en: "Best for", "pt-BR": "Melhor para", "pt-PT": "Ideal para", es: "Ideal para" },
+
+  /* ---------- Steps ---------- */
+  st_eyebrow: { en: "How it works", "pt-BR": "Como funciona", "pt-PT": "Como funciona", es: "Cómo funciona" },
+  st_title: { en: "Order in three steps", "pt-BR": "Peça em três passos", "pt-PT": "Encomende em três passos", es: "Pide en tres pasos" },
+  st1h: { en: "Choose", "pt-BR": "Escolha", "pt-PT": "Escolha", es: "Elige" },
+  st1p: { en: "Add your cuts and groceries to the basket, choosing the weight you need.", "pt-BR": "Coloque os cortes e produtos no carrinho, escolhendo o peso que precisa.", "pt-PT": "Adicione os cortes e produtos ao cesto, escolhendo o peso de que precisa.", es: "Añade tus cortes y productos a la cesta, eligiendo el peso que necesitas." },
+  st2h: { en: "Send", "pt-BR": "Envie", "pt-PT": "Envie", es: "Envía" },
+  st2p: { en: "Send your order to us on WhatsApp in one tap. We confirm it straight away.", "pt-BR": "Envie o pedido pelo WhatsApp com um toque. Confirmamos na hora.", "pt-PT": "Envie a encomenda pelo WhatsApp com um toque. Confirmamos de imediato.", es: "Envíanos tu pedido por WhatsApp con un toque. Lo confirmamos enseguida." },
+  st3h: { en: "Collect or receive", "pt-BR": "Retire ou receba", "pt-PT": "Levante ou receba", es: "Recoge o recibe" },
+  st3p: { en: "Pick it up in store, freshly cut — or have it delivered locally.", "pt-BR": "Retire na loja, cortado na hora — ou receba em casa.", "pt-PT": "Levante na loja, cortado na hora — ou receba em casa.", es: "Recógelo en tienda, recién cortado — o recíbelo en casa." },
+
+  /* ---------- About ---------- */
+  a_caption: { en: "Founders · Epsom, since March 2026", "pt-BR": "Fundadores · Epsom, desde março de 2026", "pt-PT": "Fundadores · Epsom, desde março de 2026", es: "Fundadores · Epsom, desde marzo de 2026" },
+  a_eyebrow: { en: "Who we are", "pt-BR": "Quem somos", "pt-PT": "Quem somos", es: "Quiénes somos" },
+  a_title: { en: "A dream that <em>found an address</em>", "pt-BR": "Um sonho que <em>ganhou endereço</em>", "pt-PT": "Um sonho que <em>ganhou morada</em>", es: "Un sueño que <em>encontró su dirección</em>" },
+  a_lead: {
+    en: "BrazaBrazil is the story of two Brazilians who decided to join forces and invest in a project we are proud to call our own.",
+    "pt-BR": "O BrazaBrazil é a história de dois brasileiros que decidiram juntar esforços e investir em um projeto que hoje temos orgulho de chamar de nosso.",
+    "pt-PT": "O BrazaBrazil é a história de dois brasileiros que decidiram juntar esforços e investir num projeto que hoje temos orgulho de chamar nosso.",
+    es: "BrazaBrazil es la historia de dos brasileños que decidieron unir fuerzas e invertir en un proyecto que hoy nos enorgullece llamar nuestro." },
+  a_p1: {
+    en: "Anyone who lives far from Brazil knows what it is to miss a flavour, a family churrasco, or simply walking into a place where you can chat in your own language. Having a shop here in Epsom lets us be part of those small moments in other people’s lives.",
+    "pt-BR": "Quem vive longe do Brasil conhece a saudade de um sabor, de um churrasco em família, de entrar num lugar e poder conversar em português. Ter uma loja aqui em Epsom nos permite fazer parte desses pequenos momentos na vida de outras pessoas.",
+    "pt-PT": "Quem vive longe de casa conhece a saudade de um sabor, de um churrasco em família, de entrar num sítio e poder conversar em português. Ter uma loja aqui em Epsom permite-nos fazer parte desses pequenos momentos na vida de outras pessoas.",
+    es: "Quien vive lejos de Brasil conoce la nostalgia de un sabor, de un churrasco en familia, de entrar en un lugar y poder hablar en tu idioma. Tener una tienda aquí en Epsom nos permite formar parte de esos pequeños momentos en la vida de otras personas." },
+  a_p2: {
+    en: "We opened our doors in March 2026 — but our commitment began long before, in every decision, every investment and the responsibility of making it work. Behind the two smiles in the photo there is hard work, worry, learning and plenty of problems solved together. Leciovany and Elionardo are building this story day by day, each taking on responsibilities and learning along the way.",
+    "pt-BR": "Em março de 2026 abrimos as portas da loja. Mas o nosso compromisso começou antes — nas decisões, no investimento e na responsabilidade de fazer dar certo. Na foto aparecem dois sorrisos; por trás deles tem trabalho, preocupação, aprendizado e muita coisa que precisamos resolver juntos. Leciovany e Elionardo estão construindo essa história no dia a dia, cada um contribuindo, assumindo responsabilidades e aprendendo pelo caminho.",
+    "pt-PT": "Em março de 2026 abrimos as portas da loja. Mas o nosso compromisso começou antes — nas decisões, no investimento e na responsabilidade de fazer dar certo. Na fotografia aparecem dois sorrisos; por trás deles há trabalho, preocupação, aprendizagem e muita coisa que tivemos de resolver juntos. O Leciovany e o Elionardo estão a construir esta história no dia a dia, cada um a contribuir, a assumir responsabilidades e a aprender pelo caminho.",
+    es: "Abrimos nuestras puertas en marzo de 2026, pero nuestro compromiso empezó mucho antes: en cada decisión, en la inversión y en la responsabilidad de hacer que funcione. Detrás de las dos sonrisas de la foto hay trabajo, preocupaciones, aprendizaje y muchos problemas resueltos juntos. Leciovany y Elionardo construyen esta historia día a día, cada uno asumiendo responsabilidades y aprendiendo por el camino." },
+  a_quote: {
+    en: "“We still have a long way to go, but looking at our shop and seeing happy customers coming back already makes us incredibly proud.”",
+    "pt-BR": "“Ainda temos muito pela frente, mas olhar para a nossa loja e ver clientes felizes voltando já nos dá um enorme orgulho.”",
+    "pt-PT": "“Ainda temos muito pela frente, mas olhar para a nossa loja e ver clientes felizes a voltar já nos dá um enorme orgulho.”",
+    es: "“Aún nos queda mucho camino, pero mirar nuestra tienda y ver clientes felices que vuelven ya nos llena de orgullo.”" },
+  a_p3: {
+    en: "We want every person to feel welcome and to take home products they are proud to put on their family’s table. That is how we want to grow: caring for quality and respecting everyone who trusts our work.",
+    "pt-BR": "Queremos que cada pessoa seja bem recebida e leve para casa produtos que tenha prazer em colocar na mesa da família. É assim que queremos crescer: cuidando da qualidade e respeitando quem confia no nosso trabalho.",
+    "pt-PT": "Queremos que cada pessoa seja bem recebida e leve para casa produtos que tenha prazer em pôr na mesa da família. É assim que queremos crescer: a cuidar da qualidade e a respeitar quem confia no nosso trabalho.",
+    es: "Queremos que cada persona se sienta bienvenida y se lleve a casa productos que disfrute poner en la mesa de su familia. Así queremos crecer: cuidando la calidad y respetando a quien confía en nuestro trabajo." },
+  a_p4: {
+    en: "To every customer, our team, our families and the friends who support us — thank you. You are part of this achievement.",
+    "pt-BR": "A cada cliente, à nossa equipe, às nossas famílias e aos amigos que nos apoiam: muito obrigado. Vocês fazem parte dessa conquista.",
+    "pt-PT": "A cada cliente, à nossa equipa, às nossas famílias e aos amigos que nos apoiam: muito obrigado. Fazem parte desta conquista.",
+    es: "A cada cliente, a nuestro equipo, a nuestras familias y a los amigos que nos apoyan: muchas gracias. Sois parte de este logro." },
+  a_sign: {
+    en: "With love and gratitude,<strong>Leciovany &amp; Elionardo</strong>",
+    "pt-BR": "Com carinho e gratidão,<strong>Leciovany &amp; Elionardo</strong>",
+    "pt-PT": "Com carinho e gratidão,<strong>Leciovany &amp; Elionardo</strong>",
+    es: "Con cariño y gratitud,<strong>Leciovany &amp; Elionardo</strong>" },
+  m_label: { en: "Our motto", "pt-BR": "Nosso lema", "pt-PT": "O nosso lema", es: "Nuestro lema" },
+  m1a: { en: "Price", "pt-BR": "Preço", "pt-PT": "Preço", es: "El precio" },
+  m1b: { en: "attracts", "pt-BR": "atrai", "pt-PT": "atrai", es: "atrae" },
+  m2a: { en: "Quality", "pt-BR": "Qualidade", "pt-PT": "Qualidade", es: "La calidad" },
+  m2b: { en: "wins you over", "pt-BR": "conquista", "pt-PT": "conquista", es: "conquista" },
+  m3a: { en: "Respect", "pt-BR": "Respeito", "pt-PT": "Respeito", es: "El respeto" },
+  m3b: { en: "keeps you coming back", "pt-BR": "fideliza", "pt-PT": "fideliza", es: "fideliza" },
+
+  /* ---------- Visit & footer ---------- */
+  v_title: { en: "Come and see the counter", "pt-BR": "Venha conhecer a loja", "pt-PT": "Venha conhecer a loja", es: "Ven a conocer la tienda" },
+  v_dir: { en: "Get directions", "pt-BR": "Como chegar", "pt-PT": "Como chegar", es: "Cómo llegar" },
+  v_msg: { en: "Message us", "pt-BR": "Fale conosco", "pt-PT": "Fale connosco", es: "Escríbenos" },
+  ft_sub: { en: "Butcher &amp; Groceries · Brazilian · Portuguese Shop", "pt-BR": "Açougue &amp; Mercearia · Brasileira · Portuguesa", "pt-PT": "Talho &amp; Mercearia · Brasileira · Portuguesa", es: "Carnicería &amp; Tienda · Brasileña · Portuguesa" },
+  ft_cuts: { en: "Cuts guide", "pt-BR": "Guia de cortes", "pt-PT": "Guia de cortes", es: "Guía de cortes" },
+  ft_contact: { en: "Contact", "pt-BR": "Contato", "pt-PT": "Contacto", es: "Contacto" },
+  ft_rights: { en: "BrazaBrazil. All rights reserved.", "pt-BR": "BrazaBrazil. Todos os direitos reservados.", "pt-PT": "BrazaBrazil. Todos os direitos reservados.", es: "BrazaBrazil. Todos los derechos reservados." },
+  vt_title: { en: "Daily offers", "pt-BR": "Ofertas do dia", "pt-PT": "Ofertas do dia", es: "Ofertas del día" },
+  vt_text: { en: "Join our VIP group", "pt-BR": "Entre no grupo VIP", "pt-PT": "Entre no grupo VIP", es: "Únete al grupo VIP" },
+
+  /* ---------- Basket ---------- */
+  d_title: { en: "Your basket", "pt-BR": "Seu carrinho", "pt-PT": "O seu cesto", es: "Tu cesta" },
+  d_empty: { en: "Your basket is empty.", "pt-BR": "Seu carrinho está vazio.", "pt-PT": "O seu cesto está vazio.", es: "Tu cesta está vacía." },
+  d_browse: { en: "Browse the counter", "pt-BR": "Ver os produtos", "pt-PT": "Ver os produtos", es: "Ver productos" },
+  d_how: { en: "How would you like it?", "pt-BR": "Como prefere receber?", "pt-PT": "Como prefere receber?", es: "¿Cómo lo prefieres?" },
+  d_collect: { en: "Click &amp; Collect", "pt-BR": "Retirar na loja", "pt-PT": "Levantar na loja", es: "Recoger en tienda" },
+  d_delivery: { en: "Local delivery", "pt-BR": "Entrega", "pt-PT": "Entrega", es: "Entrega a domicilio" },
+  d_name: { en: "Name", "pt-BR": "Nome", "pt-PT": "Nome", es: "Nombre" },
+  d_phone: { en: "Phone", "pt-BR": "Telefone", "pt-PT": "Telemóvel", es: "Teléfono" },
+  d_address: { en: "Delivery address &amp; postcode", "pt-BR": "Endereço e postcode", "pt-PT": "Morada e código postal", es: "Dirección y código postal" },
+  d_day: { en: "Preferred day", "pt-BR": "Dia preferido", "pt-PT": "Dia preferido", es: "Día preferido" },
+  d_notes: { en: "Notes for the butcher", "pt-BR": "Observações para o açougueiro", "pt-PT": "Notas para o talhante", es: "Notas para el carnicero" },
+  d_notes_ph: { en: "e.g. thick steaks, keep the fat cap", "pt-BR": "ex.: bifes grossos, manter a capa de gordura", "pt-PT": "ex.: bifes grossos, manter a gordura", es: "ej.: filetes gruesos, con la capa de grasa" },
+  d_total: { en: "Estimated total", "pt-BR": "Total estimado", "pt-PT": "Total estimado", es: "Total estimado" },
+  d_send: { en: "Send order on WhatsApp", "pt-BR": "Enviar pedido pelo WhatsApp", "pt-PT": "Enviar encomenda pelo WhatsApp", es: "Enviar pedido por WhatsApp" },
+
+  /* ---------- Dynamic texts (used by app.js) ---------- */
+  cat_all: { en: "All", "pt-BR": "Todos", "pt-PT": "Todos", es: "Todo" },
+  cat_beef: { en: "Beef", "pt-BR": "Bovinos", "pt-PT": "Vaca", es: "Res" },
+  cat_pork: { en: "Pork", "pt-BR": "Suínos", "pt-PT": "Porco", es: "Cerdo" },
+  cat_chicken: { en: "Chicken", "pt-BR": "Frango", "pt-PT": "Frango", es: "Pollo" },
+  cat_sausages: { en: "Sausages", "pt-BR": "Linguiças", "pt-PT": "Enchidos", es: "Embutidos" },
+  cat_boxes: { en: "BBQ Boxes", "pt-BR": "Kits Churrasco", "pt-PT": "Caixas Churrasco", es: "Cajas BBQ" },
+  cat_groceries: { en: "Groceries", "pt-BR": "Mercearia", "pt-PT": "Mercearia", es: "Despensa" },
+  out: { en: "Out of stock", "pt-BR": "Esgotado", "pt-PT": "Esgotado", es: "Agotado" },
+  none: { en: "No products found. Try another search.", "pt-BR": "Nenhum produto encontrado. Tente outra busca.", "pt-PT": "Nenhum produto encontrado. Tente outra pesquisa.", es: "No hay productos. Prueba otra búsqueda." },
+  add: { en: "Add to basket", "pt-BR": "Adicionar", "pt-PT": "Adicionar", es: "Añadir" },
+  added: { en: "added", "pt-BR": "adicionado", "pt-PT": "adicionado", es: "añadido" },
+  remove: { en: "Remove", "pt-BR": "Remover", "pt-PT": "Remover", es: "Quitar" },
+  free_ok: { en: "You qualify for free local delivery.", "pt-BR": "Você ganhou entrega grátis.", "pt-PT": "Tem direito a entrega grátis.", es: "Tienes envío local gratis." },
+  free_more: { en: "Spend {x} more for free local delivery.", "pt-BR": "Faltam {x} para ganhar entrega grátis.", "pt-PT": "Faltam {x} para ter entrega grátis.", es: "Te faltan {x} para el envío gratis." },
+  opening: { en: "Opening WhatsApp to send your order…", "pt-BR": "Abrindo o WhatsApp para enviar seu pedido…", "pt-PT": "A abrir o WhatsApp para enviar a encomenda…", es: "Abriendo WhatsApp para enviar tu pedido…" },
+  wa_hi: { en: "Hi BrazaBrazil! ", "pt-BR": "Olá BrazaBrazil! ", "pt-PT": "Olá BrazaBrazil! ", es: "¡Hola BrazaBrazil! " },
+  wa_q: { en: "Hi BrazaBrazil! I have a question about ", "pt-BR": "Olá BrazaBrazil! Tenho uma dúvida sobre ", "pt-PT": "Olá BrazaBrazil! Tenho uma dúvida sobre ", es: "¡Hola BrazaBrazil! Tengo una pregunta sobre " },
+  o_title: { en: "New order — BrazaBrazil website", "pt-BR": "Novo pedido — site BrazaBrazil", "pt-PT": "Nova encomenda — site BrazaBrazil", es: "Nuevo pedido — web BrazaBrazil" },
+  o_option: { en: "Option", "pt-BR": "Opção", "pt-PT": "Opção", es: "Opción" },
+  o_address: { en: "Address", "pt-BR": "Endereço", "pt-PT": "Morada", es: "Dirección" },
+
+  /* Product badges */
+  tag_best: { en: "Best seller", "pt-BR": "Mais vendido", "pt-PT": "Mais vendido", es: "Más vendido" },
+  tag_slow: { en: "Slow cook", "pt-BR": "Cozimento lento", "pt-PT": "Cozedura lenta", es: "Cocción lenta" },
+  tag_special: { en: "Speciality", "pt-BR": "Especialidade", "pt-PT": "Especialidade", es: "Especialidad" },
+  tag_classic: { en: "Brazilian classic", "pt-BR": "Clássico brasileiro", "pt-PT": "Clássico brasileiro", es: "Clásico brasileño" },
+  tag_gf: { en: "Gluten-free", "pt-BR": "Sem glúten", "pt-PT": "Sem glúten", es: "Sin gluten" },
+  tag_vegan: { en: "Vegan", "pt-BR": "Vegano", "pt-PT": "Vegano", es: "Vegano" },
+  tag_portuguese: { en: "Portuguese", "pt-BR": "Português", "pt-PT": "Português", es: "Portugués" },
+  tag_easy: { en: "Easy choice", "pt-BR": "Prático", "pt-PT": "Prático", es: "Fácil" },
+  tag_popular: { en: "Most popular", "pt-BR": "Mais pedido", "pt-PT": "Mais pedido", es: "El más pedido" }
+};
