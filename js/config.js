@@ -40,5 +40,22 @@ window.SITE = {
     freeOver: null                        // £ amount for free delivery, or null to hide
   },
 
+  /* Delivery fee by postcode area (the first part of the postcode, e.g. "KT18").
+     fee: number in £  → customer sees it and pays it online
+     fee: null         → "fee to be confirmed" (customer can still order)
+     A postcode not listed here = "we don't deliver there yet".
+     TODO: the fees below are EXAMPLES — replace with the real values. */
+  deliveryZones: [
+    { prefixes: ["KT17", "KT18", "KT19"], fee: 3.50 },                 // Epsom & Ewell
+    { prefixes: ["KT20", "KT21", "KT22", "KT4", "SM2", "SM3"], fee: 5.00 },
+    { prefixes: ["SM1", "SM4", "SM5", "SM6", "KT23", "KT24", "CR5", "CR8"], fee: 7.50 }
+  ],
+
+  /* Online payment (Stripe). Orders are only prepared after payment.
+     Needs the secret STRIPE_SECRET_KEY set in Cloudflare (see README).
+     If online payment is unavailable, the order goes by WhatsApp marked
+     "awaiting payment" and the shop sends a payment link. */
+  onlinePayment: true,
+
   currency: "£"
 };

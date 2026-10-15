@@ -54,7 +54,11 @@
   let picks = {};
   let activeCat = "all", query = "";
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
-  Object.keys(cart).forEach(id => { if (!byId[id]) delete cart[id]; });
+  const droppedOos = [];
+  Object.keys(cart).forEach(id => {
+    if (!byId[id]) delete cart[id];
+    else if (byId[id].available === false) { droppedOos.push(byId[id].name); delete cart[id]; }
+  });
   const save = () => store.set("bb_cart", JSON.stringify(cart));
 
   const step = p => (p.unit === "kg" ? KG_STEP : 1);
@@ -148,16 +152,18 @@
           <p class="card__desc">${pick(p.desc)}</p>
           <div class="card__row">
             <span class="price">${money(p.price)}<small>${unitLabel(p)}</small></span>
+            ${out ? `
+            <button class="btn btn--similar" data-act="similar" data-id="${p.id}">${t("similar_btn")}</button>` : `
             <div class="card__buy">
               <div class="qty">
                 <button data-act="dec" data-id="${p.id}" aria-label="−">−</button>
                 <span>${fmtQty(p, q)}</span>
                 <button data-act="inc" data-id="${p.id}" aria-label="+">+</button>
               </div>
-              <button class="add" data-act="add" data-id="${p.id}" aria-label="${t("add")}: ${p.name}" ${out ? "disabled" : ""}>
+              <button class="add" data-act="add" data-id="${p.id}" aria-label="${t("add")}: ${p.name}">
                 <svg viewBox="0 0 24 24"><use href="#i-cart"/></svg>
               </button>
-            </div>
+            </div>`}
           </div>
         </div>
       </article>`;
@@ -176,6 +182,7 @@
     const cur = picks[p.id] ?? s;
     if (b.dataset.act === "inc") picks[p.id] = +(cur + s).toFixed(2);
     if (b.dataset.act === "dec") picks[p.id] = Math.max(s, +(cur - s).toFixed(2));
+    if (b.dataset.act === "similar") { openSimilar(p.id); return; }
     if (b.dataset.act === "add") { addToCart(p.id, cur); return; }
     b.parentElement.querySelector("span").textContent = fmtQty(p, picks[p.id]);
   });
@@ -191,11 +198,14 @@
         <p>${pick(p.desc)}</p>
         <div class="box__row">
           <span class="box__price">${money(p.price)}</span>
-          <button class="btn btn--gold" data-box="${p.id}">${t("add")}</button>
+          ${p.available === false
+            ? `<button class="btn btn--line" data-similar="${p.id}">${t("similar_btn")}</button>`
+            : `<button class="btn btn--gold" data-box="${p.id}">${t("add")}</button>`}
         </div>
       </article>`).join("");
   }
   $("#boxesGrid").addEventListener("click", e => {
+    const s = e.target.closest("[data-similar]"); if (s) return openSimilar(s.dataset.similar);
     const b = e.target.closest("[data-box]"); if (b) addToCart(b.dataset.box, 1);
   });
 
@@ -249,9 +259,44 @@
         </div>
       </div>`;
     }).join("");
-    const tot = total(), f = S.delivery.freeOver;
-    $("#cartTotal").textContent = money(tot);
-    $("#freeNote").textContent = f ? (tot >= f ? t("free_ok") : t("free_more").replace("{x}", money(f - tot))) : "";
+    updateTotals();
+  }
+
+  /* ---------- Delivery fee & totals ---------- */
+  const form = $("#checkout");
+  const isDelivery = () => form.mode && form.mode.value === "delivery";
+  function currentQuote() {
+    if (!isDelivery()) return null;
+    const pc = form.postcode.value.trim();
+    if (!pc) return { status: "empty" };
+    const q = window.BB.quoteDelivery(pc, S);
+    const f = S.delivery.freeOver;
+    if (q.status === "ok" && f && total() >= f) q.fee = 0;
+    return q;
+  }
+  function updateTotals() {
+    const sub = total(), q = currentQuote();
+    const fee = q && q.status === "ok" ? q.fee : 0;
+    $("#cartSubtotal").textContent = money(sub);
+    $("#feeRow").hidden = !isDelivery();
+    $("#cartFee").textContent = !q || q.status === "empty" || q.status === "invalid" ? "—"
+      : q.status === "ok" ? (q.fee === 0 ? "£0.00" : money(q.fee))
+      : q.status === "tbc" ? t("tbc") : "—";
+    $("#cartTotal").textContent = money(sub + fee);
+    const msg = $("#feeMsg");
+    if (msg) {
+      const pc = q && q.postcode ? `<b>${q.postcode}</b>` : "";
+      msg.className = "fee-msg" + (q && (q.status === "out" || q.status === "invalid") ? " fee-msg--bad" : q && q.status === "ok" ? " fee-msg--ok" : "");
+      msg.innerHTML = !q ? "" : q.status === "empty" ? t("fee_enter")
+        : q.status === "invalid" ? t("fee_bad")
+        : q.status === "out" ? t("fee_out").replace("{pc}", pc)
+        : q.status === "tbc" ? t("fee_tbc").replace("{pc}", pc)
+        : (q.fee === 0 ? t("fee_free") : t("fee_ok")).replace("{pc}", pc).replace("{fee}", money(q.fee));
+    }
+    const f = S.delivery.freeOver;
+    $("#freeNote").textContent = f && isDelivery() ? (sub >= f ? t("free_ok") : t("free_more").replace("{x}", money(f - sub))) : "";
+    $("#sendLabel").innerHTML = t(S.onlinePayment ? "d_pay" : "d_send");
+    $("#secureNote").innerHTML = t(S.onlinePayment ? "secure" : "secure_manual");
   }
 
   $("#cartItems").addEventListener("click", e => {
@@ -273,38 +318,151 @@
   document.addEventListener("keydown", e => { if (e.key === "Escape") { closeCart(); toggleMenu(false); } });
   drawer.addEventListener("click", e => { if (e.target.closest("[data-close]")) closeCart(); });
 
-  const form = $("#checkout");
   form.addEventListener("change", () => {
-    const delivery = form.mode.value === "delivery";
+    const delivery = isDelivery();
     $(".field--delivery").hidden = !delivery;
     form.address.required = delivery;
+    form.postcode.required = delivery;
+    updateTotals();
   });
+  form.postcode.addEventListener("input", updateTotals);
+  form.postcode.addEventListener("blur", () => { if (form.postcode.value.trim()) form.postcode.value = window.BB.normPostcode(form.postcode.value); });
 
-  /* ---------- Send order on WhatsApp ---------- */
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    if (!Object.keys(cart).length) return;
-    const d = new FormData(form);
-    const plain = k => t(k).replace(/<[^>]+>/g, "").replace(/&amp;/g, "&");
-    const lines = Object.entries(cart).map(([id, q]) => {
+  /* ---------- Checkout: pay online, then send details on WhatsApp ---------- */
+  const plain = k => t(k).replace(/<[^>]+>/g, "").replace(/&amp;/g, "&");
+
+  function snapshot() {
+    const d = new FormData(form), q = currentQuote();
+    return {
+      items: { ...cart },
+      mode: isDelivery() ? "delivery" : "collect",
+      name: d.get("name"), phone: d.get("phone"),
+      address: d.get("address") || "", postcode: q && q.postcode ? q.postcode : "",
+      fee: q && q.status === "ok" ? q.fee : (q && q.status === "tbc" ? "tbc" : 0),
+      day: d.get("day") || "", notes: d.get("notes") || ""
+    };
+  }
+
+  function orderMessage(o, paidRef) {
+    const lines = Object.entries(o.items).filter(([id]) => byId[id]).map(([id, q]) => {
       const p = byId[id];
       return `• ${p.name} (${pick(p.sub)}) — ${fmtQty(p, q)} — ${money(p.price * q)}`;
     });
-    const isDel = d.get("mode") === "delivery";
-    const msg = [
+    const sub = Object.entries(o.items).reduce((s, [id, q]) => s + (byId[id] ? byId[id].price * q : 0), 0);
+    const del = o.mode === "delivery";
+    const fee = typeof o.fee === "number" ? o.fee : 0;
+    return [
       `*${plain("o_title")}*`, "",
       ...lines, "",
-      `*${plain("d_total")}:* ${money(total())}`,
-      `*${plain("o_option")}:* ${plain(isDel ? "d_delivery" : "d_collect")}`,
-      `*${plain("d_name")}:* ${d.get("name")}`,
-      `*${plain("d_phone")}:* ${d.get("phone")}`,
-      isDel ? `*${plain("o_address")}:* ${d.get("address")}` : "",
-      d.get("day") ? `*${plain("d_day")}:* ${d.get("day")}` : "",
-      d.get("notes") ? `*${plain("d_notes")}:* ${d.get("notes")}` : ""
-    ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
-    window.open(wa(msg), "_blank", "noopener");
-    toast(t("opening"));
+      `*${plain("d_subtotal")}:* ${money(sub)}`,
+      del ? `*${plain("d_fee")}:* ${o.fee === "tbc" ? plain("tbc") : money(fee)}` : "",
+      `*${plain("d_total")}:* ${money(sub + fee)}`,
+      `*${plain("o_payment")}:* ${paidRef ? plain("o_paid") + " · Ref " + paidRef : plain("o_unpaid")}`, "",
+      `*${plain("o_option")}:* ${plain(del ? "d_delivery" : "d_collect")}`,
+      `*${plain("d_name")}:* ${o.name}`,
+      `*${plain("d_phone")}:* ${o.phone}`,
+      del ? `*${plain("o_address")}:* ${o.address}` : "",
+      del ? `*${plain("o_postcode")}:* ${o.postcode}` : "",
+      o.day ? `*${plain("d_day")}:* ${o.day}` : "",
+      o.notes ? `*${plain("d_notes")}:* ${o.notes}` : ""
+    ].filter((l, i, arr) => l !== "" || arr[i - 1] !== "").join("\n");
+  }
+
+  function sendManual(o) {
+    window.open(wa(orderMessage(o, null)), "_blank", "noopener");
+  }
+
+  let paying = false;
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (!Object.keys(cart).length || paying) return;
+    const q = currentQuote();
+    if (q && (q.status === "invalid" || q.status === "out" || q.status === "empty")) {
+      updateTotals(); form.postcode.focus(); return;
+    }
+    const o = snapshot();
+    if (!S.onlinePayment) { sendManual(o); toast(t("opening")); return; }
+
+    paying = true;
+    const btn = $("#sendOrder"); btn.disabled = true; btn.classList.add("is-loading");
+    toast(t("pay_redirect"));
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...o, lang })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.url) {
+        store.set("bb_pending", JSON.stringify(o));
+        location.href = data.url;
+        return;
+      }
+      if (res.status === 409) { toast(t("err_oos")); }
+      else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); sendManual(o); }
+      else { toast(t("err_generic")); }
+    } catch (err) {
+      toast(t("pay_fallback")); sendManual(o);
+    }
+    paying = false; btn.disabled = false; btn.classList.remove("is-loading");
   });
+
+  /* ---------- Return from payment ---------- */
+  async function handleReturn() {
+    const params = new URLSearchParams(location.search);
+    const status = params.get("order");
+    if (!status) return;
+    const clean = () => history.replaceState(null, "", location.pathname + location.hash);
+    if (status === "cancelled") { clean(); toast(t("cancelled")); return; }
+    if (status !== "success") return;
+    const id = params.get("session_id") || "";
+    let pending = null;
+    try { pending = JSON.parse(store.get("bb_pending") || "null"); } catch (e) {}
+    let ref = null;
+    try {
+      const r = await fetch("/api/session?id=" + encodeURIComponent(id));
+      const d = await r.json();
+      if (d.paid) ref = d.ref;
+    } catch (e) {}
+    clean();
+    if (!ref) { toast(t("err_generic")); return; }
+    cart = {}; save(); renderCart();
+    $("#okRef").innerHTML = `${t("ok_ref")}: <b>${ref}</b>`;
+    $("#okWa").href = wa(pending ? orderMessage(pending, ref) : `${plain("o_title")} — ${plain("o_paid")} · Ref ${ref}`);
+    store.set("bb_pending", "");
+    openModal("#okModal");
+  }
+
+  /* ---------- Out of stock → similar products ---------- */
+  function similarTo(p) {
+    const chosen = (p.similar || []).map(id => byId[id]).filter(x => x && x.available !== false);
+    const sameCat = P.filter(x => x.cat === p.cat && x.id !== p.id && x.available !== false && !chosen.includes(x));
+    return [...chosen, ...sameCat].slice(0, 3);
+  }
+  function openSimilar(id) {
+    const p = byId[id], list = similarTo(p);
+    $("#similarTitle").textContent = t("similar_title").replace("{name}", p.name);
+    $("#similarSub").textContent = list.length ? t("similar_sub") : t("similar_none");
+    $("#similarList").innerHTML = list.map(s => `
+      <div class="similar__item">
+        <div class="similar__icon">${s.image ? `<img src="${s.image}" alt="">` : icon(s.cat)}</div>
+        <div class="similar__info"><b>${s.name}</b><span>${pick(s.sub)}</span><em>${money(s.price)}${unitLabel(s)}</em></div>
+        <button class="btn btn--primary" data-add-similar="${s.id}">${t("add")}</button>
+      </div>`).join("") || `<a class="btn btn--wa" href="${wa(t("wa_q") + p.name)}" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>${t("v_msg")}</a>`;
+    openModal("#similarModal");
+  }
+  $("#similarList").addEventListener("click", e => {
+    const b = e.target.closest("[data-add-similar]"); if (!b) return;
+    const p = byId[b.dataset.addSimilar];
+    addToCart(p.id, step(p)); closeModals();
+  });
+
+  /* ---------- Modals ---------- */
+  function openModal(sel) { $(sel).hidden = false; document.body.style.overflow = "hidden"; }
+  function closeModals() { $$(".modal").forEach(m => m.hidden = true); if (!drawer.classList.contains("open")) document.body.style.overflow = ""; }
+  $$(".modal").forEach(m => m.addEventListener("click", e => {
+    if (e.target === m || e.target.closest("[data-modal-close]")) closeModals();
+  }));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeModals(); });
 
   /* ---------- Mobile menu ---------- */
   const nav = $("#nav"), menuBtn = $("#menuBtn");
@@ -322,4 +480,6 @@
   }
 
   applyLang();
+  if (droppedOos.length) setTimeout(() => toast(`${droppedOos.join(", ")} ${t("removed_oos")}`), 600);
+  handleReturn();
 })();
