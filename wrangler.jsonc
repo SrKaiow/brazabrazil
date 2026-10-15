@@ -1,9 +1,11 @@
 {
-  // Cloudflare Workers — static site (no build)
+  // Cloudflare Worker: serves the static site + small payment API (/api/*)
   "name": "brazabrazil",
+  "main": "worker/index.js",
   "compatibility_date": "2025-09-01",
   "assets": {
     "directory": "./",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
   }
 }
