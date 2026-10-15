@@ -120,6 +120,7 @@
     $("#waFloat").href = wa();
 
     renderTabs(); renderGrid(); renderBoxes(); renderCuts(); renderCart();
+    if (bz.calc && !bz.calc.hidden) renderCalc();
   }
 
   /* ---------- Tabs & search ---------- */
@@ -233,6 +234,7 @@
   });
 
   /* ---------- Cart ---------- */
+  let silentAdd = false;
   function addToCart(id, q) {
     const p = byId[id];
     if (!p || p.available === false) return;
@@ -240,6 +242,7 @@
     save(); renderCart();
     const c = $("#cartCount"); c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump");
     toast(`${p.name} ${t("added")} — ${fmtQty(p, q)}`);
+    if (!silentAdd) brazaReact(p);
   }
   const total = () => Object.entries(cart).reduce((s, [id, q]) => s + byId[id].price * q, 0);
 
@@ -430,6 +433,7 @@
     $("#okWa").href = wa(pending ? orderMessage(pending, ref) : `${plain("o_title")} — ${plain("o_paid")} · Ref ${ref}`);
     store.set("bb_pending", "");
     openModal("#okModal");
+    setTimeout(() => brazaSay(t("bz_r_paid")), 800);
   }
 
   /* ---------- Out of stock → similar products ---------- */
@@ -449,6 +453,7 @@
         <button class="btn btn--primary" data-add-similar="${s.id}">${t("add")}</button>
       </div>`).join("") || `<a class="btn btn--wa" href="${wa(t("wa_q") + p.name)}" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>${t("v_msg")}</a>`;
     openModal("#similarModal");
+    brazaSay(t("bz_r_oos"));
   }
   $("#similarList").addEventListener("click", e => {
     const b = e.target.closest("[data-add-similar]"); if (!b) return;
@@ -478,6 +483,105 @@
     const el = $("#toast"); el.textContent = text; el.classList.add("show");
     clearTimeout(tt); tt = setTimeout(() => el.classList.remove("show"), 2200);
   }
+
+
+  /* ============================================================
+     SEU BRAZA — mascot assistant
+     ============================================================ */
+  const bz = {
+    root: $("#braza"), btn: $("#brazaBtn"), panel: $("#brazaPanel"),
+    bubble: $("#brazaBubble"), say: $("#brazaSay"),
+    menu: $("#brazaMenu"), calc: $("#brazaCalc"), people: 8, timer: null
+  };
+  const ssGet = k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } };
+  const ssSet = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} };
+
+  function brazaSay(html, ms = 5200) {
+    if (!bz.root || !bz.panel.hidden) return;
+    bz.say.innerHTML = html;
+    bz.bubble.hidden = false;
+    bz.bubble.classList.remove("pop"); void bz.bubble.offsetWidth; bz.bubble.classList.add("pop");
+    bz.btn.classList.remove("wave"); void bz.btn.offsetWidth; bz.btn.classList.add("wave");
+    clearTimeout(bz.timer);
+    if (ms) bz.timer = setTimeout(() => { bz.bubble.hidden = true; }, ms);
+  }
+  function brazaReact(p) {
+    if (p.id === "picanha") return brazaSay(t("bz_r_picanha"));
+    if (p.cat === "boxes") return brazaSay(t("bz_r_box"));
+    const hasFarofa = cart.farofa;
+    const pool = ["bz_r1", "bz_r2"].concat(hasFarofa || p.cat === "groceries" ? [] : ["bz_r3"]);
+    brazaSay(t(pool[Math.floor(Math.random() * pool.length)]), 3800);
+  }
+  function brazaOpen(open) {
+    bz.panel.hidden = !open;
+    bz.btn.setAttribute("aria-expanded", open);
+    bz.root.classList.toggle("is-open", open);
+    if (open) { bz.bubble.hidden = true; bz.btn.querySelector(".braza__dot").hidden = true; showView("menu"); ssSet("bz_seen", "1"); }
+  }
+  function showView(v) {
+    bz.menu.hidden = v !== "menu";
+    bz.calc.hidden = v !== "calc";
+    if (v === "calc") renderCalc();
+  }
+
+  /* --- Churrasco calculator --- */
+  const MIX = [ ["picanha", .30], ["fraldinha", .20], ["toscana", .20], ["coracao", .10], ["asinha", .10], ["panceta", .10] ];
+  function churrascoPlan() {
+    const hungry = (document.querySelector('input[name="bzApp"]:checked') || {}).value === "hungry";
+    const n = bz.people, totalKg = n * (hungry ? .55 : .4);
+    const avail = MIX.filter(([id]) => byId[id] && byId[id].available !== false);
+    const share = avail.reduce((s, [, f]) => s + f, 0) || 1;
+    const items = avail.map(([id, f]) => [id, Math.max(.5, Math.round((totalKg * f / share) * 2) / 2)]);
+    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["paodequeijo", Math.ceil(n / 8)]]
+      .filter(([id]) => byId[id] && byId[id].available !== false);
+    return { n, totalKg, items: items.concat(extra) };
+  }
+  function renderCalc() {
+    $("#bzPeople").textContent = bz.people;
+    const plan = churrascoPlan();
+    const total = plan.items.reduce((s, [id, q]) => s + byId[id].price * q, 0);
+    const box = bz.people <= 4 ? byId.box4 : bz.people <= 8 ? byId.box8 : null;
+    const kg = (Math.round(plan.totalKg * 10) / 10).toString();
+    $("#bzResult").innerHTML = `
+      <p>${t("bz_result").replace("{n}", plan.n).replace("{kg}", kg)}</p>
+      <ul class="braza__list">${plan.items.map(([id, q]) => {
+        const p = byId[id];
+        return `<li><span>${p.name}</span><em>${fmtQty(p, q)}</em><b>${money(p.price * q)}</b></li>`;
+      }).join("")}</ul>
+      <div class="braza__total"><span>${plain("d_total")}</span><strong>${money(total)}</strong></div>
+      <button class="btn btn--pay btn--block" data-bz="addall">${t("bz_add_all")}</button>
+      ${box && box.available !== false ? `<button class="braza__box" data-bz="box" data-id="${box.id}">${t("bz_or_box").replace("{box}", box.name).replace("{price}", money(box.price))} →</button>` : ""}`;
+  }
+
+  bz.btn.addEventListener("click", () => brazaOpen(bz.panel.hidden));
+  $("#brazaClose").addEventListener("click", () => brazaOpen(false));
+  $("#brazaBubbleX").addEventListener("click", e => { e.stopPropagation(); bz.bubble.hidden = true; });
+  bz.bubble.addEventListener("click", e => { if (e.target.id !== "brazaBubbleX") brazaOpen(true); });
+  bz.calc.addEventListener("change", e => { if (e.target.name === "bzApp") renderCalc(); });
+  bz.panel.addEventListener("click", e => {
+    const b = e.target.closest("[data-bz]"); if (!b) return;
+    const act = b.dataset.bz;
+    if (act === "menu") showView("menu");
+    if (act === "calc") showView("calc");
+    if (act === "plus") { bz.people = Math.min(60, bz.people + 1); renderCalc(); }
+    if (act === "minus") { bz.people = Math.max(1, bz.people - 1); renderCalc(); }
+    if (act === "cuts") { brazaOpen(false); document.getElementById("cuts").scrollIntoView({ behavior: "smooth" }); setTimeout(() => brazaSay(t("bz_cuts")), 900); }
+    if (act === "vip") window.open(S.vipGroup, "_blank", "noopener");
+    if (act === "wa") window.open(wa(), "_blank", "noopener");
+    if (act === "box") { addToCart(b.dataset.id, 1); brazaOpen(false); openCart(); }
+    if (act === "addall") {
+      silentAdd = true;
+      churrascoPlan().items.forEach(([id, q]) => addToCart(id, q));
+      silentAdd = false;
+      brazaOpen(false); openCart();
+      toast(t("bz_added_all"));
+    }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !bz.panel.hidden) brazaOpen(false); });
+
+  // Greeting once per visit
+  if (!ssGet("bz_seen")) setTimeout(() => { brazaSay(t("bz_greet"), 9000); ssSet("bz_seen", "1"); }, 2600);
+  else bz.btn.querySelector(".braza__dot").hidden = true;
 
   applyLang();
   if (droppedOos.length) setTimeout(() => toast(`${droppedOos.join(", ")} ${t("removed_oos")}`), 600);

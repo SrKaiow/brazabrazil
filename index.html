@@ -374,6 +374,54 @@
   <span class="vip-tab__text"><b data-i18n="vt_title">Daily offers</b><small data-i18n="vt_text">Join our VIP group</small></span>
 </a>
 
+<!-- ===== Seu Braza (mascot assistant) ===== -->
+<div class="braza" id="braza">
+  <div class="braza__bubble" id="brazaBubble" hidden>
+    <button class="braza__bubble-x" id="brazaBubbleX" aria-label="Close">×</button>
+    <p id="brazaSay"></p>
+  </div>
+
+  <section class="braza__panel" id="brazaPanel" hidden aria-label="Seu Braza">
+    <header class="braza__head">
+      <img src="assets/seu-braza.webp" alt="" width="700" height="645">
+      <div>
+        <p class="braza__name">Seu Braza</p>
+        <p class="braza__role" data-i18n="bz_role">Your BrazaBrazil butcher</p>
+      </div>
+      <button class="braza__close" id="brazaClose" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+    </header>
+
+    <div class="braza__body" id="brazaMenu">
+      <p class="braza__hello" data-i18n="bz_hello"></p>
+      <button class="braza__opt" data-bz="calc"><span>🔥</span><b data-i18n="bz_opt_calc"></b></button>
+      <button class="braza__opt" data-bz="cuts"><span>🥩</span><b data-i18n="bz_opt_cuts"></b></button>
+      <button class="braza__opt" data-bz="vip"><span>🎁</span><b data-i18n="bz_opt_vip"></b></button>
+      <button class="braza__opt" data-bz="wa"><span>💬</span><b data-i18n="bz_opt_wa"></b></button>
+    </div>
+
+    <div class="braza__body" id="brazaCalc" hidden>
+      <button class="braza__back" data-bz="menu">← <span data-i18n="bz_back"></span></button>
+      <p class="braza__q" data-i18n="bz_q_people"></p>
+      <div class="braza__people">
+        <button data-bz="minus" aria-label="−">−</button>
+        <output id="bzPeople">8</output>
+        <button data-bz="plus" aria-label="+">+</button>
+      </div>
+      <p class="braza__q" data-i18n="bz_q_appetite"></p>
+      <div class="seg seg--sm">
+        <label><input type="radio" name="bzApp" value="normal" checked><span data-i18n="bz_app_normal"></span></label>
+        <label><input type="radio" name="bzApp" value="hungry"><span data-i18n="bz_app_hungry"></span></label>
+      </div>
+      <div class="braza__result" id="bzResult"></div>
+    </div>
+  </section>
+
+  <button class="braza__btn" id="brazaBtn" aria-label="Seu Braza" aria-expanded="false">
+    <img src="assets/seu-braza-face.png" alt="Seu Braza" width="192" height="192">
+    <span class="braza__dot"></span>
+  </button>
+</div>
+
 <!-- ===== Floating WhatsApp ===== -->
 <a class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
