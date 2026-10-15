@@ -674,3 +674,21 @@ html{scroll-padding-top:110px}
   .brand img{width:64px}
   .header.is-scrolled .brand img{width:50px}
 }
+
+/* ---------- Photo cuts chart (Nelore) ---------- */
+.cow--photo{overflow:visible}
+.cow--photo .cow__labels path{stroke:rgba(242,194,48,.75);stroke-width:3;stroke-dasharray:8 8}
+.cow--photo .cow__labels circle{fill:var(--gold);stroke:#0b1330;stroke-width:4}
+.cow--photo .cow__labels .cut__ring{fill:rgba(242,194,48,.18);stroke:rgba(242,194,48,.85);stroke-width:3;transform-box:fill-box;transform-origin:center;animation:cutPulse 2.4s ease-out infinite}
+.cow--photo .cow__labels text{font-size:50px;letter-spacing:2px;fill:#fff;paint-order:stroke;stroke:#0b1330;stroke-width:8px;stroke-linejoin:round}
+.cow--photo .cut:hover text,.cow--photo .cut:focus text{fill:var(--gold)}
+.cow--photo .cut:hover circle:not(.cut__ring){r:16}
+.cow--photo .cut:nth-child(2) .cut__ring{animation-delay:.3s}
+.cow--photo .cut:nth-child(3) .cut__ring{animation-delay:.6s}
+.cow--photo .cut:nth-child(4) .cut__ring{animation-delay:.9s}
+.cow--photo .cut:nth-child(5) .cut__ring{animation-delay:1.2s}
+.cow--photo .cut:nth-child(6) .cut__ring{animation-delay:1.5s}
+.cow--photo .cut:nth-child(7) .cut__ring{animation-delay:1.8s}
+@keyframes cutPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.cow--photo .cut__ring{animation:none}}
+@media (max-width:640px){.cow--photo .cow__labels text{font-size:62px;stroke-width:10px}}

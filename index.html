@@ -183,35 +183,19 @@
       <figure class="chart" aria-label="Brazilian beef cuts chart">
         <div class="chart__frame">
           <p class="chart__title"><span class="chart__script">Churrasco</span><span data-i18n="chart_title">Brazilian beef cuts</span></p>
-          <svg class="cow" viewBox="20 20 560 320" role="img" aria-label="Diagram of a Nelore bull showing Brazilian beef cuts">
-            <g class="cow__body">
-              <!-- Nelore: hump, dewlap, long face, droopy ears, short horns -->
-              <path d="M150 116C160 98 176 78 200 72C222 68 238 76 246 92C252 104 262 108 290 108L440 106C470 105 492 108 508 118C520 126 526 150 524 176C522 200 516 214 512 226L510 262L512 298L498 300L494 264L488 232C470 238 452 240 440 238C400 244 320 246 262 240C252 240 246 238 240 236L236 266L238 298L224 300L220 266L214 238C208 236 202 230 196 222C190 234 176 242 162 236C148 228 138 208 128 186C126 180 125 176 124 172C116 180 106 188 96 194C88 198 80 192 80 184C84 166 104 138 122 122C132 116 142 114 150 116Z"/>
-              <path class="leg2" d="M228 238L230 300H216L214 242M478 236L476 300H462L464 240"/>
-              <path d="M128 124C120 132 112 144 110 158C118 156 126 146 134 128"/>
-              <path d="M132 118C134 108 140 102 147 100M141 116C146 107 152 103 159 103"/>
-              <path d="M512 120C534 140 538 190 534 236M534 236C528 242 528 252 534 258M534 236C540 242 540 252 534 258"/>
-              <path d="M134 190C142 208 152 222 166 230M150 182C160 200 172 212 188 220" opacity=".4"/>
-              <path d="M232 112C224 146 222 190 228 230M470 128C480 160 486 192 488 230" opacity=".35"/>
-              <circle cx="110" cy="140" r="2.4"/>
-              <circle cx="86" cy="184" r="1.5"/>
-            </g>
-            <g class="cow__cuts">
-              <path d="M194 104C214 96 238 98 258 108"/>
-              <path d="M262 108C258 150 258 200 264 240"/>
-              <path d="M360 107C356 150 356 200 360 244"/>
-              <path d="M440 106C434 134 432 160 438 184"/>
-              <path d="M262 166C300 172 400 174 438 168"/>
-              <path d="M438 184C458 194 486 198 516 196"/>
-            </g>
+          <svg class="cow cow--photo" viewBox="-40 -150 1974 1458" role="img" aria-label="Nelore bull showing Brazilian beef cuts">
+            <defs><radialGradient id="bullGlow" cx="50%" cy="55%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+            <ellipse cx="947.0" cy="602.16" rx="1041.7" ry="694.8" fill="url(#bullGlow)" stroke="none"/>
+            <ellipse cx="909.12" cy="1144" rx="795.48" ry="34" fill="#000" fill-opacity=".35" stroke="none" filter="blur(6px)"/>
+            <image href="assets/nelore.webp" x="0" y="0" width="1894" height="1158"/>
             <g class="cow__labels">
-              <g class="cut" data-cut="cupim"><circle cx="222" cy="86" r="3.5"/><text x="194" y="44">Cupim</text><path d="M222 83 219 50"/></g>
-              <g class="cut" data-cut="contrafile"><circle cx="310" cy="132" r="3"/><text x="274" y="44">Contrafilé</text><path d="M310 129 312 50"/></g>
-              <g class="cut" data-cut="alcatra"><circle cx="400" cy="136" r="3"/><text x="376" y="44">Alcatra</text><path d="M400 133 402 50"/></g>
-              <g class="cut" data-cut="picanha"><circle cx="474" cy="124" r="3.5"/><text x="448" y="44">Picanha</text><path d="M474 121 476 50"/></g>
-              <g class="cut" data-cut="maminha"><circle cx="452" cy="190" r="3"/><text x="428" y="326">Maminha</text><path d="M452 193 458 310"/></g>
-              <g class="cut" data-cut="fraldinha"><circle cx="390" cy="222" r="3"/><text x="330" y="326">Fraldinha</text><path d="M390 225 368 310"/></g>
-              <g class="cut" data-cut="costela"><circle cx="300" cy="200" r="3"/><text x="228" y="326">Costela</text><path d="M300 203 260 310"/></g>
+              <g class="cut" data-cut="picanha"><path d="M260 300 L260 -50"/><circle class="cut__ring" cx="260" cy="300" r="26"/><circle cx="260" cy="300" r="12"/><text x="260" y="-70" text-anchor="middle">Picanha</text></g>
+              <g class="cut" data-cut="alcatra"><path d="M540 340 L540 -50"/><circle class="cut__ring" cx="540" cy="340" r="26"/><circle cx="540" cy="340" r="12"/><text x="540" y="-70" text-anchor="middle">Alcatra</text></g>
+              <g class="cut" data-cut="contrafile"><path d="M820 330 L820 -50"/><circle class="cut__ring" cx="820" cy="330" r="26"/><circle cx="820" cy="330" r="12"/><text x="820" y="-70" text-anchor="middle">Contrafilé</text></g>
+              <g class="cut" data-cut="cupim"><path d="M1060 120 L1060 -50"/><circle class="cut__ring" cx="1060" cy="120" r="26"/><circle cx="1060" cy="120" r="12"/><text x="1060" y="-70" text-anchor="middle">Cupim</text></g>
+              <g class="cut" data-cut="maminha"><path d="M330 620 L330 1218"/><circle class="cut__ring" cx="330" cy="620" r="26"/><circle cx="330" cy="620" r="12"/><text x="330" y="1268" text-anchor="middle">Maminha</text></g>
+              <g class="cut" data-cut="fraldinha"><path d="M680 820 L680 1218"/><circle class="cut__ring" cx="680" cy="820" r="26"/><circle cx="680" cy="820" r="12"/><text x="680" y="1268" text-anchor="middle">Fraldinha</text></g>
+              <g class="cut" data-cut="costela"><path d="M1010 620 L1010 1218"/><circle class="cut__ring" cx="1010" cy="620" r="26"/><circle cx="1010" cy="620" r="12"/><text x="1010" y="1268" text-anchor="middle">Costela</text></g>
             </g>
           </svg>
           <p class="chart__hint" data-i18n="chart_hint">Tap a cut to find it in the shop</p>
