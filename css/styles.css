@@ -641,3 +641,36 @@ body{background:#fff}
   .braza__head img{width:110px}
 }
 @media (prefers-reduced-motion:reduce){.braza__btn{animation:none}}
+
+/* ---------- Bigger brand in header (shrinks on scroll) ---------- */
+.header__in{height:104px;transition:height .3s}
+.brand{gap:16px}
+.brand img{width:84px;height:auto;filter:drop-shadow(0 6px 12px rgba(20,32,74,.22));transition:width .3s}
+.brand__text strong{font-size:1.85rem;letter-spacing:.07em}
+.brand__text small{font-size:.74rem;letter-spacing:.26em;margin-top:7px;color:var(--green);font-weight:500}
+.header.is-scrolled .header__in{height:76px}
+.header.is-scrolled .brand img{width:56px}
+.header.is-scrolled .brand__text strong{font-size:1.45rem}
+html{scroll-padding-top:110px}
+@media (max-width:1100px){.nav{gap:20px}}
+@media (max-width:860px){
+  .header__in{height:88px}
+  .brand img{width:66px}
+  .brand__text strong{font-size:1.4rem}
+  .header.is-scrolled .header__in{height:70px}
+  .header.is-scrolled .brand img{width:50px}
+  .header.is-scrolled .brand__text strong{font-size:1.2rem}
+}
+@media (max-width:480px){
+  .header__in{height:78px}
+  .brand img{width:56px}
+  .brand__text strong{font-size:1.12rem}
+  .header.is-scrolled .header__in{height:66px}
+  .header.is-scrolled .brand img{width:46px}
+  .header.is-scrolled .brand__text strong{font-size:1.02rem}
+}
+@media (max-width:480px){
+  .brand__text{display:none}
+  .brand img{width:64px}
+  .header.is-scrolled .brand img{width:50px}
+}

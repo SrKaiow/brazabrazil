@@ -583,6 +583,11 @@
   if (!ssGet("bz_seen")) setTimeout(() => { brazaSay(t("bz_greet"), 9000); ssSet("bz_seen", "1"); }, 2600);
   else bz.btn.querySelector(".braza__dot").hidden = true;
 
+  /* Header shrinks on scroll */
+  const header = $(".header");
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
   applyLang();
   if (droppedOos.length) setTimeout(() => toast(`${droppedOos.join(", ")} ${t("removed_oos")}`), 600);
   handleReturn();
