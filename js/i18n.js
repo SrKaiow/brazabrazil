@@ -21,10 +21,10 @@ window.I18N = {
     "pt-PT": "BrazaBrazil — Talho e Mercearia Brasileira e Portuguesa em Epsom",
     es: "BrazaBrazil — Carnicería y Tienda Brasileña y Portuguesa en Epsom" },
   meta_desc: {
-    en: "Brazilian and Portuguese butcher and groceries in Epsom, Surrey. Picanha, fraldinha, linguiça, churrasco boxes and more. Order online for collection or local delivery.",
-    "pt-BR": "Açougue e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, linguiça, kits de churrasco e muito mais. Peça online para retirar ou receber em casa.",
-    "pt-PT": "Talho e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, linguiça, caixas de churrasco e muito mais. Encomende online para levantar ou receber em casa.",
-    es: "Carnicería y tienda brasileña y portuguesa en Epsom, Surrey. Picanha, fraldinha, linguiça, cajas de churrasco y más. Pide online para recoger o recibir a domicilio." },
+    en: "Brazilian and Portuguese butcher and groceries in Epsom, Surrey. Picanha, fraldinha, chouriço, cachaça, frozen Brazilian food and more. Order online for collection or local delivery.",
+    "pt-BR": "Açougue e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, chouriço, cachaça, congelados brasileiros e muito mais. Peça online para retirar ou receber em casa.",
+    "pt-PT": "Talho e mercearia brasileira e portuguesa em Epsom, Surrey. Picanha, fraldinha, chouriço, cachaça, congelados brasileiros e muito mais. Encomende online para levantar ou receber em casa.",
+    es: "Carnicería y tienda brasileña y portuguesa en Epsom, Surrey. Picanha, fraldinha, chouriço, cachaça, congelados brasileños y más. Pide online para recoger o recibir a domicilio." },
 
   /* ---------- Top bar & header ---------- */
   t_butcher: { en: "Brazilian &amp; Portuguese Butcher", "pt-BR": "Açougue Brasileiro &amp; Português", "pt-PT": "Talho Brasileiro &amp; Português", es: "Carnicería Brasileña &amp; Portuguesa" },
@@ -73,10 +73,10 @@ window.I18N = {
   s_search: { en: "Search picanha, linguiça…", "pt-BR": "Buscar picanha, linguiça…", "pt-PT": "Procurar picanha, linguiça…", es: "Buscar picanha, linguiça…" },
   vip_title: { en: "Daily offers in our WhatsApp VIP group", "pt-BR": "Ofertas diárias no nosso grupo VIP do WhatsApp", "pt-PT": "Ofertas diárias no nosso grupo VIP do WhatsApp", es: "Ofertas diarias en nuestro grupo VIP de WhatsApp" },
   vip_text: {
-    en: "Special prices on picanha, boxes and groceries — every day, only for members.",
-    "pt-BR": "Preços especiais em picanha, kits e mercearia — todos os dias, só para membros.",
-    "pt-PT": "Preços especiais em picanha, caixas e mercearia — todos os dias, só para membros.",
-    es: "Precios especiales en picanha, cajas y productos — cada día, solo para miembros." },
+    en: "Special prices on picanha, cuts and groceries — every day, only for members.",
+    "pt-BR": "Preços especiais em picanha, carnes e mercearia — todos os dias, só para membros.",
+    "pt-PT": "Preços especiais em picanha, carnes e mercearia — todos os dias, só para membros.",
+    es: "Precios especiales en picanha, carnes y productos — cada día, solo para miembros." },
   vip_join: { en: "Join free", "pt-BR": "Entrar grátis", "pt-PT": "Entrar grátis", es: "Únete gratis" },
   price_note: {
     en: "Meat sold by weight is cut to order; the final price is confirmed when weighed.",

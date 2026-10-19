@@ -41,9 +41,6 @@ window.GROUPS.deli = [
   S("calabresa-jlp", "Calabresa JLP", "linguicas", 14.90, "calabresa-jlp",
     { en: "Smoked sausage · per kg", pt: "Calabresa defumada · por kg", es: "Salchicha ahumada · por kg" },
     { en: "The classic smoked calabresa, sold by weight.", pt: "A clássica calabresa defumada, vendida a peso.", es: "La clásica calabresa ahumada, al peso." }, { unit: "kg" });
-  S("linguica-dchaves", "Linguiça D'Chaves Tradicional", "linguicas", 35.00, "",
-    { en: "Traditional Portuguese linguiça · per kg", pt: "Linguiça tradicional portuguesa · por kg", es: "Longaniza portuguesa tradicional · por kg" },
-    { en: "Artisanal smoked linguiça from Chaves, Portugal.", pt: "Linguiça fumada artesanal de Chaves, Portugal.", es: "Longaniza ahumada artesanal de Chaves, Portugal." }, { unit: "kg", tags: ["portuguese"] });
 
   /* ---------- CHOURIÇOS & FARINHEIRAS ---------- */
   S("chourica-lavrador", "Chouriça Lavrador Terras do Demo", "chouricos", 2.99, "chourica-lavrador",
@@ -73,10 +70,8 @@ window.GROUPS.deli = [
   G("mortadela", "Mortadela", "frios",
     { en: "Mortadella", pt: "Mortadela", es: "Mortadela" },
     { en: "For the classic mortadela sandwich — sliced thin, piled high.", pt: "Para o clássico sanduíche de mortadela — fatiada fininha.", es: "Para el clásico bocadillo de mortadela — en lonchas finas." },
-    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"]]);
-  S("chouricao-porminho", "Chouriçao Extra Porminho", "chouricos", 12.99, "chouricao-porminho",
-    { en: "Large Portuguese chorizo · per kg", pt: "Chouriçao grosso · por kg", es: "Chorizo grueso portugués · por kg" },
-    { en: "Sliced thin for sandwiches and boards — smoky and full of paprika.", pt: "Fatiado fininho para sanduíches e tábuas — fumado e com colorau.", es: "En lonchas finas para bocadillos y tablas — ahumado y con pimentón." }, { unit: "kg", tags: ["portuguese"] });
+    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"],
+     ["mortadela-porminho-extra", "Porminho Extra · kg", 12.99, "mortadela-porminho-extra", "kg"]]);
 
   /* ---------- DEFUMADOS & SALGADOS ---------- */
   S("entremeada", "Porco Salgado Entremeada Tiras", "defumados", 13.50, "entremeada",
@@ -112,8 +107,7 @@ window.GROUPS.deli = [
   window.PRODUCTS = window.PRODUCTS.filter(p => !["calabresa", "chourico", "bacalhau"].includes(p.id));
   window.PRODUCTS.push(...out);
   window.CATEGORIES = window.CATEGORIES.filter(c => c !== "sausages");
-  if (!window.CATEGORIES.includes("deli")) {
-    const i = window.CATEGORIES.indexOf("frozen");
-    window.CATEGORIES.splice(i < 0 ? window.CATEGORIES.length : i, 0, "deli");
-  }
+  if (!window.CATEGORIES.includes("deli")) window.CATEGORIES.push("deli");
+  const ORDER = ["all", "beef", "deli", "frozen", "drinks"];
+  window.CATEGORIES.sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
 })();

@@ -46,7 +46,7 @@ window.GROUPS.frozen = [
   G("snip-paodequeijo", "Pão de Queijo Snip", "cheesebread",
     { en: "Frozen Brazilian cheese bread", pt: "Pão de queijo congelado", es: "Pan de queso congelado" },
     { en: "Classic Minas-style cheese bread, ready to bake.", pt: "Pão de queijo mineiro clássico, pronto para assar.", es: "Pan de queso clásico estilo Minas, listo para hornear." },
-    [["snip-15", "15 unidades", 5.99, "snip-50"], ["snip-50", "50 unidades", 19.99, "snip-50"]],
+    [["snip-15", "15 unidades", 5.99, "snip-15"], ["snip-50", "50 unidades", 19.99, "snip-50"]],
     { tags: ["frozen", "gf"] });
   S("cheese-yummies", "Pão de Queijo Cheese Yummies", "cheesebread", 5.99, "cheese-yummies",
     { en: "18 units", pt: "18 unidades", es: "18 unidades" },

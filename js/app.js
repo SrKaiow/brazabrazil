@@ -593,14 +593,14 @@
   }
 
   /* --- Churrasco calculator --- */
-  const MIX = [ ["picanha-angus", .30], ["fraldinha", .20], ["toscana", .20], ["coracao", .10], ["asinha", .10], ["panceta", .10] ];
+  const MIX = [ ["picanha-angus", .35], ["fraldinha", .20], ["contrafile-br", .15], ["maminha", .15], ["calabresa-jlp", .15] ];
   function churrascoPlan() {
     const hungry = (document.querySelector('input[name="bzApp"]:checked') || {}).value === "hungry";
     const n = bz.people, totalKg = n * (hungry ? .55 : .4);
     const avail = MIX.filter(([id]) => byId[id] && byId[id].available !== false);
     const share = avail.reduce((s, [, f]) => s + f, 0) || 1;
     const items = avail.map(([id, f]) => [id, Math.max(.5, Math.round((totalKg * f / share) * 2) / 2)]);
-    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["rez-18", Math.ceil(n / 15)]]
+    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["rez-18", Math.ceil(n / 15)], ["salsicha-calabresa", Math.ceil(n / 8)]]
       .filter(([id]) => byId[id] && byId[id].available !== false);
     return { n, totalKg, items: items.concat(extra) };
   }
@@ -650,6 +650,15 @@
   // Greeting once per visit
   if (!ssGet("bz_seen")) setTimeout(() => { brazaSay(t("bz_greet"), 9000); ssSet("bz_seen", "1"); }, 2600);
   else bz.btn.querySelector(".braza__dot").hidden = true;
+
+  /* No BBQ boxes in the catalogue yet → hide that section; "Build your churrasco" opens Seu Braza's calculator */
+  if (!P.some(p => p.cat === "boxes")) {
+    const sec = document.getElementById("boxes"); if (sec) sec.hidden = true;
+    $$('a[href="#boxes"]').forEach(a => {
+      if (a.classList.contains("btn")) a.addEventListener("click", e => { e.preventDefault(); brazaOpen(true); showView("calc"); });
+      else a.remove();
+    });
+  }
 
   /* Header shrinks on scroll */
   const header = $(".header");
