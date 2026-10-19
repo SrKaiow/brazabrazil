@@ -22,19 +22,19 @@ window.GROUPS.frozen = [
 ];
 
 (function () {
-  const I = f => "assets/products/frozen/" + f + ".webp";
+  const I = f => f ? "assets/products/frozen/" + f + ".webp" : "";
   const out = [];
   const S = (id, name, group, price, image, sub, desc, extra) =>
     out.push(Object.assign({ id, name, cat: "frozen", group, unit: "each", price, tags: ["frozen"], image: I(image), available: true, sub, desc }, extra || {}));
   const G = (id, name, group, sub, desc, variants, extra) => {
-    const ids = [];
-    variants.forEach(([vid, label, price, image]) => {
+    const ids = [], first = (variants.find(v => v[3]) || [])[3] || "";
+    variants.forEach(([vid, label, price, image, unit]) => {
       ids.push(vid);
       out.push({ id: vid, name: name + " · " + label, optionLabel: label, parent: id, hidden: true, cat: "frozen", group,
-                 unit: "each", price, tags: ["frozen"], image: I(image), available: true, sub, desc });
+                 unit: unit || "each", price, tags: ["frozen"], image: I(image || first), available: true, sub, desc });
     });
     out.push(Object.assign({ id, name, cat: "frozen", group, unit: "each", isGroup: true, variants: ids, tags: ["frozen"],
-                 image: I(variants[0][3]), available: true, sub, desc }, extra || {}));
+                 image: I(first), available: true, sub, desc }, extra || {}));
   };
 
   /* ---------- CHEESE BREAD & BAKERY ---------- */
@@ -123,11 +123,13 @@ window.GROUPS.frozen = [
   S("duforno", "Biscoito de Queijo Duforno", "cheesebread", 15.99, "duforno",
     { en: "Horseshoe cheese biscuits · 1 kg", pt: "Biscoito ferradura de queijo · 1 kg", es: "Galletas de queso en herradura · 1 kg" },
     { en: "Crunchy cheese biscuits — straight from the freezer to the oven.", pt: "Biscoitos de queijo crocantes — direto do freezer para o forno.", es: "Galletas de queso crujientes — del congelador al horno." }, { tags: ["frozen", "gf"] });
-  G("beths-salgados", "Salgados Beth's · 50 un", "salgados",
-    { en: "Party snacks · approx. 50 units", pt: "Salgadinhos de festa · aprox. 50 unidades", es: "Aperitivos de fiesta · aprox. 50 unidades" },
+  G("beths-salgados", "Salgados Beth's", "salgados",
+    { en: "Party snacks · 12 or 50 units", pt: "Salgadinhos de festa · 12 ou 50 unidades", es: "Aperitivos de fiesta · 12 o 50 unidades" },
     { en: "The real Brazilian party snacks — oven 12 min or air-fryer 6 min.", pt: "Os salgadinhos de festa de verdade — forno 12 min ou air fryer 6 min.", es: "Los auténticos aperitivos de fiesta brasileños — horno 12 min o freidora de aire 6 min." },
-    [["beths-coxinha", "Coxinha de frango", 19.90, "beths-coxinha"], ["beths-kibe", "Kibe", 19.90, "beths-kibe"],
-     ["beths-bolinha", "Bolinha 4 queijos", 19.90, "beths-bolinha"], ["beths-enrolado", "Enrolado de salsicha", 19.90, "beths-enrolado"]], { tags: ["frozen", "best"] });
+    [["beths-coxinha-12", "Coxinha de frango · 12 un", 5.99, "beths-coxinha"], ["beths-bolinha-12", "Bolinha 4 queijos · 12 un", 5.99, "beths-bolinha"],
+     ["beths-enrolado-12", "Enroladinho de salsicha · 12 un", 5.99, "beths-enrolado"],
+     ["beths-coxinha", "Coxinha de frango · 50 un", 19.90, "beths-coxinha"], ["beths-kibe", "Kibe · 50 un", 19.90, "beths-kibe"],
+     ["beths-bolinha", "Bolinha 4 queijos · 50 un", 19.90, "beths-bolinha"], ["beths-enrolado", "Enrolado de salsicha · 50 un", 19.90, "beths-enrolado"]], { tags: ["frozen", "best"] });
   S("croquete", "Croquete", "salgados", 3.50, "croquete",
     { en: "Brazilian beef croquette", pt: "Croquete de carne", es: "Croqueta de carne" },
     { en: "Crispy outside, tasty filling inside — fry or air-fry.", pt: "Crocante por fora, recheio saboroso — frito ou na air fryer.", es: "Crujiente por fuera, sabroso por dentro — frito o en freidora de aire." });
@@ -160,6 +162,23 @@ window.GROUPS.frozen = [
   S("couve", "Couve", "veg", 2.99, "couve",
     { en: "Shredded collard greens", pt: "Couve fatiada", es: "Col rizada en tiras" },
     { en: "Finely shredded — sauté with garlic to go with feijoada.", pt: "Fatiada fininha — refogue com alho para acompanhar a feijoada.", es: "En tiras finas — saltea con ajo para acompañar la feijoada." }, { tags: ["frozen", "vegan"] });
+
+  /* ---------- batch 4 ---------- */
+  S("acai-tube", "Açaí Tube", "acai", 2.50, "",
+    { en: "Single-serve açaí tube", pt: "Açaí em tubo individual", es: "Açaí en tubo individual" },
+    { en: "Açaí on the go — squeeze, eat and enjoy.", pt: "Açaí para levar — é só apertar e saborear.", es: "Açaí para llevar — aprieta y disfruta." }, { tags: ["frozen"] });
+  S("alho", "Alho Congelado", "veg", 5.90, "",
+    { en: "Frozen peeled garlic · 1 kg", pt: "Alho descascado congelado · 1 kg", es: "Ajo pelado congelado · 1 kg" },
+    { en: "Peeled cloves ready to use — the base of every Brazilian dish.", pt: "Dentes descascados prontos — a base de todo tempero.", es: "Dientes pelados listos — la base de todo sofrito." }, { tags: ["frozen", "vegan"] });
+  G("bacalhau-desfiado", "Bacalhau Desfiado", "fish",
+    { en: "Shredded salt cod", pt: "Bacalhau desfiado", es: "Bacalao desmigado" },
+    { en: "Ready for bolinhos de bacalhau, bacalhau à brás and pataniscas.", pt: "Pronto para bolinho de bacalhau, bacalhau à brás e pataniscas.", es: "Listo para buñuelos de bacalao y bacalao a la brás." },
+    [["bacalhau-migas-brites", "Migas Brites · 400 g", 6.50, ""], ["bacalhau-desfiado-lugrade", "Lugrade · 400 g", 6.50, ""],
+     ["bacalhau-desfiado-gadus", "Gadus Morhua", 7.99, "bacalhau-desfiado-gadus"]], { tags: ["frozen", "portuguese"] });
+  G("bacalhau-postas", "Bacalhau em Postas", "fish",
+    { en: "Salt cod loins", pt: "Postas de bacalhau", es: "Lomos de bacalao" },
+    { en: "Thick Portuguese cod loins — for bacalhau assado or à lagareiro.", pt: "Postas altas de bacalhau — para assado ou à lagareiro.", es: "Lomos gruesos de bacalao — al horno o a la lagareira." },
+    [["bacalhau-postas-lugrade", "Lugrade · 1 kg", 25.99, ""], ["bacalhau-posta-brites", "Brites congelada · kg", 30.00, "", "kg"]], { tags: ["frozen", "portuguese"] });
 
   // sort: by group order, then lowest price (groups use their cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));

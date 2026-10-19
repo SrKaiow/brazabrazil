@@ -12,6 +12,7 @@ import "../js/config.js";
 import "../js/products.js";
 import "../js/beef.js";
 import "../js/frozen.js";
+import "../js/deli.js";
 import "../js/drinks.js";
 import "../js/shared.js";
 
