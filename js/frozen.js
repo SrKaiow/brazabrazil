@@ -13,7 +13,10 @@ window.GROUPS = window.GROUPS || {};
 window.GROUPS.frozen = [
   { id: "cheesebread", label: { en: "Cheese bread & bakery", "pt-BR": "Pão de queijo & padaria", "pt-PT": "Pão de queijo & padaria", es: "Pan de queso y panadería" } },
   { id: "acai",        label: { en: "Açaí & fruit pulps",    "pt-BR": "Açaí & polpas",           "pt-PT": "Açaí & polpas",           es: "Açaí y pulpas" } },
+  { id: "salgados",    label: { en: "Brazilian savoury snacks","pt-BR": "Salgados",              "pt-PT": "Salgados",                es: "Aperitivos brasileños" } },
   { id: "snacks",      label: { en: "Pastel & pamonha",      "pt-BR": "Pastel & pamonha",        "pt-PT": "Pastel & pamonha",        es: "Pastel y pamonha" } },
+  { id: "sweets",      label: { en: "Sweets",                "pt-BR": "Doces",                   "pt-PT": "Doces",                   es: "Dulces" } },
+  { id: "poultry",     label: { en: "Chicken",               "pt-BR": "Frangos",                 "pt-PT": "Frangos",                 es: "Pollo" } },
   { id: "fish",        label: { en: "Fish & seafood",        "pt-BR": "Peixes & frutos do mar",  "pt-PT": "Peixes & marisco",        es: "Pescados y mariscos" } },
   { id: "veg",         label: { en: "Vegetables & roots",    "pt-BR": "Legumes & raízes",        "pt-PT": "Legumes & raízes",        es: "Verduras y raíces" } }
 ];
@@ -65,7 +68,8 @@ window.GROUPS.frozen = [
   G("polpas", "Polpa de Fruta", "acai",
     { en: "Frozen fruit pulp · 100 g", pt: "Polpa congelada · 100 g", es: "Pulpa de fruta congelada · 100 g" },
     { en: "100% fruit pulp for juices, smoothies and desserts.", pt: "100% polpa de fruta para sucos, vitaminas e sobremesas.", es: "100% pulpa de fruta para zumos, batidos y postres." },
-    [["polpa-acai", "Açaí", 1.99, "polpa-acai"], ["polpa-maracuja", "Maracujá", 1.99, "polpa-maracuja"], ["polpa-cupuacu", "Cupuaçu Polpa Norte", 13.99, "polpa-cupuacu"]],
+    [["polpa-acai", "Açaí", 1.99, "polpa-acai"], ["polpa-maracuja", "Maracujá", 1.99, "polpa-maracuja"], ["brasfrut-cacau", "Cacau Brasfrut", 1.99, "brasfrut-cacau"],
+     ["brasfrut-cupuacu", "Cupuaçu Brasfrut", 1.99, "brasfrut-cupuacu"], ["polpa-cupuacu", "Cupuaçu Polpa Norte", 13.99, "polpa-cupuacu"]],
     { tags: ["frozen", "vegan"] });
   S("cupuacu", "Creme de Cupuaçu Polpa Norte", "acai", 9.99, "cupuacu",
     { en: "Cupuaçu cream · 1.02 kg", pt: "Creme de cupuaçu · 1,02 kg", es: "Crema de cupuaçu · 1,02 kg" },
@@ -110,6 +114,52 @@ window.GROUPS.frozen = [
   S("pequi", "Pequi Top Brazil", "veg", 8.99, "pequi",
     { en: "Frozen pequi fruit", pt: "Pequi congelado", es: "Pequi congelado" },
     { en: "The soul of Goiás cooking — arroz com pequi and frango com pequi.", pt: "A alma da cozinha goiana — arroz e frango com pequi.", es: "El alma de la cocina de Goiás — arroz y pollo con pequi." }, { tags: ["frozen", "vegan"] });
+
+  /* ---------- batch 3 ---------- */
+  G("beths-paodequeijo", "Pão de Queijo Beth's", "cheesebread",
+    { en: "Brazilian cheese bread · Beth's", pt: "Pão de queijo Beth's", es: "Pan de queso Beth's" },
+    { en: "Made with love in the UK — bake from frozen, golden and cheesy.", pt: "Feito com carinho aqui no UK — do freezer ao forno, dourado e cheio de queijo.", es: "Hecho con cariño en UK — del congelador al horno, dorado y con mucho queso." },
+    [["beths-pdq-15", "15 unidades", 5.99, "beths-pdq-15"], ["beths-pdq-50", "50 unidades", 19.90, "beths-pdq-50"]], { tags: ["frozen", "gf"] });
+  S("duforno", "Biscoito de Queijo Duforno", "cheesebread", 15.99, "duforno",
+    { en: "Horseshoe cheese biscuits · 1 kg", pt: "Biscoito ferradura de queijo · 1 kg", es: "Galletas de queso en herradura · 1 kg" },
+    { en: "Crunchy cheese biscuits — straight from the freezer to the oven.", pt: "Biscoitos de queijo crocantes — direto do freezer para o forno.", es: "Galletas de queso crujientes — del congelador al horno." }, { tags: ["frozen", "gf"] });
+  G("beths-salgados", "Salgados Beth's · 50 un", "salgados",
+    { en: "Party snacks · approx. 50 units", pt: "Salgadinhos de festa · aprox. 50 unidades", es: "Aperitivos de fiesta · aprox. 50 unidades" },
+    { en: "The real Brazilian party snacks — oven 12 min or air-fryer 6 min.", pt: "Os salgadinhos de festa de verdade — forno 12 min ou air fryer 6 min.", es: "Los auténticos aperitivos de fiesta brasileños — horno 12 min o freidora de aire 6 min." },
+    [["beths-coxinha", "Coxinha de frango", 19.90, "beths-coxinha"], ["beths-kibe", "Kibe", 19.90, "beths-kibe"],
+     ["beths-bolinha", "Bolinha 4 queijos", 19.90, "beths-bolinha"], ["beths-enrolado", "Enrolado de salsicha", 19.90, "beths-enrolado"]], { tags: ["frozen", "best"] });
+  S("croquete", "Croquete", "salgados", 3.50, "croquete",
+    { en: "Brazilian beef croquette", pt: "Croquete de carne", es: "Croqueta de carne" },
+    { en: "Crispy outside, tasty filling inside — fry or air-fry.", pt: "Crocante por fora, recheio saboroso — frito ou na air fryer.", es: "Crujiente por fuera, sabroso por dentro — frito o en freidora de aire." });
+  S("dadinho", "Dadinho de Tapioca Sol", "salgados", 5.99, "dadinho",
+    { en: "Tapioca cheesy dice · 300 g", pt: "Dadinho de tapioca · 300 g", es: "Dados de tapioca con queso · 300 g" },
+    { en: "Boteco favourite — crispy tapioca and cheese cubes, ready in 5 minutes. Gluten-free.", pt: "Clássico de boteco — dadinhos de tapioca com queijo, prontos em 5 minutos. Sem glúten.", es: "Clásico de bar — dados de tapioca y queso, listos en 5 minutos. Sin gluten." }, { tags: ["frozen", "gf"] });
+  G("beths-churros", "Churros Beth's", "sweets",
+    { en: "Brazilian churros", pt: "Churros recheados", es: "Churros rellenos" },
+    { en: "Filled churros dusted with cinnamon sugar — oven or air-fryer.", pt: "Churros recheados com açúcar e canela — forno ou air fryer.", es: "Churros rellenos con azúcar y canela — horno o freidora de aire." },
+    [["beths-churros-15", "15 un · com doce", 5.99, "beths-churros-15"], ["beths-churros-50", "50 un · doce de leite", 19.90, "beths-churros-50"]]);
+  S("pitaya", "Creme de Pitaya Frooty", "acai", 10.00, "pitaya",
+    { en: "Pitaya (dragon fruit) sorbet · 1 L", pt: "Sorbet de pitaya · 850 g / 1 L", es: "Sorbete de pitahaya · 1 L" },
+    { en: "Vibrant pink sorbet — perfect as a bowl, just like açaí.", pt: "Sorbet rosa vibrante — perfeito na tigela, igual açaí.", es: "Sorbete rosa vibrante — perfecto en bol, como el açaí." }, { tags: ["frozen", "vegan"] });
+  G("camarao", "Camarão", "fish",
+    { en: "Raw king prawns", pt: "Camarão grande cru", es: "Langostinos crudos" },
+    { en: "Big raw prawns — grill with garlic or add to moqueca.", pt: "Camarão grande cru — na chapa com alho ou na moqueca.", es: "Langostinos grandes crudos — a la plancha con ajo o en moqueca." },
+    [["black-tiger", "Black Tiger · 800 g · 20 un", 15.99, "black-tiger"], ["camarao-cru", "Camarão grande cru", 19.99, "camarao-cru"]]);
+  S("mexilhao", "Mexilhão Cozido", "fish", 8.99, "mexilhao",
+    { en: "Cooked mussels", pt: "Mexilhão cozido", es: "Mejillones cocidos" },
+    { en: "Ready-cooked mussels for rice, pasta or a quick starter.", pt: "Mexilhões já cozidos para arroz, massas ou petisco.", es: "Mejillones cocidos para arroz, pasta o tapa." }, { tags: ["frozen", "portuguese"] });
+  S("polvo-tentaculos", "Tentáculos de Polvo Cozidos", "fish", 22.99, "polvo-tentaculos",
+    { en: "Cooked octopus tentacles", pt: "Tentáculos de polvo cozidos", es: "Tentáculos de pulpo cocidos" },
+    { en: "Tender and ready — just grill with olive oil and garlic.", pt: "Macios e prontos — é só grelhar com azeite e alho.", es: "Tiernos y listos — a la plancha con aceite y ajo." }, { tags: ["frozen", "portuguese"] });
+  S("frango-campestre", "Frango Campestre", "poultry", 10.99, "frango-campestre",
+    { en: "Free-range style whole chicken · per kg", pt: "Frango caipira · por kg", es: "Pollo de campo · por kg" },
+    { en: "Firmer, tastier country chicken — the real frango caipira flavour.", pt: "Frango de carne firme e saborosa — o verdadeiro sabor caipira.", es: "Pollo de campo, carne firme y sabrosa." }, { unit: "kg" });
+  S("cornfed", "Cornfed Chicken", "poultry", 10.99, "cornfed",
+    { en: "Corn-fed whole chicken", pt: "Frango alimentado com milho", es: "Pollo alimentado con maíz" },
+    { en: "Golden-skinned corn-fed chicken — juicy and full of flavour.", pt: "Frango de pele dourada alimentado com milho — suculento e saboroso.", es: "Pollo de piel dorada alimentado con maíz — jugoso y sabroso." });
+  S("couve", "Couve", "veg", 2.99, "couve",
+    { en: "Shredded collard greens", pt: "Couve fatiada", es: "Col rizada en tiras" },
+    { en: "Finely shredded — sauté with garlic to go with feijoada.", pt: "Fatiada fininha — refogue com alho para acompanhar a feijoada.", es: "En tiras finas — saltea con ajo para acompañar la feijoada." }, { tags: ["frozen", "vegan"] });
 
   // sort: by group order, then lowest price (groups use their cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
