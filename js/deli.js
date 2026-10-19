@@ -35,7 +35,7 @@ window.GROUPS.deli = [
     { en: "Brazilian BBQ sausage · Prisca", pt: "Salsicha para churrasco · Prisca", es: "Salchicha para barbacoa · Prisca" },
     { en: "Juicy Brazilian-style sausages made for the grill.", pt: "Salsichas suculentas no estilo brasileiro, feitas para a brasa.", es: "Salchichas jugosas estilo brasileño, hechas para la brasa." },
     [["salsicha-calabresa", "Calabresa", 3.99, "salsicha-calabresa"], ["salsicha-crioula", "Crioula", 3.99, "salsicha-crioula"]], { tags: ["best"] });
-  S("linguica-calabresa-prisca", "Linguiça Calabresa Prisca", "linguicas", 5.50, "",
+  S("linguica-calabresa-prisca", "Linguiça Calabresa Prisca", "linguicas", 5.50, "linguica-calabresa-prisca",
     { en: "Smoked calabresa sausage", pt: "Calabresa defumada", es: "Longaniza calabresa ahumada" },
     { en: "Smoked and lightly spicy — fry with onions or add to feijoada.", pt: "Defumada e levemente picante — acebolada ou na feijoada.", es: "Ahumada y ligeramente picante — con cebolla o en feijoada." });
   S("calabresa-jlp", "Calabresa JLP", "linguicas", 14.90, "calabresa-jlp",
@@ -73,8 +73,10 @@ window.GROUPS.deli = [
   G("mortadela", "Mortadela", "frios",
     { en: "Mortadella", pt: "Mortadela", es: "Mortadela" },
     { en: "For the classic mortadela sandwich — sliced thin, piled high.", pt: "Para o clássico sanduíche de mortadela — fatiada fininha.", es: "Para el clásico bocadillo de mortadela — en lonchas finas." },
-    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"],
-     ["mortadela-porminho-extra", "Porminho com azeitonas · kg", 12.99, "mortadela-porminho-extra", "kg"]]);
+    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"]]]);
+  S("chouricao-porminho", "Chouriçao Extra Porminho", "chouricos", 12.99, "chouricao-porminho",
+    { en: "Large Portuguese chorizo · per kg", pt: "Chouriçao grosso · por kg", es: "Chorizo grueso portugués · por kg" },
+    { en: "Sliced thin for sandwiches and boards — smoky and full of paprika.", pt: "Fatiado fininho para sanduíches e tábuas — fumado e com colorau.", es: "En lonchas finas para bocadillos y tablas — ahumado y con pimentón." }, { unit: "kg", tags: ["portuguese"] });
 
   /* ---------- DEFUMADOS & SALGADOS ---------- */
   S("entremeada", "Porco Salgado Entremeada Tiras", "defumados", 13.50, "entremeada",
