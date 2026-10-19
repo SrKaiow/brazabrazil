@@ -85,8 +85,40 @@ window.GROUPS.beef = [
       { en: "For a proper rabada with watercress and polenta.", pt: "Para uma boa rabada com agrião e polenta.", es: "Para un buen guiso de rabo con berros y polenta." }),
     B("patinho", "Patinho Australiano", "slow", 14.99, "patinho", ["au"],
       { en: "Knuckle · Australian", pt: "Patinho australiano", es: "Babilla australiana" },
-      { en: "Lean and tender — great for steaks, mince and milanesa.", pt: "Magro e macio — ótimo para bifes, carne moída e à milanesa.", es: "Magra y tierna — ideal para filetes, picada y milanesa." })
+      { en: "Lean and tender — great for steaks, mince and milanesa.", pt: "Magro e macio — ótimo para bifes, carne moída e à milanesa.", es: "Magra y tierna — ideal para filetes, picada y milanesa." }),
+    /* ---- batch 2 ---- */
+    B("costela-osso", "Costela com Osso", "bbq", 9.99, "costela-osso", ["slow"],
+      { en: "Plate on the bone · beef ribs", pt: "Costela bovina com osso", es: "Costilla de res con hueso" },
+      { en: "The classic Brazilian costela — slow over the fire for hours, falls off the bone.", pt: "A costela clássica do churrasco — horas no fogo baixo até soltar do osso.", es: "La costilla clásica del churrasco — horas a fuego lento hasta soltarse del hueso." }),
+    B("costela-sem-osso", "Costela sem Osso", "bbq", 12.99, "costela-sem-osso", ["slow"],
+      { en: "Boneless beef ribs", pt: "Costela bovina desossada", es: "Costilla de res sin hueso" },
+      { en: "All the flavour of costela, no bone. Great slow-roasted or in the pressure cooker.", pt: "Todo o sabor da costela, sem osso. Ótima assada devagar ou na pressão.", es: "Todo el sabor de la costilla, sin hueso. Ideal asada lenta o en olla a presión." }),
+    B("cupim", "Cupim Brasileiro", "bbq", 18.99, "cupim", ["br", "special"],
+      { en: "Beef hump · Brazilian", pt: "Cupim brasileiro", es: "Giba de res · brasileña" },
+      { en: "A true Brazilian speciality — marbled hump that melts after hours of slow cooking.", pt: "Especialidade brasileira — marmorizado, derrete depois de horas no fogo baixo.", es: "Auténtica especialidad brasileña — marmoleado, se deshace tras horas a fuego lento." }),
+    B("alcatra", "Alcatra Australiana", "bbq", 16.99, "alcatra", ["au"],
+      { en: "Rump · Australian", pt: "Alcatra australiana", es: "Cuadril · australiano" },
+      { en: "Versatile and full of flavour — steaks, skewers or roasting.", pt: "Versátil e saborosa — bifes, espetinhos ou assados.", es: "Versátil y sabrosa — filetes, brochetas o al horno." }),
+    B("contrafile-br", "Contrafilé Brasileiro", "steak", 16.99, "contrafile-br", ["br"],
+      { en: "Sirloin · Brazilian", pt: "Contrafilé brasileiro", es: "Bife de chorizo · brasileño" },
+      { en: "Brazilian sirloin with its fat ribbon — juicy steaks with real churrasco flavour.", pt: "Contrafilé brasileiro com a faixa de gordura — bifes suculentos com sabor de churrasco.", es: "Bife de chorizo brasileño con su franja de grasa — jugoso y con sabor a churrasco." }),
+    B("figado", "Fígado de Boi", "slow", 4.99, "figado", [],
+      { en: "Ox liver", pt: "Fígado bovino", es: "Hígado de res" },
+      { en: "Rich in iron — classic fígado acebolado with onions.", pt: "Rico em ferro — perfeito para o clássico fígado acebolado.", es: "Rico en hierro — clásico hígado encebollado." }),
+    B("bucho", "Bucho", "slow", 8.90, "bucho", [],
+      { en: "Beef tripe", pt: "Bucho bovino", es: "Mondongo · callos" },
+      { en: "Cleaned honeycomb tripe for dobradinha and traditional stews.", pt: "Bucho limpo para dobradinha e cozidos tradicionais.", es: "Mondongo limpio para callos y guisos tradicionales." }),
+    B("acem", "Acém Australiano", "slow", 13.99, "acem", ["au"],
+      { en: "Chuck roll · Australian", pt: "Acém australiano", es: "Aguja de res · australiana" },
+      { en: "Perfect for carne de panela, stews and homemade mince.", pt: "Perfeito para carne de panela, ensopados e carne moída.", es: "Perfecto para carne en olla, guisos y carne picada." }),
+    B("cha-de-fora", "Chã de Fora", "slow", 14.50, "cha-de-fora", [],
+      { en: "Silverside", pt: "Coxão duro · chã de fora", es: "Contra de res" },
+      { en: "Lean cut for pot roasts, carne louca and slow braising.", pt: "Corte magro para carne assada de panela, carne louca e cozidos.", es: "Corte magro para asados en olla y estofados lentos." }),
+    B("colchao-mole", "Colchão Mole", "slow", 14.99, "colchao-mole", [],
+      { en: "Topside", pt: "Coxão mole", es: "Tapa de res" },
+      { en: "Tender and lean — ideal for bife à milanesa, steaks and stroganoff.", pt: "Macio e magro — ideal para bife à milanesa, bifes e strogonoff.", es: "Tierno y magro — ideal para milanesa, filetes y strogonoff." })
   ];
+
 
   const order = window.GROUPS.beef.map(g => g.id);
   beef.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));

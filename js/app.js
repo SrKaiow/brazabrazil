@@ -52,7 +52,7 @@
   /* ---------- State ---------- */
   let cart = {};
   let picks = {};
-  let activeCat = "all", query = "", activeGroup = "all";
+  let activeCat = "all", query = "", activeGroup = "all", onlyIds = null;
   const groupsFor = cat => (window.GROUPS || {})[cat] || [];
   const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && byId[id].cat === "drinks");
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
@@ -138,13 +138,13 @@
   }
   $("#subtabs").addEventListener("click", e => {
     const b = e.target.closest(".subtab"); if (!b) return;
-    activeGroup = b.dataset.group; renderTabs(); renderGrid();
+    activeGroup = b.dataset.group; onlyIds = null; renderTabs(); renderGrid();
   });
   tabs.addEventListener("click", e => {
     const b = e.target.closest(".tab"); if (!b) return;
-    activeCat = b.dataset.cat; activeGroup = "all"; renderTabs(); renderGrid();
+    activeCat = b.dataset.cat; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid();
   });
-  $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderGrid(); });
+  $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); onlyIds = null; renderGrid(); });
 
   /* ---------- Product grid ---------- */
   function card(p) {
@@ -186,6 +186,7 @@
     const list = P.filter(p =>
       (activeCat === "all" || p.cat === activeCat) &&
       (activeCat === "all" || activeGroup === "all" || p.group === activeGroup) &&
+      (!onlyIds || onlyIds.includes(p.id)) &&
       (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
     let html = "", lastHead = null;
@@ -251,10 +252,11 @@
     g.setAttribute("tabindex", "0");
     g.setAttribute("role", "button");
     const go = () => {
-      const key = { contrafile: "contra", picanha: "picanha", costela: "costela" }[g.dataset.cut] || g.dataset.cut;
+      const key = { contrafile: "contrafile" }[g.dataset.cut] || g.dataset.cut;
       activeCat = "beef"; activeGroup = "all";
       const hit = P.filter(p => p.cat === "beef" && p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(key));
-      query = hit.length > 1 ? key : ""; $("#search").value = query;
+      query = ""; $("#search").value = "";
+      onlyIds = hit.length > 1 ? hit.map(p => p.id) : null;
       renderTabs(); renderGrid();
       if (!hit.length) toast(t("cut_ask").replace("{cut}", g.querySelector("text").textContent));
       const el = hit.length ? document.getElementById("p-" + hit[0].id) : $("#grid");

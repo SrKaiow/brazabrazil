@@ -202,6 +202,7 @@ window.I18N = {
   tag_wagyu: { en: "Wagyu", "pt-BR": "Wagyu", "pt-PT": "Wagyu", es: "Wagyu" },
   tag_angus: { en: "Angus", "pt-BR": "Angus", "pt-PT": "Angus", es: "Angus" },
   tag_aberdeen: { en: "Aberdeen Angus", "pt-BR": "Aberdeen Angus", "pt-PT": "Aberdeen Angus", es: "Aberdeen Angus" },
+  tag_br: { en: "🇧🇷 Brazilian", "pt-BR": "🇧🇷 Brasil", "pt-PT": "🇧🇷 Brasil", es: "🇧🇷 Brasil" },
   tag_ar: { en: "🇦🇷 Argentina", "pt-BR": "🇦🇷 Argentina", "pt-PT": "🇦🇷 Argentina", es: "🇦🇷 Argentina" },
   tag_ie: { en: "🇮🇪 Irish", "pt-BR": "🇮🇪 Irlanda", "pt-PT": "🇮🇪 Irlanda", es: "🇮🇪 Irlanda" },
   tag_au: { en: "🇦🇺 Australian", "pt-BR": "🇦🇺 Austrália", "pt-PT": "🇦🇺 Austrália", es: "🇦🇺 Australia" },
