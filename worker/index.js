@@ -11,6 +11,7 @@ import "./shim.js";
 import "../js/config.js";
 import "../js/products.js";
 import "../js/beef.js";
+import "../js/frozen.js";
 import "../js/drinks.js";
 import "../js/shared.js";
 
@@ -62,7 +63,7 @@ async function createCheckout(request, env) {
   for (const [id, rawQty] of Object.entries(b.items || {})) {
     const p = byId[id];
     const qty = Number(rawQty);
-    if (!p) return json({ error: "unknown_item", id }, 400);
+    if (!p || p.isGroup) return json({ error: "unknown_item", id }, 400);
     if (p.available === false) return json({ error: "out_of_stock", id }, 409);
     const step = p.unit === "kg" ? 0.5 : 1;
     if (!(qty > 0) || qty > 50 || Math.abs(qty / step - Math.round(qty / step)) > 1e-9)

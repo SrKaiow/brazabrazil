@@ -720,3 +720,13 @@ html{scroll-padding-top:110px}
 .shop-bar .tabs{flex:1 1 auto}
 .shop-bar .search{order:2}
 .shop-bar .subtabs{order:3}
+
+/* ---------- Grouped products (options) ---------- */
+.opt{display:block;margin:-6px 0 16px}
+.opt span{display:block;font-family:var(--cond);text-transform:uppercase;letter-spacing:.14em;font-size:.66rem;color:var(--muted);margin-bottom:5px}
+.opt select{width:100%;appearance:none;-webkit-appearance:none;border:1px solid var(--line-strong);border-radius:10px;padding:10px 36px 10px 12px;font:inherit;font-size:.86rem;font-weight:600;color:var(--navy);cursor:pointer;
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2314204a' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 12px center}
+.opt select:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px rgba(11,122,59,.12)}
+.tag--opts{background:var(--navy);color:#fff}
+.tab[data-cat="frozen"]::before{content:"❄ "}
+.card--framed .card__tags{max-width:calc(100% - 90px)}

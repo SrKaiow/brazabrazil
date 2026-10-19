@@ -147,25 +147,36 @@
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); onlyIds = null; renderGrid(); });
 
   /* ---------- Product grid ---------- */
-  function card(p) {
+  const vsel = {};   // chosen option for grouped products
+  const variantOf = g => {
+    const opts = g.variants.map(id => byId[id]);
+    return byId[vsel[g.id]] || opts.find(v => v.available !== false) || opts[0];
+  };
+  function card(g) {
+    const p = g.isGroup ? variantOf(g) : g;
     const q = picks[p.id] ?? step(p);
-    const out = p.available === false;
+    const out = g.isGroup ? g.variants.every(id => byId[id].available === false) : p.available === false;
+    const optsHtml = g.isGroup ? `<label class="opt"><span>${t("opt_choose")}</span><select data-group="${g.id}">${g.variants.map(id => {
+      const v = byId[id];
+      return `<option value="${id}"${id === p.id ? " selected" : ""}${v.available === false ? " disabled" : ""}>${v.optionLabel} — ${money(v.price)}${v.available === false ? " · " + t("out") : ""}</option>`;
+    }).join("")}</select></label>` : "";
     const media = p.image ? `<img src="${p.image}" alt="${p.name} — ${pick(p.sub)}" loading="lazy">` : icon(p.cat);
     return `
-      <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}" id="p-${p.id}">
+      <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}${g.isGroup ? " card--group" : ""}" id="p-${g.id}">
         <div class="card__media">
           ${media}
-          <div class="card__tags">${(p.tags || []).map(tagHtml).join("")}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
+          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
           <span class="cat">${t("cat_" + p.cat)}</span>
         </div>
         <div class="card__body">
-          <h3 class="card__name">${p.name}</h3>
+          <h3 class="card__name">${g.name}</h3>
           <p class="card__en">${pick(p.sub)}</p>
           <p class="card__desc">${pick(p.desc)}</p>
+          ${optsHtml}
           <div class="card__row">
             <span class="price">${money(p.price)}<small>${unitLabel(p)}</small></span>
             ${out ? `
-            <button class="btn btn--similar" data-act="similar" data-id="${p.id}">${t("similar_btn")}</button>` : `
+            <button class="btn btn--similar" data-act="similar" data-id="${g.id}">${t("similar_btn")}</button>` : `
             <div class="card__buy">
               <div class="qty">
                 <button data-act="dec" data-id="${p.id}" aria-label="−">−</button>
@@ -183,7 +194,7 @@
 
   function renderGrid() {
     const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
-    const list = P.filter(p =>
+    const list = P.filter(p => !p.hidden &&
       (activeCat === "all" || p.cat === activeCat) &&
       (activeCat === "all" || activeGroup === "all" || p.group === activeGroup) &&
       (!onlyIds || onlyIds.includes(p.id)) &&
@@ -208,6 +219,12 @@
     $("#grid").innerHTML = html;
   }
 
+  $("#grid").addEventListener("change", e => {
+    const sel = e.target.closest("select[data-group]"); if (!sel) return;
+    vsel[sel.dataset.group] = sel.value;
+    const el = document.getElementById("p-" + sel.dataset.group);
+    if (el) { el.outerHTML = card(byId[sel.dataset.group]); }
+  });
   $("#grid").addEventListener("click", e => {
     const b = e.target.closest("button[data-act]"); if (!b) return;
     const p = byId[b.dataset.id], s = step(p);
@@ -484,7 +501,7 @@
   /* ---------- Out of stock → similar products ---------- */
   function similarTo(p) {
     const chosen = (p.similar || []).map(id => byId[id]).filter(x => x && x.available !== false);
-    const ok = x => x.id !== p.id && x.available !== false && !chosen.includes(x);
+    const ok = x => !x.hidden && x.id !== p.id && x.id !== p.parent && x.available !== false && !chosen.includes(x);
     const sameCat = [...P.filter(x => ok(x) && x.cat === p.cat && x.group && x.group === p.group),
                      ...P.filter(x => ok(x) && x.cat === p.cat && (!x.group || x.group !== p.group))];
     return [...chosen, ...sameCat].slice(0, 3);
@@ -504,7 +521,7 @@
   }
   $("#similarList").addEventListener("click", e => {
     const b = e.target.closest("[data-add-similar]"); if (!b) return;
-    const p = byId[b.dataset.addSimilar];
+    let p = byId[b.dataset.addSimilar]; if (p.isGroup) p = variantOf(p);
     addToCart(p.id, step(p)); closeModals();
   });
 
@@ -583,7 +600,7 @@
     const avail = MIX.filter(([id]) => byId[id] && byId[id].available !== false);
     const share = avail.reduce((s, [, f]) => s + f, 0) || 1;
     const items = avail.map(([id, f]) => [id, Math.max(.5, Math.round((totalKg * f / share) * 2) / 2)]);
-    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["paodequeijo", Math.ceil(n / 8)]]
+    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["rez-18", Math.ceil(n / 15)]]
       .filter(([id]) => byId[id] && byId[id].available !== false);
     return { n, totalKg, items: items.concat(extra) };
   }

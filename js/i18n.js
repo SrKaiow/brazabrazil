@@ -207,6 +207,10 @@ window.I18N = {
   tag_ie: { en: "🇮🇪 Irish", "pt-BR": "🇮🇪 Irlanda", "pt-PT": "🇮🇪 Irlanda", es: "🇮🇪 Irlanda" },
   tag_au: { en: "🇦🇺 Australian", "pt-BR": "🇦🇺 Austrália", "pt-PT": "🇦🇺 Austrália", es: "🇦🇺 Australia" },
   tag_pl: { en: "🇵🇱 Polish", "pt-BR": "🇵🇱 Polônia", "pt-PT": "🇵🇱 Polónia", es: "🇵🇱 Polonia" },
+  cat_frozen: { en: "Frozen", "pt-BR": "Congelados", "pt-PT": "Congelados", es: "Congelados" },
+  tag_frozen: { en: "❄ Frozen", "pt-BR": "❄ Congelado", "pt-PT": "❄ Congelado", es: "❄ Congelado" },
+  opt_choose: { en: "Choose", "pt-BR": "Escolha", "pt-PT": "Escolha", es: "Elige" },
+  opt_n: { en: "options", "pt-BR": "opções", "pt-PT": "opções", es: "opciones" },
   tag_adult: { en: "18+", "pt-BR": "18+", "pt-PT": "18+", es: "18+" },
   age_confirm: {
     en: "I confirm I am <b>18 or over</b>. ID may be requested on collection or delivery.",
