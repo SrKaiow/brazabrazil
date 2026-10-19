@@ -52,7 +52,9 @@
   /* ---------- State ---------- */
   let cart = {};
   let picks = {};
-  let activeCat = "all", query = "";
+  let activeCat = "all", query = "", activeGroup = "all";
+  const GROUPS = window.DRINK_GROUPS || [];
+  const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && byId[id].cat === "drinks");
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
   const droppedOos = [];
   Object.keys(cart).forEach(id => {
@@ -65,7 +67,7 @@
   const fmtQty = (p, q) => (p.unit === "kg" ? (q % 1 ? q.toFixed(1) : q) + " kg" : "× " + q);
   const unitLabel = p => (p.unit === "kg" ? "/kg" : "");
   const icon = cat => `<svg viewBox="0 0 120 90" aria-hidden="true"><use href="#i-${cat}"/></svg>`;
-  const tagHtml = k => `<span class="tag${["gf", "vegan", "portuguese"].includes(k) ? " tag--green" : ""}">${t("tag_" + k)}</span>`;
+  const tagHtml = k => `<span class="tag${["gf", "vegan", "portuguese"].includes(k) ? " tag--green" : k === "adult" ? " tag--adult" : ""}">${t("tag_" + k)}</span>`;
   const wa = text => `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(text ?? t("wa_hi"))}`;
 
   /* ---------- Static config content ---------- */
@@ -127,11 +129,19 @@
   const tabs = $("#tabs");
   function renderTabs() {
     tabs.innerHTML = CATS.map(c =>
-      `<button class="tab" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
+      `<button class="tab${c === "drinks" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
+    const st = $("#subtabs");
+    st.hidden = activeCat !== "drinks";
+    st.innerHTML = [{ id: "all", label: null }, ...GROUPS].map(g =>
+      `<button class="subtab" data-group="${g.id}" aria-pressed="${g.id === activeGroup}">${g.label ? pick(g.label) : t("cat_all")}</button>`).join("");
   }
+  $("#subtabs").addEventListener("click", e => {
+    const b = e.target.closest(".subtab"); if (!b) return;
+    activeGroup = b.dataset.group; renderTabs(); renderGrid();
+  });
   tabs.addEventListener("click", e => {
     const b = e.target.closest(".tab"); if (!b) return;
-    activeCat = b.dataset.cat; renderTabs(); renderGrid();
+    activeCat = b.dataset.cat; activeGroup = "all"; renderTabs(); renderGrid();
   });
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderGrid(); });
 
@@ -141,7 +151,7 @@
     const out = p.available === false;
     const media = p.image ? `<img src="${p.image}" alt="${p.name} — ${pick(p.sub)}" loading="lazy">` : icon(p.cat);
     return `
-      <article class="card${out ? " card--out" : ""}" id="p-${p.id}">
+      <article class="card${out ? " card--out" : ""}${p.cat === "drinks" && p.image ? " card--framed" : ""}" id="p-${p.id}">
         <div class="card__media">
           ${media}
           <div class="card__tags">${(p.tags || []).map(tagHtml).join("")}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
@@ -171,10 +181,25 @@
   }
 
   function renderGrid() {
+    const gLabel = id => { const g = GROUPS.find(x => x.id === id); return g ? pick(g.label) : ""; };
     const list = P.filter(p =>
       (activeCat === "all" || p.cat === activeCat) &&
-      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc)].join(" ").toLowerCase().includes(query)));
-    $("#grid").innerHTML = list.length ? list.map(card).join("") : `<p class="empty-state">${t("none")}</p>`;
+      (activeCat !== "drinks" || activeGroup === "all" || p.group === activeGroup) &&
+      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p.group) : ""].join(" ").toLowerCase().includes(query)));
+    if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
+    let html = "", lastHead = null;
+    list.forEach(p => {
+      const head = p.cat === "drinks" ? "drinks:" + p.group : (activeCat === "all" ? "cat:" + p.cat : null);
+      if (activeCat === "drinks" || (activeCat === "all" && p.cat === "drinks")) {
+        if (head !== lastHead) {
+          const n = list.filter(x => x.group === p.group).length;
+          html += `<h3 class="grid__head"><span>${gLabel(p.group)}</span><small>${n} · ${t("sorted_price")}</small></h3>`;
+          lastHead = head;
+        }
+      }
+      html += card(p);
+    });
+    $("#grid").innerHTML = html;
   }
 
   $("#grid").addEventListener("click", e => {
@@ -262,6 +287,8 @@
         </div>
       </div>`;
     }).join("");
+    const ac = $("#ageCheck");
+    if (ac) { ac.hidden = !hasAlcohol(); form.adult.required = hasAlcohol(); }
     updateTotals();
   }
 
@@ -329,6 +356,7 @@
     updateTotals();
   });
   form.postcode.addEventListener("input", updateTotals);
+  form.adult.addEventListener("change", () => $("#ageCheck").classList.remove("age-check--err"));
   form.postcode.addEventListener("blur", () => { if (form.postcode.value.trim()) form.postcode.value = window.BB.normPostcode(form.postcode.value); });
 
   /* ---------- Checkout: pay online, then send details on WhatsApp ---------- */
@@ -342,7 +370,8 @@
       name: d.get("name"), phone: d.get("phone"),
       address: d.get("address") || "", postcode: q && q.postcode ? q.postcode : "",
       fee: q && q.status === "ok" ? q.fee : (q && q.status === "tbc" ? "tbc" : 0),
-      day: d.get("day") || "", notes: d.get("notes") || ""
+      day: d.get("day") || "", notes: d.get("notes") || "",
+      adult: hasAlcohol() ? !!form.adult.checked : undefined
     };
   }
 
@@ -367,7 +396,8 @@
       del ? `*${plain("o_address")}:* ${o.address}` : "",
       del ? `*${plain("o_postcode")}:* ${o.postcode}` : "",
       o.day ? `*${plain("d_day")}:* ${o.day}` : "",
-      o.notes ? `*${plain("d_notes")}:* ${o.notes}` : ""
+      o.notes ? `*${plain("d_notes")}:* ${o.notes}` : "",
+      o.adult ? `*18+:* ✅ ${plain("age_short")}` : ""
     ].filter((l, i, arr) => l !== "" || arr[i - 1] !== "").join("\n");
   }
 
@@ -382,6 +412,9 @@
     const q = currentQuote();
     if (q && (q.status === "invalid" || q.status === "out" || q.status === "empty")) {
       updateTotals(); form.postcode.focus(); return;
+    }
+    if (hasAlcohol() && !form.adult.checked) {
+      $("#ageCheck").classList.add("age-check--err"); form.adult.focus(); toast(t("age_needed")); return;
     }
     const o = snapshot();
     if (!S.onlinePayment) { sendManual(o); toast(t("opening")); return; }
@@ -401,6 +434,7 @@
         return;
       }
       if (res.status === 409) { toast(t("err_oos")); }
+      else if (data.error === "age_required") { toast(t("age_needed")); }
       else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); sendManual(o); }
       else { toast(t("err_generic")); }
     } catch (err) {
@@ -439,7 +473,9 @@
   /* ---------- Out of stock → similar products ---------- */
   function similarTo(p) {
     const chosen = (p.similar || []).map(id => byId[id]).filter(x => x && x.available !== false);
-    const sameCat = P.filter(x => x.cat === p.cat && x.id !== p.id && x.available !== false && !chosen.includes(x));
+    const ok = x => x.id !== p.id && x.available !== false && !chosen.includes(x);
+    const sameCat = [...P.filter(x => ok(x) && x.cat === p.cat && x.group && x.group === p.group),
+                     ...P.filter(x => ok(x) && x.cat === p.cat && (!x.group || x.group !== p.group))];
     return [...chosen, ...sameCat].slice(0, 3);
   }
   function openSimilar(id) {
@@ -508,6 +544,10 @@
   function brazaReact(p) {
     if (p.id === "picanha") return brazaSay(t("bz_r_picanha"));
     if (p.cat === "boxes") return brazaSay(t("bz_r_box"));
+    if (p.cat === "drinks") {
+      const k = p.group === "beer" ? "bz_r_beer" : p.group === "cachaca" ? "bz_r_cachaca" : p.group === "wine" ? "bz_r_wine" : "bz_r_cheers";
+      return brazaSay(t(k), 3800);
+    }
     const hasFarofa = cart.farofa;
     const pool = ["bz_r1", "bz_r2"].concat(hasFarofa || p.cat === "groceries" ? [] : ["bz_r3"]);
     brazaSay(t(pool[Math.floor(Math.random() * pool.length)]), 3800);

@@ -10,6 +10,7 @@
 import "./shim.js";
 import "../js/config.js";
 import "../js/products.js";
+import "../js/drinks.js";
 import "../js/shared.js";
 
 const S = globalThis.SITE;
@@ -69,6 +70,7 @@ async function createCheckout(request, env) {
   }
   if (!items.length) return json({ error: "empty" }, 400);
   if (!b.name || !b.phone) return json({ error: "missing_contact" }, 400);
+  if (items.some(({ p }) => p.cat === "drinks") && b.adult !== true) return json({ error: "age_required" }, 400);
 
   const isDelivery = b.mode === "delivery";
   let quote = null;
@@ -118,6 +120,7 @@ async function createCheckout(request, env) {
       delivery_fee: isDelivery ? (quote.status === "tbc" ? "TBC" : fee.toFixed(2)) : "",
       preferred_day: clip(b.day, 20),
       notes: clip(b.notes),
+      age_18_confirmed: items.some(({ p }) => p.cat === "drinks") ? "yes" : "n/a",
       items: clip(summary)
     },
     payment_intent_data: {

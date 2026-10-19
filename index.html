@@ -77,6 +77,7 @@
       <path d="M20 34l40 14 40-14M60 48v36"/>
       <path d="M40 26l40 16v12" opacity=".55"/>
     </symbol>
+    <symbol id="i-drinks" viewBox="0 0 120 90"><path d="M50 14h20M52 14v14c0 6-8 10-8 20v32h32V48c0-10-8-14-8-20V14"/><path d="M44 56h32" opacity=".55"/></symbol>
     <symbol id="i-groceries" viewBox="0 0 120 90">
       <path d="M30 32h60l-6 50H36z"/>
       <path d="M44 32c0-12 8-20 16-20s16 8 16 20"/>
@@ -223,6 +224,7 @@
 
       <div class="shop-bar">
         <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="subtabs" id="subtabs" hidden></div>
         <label class="search">
           <svg><use href="#i-search"/></svg>
           <input type="search" id="search" placeholder="Search picanha, linguiça…" data-i18n-ph="s_search" aria-label="Search products">
@@ -440,6 +442,7 @@
         <p class="fee-msg" id="feeMsg" aria-live="polite"></p>
         <label class="field"><span data-i18n="d_address">Full address (house number, street, town)</span><input name="address" autocomplete="street-address"></label>
       </div>
+      <label class="age-check" id="ageCheck" hidden><input type="checkbox" name="adult"><span data-i18n="age_confirm">I confirm I am 18 or over. ID may be requested on collection or delivery.</span></label>
       <label class="field"><span data-i18n="d_day">Preferred day</span><input name="day" type="date"></label>
       <label class="field"><span data-i18n="d_notes">Notes for the butcher</span><textarea name="notes" rows="2" placeholder="e.g. thick steaks, keep the fat cap" data-i18n-ph="d_notes_ph"></textarea></label>
     </form>
@@ -482,6 +485,7 @@
 <script src="js/config.js"></script>
 <script src="js/i18n.js"></script>
 <script src="js/products.js"></script>
+<script src="js/drinks.js"></script>
 <script src="js/shared.js"></script>
 <script src="js/app.js"></script>
 </body>

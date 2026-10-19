@@ -692,3 +692,31 @@ html{scroll-padding-top:110px}
 @keyframes cutPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
 @media (prefers-reduced-motion:reduce){.cow--photo .cut__ring{animation:none}}
 @media (max-width:640px){.cow--photo .cow__labels text{font-size:62px;stroke-width:10px}}
+
+/* ============================================================
+   DRINKS
+   ============================================================ */
+.tab--drinks{border-color:rgba(214,174,72,.6)}
+.tab--drinks::before{content:"🍷 ";}
+.subtabs{flex-basis:100%;display:flex;gap:6px;flex-wrap:wrap;padding:12px 14px;margin-top:4px;border-radius:14px;background:linear-gradient(135deg,rgba(11,122,59,.06),rgba(242,194,48,.10));border:1px solid rgba(214,174,72,.35)}
+.shop-bar{flex-wrap:wrap}
+.subtab{border:1px solid var(--line-strong);background:#fff;color:var(--navy);padding:7px 14px;border-radius:999px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.subtab:hover{border-color:var(--green)}
+.subtab[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.grid__head{grid-column:1/-1;display:flex;align-items:baseline;gap:14px;margin:18px 0 -4px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:1.7rem}
+.grid__head:first-child{margin-top:0}
+.grid__head small{font-family:var(--cond);text-transform:uppercase;letter-spacing:.16em;font-size:.68rem;color:var(--green)}
+.card--framed .card__media{aspect-ratio:1;background:#fff;padding:0}
+.card--framed .card__media::before{display:none}
+.card--framed .card__media img{object-fit:contain;transition:transform .4s}
+.card--framed:hover .card__media img{transform:scale(1.03)}
+.card--framed .card__media .cat{display:none}
+.card--framed .card__tags{top:22px;left:22px}
+.tag--adult{background:#b42318;color:#fff}
+.age-check{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;margin:4px 0 14px;border:1px solid rgba(180,35,24,.35);background:rgba(180,35,24,.05);border-radius:12px;font-size:.82rem;color:var(--navy);cursor:pointer}
+.age-check input{width:18px;height:18px;margin-top:1px;accent-color:var(--green);flex:none}
+.age-check--err{border-color:#b42318;box-shadow:0 0 0 3px rgba(180,35,24,.15);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.shop-bar .tabs{flex:1 1 auto}
+.shop-bar .search{order:2}
+.shop-bar .subtabs{order:3}
