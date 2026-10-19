@@ -3,6 +3,8 @@
   "name": "brazabrazil",
   "main": "worker/index.js",
   "compatibility_date": "2025-09-01",
+  // Required by `wrangler preview` (preview builds for non-main branches)
+  "previews": {},
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
