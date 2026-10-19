@@ -126,8 +126,8 @@ window.GROUPS.frozen = [
   G("beths-salgados", "Salgados Beth's", "salgados",
     { en: "Party snacks · 12 or 50 units", pt: "Salgadinhos de festa · 12 ou 50 unidades", es: "Aperitivos de fiesta · 12 o 50 unidades" },
     { en: "The real Brazilian party snacks — oven 12 min or air-fryer 6 min.", pt: "Os salgadinhos de festa de verdade — forno 12 min ou air fryer 6 min.", es: "Los auténticos aperitivos de fiesta brasileños — horno 12 min o freidora de aire 6 min." },
-    [["beths-coxinha-12", "Coxinha de frango · 12 un", 5.99, "beths-coxinha"], ["beths-bolinha-12", "Bolinha 4 queijos · 12 un", 5.99, "beths-bolinha"],
-     ["beths-enrolado-12", "Enroladinho de salsicha · 12 un", 5.99, "beths-enrolado"],
+    [["beths-coxinha-12", "Coxinha de frango · 12 un", 5.99, "beths-coxinha-12"], ["beths-bolinha-12", "Bolinha 4 queijos · 12 un", 5.99, "beths-bolinha-12"],
+     ["beths-enrolado-12", "Enroladinho de salsicha · 12 un", 5.99, "beths-enrolado-12"],
      ["beths-coxinha", "Coxinha de frango · 50 un", 19.90, "beths-coxinha"], ["beths-kibe", "Kibe · 50 un", 19.90, "beths-kibe"],
      ["beths-bolinha", "Bolinha 4 queijos · 50 un", 19.90, "beths-bolinha"], ["beths-enrolado", "Enrolado de salsicha · 50 un", 19.90, "beths-enrolado"]], { tags: ["frozen", "best"] });
   S("croquete", "Croquete", "salgados", 3.50, "croquete",
@@ -164,21 +164,21 @@ window.GROUPS.frozen = [
     { en: "Finely shredded — sauté with garlic to go with feijoada.", pt: "Fatiada fininha — refogue com alho para acompanhar a feijoada.", es: "En tiras finas — saltea con ajo para acompañar la feijoada." }, { tags: ["frozen", "vegan"] });
 
   /* ---------- batch 4 ---------- */
-  S("acai-tube", "Açaí Tube", "acai", 2.50, "",
+  S("acai-tube", "Açaí Tube", "acai", 2.50, "acai-tube",
     { en: "Single-serve açaí tube", pt: "Açaí em tubo individual", es: "Açaí en tubo individual" },
     { en: "Açaí on the go — squeeze, eat and enjoy.", pt: "Açaí para levar — é só apertar e saborear.", es: "Açaí para llevar — aprieta y disfruta." }, { tags: ["frozen"] });
-  S("alho", "Alho Congelado", "veg", 5.90, "",
+  S("alho", "Alho Congelado", "veg", 5.90, "alho",
     { en: "Frozen peeled garlic · 1 kg", pt: "Alho descascado congelado · 1 kg", es: "Ajo pelado congelado · 1 kg" },
     { en: "Peeled cloves ready to use — the base of every Brazilian dish.", pt: "Dentes descascados prontos — a base de todo tempero.", es: "Dientes pelados listos — la base de todo sofrito." }, { tags: ["frozen", "vegan"] });
   G("bacalhau-desfiado", "Bacalhau Desfiado", "fish",
     { en: "Shredded salt cod", pt: "Bacalhau desfiado", es: "Bacalao desmigado" },
     { en: "Ready for bolinhos de bacalhau, bacalhau à brás and pataniscas.", pt: "Pronto para bolinho de bacalhau, bacalhau à brás e pataniscas.", es: "Listo para buñuelos de bacalao y bacalao a la brás." },
-    [["bacalhau-migas-brites", "Migas Brites · 400 g", 6.50, ""], ["bacalhau-desfiado-lugrade", "Lugrade · 400 g", 6.50, ""],
+    [["bacalhau-migas-brites", "Migas Brites · 400 g", 6.50, "bacalhau-migas-brites"], ["bacalhau-desfiado-lugrade", "Lugrade · 400 g", 6.50, "bacalhau-desfiado-lugrade"],
      ["bacalhau-desfiado-gadus", "Gadus Morhua", 7.99, "bacalhau-desfiado-gadus"]], { tags: ["frozen", "portuguese"] });
   G("bacalhau-postas", "Bacalhau em Postas", "fish",
     { en: "Salt cod loins", pt: "Postas de bacalhau", es: "Lomos de bacalao" },
     { en: "Thick Portuguese cod loins — for bacalhau assado or à lagareiro.", pt: "Postas altas de bacalhau — para assado ou à lagareiro.", es: "Lomos gruesos de bacalao — al horno o a la lagareira." },
-    [["bacalhau-postas-lugrade", "Lugrade · 1 kg", 25.99, ""], ["bacalhau-posta-brites", "Brites congelada · kg", 30.00, "", "kg"]], { tags: ["frozen", "portuguese"] });
+    [["bacalhau-postas-lugrade", "Lugrade · 1 kg", 25.99, "bacalhau-postas-lugrade"], ["bacalhau-posta-brites", "Brites congelada · kg", 30.00, "bacalhau-posta-brites", "kg"]], { tags: ["frozen", "portuguese"] });
 
   // sort: by group order, then lowest price (groups use their cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));

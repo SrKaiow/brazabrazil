@@ -65,7 +65,7 @@ window.GROUPS.deli = [
   S("chourico-alentejano", "Chouriço Alentejano SEL", "chouricos", 5.50, "chourico-alentejano",
     { en: "Alentejo chouriço · 250 g", pt: "Chouriço alentejano · 250 g", es: "Chorizo alentejano · 250 g" },
     { en: "Authentic flavour of the Alentejo, made to roast.", pt: "O sabor autêntico do Alentejo, ideal para assar.", es: "El auténtico sabor del Alentejo, ideal para asar." }, { tags: ["portuguese"] });
-  S("barrancos", "Chouriço Barrancos", "chouricos", 6.97, "",
+  S("barrancos", "Chouriço Barrancos", "chouricos", 6.97, "barrancos",
     { en: "Black pork chouriço · Barrancos", pt: "Chouriço de porco preto · Barrancos", es: "Chorizo de cerdo negro · Barrancos" },
     { en: "Premium black pork chouriço from Barrancos.", pt: "Chouriço premium de porco preto de Barrancos.", es: "Chorizo premium de cerdo negro de Barrancos." }, { tags: ["portuguese"] });
 
@@ -83,7 +83,7 @@ window.GROUPS.deli = [
   S("costela-defumada", "Costela de Porco Defumada", "defumados", 13.99, "costela-defumada",
     { en: "Smoked pork ribs · per kg", pt: "Costela suína defumada · por kg", es: "Costillas de cerdo ahumadas · por kg" },
     { en: "Essential for feijoada and feijão tropeiro.", pt: "Essencial na feijoada e no feijão tropeiro.", es: "Imprescindible en la feijoada." }, { unit: "kg" });
-  S("bacon", "Bacon Defumado", "defumados", 14.90, "",
+  S("bacon", "Bacon Defumado", "defumados", 14.90, "bacon",
     { en: "Smoked bacon slab · per kg", pt: "Bacon defumado em manta · por kg", es: "Panceta ahumada · por kg" },
     { en: "Smoky bacon for farofa, feijão and everything else.", pt: "Bacon defumado para farofa, feijão e tudo mais.", es: "Panceta ahumada para farofa, frijoles y más." }, { unit: "kg" });
   S("carne-salgada", "Carne Salgada", "defumados", 14.99, "carne-salgada",
