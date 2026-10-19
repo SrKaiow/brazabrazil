@@ -7,7 +7,8 @@
    Alcohol: the basket asks the customer to confirm they are 18+.
    ============================================================ */
 
-window.DRINK_GROUPS = [
+window.GROUPS = window.GROUPS || {};
+window.DRINK_GROUPS = window.GROUPS.drinks = [
   { id: "wine",    label: { en: "Wines",            "pt-BR": "Vinhos",                 "pt-PT": "Vinhos",                  es: "Vinos" } },
   { id: "beer",    label: { en: "Beers",            "pt-BR": "Cervejas",               "pt-PT": "Cervejas",                es: "Cervezas" } },
   { id: "cachaca", label: { en: "Cachaça",          "pt-BR": "Cachaças & aguardentes", "pt-PT": "Cachaças & aguardentes",  es: "Cachaça" } },

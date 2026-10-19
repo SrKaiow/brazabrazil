@@ -23,42 +23,7 @@
 window.CATEGORIES = ["all", "beef", "pork", "chicken", "sausages", "boxes", "groceries"];
 
 window.PRODUCTS = [
-  // ---------- BEEF ----------
-  { id: "picanha", name: "Picanha", cat: "beef", unit: "kg", price: 24.99, tags: ["best"], image: "", available: true,
-    sub: { en: "Rump cap", pt: "No UK: rump cap", es: "Tapa de cuadril" },
-    desc: { en: "The king of Brazilian churrasco. Thick fat cap, deep beefy flavour.",
-            pt: "A rainha do churrasco brasileiro. Capa de gordura generosa e muito sabor.",
-            es: "La reina del churrasco brasileño. Buena capa de grasa y mucho sabor." } },
-  { id: "fraldinha", name: "Fraldinha", cat: "beef", unit: "kg", price: 18.99, tags: [], image: "", available: true,
-    sub: { en: "Bavette / flank", pt: "No UK: bavette / flank", es: "Vacío / bavette" },
-    desc: { en: "Loose-grained and juicy. Grill hot and slice against the grain.",
-            pt: "Fibras soltas e muito suculenta. Grelhe em fogo alto e corte contra a fibra.",
-            es: "Jugosa y de fibra suelta. A la parrilla fuerte y corta contra la fibra." } },
-  { id: "maminha", name: "Maminha", cat: "beef", unit: "kg", price: 19.99, tags: [], image: "", available: true,
-    sub: { en: "Tri-tip", pt: "No UK: tri-tip", es: "Colita de cuadril" },
-    desc: { en: "Tender and lean, perfect for slow grilling over embers.",
-            pt: "Macia e magra, perfeita para assar devagar na brasa.",
-            es: "Tierna y magra, perfecta para asar despacio a la brasa." } },
-  { id: "contrafile", name: "Contrafilé", cat: "beef", unit: "kg", price: 22.99, tags: [], image: "", available: true,
-    sub: { en: "Sirloin", pt: "No UK: sirloin", es: "Bife de chorizo / lomo bajo" },
-    desc: { en: "Classic steak cut with a ribbon of fat. Great on the grill or pan.",
-            pt: "Corte clássico com uma faixa de gordura. Ótimo na grelha ou na frigideira.",
-            es: "Corte clásico con su franja de grasa. Ideal a la parrilla o a la sartén." } },
-  { id: "alcatra", name: "Alcatra", cat: "beef", unit: "kg", price: 17.99, tags: [], image: "", available: true,
-    sub: { en: "Top rump", pt: "No UK: top rump", es: "Cuadril" },
-    desc: { en: "Versatile and full of flavour — steaks, skewers or roasting.",
-            pt: "Versátil e saborosa — bifes, espetinhos ou assados.",
-            es: "Versátil y sabrosa — filetes, brochetas o al horno." } },
-  { id: "costela", name: "Costela", cat: "beef", unit: "kg", price: 12.99, tags: ["slow"], image: "", available: true,
-    sub: { en: "Beef short ribs", pt: "No UK: beef short ribs", es: "Costilla de res" },
-    desc: { en: "Cooked low and slow for hours until it falls off the bone.",
-            pt: "Assada devagar por horas até desmanchar do osso.",
-            es: "Cocinada a fuego lento durante horas hasta que se despega del hueso." } },
-  { id: "cupim", name: "Cupim", cat: "beef", unit: "kg", price: 16.99, tags: ["special"], image: "", available: true,
-    sub: { en: "Beef hump", pt: "No UK: beef hump", es: "Giba de res" },
-    desc: { en: "A true Brazilian speciality. Marbled, rich and meltingly soft.",
-            pt: "Especialidade brasileira. Marmorizado, suculento e macio.",
-            es: "Una auténtica especialidad brasileña. Marmoleada, rica y muy tierna." } },
+  // BEEF → real cuts and prices live in js/beef.js
 
   // ---------- PORK ----------
   { id: "costelinha", name: "Costelinha de Porco", cat: "pork", unit: "kg", price: 11.99, tags: [], image: "", available: true,

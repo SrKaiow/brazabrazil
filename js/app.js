@@ -53,7 +53,7 @@
   let cart = {};
   let picks = {};
   let activeCat = "all", query = "", activeGroup = "all";
-  const GROUPS = window.DRINK_GROUPS || [];
+  const groupsFor = cat => (window.GROUPS || {})[cat] || [];
   const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && byId[id].cat === "drinks");
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
   const droppedOos = [];
@@ -131,8 +131,9 @@
     tabs.innerHTML = CATS.map(c =>
       `<button class="tab${c === "drinks" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
     const st = $("#subtabs");
-    st.hidden = activeCat !== "drinks";
-    st.innerHTML = [{ id: "all", label: null }, ...GROUPS].map(g =>
+    const gs = groupsFor(activeCat);
+    st.hidden = !gs.length;
+    st.innerHTML = [{ id: "all", label: null }, ...gs].map(g =>
       `<button class="subtab" data-group="${g.id}" aria-pressed="${g.id === activeGroup}">${g.label ? pick(g.label) : t("cat_all")}</button>`).join("");
   }
   $("#subtabs").addEventListener("click", e => {
@@ -151,7 +152,7 @@
     const out = p.available === false;
     const media = p.image ? `<img src="${p.image}" alt="${p.name} — ${pick(p.sub)}" loading="lazy">` : icon(p.cat);
     return `
-      <article class="card${out ? " card--out" : ""}${p.cat === "drinks" && p.image ? " card--framed" : ""}" id="p-${p.id}">
+      <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}" id="p-${p.id}">
         <div class="card__media">
           ${media}
           <div class="card__tags">${(p.tags || []).map(tagHtml).join("")}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
@@ -181,21 +182,25 @@
   }
 
   function renderGrid() {
-    const gLabel = id => { const g = GROUPS.find(x => x.id === id); return g ? pick(g.label) : ""; };
+    const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
     const list = P.filter(p =>
       (activeCat === "all" || p.cat === activeCat) &&
-      (activeCat !== "drinks" || activeGroup === "all" || p.group === activeGroup) &&
-      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p.group) : ""].join(" ").toLowerCase().includes(query)));
+      (activeCat === "all" || activeGroup === "all" || p.group === activeGroup) &&
+      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
     let html = "", lastHead = null;
     list.forEach(p => {
-      const head = p.cat === "drinks" ? "drinks:" + p.group : (activeCat === "all" ? "cat:" + p.cat : null);
-      if (activeCat === "drinks" || (activeCat === "all" && p.cat === "drinks")) {
+      if (p.group) {
+        const head = p.cat + ":" + p.group;
         if (head !== lastHead) {
-          const n = list.filter(x => x.group === p.group).length;
-          html += `<h3 class="grid__head"><span>${gLabel(p.group)}</span><small>${n} · ${t("sorted_price")}</small></h3>`;
+          const n = list.filter(x => x.cat === p.cat && x.group === p.group).length;
+          const pre = activeCat === "all" ? `${t("cat_" + p.cat)} · ` : "";
+          html += `<h3 class="grid__head"><span>${pre}${gLabel(p)}</span><small>${n} · ${t("sorted_price")}</small></h3>`;
           lastHead = head;
         }
+      } else if (lastHead !== null && lastHead !== "cat:" + p.cat) {
+        html += `<h3 class="grid__head"><span>${t("cat_" + p.cat)}</span></h3>`;
+        lastHead = "cat:" + p.cat;
       }
       html += card(p);
     });
@@ -246,9 +251,13 @@
     g.setAttribute("tabindex", "0");
     g.setAttribute("role", "button");
     const go = () => {
-      activeCat = "beef"; query = ""; $("#search").value = "";
+      const key = { contrafile: "contra", picanha: "picanha", costela: "costela" }[g.dataset.cut] || g.dataset.cut;
+      activeCat = "beef"; activeGroup = "all";
+      const hit = P.filter(p => p.cat === "beef" && p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(key));
+      query = hit.length > 1 ? key : ""; $("#search").value = query;
       renderTabs(); renderGrid();
-      const el = document.getElementById("p-" + g.dataset.cut);
+      if (!hit.length) toast(t("cut_ask").replace("{cut}", g.querySelector("text").textContent));
+      const el = hit.length ? document.getElementById("p-" + hit[0].id) : $("#grid");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
         el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600);
@@ -542,7 +551,7 @@
     if (ms) bz.timer = setTimeout(() => { bz.bubble.hidden = true; }, ms);
   }
   function brazaReact(p) {
-    if (p.id === "picanha") return brazaSay(t("bz_r_picanha"));
+    if (p.id.startsWith("picanha")) return brazaSay(t("bz_r_picanha"));
     if (p.cat === "boxes") return brazaSay(t("bz_r_box"));
     if (p.cat === "drinks") {
       const k = p.group === "beer" ? "bz_r_beer" : p.group === "cachaca" ? "bz_r_cachaca" : p.group === "wine" ? "bz_r_wine" : "bz_r_cheers";
@@ -565,7 +574,7 @@
   }
 
   /* --- Churrasco calculator --- */
-  const MIX = [ ["picanha", .30], ["fraldinha", .20], ["toscana", .20], ["coracao", .10], ["asinha", .10], ["panceta", .10] ];
+  const MIX = [ ["picanha-angus", .30], ["fraldinha", .20], ["toscana", .20], ["coracao", .10], ["asinha", .10], ["panceta", .10] ];
   function churrascoPlan() {
     const hungry = (document.querySelector('input[name="bzApp"]:checked') || {}).value === "hungry";
     const n = bz.people, totalKg = n * (hungry ? .55 : .4);

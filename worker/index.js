@@ -10,6 +10,7 @@
 import "./shim.js";
 import "../js/config.js";
 import "../js/products.js";
+import "../js/beef.js";
 import "../js/drinks.js";
 import "../js/shared.js";
 
