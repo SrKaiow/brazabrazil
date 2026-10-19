@@ -73,7 +73,7 @@ window.GROUPS.deli = [
   G("mortadela", "Mortadela", "frios",
     { en: "Mortadella", pt: "Mortadela", es: "Mortadela" },
     { en: "For the classic mortadela sandwich — sliced thin, piled high.", pt: "Para o clássico sanduíche de mortadela — fatiada fininha.", es: "Para el clásico bocadillo de mortadela — en lonchas finas." },
-    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"]]]);
+    [["mortadela-porminho", "Porminho", 3.50, "mortadela-porminho"], ["mortadela-beretta", "Bologna IGP F. Beretta", 3.99, "mortadela-beretta"]]);
   S("chouricao-porminho", "Chouriçao Extra Porminho", "chouricos", 12.99, "chouricao-porminho",
     { en: "Large Portuguese chorizo · per kg", pt: "Chouriçao grosso · por kg", es: "Chorizo grueso portugués · por kg" },
     { en: "Sliced thin for sandwiches and boards — smoky and full of paprika.", pt: "Fatiado fininho para sanduíches e tábuas — fumado e com colorau.", es: "En lonchas finas para bocadillos y tablas — ahumado y con pimentón." }, { unit: "kg", tags: ["portuguese"] });
