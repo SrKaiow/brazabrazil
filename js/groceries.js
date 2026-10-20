@@ -357,7 +357,7 @@ window.GROUPS.groceries = [
     { en: "Brazilian & Portuguese ground coffee", pt: "Café torrado e moído", es: "Café molido" },
     { en: "More coffees from Brazil and Portugal.", pt: "Mais cafés do Brasil e de Portugal.", es: "Más cafés de Brasil y Portugal." },
     [["cafe-uniao", "União tradicional · 250 g", 4.99, "cafe-uniao"], ["cafe-brasileiro", "Café brasileiro", 5.99, "cafe-brasileiro"],
-     ["buondi-robusto", "Buondi Robusto", 6.99, "buondi-robusto"], ["cafe-sao-francisco", "São Francisco · 250 g", 9.50, "cafe-sao-francisco"],
+     ["buondi-robusto", "Buondi Robusto", 6.99, "buondi-robusto"],
      ["cafe-caboclo", "Caboclo", 11.50, "cafe-caboclo"]]);
   G("chas-barao", "Chás Barão", "cafe",
     { en: "Brazilian herbal teas", pt: "Chás e infusões Barão", es: "Infusiones Barão" },
@@ -373,9 +373,6 @@ window.GROUPS.groceries = [
     { en: "Roasted mate tea", pt: "Chá mate tostado", es: "Té mate tostado" },
     { en: "The famous Rio de Janeiro mate tea — hot or iced with lemon.", pt: "O famoso mate carioca — quente ou gelado com limão.", es: "El famoso mate de Río." },
     [["matte-sachets", "Sachês", 3.40, "matte-sachets"], ["matte-granel", "A granel", 5.80, "matte-granel"]], { tags: ["vegan"] });
-  S("bolo-arminda", "Bolo Arminda Neto", "matinais", 6.99, "bolo-arminda",
-    { en: "Portuguese cake", pt: "Bolo português", es: "Bizcocho portugués" },
-    { en: "Traditional Portuguese cake for coffee time.", pt: "Bolo tradicional português para a hora do café.", es: "Bizcocho tradicional portugués." }, { tags: ["portuguese"] });
   G("wafer-bauducco", "Wafer Bauducco", "biscoitos",
     { en: "Wafer biscuits", pt: "Biscoito wafer", es: "Barquillos" },
     { en: "Crispy Bauducco wafers.", pt: "Wafers crocantes Bauducco.", es: "Barquillos crujientes." },
