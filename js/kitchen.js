@@ -8,7 +8,8 @@ window.GROUPS.kitchen = [
   { id: "chimarrao", label: { en: "Chimarrão gourds",      "pt-BR": "Chimarrão",               "pt-PT": "Chimarrão",               es: "Mate y bombillas" } },
   { id: "cozinha",   label: { en: "Cookware & utensils",   "pt-BR": "Panelas & utensílios",    "pt-PT": "Tachos & utensílios",     es: "Menaje y utensilios" } },
   { id: "cafe",      label: { en: "Coffee & water filters","pt-BR": "Café & filtros",          "pt-PT": "Café & filtros",          es: "Café y filtros" } },
-  { id: "churrasco", label: { en: "Barbecue grills",       "pt-BR": "Churrasqueiras",          "pt-PT": "Grelhadores",             es: "Parrillas" } }
+  { id: "churrasco", label: { en: "Barbecue grills",       "pt-BR": "Churrasqueiras",          "pt-PT": "Grelhadores",             es: "Parrillas" } },
+  { id: "variedades", label: { en: "Gifts & bits",         "pt-BR": "Variedades & presentes",  "pt-PT": "Variedades & presentes",  es: "Variedades y regalos" } }
 ];
 
 (function () {
@@ -92,6 +93,13 @@ window.GROUPS.kitchen = [
     { en: "Cooks feijão, ribs and stews in a fraction of the time — with safety valve.", pt: "Feijão, costela e cozidos em muito menos tempo — com válvula de segurança.", es: "Frijoles, costillas y guisos en mucho menos tiempo." },
     [["pressao-45", "4,5 L", 49.90, "pressao-45"], ["pressao-6", "6 L", 65.00, "pressao-6"]]);
 
+  S("abridor", "Abridor Combinado Art House", "cozinha", 1.75, "abridor",
+    { en: "Bottle & can opener", pt: "Abridor de garrafa e lata", es: "Abrebotellas y abrelatas" },
+    { en: "Two-in-one stainless opener for bottles and cans.", pt: "Abridor 2 em 1 de inox para garrafa e lata.", es: "Abridor 2 en 1 para botellas y latas." });
+  S("borracha-panela", "Borracha de Panela de Pressão Tramontina", "cozinha", 6.00, "borracha-panela",
+    { en: "Pressure-cooker sealing ring", pt: "Anel de vedação para panela de pressão", es: "Junta para olla a presión" },
+    { en: "Genuine Tramontina replacement sealing ring — keep your pressure cooker safe.", pt: "Anel de vedação original Tramontina — panela de pressão sempre segura.", es: "Junta de repuesto original Tramontina." });
+
   /* ---------- COFFEE & WATER FILTERS ---------- */
   G("melitta-filtro", "Filtro de Papel Melitta · 30 un", "cafe",
     { en: "Paper coffee filters", pt: "Filtro de papel para café", es: "Filtros de papel para café" },
@@ -136,6 +144,18 @@ window.GROUPS.kitchen = [
     { en: "Barbecue carving set · knife & fork", pt: "Jogo para churrasco · faca e garfo trinchante", es: "Juego para asado · cuchillo y tenedor" },
     { en: "Carving knife and fork with wooden handles — the churrasqueiro’s essentials.", pt: "Faca e garfo trinchante com cabo de madeira — o essencial do churrasqueiro.", es: "Cuchillo y tenedor trinchante con mango de madera." },
     [["kit-churrasco-2", "Natural wood · 2 pç", 19.00, "kit-churrasco-2"], ["faca-garfo-madeira", "Polywood vermelho · 2 pç", 25.00, "faca-garfo-madeira"]]);
+
+  S("carvao", "Carvão Vegetal · 5 kg", "churrasco", 11.99, "carvao",
+    { en: "Lumpwood charcoal · approx. 5 kg", pt: "Carvão para churrasco · aprox. 5 kg", es: "Carbón vegetal · aprox. 5 kg" },
+    { en: "Natural lumpwood charcoal — lights fast and burns hot for the perfect churrasco.", pt: "Carvão vegetal que acende rápido e dá brasa forte para o churrasco perfeito.", es: "Carbón vegetal natural para el asado perfecto." });
+
+  /* ---------- GIFTS & BITS ---------- */
+  S("baralho-copag", "Baralho Copag 157", "variedades", 5.99, "baralho-copag",
+    { en: "Brazilian playing cards", pt: "Baralho Copag", es: "Baraja Copag" },
+    { en: "The classic Brazilian deck — for truco, buraco and family nights.", pt: "O baralho clássico — para truco, buraco e a noite em família.", es: "La baraja clásica brasileña — para truco y noches en familia." });
+  S("chaveiros", "Chaveiros Variados", "variedades", 0, "",
+    { en: "Assorted keyrings", pt: "Chaveiros variados", es: "Llaveros variados" },
+    { en: "Assorted Brazilian and Portuguese keyrings — photos coming soon.", pt: "Chaveiros variados do Brasil e de Portugal — fotos em breve.", es: "Llaveros variados — fotos pronto." }, { available: false, soon: true });
 
   const order = window.GROUPS.kitchen.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));

@@ -33,6 +33,10 @@ window.GROUPS.groceries = [
   S("queijo-coalho", "Queijo Coalho · por kg", "laticinios", 22.00, "queijo-coalho",
     { en: "Brazilian grilling cheese · sold by weight", pt: "Queijo coalho para churrasco · a peso", es: "Queso para asar · al peso" },
     { en: "Squeaky grilling cheese that browns without melting — a churrasco must, great with honey or oregano.", pt: "O queijo que doura na brasa sem derreter — indispensável no churrasco, com mel ou orégano.", es: "Queso que se dora a la brasa sin derretirse." }, { unit: "kg", tags: ["best"] });
+  G("queijo-fresco", "Queijo Fresco", "laticinios",
+    { en: "Portuguese fresh cheese", pt: "Queijo fresco português", es: "Queso fresco portugués" },
+    { en: "Soft, mild fresh cheese — lovely with bread, honey or a little salt and pepper.", pt: "Queijo fresco suave e macio — com pão, mel ou um pouco de sal e pimenta.", es: "Queso fresco suave — con pan, miel o sal y pimienta." },
+    [["fresco-paiva", "Paiva meio-gordo", 3.99, "fresco-paiva"], ["fresco-matinal", "Matinal · 3 × 72 g", 5.99, "fresco-matinal"]], { tags: ["portuguese"] });
   S("leite-mimosa", "Leite Mimosa Meio-Gordo · 1 L", "laticinios", 2.99, "leite-mimosa",
     { en: "Portuguese semi-skimmed milk · UHT", pt: "Leite semidesnatado · UHT", "pt-PT": "Leite meio-gordo · UHT", es: "Leche semidesnatada portuguesa" },
     { en: "Portugal’s favourite milk, long-life.", pt: "O leite preferido de Portugal, longa vida.", es: "La leche favorita de Portugal." }, { tags: ["portuguese"] });

@@ -165,7 +165,7 @@
       <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}${g.isGroup ? " card--group" : ""}" id="p-${g.id}">
         <div class="card__media">
           ${media}
-          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
+          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t(p.soon ? "soon" : "out")}</span>` : ""}</div>
           <span class="cat">${t("cat_" + p.cat)}</span>
         </div>
         <div class="card__body">
@@ -174,8 +174,8 @@
           <p class="card__desc">${pick(p.desc)}</p>
           ${optsHtml}
           <div class="card__row">
-            <span class="price">${money(p.price)}<small>${unitLabel(p)}</small></span>
-            ${out ? `
+            <span class="price">${p.soon ? `<small>${t("soon")}</small>` : `${money(p.price)}<small>${unitLabel(p)}</small>`}</span>
+            ${p.soon ? "" : out ? `
             <button class="btn btn--similar" data-act="similar" data-id="${g.id}">${t("similar_btn")}</button>` : `
             <div class="card__buy">
               <div class="qty">
