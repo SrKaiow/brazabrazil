@@ -36,6 +36,9 @@ window.GROUPS.candy = [
     { en: "Brazilian peanut sweet", pt: "Paçoca de amendoim", es: "Dulce de cacahuete" },
     { en: "Crumbly peanut sweet — a Brazilian childhood favourite.", pt: "Paçoca de amendoim que derrete na boca — sabor de infância.", es: "Dulce de cacahuete que se deshace — un clásico de la infancia en Brasil." },
     [["pacoca-un", "Unidade", 0.60, "pacoca-un"], ["pacoca-zero", "Zero açúcar · caixa", 5.99, "pacoca-zero"]], { tags: ["gf"] });
+  S("goiabada-val", "Goiabada Val · 250 g", "brasil", 2.50, "goiabada-val",
+    { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
+    { en: "Sweet guava paste — with cheese it’s a Romeu e Julieta.", pt: "Goiabada — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso, un clásico." }, { tags: ["gf", "vegan"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
@@ -221,6 +224,9 @@ window.GROUPS.candy = [
      ["amendoas-sporting", "Sporting", 4.99, "amendoas-sporting"], ["amendoas-portugal", "Portugal", 4.99, "amendoas-portugal"]], { tags: ["portuguese"] });
 
   /* ---------- SNACKS ---------- */
+  S("gulozitos", "Gulozitos", "snacks", 1.99, "gulozitos",
+    { en: "Portuguese corn puffs", pt: "Salgadinho de milho", "pt-PT": "Aperitivo de milho", es: "Aperitivo de maíz" },
+    { en: "The Portuguese childhood snack — crunchy corn puffs.", pt: "O salgadinho de infância português — crocante.", es: "El aperitivo de la infancia portuguesa." }, { tags: ["portuguese"] });
   S("wotsits", "Wotsits That’s Nuts", "snacks", 2.99, "wotsits",
     { en: "Cheesy coated peanuts · 160 g", pt: "Amendoim com cobertura de queijo · 160 g", es: "Cacahuetes recubiertos de queso · 160 g" },
     { en: "Crunchy peanuts with a really cheesy coating.", pt: "Amendoins crocantes com cobertura sabor queijo.", es: "Cacahuetes crujientes con cobertura de queso." });

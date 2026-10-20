@@ -7,7 +7,7 @@ window.GROUPS.groceries = [
   { id: "matinais", label: { en: "Breakfast, cereals & chocolate drinks", "pt-BR": "Café da manhã & achocolatados", "pt-PT": "Pequeno-almoço & achocolatados", es: "Desayuno y cacao" } },
   { id: "massas", label: { en: "Pasta & instant noodles", "pt-BR": "Massas & miojo", "pt-PT": "Massas", es: "Pasta y fideos" } },
   { id: "bolos", label: { en: "Cake & cheese-bread mixes", "pt-BR": "Misturas para bolo & pão de queijo", "pt-PT": "Misturas para bolo & pão de queijo", es: "Mezclas para bizcocho y pan de queso" } },
-  { id: "molhos", label: { en: "Hot sauces & sauces", "pt-BR": "Molhos & pimentas", "pt-PT": "Molhos & piri-piri", es: "Salsas y picantes" } },
+  { id: "molhos", label: { en: "Sauces, chilli & seasonings", "pt-BR": "Molhos, pimentas & temperos", "pt-PT": "Molhos, piri-piri & temperos", es: "Salsas, picantes y condimentos" } },
   { id: "conservas", label: { en: "Portuguese tinned food", "pt-BR": "Conservas portuguesas", "pt-PT": "Conservas", es: "Conservas portuguesas" } },
   { id: "geral", label: { en: "Pantry, tins & jars", "pt-BR": "Mercearia, enlatados & temperos", "pt-PT": "Mercearia, enlatados & temperos", es: "Despensa y conservas" } }
 ];
@@ -55,9 +55,10 @@ window.GROUPS.groceries = [
   S("llanero", "Queso Llanero Paisa · 283 g", "laticinios", 0, "llanero",
     { en: "Venezuelan-style hard cheese", pt: "Queijo duro estilo venezuelano", es: "Queso duro estilo venezolano" },
     { en: "Salty and firm — for arepas, cachapas and grating.", pt: "Salgado e firme — para arepas e para ralar.", es: "Salado y firme — para arepas y cachapas." });
-  S("requeijao-mabiju", "Requeijão Cremoso Mabiju · 220 g", "laticinios", 3.49, "requeijao-mabiju",
-    { en: "Brazilian cream cheese spread", pt: "Requeijão cremoso", es: "Queso crema brasileño" },
-    { en: "The creamy requeijão Brazilians love on bread and in recipes.", pt: "O requeijão cremoso para o pão e as receitas.", es: "El requeijão cremoso para el pan y recetas." });
+  G("requeijao", "Requeijão Cremoso Mabiju", "laticinios",
+    { en: "Brazilian cream cheese spread", pt: "Requeijão cremoso tradicional", es: "Queso crema brasileño" },
+    { en: "The creamy requeijão Brazilians love on bread and in recipes.", pt: "O requeijão cremoso para o pão e as receitas.", es: "El requeijão cremoso para el pan y recetas." },
+    [["requeijao-mabiju", "220 g", 3.49, "requeijao-mabiju"], ["requeijao-500", "500 g", 6.99, "requeijao-500"]]);
   G("tang", "Refresco em Pó Tang · 18 g", "geral",
     { en: "Powdered drink mix · makes 1 L", pt: "Refresco em pó · faz 1 litro", es: "Refresco en polvo · rinde 1 L" },
     { en: "The classic Brazilian powdered juice — just add water. Lots of flavours.", pt: "O clássico suco em pó — é só misturar com água. Vários sabores.", es: "El clásico refresco en polvo — solo añade agua." },
@@ -68,9 +69,10 @@ window.GROUPS.groceries = [
   S("creme-leite", "Creme de Leite Nestlé · 200 g", "laticinios", 3.69, "creme-leite",
     { en: "Brazilian table cream · UHT", pt: "Creme de leite leve", es: "Nata para cocinar" },
     { en: "For strogonoff, mousse and every Brazilian dessert.", pt: "Para strogonoff, mousse e as sobremesas brasileiras.", es: "Para strogonoff, mousse y postres." });
-  S("leite-cond-cozido", "Leite Condensado Cozido Nestlé · 397 g", "laticinios", 3.49, "leite-cond-cozido",
-    { en: "Ready-made caramel (dulce de leche)", pt: "Leite condensado cozido · doce de leite", es: "Dulce de leche listo" },
-    { en: "Already cooked and creamy — for banoffee, cakes and straight from the spoon.", pt: "Já cozido e cremoso — para banoffee, bolos ou de colher.", es: "Ya cocido y cremoso — para tartas o a cucharadas." }, { tags: ["portuguese"] });
+  G("leite-condensado", "Leite Condensado Nestlé", "laticinios",
+    { en: "Sweetened condensed milk", pt: "Leite condensado", es: "Leche condensada" },
+    { en: "For brigadeiro, pudim and every Brazilian sweet — or the ready-cooked caramel version.", pt: "Para brigadeiro, pudim e todo doce — ou o cozido, já pronto.", es: "Para brigadeiro, flan y dulces — o la versión ya cocida." },
+    [["leite-cond-trad", "Tradicional · 370 g", 3.49, "leite-cond-trad"], ["leite-cond-cozido", "Cozido · 397 g", 3.49, "leite-cond-cozido"]]);
   S("nescau", "Nescau · 350 g", "matinais", 3.80, "nescau",
     { en: "Brazilian chocolate drink powder", pt: "Achocolatado em pó", es: "Cacao en polvo brasileño" },
     { en: "The Brazilian chocolate milk everyone grew up with.", pt: "O achocolatado de toda infância brasileira.", es: "El cacao con el que crecieron todos los brasileños." });
@@ -88,8 +90,8 @@ window.GROUPS.groceries = [
      ["nissin-legumes", "Legumes", 1.99, "nissin-legumes"], ["nissin-picanha", "Picanha", 1.99, "nissin-picanha"]]);
   G("gota", "Molho Gota Maratá", "molhos",
     { en: "Brazilian sauces · Gota", pt: "Molhos Gota", es: "Salsas brasileñas Gota" },
-    { en: "Maratá’s classic Gota sauces — red chilli, green chilli or garlic.", pt: "Os clássicos molhos Gota da Maratá — pimenta vermelha, verde ou alho.", es: "Las clásicas salsas Gota de Maratá." },
-    [["gota-vermelha", "Pimenta vermelha", 2.50, "gota-vermelha"], ["gota-verde", "Pimenta verde · 150 ml", 2.50, "gota-verde"], ["gota-alho", "Alho · 150 ml", 0, "gota-alho"]]);
+    { en: "Maratá’s classic Gota sauces — red chilli, green chilli or garlic.", pt: "Os clássicos molhos Gota da Maratá — inglês, pimenta vermelha, verde ou alho.", es: "Las clásicas salsas Gota de Maratá." },
+    [["gota-ingles", "Molho inglês · 150 ml", 2.50, "gota-ingles"], ["gota-vermelha", "Pimenta vermelha", 2.50, "gota-vermelha"], ["gota-verde", "Pimenta verde · 150 ml", 2.50, "gota-verde"], ["gota-alho", "Alho · 150 ml", 0, "gota-alho"]]);
   S("cepera-extra", "Molho de Pimenta Extra Forte Cepêra · 60 ml", "molhos", 2.20, "cepera-extra",
     { en: "Extra-hot chilli sauce", pt: "Pimenta extra forte", es: "Salsa picante extra fuerte" },
     { en: "For those who like it really hot.", pt: "Para quem gosta de pimenta de verdade.", es: "Para los que lo quieren bien picante." });
@@ -156,6 +158,43 @@ window.GROUPS.groceries = [
   S("mimosa-natas", "Natas Culinária Mimosa · 200 ml", "laticinios", 2.25, "mimosa-natas",
     { en: "Portuguese cooking cream", pt: "Creme de leite culinário", "pt-PT": "Natas para culinária", es: "Nata para cocinar" },
     { en: "Light cooking cream for sauces and bacalhau com natas.", pt: "Para molhos e bacalhau com natas.", es: "Para salsas y bacalao con nata." }, { tags: ["portuguese"] });
+  /* ---------- remessa leites / caldos / temperos / conservas ---------- */
+  G("leite-coco", "Leite de Coco · 200 ml", "laticinios",
+    { en: "Coconut milk", pt: "Leite de coco", es: "Leche de coco" },
+    { en: "For moqueca, bobó, cocada and cakes.", pt: "Para moqueca, bobó, cocada e bolos.", es: "Para moqueca y postres." },
+    [["coco-sinha", "Sinhá", 2.99, "coco-sinha"], ["coco-sococo", "Sococo", 2.99, "coco-sococo"]], { tags: ["vegan"] });
+  S("nido", "Leite em Pó Nido Nestlé · 900 g", "matinais", 10.99, "nido",
+    { en: "Full cream milk powder", pt: "Leite em pó integral", es: "Leche en polvo entera" },
+    { en: "Creamy powdered milk — for drinks, brigadeiro and recipes.", pt: "Leite em pó cremoso — para beber, brigadeiro e receitas.", es: "Leche en polvo cremosa." });
+  S("mabel-coco", "Rosquinhas de Coco Mabel · 300 g", "matinais", 2.99, "mabel-coco",
+    { en: "Coconut ring biscuits", pt: "Rosquinha sabor coco", es: "Rosquillas de coco" },
+    { en: "The classic rosquinha to dunk in your cafezinho.", pt: "A rosquinha clássica para molhar no cafezinho.", es: "La rosquilla clásica para el café." });
+  G("knorr", "Caldo Knorr", "molhos",
+    { en: "Stock cubes", pt: "Caldo em cubos", "pt-PT": "Caldo em cubos", es: "Caldo en cubitos" },
+    { en: "Stock cubes for rice, beans, soups and stews.", pt: "Caldo para arroz, feijão, sopas e ensopados.", es: "Cubitos para arroz, sopas y guisos." },
+    [["knorr-carne", "Carne · 6 cubos", 1.99, "knorr-carne"], ["knorr-galinha", "Galinha · 6 cubos", 1.99, "knorr-galinha"],
+     ["knorr-legumes", "Legumes · 6 cubos", 1.99, "knorr-legumes"], ["knorr-marisco", "Marisco · 8 cubos", 1.99, "knorr-marisco"]]);
+  S("louro", "Louro em Folhas Margão", "molhos", 1.20, "louro",
+    { en: "Dried bay leaves", pt: "Folhas de louro", es: "Hojas de laurel" },
+    { en: "Essential for feijão, feijoada and stews.", pt: "Indispensável no feijão, na feijoada e nos cozidos.", es: "Imprescindible en frijoles y guisos." }, { tags: ["portuguese"] });
+  S("kitano-baiano", "Tempero Baiano Kitano · 40 g", "molhos", 2.20, "kitano-baiano",
+    { en: "Bahian spice mix", pt: "Tempero baiano", es: "Condimento bahiano" },
+    { en: "Warm Bahian spice blend for meat, chicken and moqueca.", pt: "O tempero baiano para carnes, frango e moqueca.", es: "Mezcla de especias de Bahía." });
+  S("kitano-toque", "Toque de Chef Kitano · aves e peixes · 120 g", "molhos", 3.89, "kitano-toque",
+    { en: "Seasoning for poultry, fish & veg", pt: "Tempero para aves, peixes e legumes", es: "Condimento para aves y pescado" },
+    { en: "Ready seasoning — just sprinkle on chicken, fish and salads.", pt: "Tempero pronto — é só polvilhar em frango, peixe e saladas.", es: "Condimento listo para aves y pescado." });
+  S("koala-maracuja", "Polpa de Maracujá Koala · 565 g", "geral", 4.49, "koala-maracuja",
+    { en: "Passion fruit pulp with seeds · tinned", pt: "Polpa de maracujá com sementes", es: "Pulpa de maracuyá con semillas" },
+    { en: "For mousse de maracujá, juices and cocktails.", pt: "Para mousse de maracujá, sucos e caipirinhas.", es: "Para mousse, zumos y cócteles." }, { tags: ["portuguese"] });
+  S("jilo", "Jiló em Conserva Aroma D’Minas · 500 g", "geral", 9.99, "jilo",
+    { en: "Pickled jiló (scarlet eggplant)", pt: "Conserva de jiló", es: "Jiló en conserva" },
+    { en: "The bittersweet Minas Gerais favourite, ready to serve.", pt: "O clássico mineiro, pronto para servir.", es: "El clásico de Minas Gerais." });
+  S("jurubeba-conserva", "Jurubeba em Conserva Nativa", "geral", 7.99, "jurubeba-conserva",
+    { en: "Pickled jurubeba berries", pt: "Conserva de jurubeba", es: "Jurubeba en conserva" },
+    { en: "Bitter little berries — a classic side for rice and beans.", pt: "O amarguinho clássico para acompanhar arroz e feijão.", es: "Bayas amargas, clásicas con arroz y frijoles." });
+  S("granulado", "Granulado Dori · 1 kg", "bolos", 2.50, "granulado",
+    { en: "Chocolate sprinkles", pt: "Granulado de chocolate", es: "Fideos de chocolate" },
+    { en: "The real sprinkles for brigadeiro and cakes.", pt: "O granulado do brigadeiro e dos bolos.", es: "Para brigadeiros y tartas." });
   const SOON = new Set(["muenster", "llanero", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
