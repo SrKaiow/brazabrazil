@@ -43,9 +43,10 @@ window.GROUPS.candy = [
   S("pao-de-mel", "Pão de Mel", "brasil", 2.50, "pao-de-mel",
     { en: "Honey cake with chocolate coating", pt: "Pão de mel com cobertura de chocolate", es: "Pastel de miel con chocolate" },
     { en: "Spiced honey cake filled with doce de leite and coated in chocolate.", pt: "Pão de mel recheado com doce de leite e coberto de chocolate.", es: "Bizcocho de miel relleno de dulce de leche y cubierto de chocolate." });
-  S("rapadurinha", "Rapadurinha Doce de Leite com Chocolate", "brasil", 2.99, "rapadurinha",
-    { en: "Milk fudge with chocolate · 160 g", pt: "Fondant de leite com chocolate · 160 g", es: "Dulce de leche con chocolate · 160 g" },
-    { en: "Little squares of milk fudge and chocolate — impossible to eat just one.", pt: "Quadradinhos de doce de leite com chocolate — impossível comer um só.", es: "Cuadraditos de dulce de leche y chocolate — imposible comer solo uno." });
+  G("fondant", "Fondant de Leite DaColônia", "brasil",
+    { en: "Milk fudge squares · 160 g", pt: "Doce de leite em tabletes · 160 g", es: "Dulce de leche en cuadraditos · 160 g" },
+    { en: "Little squares of creamy milk fudge — impossible to eat just one.", pt: "Quadradinhos de doce de leite — impossível comer um só.", es: "Cuadraditos de dulce de leche — imposible comer solo uno." },
+    [["fondant-trad", "Tradicional", 2.50, "fondant-trad"], ["fondant-coco", "Com coco", 2.50, "fondant-coco"], ["rapadurinha", "Com chocolate", 2.99, "rapadurinha"]], { tags: ["gf"] });
   S("maria-mole", "Maria Mole Fini", "brasil", 3.50, "maria-mole",
     { en: "Coconut marshmallows · 80 g", pt: "Marshmallow sabor maria-mole · 80 g", es: "Malvaviscos de coco · 80 g" },
     { en: "Soft marshmallow with grated coconut — a nostalgic Brazilian treat.", pt: "Maria-mole fofinha com coco ralado — doce de infância.", es: "Malvavisco suave con coco rallado — un dulce nostálgico." });
@@ -116,6 +117,49 @@ window.GROUPS.candy = [
   S("ferrero", "Ferrero Rocher · 16 un", "chocolates", 15.00, "ferrero",
     { en: "Hazelnut chocolates gift box · 16", pt: "Caixa com 16 bombons", es: "Caja de 16 bombones" },
     { en: "The perfect gift: crispy hazelnut chocolates.", pt: "O presente perfeito: bombons crocantes de avelã.", es: "El regalo perfecto: bombones crujientes de avellana." });
+
+  /* ---------- batch 3 ---------- */
+  S("doce-abobora", "Doce de Abóbora", "brasil", 0.99, "doce-abobora",
+    { en: "Pumpkin sweet", pt: "Doce de abóbora em pedaço", es: "Dulce de calabaza" },
+    { en: "Traditional Brazilian pumpkin sweet — soft and spiced.", pt: "Doce de abóbora tradicional — macio e perfumado.", es: "Dulce de calabaza tradicional brasileño." }, { tags: ["gf"] });
+  S("cocada", "Cocada", "brasil", 2.99, "cocada",
+    { en: "Coconut sweet", pt: "Cocada", es: "Cocada" },
+    { en: "Chewy coconut sweet — a true taste of Brazil.", pt: "Cocada de coco — o sabor do Brasil.", es: "Dulce de coco — un sabor auténtico de Brasil." }, { tags: ["gf"] });
+  S("pe-moleque", "Pé de Moleque DaColônia", "brasil", 2.99, "pe-moleque",
+    { en: "Peanut brittle · 170 g", pt: "Pé de moleque · 170 g", es: "Dulce de cacahuete · 170 g" },
+    { en: "Crunchy peanuts in caramelised sugar — a festa junina classic.", pt: "Amendoim crocante com açúcar caramelizado — clássico de festa junina.", es: "Cacahuetes crujientes con azúcar caramelizado." }, { tags: ["gf", "vegan"] });
+  G("pe-moca", "Pé de Moça DaColônia", "brasil",
+    { en: "Milk caramel with peanuts", pt: "Doce de leite com amendoim", es: "Dulce de leche con cacahuetes" },
+    { en: "Soft milk caramel packed with peanuts.", pt: "Doce de leite macio com amendoim.", es: "Dulce de leche suave con cacahuetes." },
+    [["pe-moca-tab", "Tablete · 130 g", 2.99, "pe-moca-tab"], ["pe-moca-box", "Pote · 190 g", 4.99, "pe-moca-box"]], { tags: ["gf"] });
+  G("pacoca-dacolonia", "Paçoca DaColônia", "brasil",
+    { en: "Brazilian peanut sweet", pt: "Paçoca de amendoim", es: "Dulce de cacahuete" },
+    { en: "Traditional crumbly peanut sweet.", pt: "Paçoca tradicional de amendoim.", es: "Dulce de cacahuete tradicional." },
+    [["pacoca-rolha", "Rolha · pote 210 g", 4.50, "pacoca-rolha"], ["pacoca-ret", "Retangular · display", 5.99, "pacoca-ret"]], { tags: ["gf"] });
+  G("dadinho", "Dadinho", "brasil",
+    { en: "Peanut sweets since 1954", pt: "Doces de amendoim desde 1954", es: "Dulces de cacahuete desde 1954" },
+    { en: "The famous Dadinho peanut sweets.", pt: "Os famosos docinhos de amendoim Dadinho.", es: "Los famosos dulces de cacahuete Dadinho." },
+    [["dadinho-sortidos", "Doces sortidos · 600 g", 4.99, "dadinho-sortidos"], ["dadinho-pacoca", "Paçoca quadrada · caixa 800 g", 10.80, "dadinho-pacoca"]], { tags: ["gf"] });
+  S("chocomoca", "Chocomoca Pistache 25 g", "chocolates", 1.20, "chocomoca",
+    { en: "Pistachio-filled chocolate (Dubai style)", pt: "Chocolate com recheio de pistache", es: "Chocolate relleno de pistacho" },
+    { en: "Milk chocolate with crunchy pistachio filling — the Dubai chocolate trend.", pt: "Chocolate ao leite com recheio crocante de pistache — o famoso chocolate Dubai.", es: "Chocolate con relleno crujiente de pistacho — estilo Dubái." });
+  S("chokito", "Chokito Nestlé 32 g", "chocolates", 1.50, "chokito",
+    { en: "Caramel and crispy chocolate bar", pt: "Chocolate com caramelo e flocos crocantes", es: "Chocolate con caramelo crujiente" },
+    { en: "Chewy caramel with crispy bits covered in chocolate.", pt: "Caramelo com flocos crocantes coberto de chocolate.", es: "Caramelo con trocitos crujientes cubierto de chocolate." });
+  S("caribe", "Caribe Garoto", "chocolates", 2.20, "caribe",
+    { en: "Banana & chocolate bar", pt: "Tablete de banana com chocolate", es: "Barrita de plátano y chocolate" },
+    { en: "Banana filling covered in chocolate — a Garoto classic.", pt: "Recheio de banana coberto de chocolate — clássico da Garoto.", es: "Relleno de plátano cubierto de chocolate." });
+  G("bubbaloo", "Bubbaloo", "balas",
+    { en: "Filled bubble gum", pt: "Chiclete recheado", "pt-PT": "Pastilha elástica recheada", es: "Chicle relleno" },
+    { en: "The bubble gum with a liquid centre.", pt: "O chiclete com recheio líquido.", es: "El chicle con centro líquido." },
+    [["bubbaloo-sortido", "Sortido", 0.25, "bubbaloo"], ["bubbaloo-morango", "Morango", 0.25, "bubbaloo-morango"],
+     ["bubbaloo-tutti", "Tutti-frutti", 0.25, "bubbaloo-tutti"], ["bubbaloo-uva", "Uva", 0.25, "bubbaloo-uva"]]);
+  S("gorila", "Chiclete Gorila Sortido", "balas", 0.25, "gorila",
+    { en: "Chewing gum · assorted", pt: "Chiclete sortido", "pt-PT": "Pastilha elástica sortida", es: "Chicle surtido" },
+    { en: "The classic Gorila gum — menta, morango, melancia and more.", pt: "O clássico chiclete Gorila — menta, morango, melancia e mais.", es: "El clásico chicle Gorila — menta, fresa, sandía y más." });
+  S("amendoim", "Amendoim Salgado DaColônia", "snacks", 2.99, "amendoim",
+    { en: "Roasted salted peanuts · 450 g", pt: "Amendoim torrado salgado · 450 g", es: "Cacahuetes tostados salados · 450 g" },
+    { en: "Roasted, not fried — perfect with a cold beer.", pt: "Torrado, não frito — perfeito com uma cerveja gelada.", es: "Tostados, no fritos — perfectos con una cerveza fría." }, { tags: ["gf", "vegan"] });
 
   /* ---------- SNACKS ---------- */
   S("wotsits", "Wotsits That’s Nuts", "snacks", 2.99, "wotsits",
