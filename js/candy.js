@@ -51,6 +51,12 @@ window.GROUPS.candy = [
     { en: "Milk caramel spread (dulce de leche)", pt: "Doce de leite cremoso", es: "Dulce de leche" },
     { en: "Creamy doce de leite — on toast, in cakes or straight from the spoon.", pt: "Doce de leite cremoso — no pão, no bolo ou de colher.", es: "Dulce de leche cremoso." },
     [["dl-ipanema", "Ipanema", 4.99, "dl-ipanema"], ["dl-uai", "Uai Delícias · 300 g", 6.75, "dl-uai"], ["dl-gaucho", "Don Gaucho", 7.99, "dl-gaucho"]], { tags: ["gf"] });
+  S("doce-amendoim", "Doce de Amendoim DaColônia · 120 g", "brasil", 1.50, "doce-amendoim",
+    { en: "Peanut fudge bar", pt: "Doce de amendoim caseiro", es: "Dulce de cacahuete" },
+    { en: "Homestyle peanut sweet bar.", pt: "Doce de amendoim tipo caseiro.", es: "Dulce de cacahuete casero." }, { tags: ["gf"] });
+  S("doce-abobora", "Doce de Abóbora com Coco Duas Irmãs · 400 g", "brasil", 7.50, "doce-abobora",
+    { en: "Pumpkin & coconut sweet", pt: "Doce de abóbora cremoso com coco", es: "Dulce de calabaza con coco" },
+    { en: "Creamy pumpkin and coconut — a grandma’s classic.", pt: "Cremoso, de abóbora com coco — clássico da vó.", es: "Dulce cremoso de calabaza." }, { tags: ["gf"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },

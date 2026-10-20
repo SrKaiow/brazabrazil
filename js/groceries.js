@@ -208,7 +208,7 @@ window.GROUPS.groceries = [
   G("flocao", "Flocão de Milho · 500 g", "graos",
     { en: "Corn flakes flour for cuscuz", pt: "Farinha de milho flocada para cuscuz", es: "Harina de maíz en copos para cuscuz" },
     { en: "The base for a proper cuscuz nordestino.", pt: "A base do cuscuz nordestino.", es: "La base del cuscuz nordestino." },
-    [["flocao-sinha", "Sinhá", 1.99, "flocao-sinha"], ["kimilho", "Kimilho Yoki", 2.99, "kimilho"]], { tags: ["gf"] });
+    [["flocao-sinha", "Sinhá Flocão", 1.99, "flocao-sinha"], ["cuscuz-sinha", "Sinhá Cuscuz tradicional", 1.99, "cuscuz-sinha"], ["kimilho", "Kimilho Yoki", 2.99, "kimilho"]], { tags: ["gf"] });
   G("fuba", "Fubá Yoki · 500 g", "graos",
     { en: "Cornmeal", pt: "Fubá", es: "Harina de maíz" },
     { en: "Mimoso for bolo de fubá and angu, pré-cozido for quick polenta.", pt: "Mimoso para bolo de fubá e angu; pré-cozido para polenta rápida.", es: "Para bizcocho de maíz y polenta." },
@@ -282,10 +282,40 @@ window.GROUPS.groceries = [
   S("erva-mate", "Erva-Mate Barão de Cotegipe · 1 kg", "matinais", 3.99, "erva-mate",
     { en: "Yerba mate for chimarrão", pt: "Erva-mate para chimarrão", es: "Yerba mate" },
     { en: "Native yerba mate, vacuum-packed — for chimarrão and tereré.", pt: "Erva-mate nativa, embalada a vácuo — para chimarrão e tereré.", es: "Yerba mate nativa al vacío." }, { tags: ["vegan"] });
-  S("cha-cidreira", "Chá de Cidreira Dom Duarte · 20 saquetas", "matinais", 2.60, "cha-cidreira",
-    { en: "Lemon balm tea", pt: "Chá de erva-cidreira", es: "Infusión de melisa" },
-    { en: "Calming lemon balm infusion.", pt: "Infusão calmante de erva-cidreira.", es: "Infusión relajante de melisa." }, { tags: ["portuguese", "vegan"] });
-  const SOON = new Set(["muenster", "llanero", "gota-alho"]);
+  G("chas-dd", "Chás Dom Duarte · 20 saquetas", "matinais",
+    { en: "Herbal teas · 20 bags", pt: "Chás e infusões · 20 saquetas", es: "Infusiones · 20 bolsitas" },
+    { en: "Portuguese herbal infusions — pick your blend.", pt: "Infusões portuguesas — escolha a sua.", es: "Infusiones portuguesas." },
+    [["cha-camomila", "Camomila", 2.60, "cha-camomila"], ["cha-cidreira", "Cidreira", 2.60, "cha-cidreira"],
+     ["cha-detox", "Detox", 2.85, "cha-camomila"], ["cha-emagrecimento", "Emagrecimento", 3.29, "cha-emagrecimento"]], { tags: ["portuguese", "vegan"] });
+  /* ---------- remessa chás / molhos / biscoitos ---------- */
+  G("molhos-dd", "Molhos Dom Duarte", "molhos",
+    { en: "Soy & Worcestershire sauce", pt: "Molho de soja e molho inglês", es: "Salsa de soja e inglesa" },
+    { en: "For marinades, stir-fries and steaks.", pt: "Para marinadas, refogados e bifes.", es: "Para adobos y salteados." },
+    [["dd-ingles", "Inglês", 2.59, "dd-ingles"], ["dd-soja", "Soja", 3.50, "dd-soja"]], { tags: ["portuguese"] });
+  G("cremes-pimenta", "Creme de Pimenta · 200 ml", "molhos",
+    { en: "Creamy Brazilian chilli sauces", pt: "Cremes de pimenta", es: "Cremas de ají" },
+    { en: "Creamy, spicy and full of flavour — perfect on churrasco, pastel and rice.", pt: "Cremosos e picantes — perfeitos no churrasco, pastel e arroz.", es: "Cremosas y picantes." },
+    [["creme-calabresa", "Calabresa Brasileiríssimo", 6.50, "creme-calabresa"], ["creme-pequi", "Pequi Aroma D’Minas", 6.50, "creme-pequi"], ["creme-verde", "Pimenta verde com ervas Aroma D’Minas", 6.50, "creme-verde"]]);
+  S("creme-cebola", "Creme de Cebola Zaeli · 60 g", "molhos", 0, "creme-cebola",
+    { en: "Onion soup & dip mix", pt: "Creme de cebola", es: "Crema de cebolla" },
+    { en: "For dips, soups and strogonoff.", pt: "Para patês, sopas e strogonoff.", es: "Para salsas y sopas." });
+  S("mutti", "Concentrado de Tomate Mutti · bisnaga", "geral", 1.50, "mutti",
+    { en: "Double tomato concentrate · tube", pt: "Extrato de tomate duplo", "pt-PT": "Concentrado de tomate", es: "Concentrado de tomate" },
+    { en: "100% Italian tomatoes for sauces and stews.", pt: "Tomates 100% italianos para molhos e ensopados.", es: "Tomates 100% italianos." }, { tags: ["vegan"] });
+  S("pequi-fatiado", "Pequi Fatiado D’Horta · 370 g", "geral", 6.99, "pequi-fatiado",
+    { en: "Sliced pequi in brine", pt: "Pequi fatiado em conserva", es: "Pequi en conserva" },
+    { en: "For arroz com pequi and frango com pequi.", pt: "Para arroz e frango com pequi.", es: "Para arroz con pequi." });
+  G("bolacha-cuetara", "Bolacha Cuétara", "matinais",
+    { en: "Portuguese biscuits", pt: "Bolacha portuguesa", es: "Galletas Cuétara" },
+    { en: "The classic biscuit to dunk in milk or coffee.", pt: "A bolacha clássica para molhar no leite ou no café.", es: "La galleta clásica para mojar." },
+    [["bolacha-oro", "Oro", 3.80, "bolacha-maria"], ["bolacha-maria", "Maria", 3.90, "bolacha-maria"]], { tags: ["portuguese"] });
+  S("cream-cracker", "Biscoito Cream Cracker Renata · 360 g", "matinais", 2.18, "cream-cracker",
+    { en: "Cream crackers", pt: "Biscoito água e sal", es: "Galletas saladas" },
+    { en: "Crunchy crackers for butter, requeijão and soups.", pt: "Crocantes, para manteiga, requeijão e sopas.", es: "Crujientes, para untar." });
+  S("diatosta", "Mini Tostas Diatosta Mini Grill", "matinais", 3.49, "diatosta",
+    { en: "Mini toasts", pt: "Mini torradas", es: "Mini tostadas" },
+    { en: "Crunchy mini toasts for breakfast and snacks.", pt: "Torradinhas crocantes para o café e petiscos.", es: "Tostaditas crujientes." }, { tags: ["portuguese", "vegan"] });
+  const SOON = new Set(["muenster", "llanero", "gota-alho", "creme-cebola"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
