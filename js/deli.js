@@ -38,9 +38,27 @@ window.GROUPS.deli = [
   S("linguica-calabresa-prisca", "Linguiça Calabresa Prisca", "linguicas", 5.50, "linguica-calabresa-prisca",
     { en: "Smoked calabresa sausage", pt: "Calabresa defumada", es: "Longaniza calabresa ahumada" },
     { en: "Smoked and lightly spicy — fry with onions or add to feijoada.", pt: "Defumada e levemente picante — acebolada ou na feijoada.", es: "Ahumada y ligeramente picante — con cebolla o en feijoada." });
-  S("linguica-topking", "Linguiça de Porco Pura Top King", "linguicas", 12.96, "linguica-topking",
-    { en: "Fresh Brazilian-style pork sausage · Toscana", pt: "Linguiça toscana de porco pura", es: "Salchicha fresca de cerdo · Toscana" },
-    { en: "Pure pork, Brazilian-style — the sausage that opens every churrasco.", pt: "Linguiça de porco pura, no estilo brasileiro — a que abre todo churrasco.", es: "Cerdo puro al estilo brasileño — la que abre todo churrasco." });
+  G("linguica-fresca", "Linguiça Fresca · por kg", "linguicas",
+    { en: "Fresh Brazilian sausages · sold by weight", pt: "Linguiças frescas · vendidas a peso", es: "Longanizas frescas · al peso" },
+    { en: "Fresh Brazilian-style sausages for the churrasco — choose your flavour and the weight you need.", pt: "Linguiças frescas para o churrasco — escolha o sabor e o peso que precisa.", es: "Longanizas frescas para el churrasco — elige sabor y peso." },
+    [["lf-fina", "Tradicional fina", 10.99, "lf-fina", "kg"],
+     ["lf-toscana", "Tradicional toscana", 10.99, "lf-toscana", "kg"],
+     ["lf-frango", "Frango", 10.99, "lf-frango", "kg"],
+     ["lf-frango-cs", "Frango (chicken sausage)", 11.99, "lf-frango-cs", "kg"],
+     ["lf-porco-jlp", "Porco JLP", 11.99, "lf-porco-jlp", "kg"],
+     ["lf-apimentada", "Porco apimentada", 11.99, "lf-apimentada", "kg"],
+     ["lf-porco-queijo", "Porco e queijo", 12.99, "lf-porco-queijo", "kg"],
+     ["lf-costela-bacon", "Costela e bacon", 12.99, "lf-costela-bacon", "kg"]], { unit: "kg", tags: ["best"] });
+  G("linguica-topking-g", "Linguiça Top King Gourmet · 1 kg", "linguicas",
+    { en: "Premium gourmet sausages · 1 kg pack", pt: "Linguiça gourmet premium · pacote 1 kg", es: "Longaniza gourmet premium · paquete 1 kg" },
+    { en: "Top King premium Brazilian-style sausages — six flavours made for the grill.", pt: "Linguiças premium Top King no estilo brasileiro — vários sabores feitos para a brasa.", es: "Longanizas premium Top King — varios sabores para la brasa." },
+    [["linguica-topking", "Porco pura", 12.96, "linguica-topking"],
+     ["tk-alho", "Alho", 12.97, "tk-alho"],
+     ["tk-apimentada", "Apimentada (fininha)", 12.99, "tk-apimentada"],
+     ["tk-bacon", "Bacon", 12.99, "tk-bacon"],
+     ["tk-frango", "Frango", 12.99, "tk-frango"],
+     ["tk-queijo", "Queijo", 12.99, "tk-queijo"],
+     ["tk-toscana", "Toscana", 12.99, "tk-toscana"]]);
   S("calabresa-jlp", "Calabresa JLP", "linguicas", 14.90, "calabresa-jlp",
     { en: "Smoked sausage · per kg", pt: "Calabresa defumada · por kg", es: "Salchicha ahumada · por kg" },
     { en: "The classic smoked calabresa, sold by weight.", pt: "A clássica calabresa defumada, vendida a peso.", es: "La clásica calabresa ahumada, al peso." }, { unit: "kg" });
