@@ -70,8 +70,7 @@ window.GROUPS.frozen = [
     { en: "Polpa Norte frozen fruit pulp · 100 g", pt: "Polpa congelada Polpa Norte · 100 g", es: "Pulpa de fruta congelada Polpa Norte · 100 g" },
     { en: "100% fruit pulp for juices, smoothies and desserts.", pt: "100% polpa de fruta para sucos, vitaminas e sobremesas.", es: "100% pulpa de fruta para zumos, batidos y postres." },
     [["polpa-maracuja", "Maracujá", 1.99, "polpa-maracuja"], ["polpa-manga", "Manga", 0, "polpa-maracuja"],
-     ["polpa-caja", "Cajá", 0, "polpa-maracuja"], ["polpa-acerola", "Acerola", 0, "polpa-maracuja"],
-     ["polpa-cupuacu-1kg", "Cupuaçu · 1 kg", 0, "polpa-maracuja"]],
+     ["polpa-caja", "Cajá", 0, "polpa-maracuja"], ["polpa-acerola", "Acerola", 0, "polpa-maracuja"]],
     { tags: ["frozen", "vegan"] });
   S("cupuacu", "Creme de Cupuaçu Polpa Norte", "acai", 9.99, "cupuacu",
     { en: "Cupuaçu cream · 1.02 kg", pt: "Creme de cupuaçu · 1,02 kg", es: "Crema de cupuaçu · 1,02 kg" },
@@ -192,7 +191,7 @@ window.GROUPS.frozen = [
      ["gel-pudim", "Pudim de leite condensado", 0, "geladinho"], ["gel-coco-queimado", "Coco queimado", 0, "geladinho"], ["gel-acai-ninho", "Açaí com Ninho", 0, "geladinho"],
      ["gel-ninho-morango", "Ninho com morango", 0, "geladinho"], ["gel-abacate", "Abacate", 0, "geladinho"], ["gel-ninho-nutella", "Ninho com Nutella", 0, "geladinho"],
      ["gel-doce-leite", "Doce de leite", 0, "geladinho"]]);
-  const SOON = new Set(["polpa-manga", "polpa-caja", "polpa-acerola", "polpa-cupuacu-1kg", "pasteis-bacalhau", "geladinho", "gel-maracuja", "gel-leite-condensado", "gel-morango-nutella", "gel-pudim", "gel-coco-queimado", "gel-acai-ninho", "gel-ninho-morango", "gel-abacate", "gel-ninho-nutella", "gel-doce-leite"]);
+  const SOON = new Set(["polpa-manga", "polpa-caja", "polpa-acerola", "pasteis-bacalhau", "geladinho", "gel-maracuja", "gel-leite-condensado", "gel-morango-nutella", "gel-pudim", "gel-coco-queimado", "gel-acai-ninho", "gel-ninho-morango", "gel-abacate", "gel-ninho-nutella", "gel-doce-leite"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   // sort: by group order, then lowest price (groups use their cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));

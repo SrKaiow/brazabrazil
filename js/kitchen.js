@@ -137,8 +137,8 @@ window.GROUPS.kitchen = [
     { en: "Stainless-steel barrel charcoal grill", pt: "Churrasqueira a carvão em aço inox", es: "Parrilla de carbón tipo barril" },
     { en: "Portable charcoal barrel grill — perfect for the garden churrasco.", pt: "Churrasqueira barril a carvão, portátil — perfeita para o churrasco no quintal.", es: "Parrilla de carbón portátil — perfecta para el jardín." });
 
-  S("espetos-bambu", "Espetos de Bambu Bompack · 25 cm", "churrasco", 2.50, "espetos-bambu",
-    { en: "Bamboo skewers · 50 pcs", pt: "Palitos de bambu para espetinho · 50 un", es: "Brochetas de bambú · 50 un" },
+  S("espetos-bambu", "Espetos de Bambu Every Chef · 100 un", "churrasco", 2.50, "espetos-bambu",
+    { en: "Bamboo skewers · 100 pack", pt: "Palitos de bambu para espetinho · 100 un", es: "Brochetas de bambú · 100 un" },
     { en: "For espetinhos, kebabs and party snacks.", pt: "Para espetinhos de churrasco e petiscos.", es: "Para brochetas y aperitivos." });
   G("kit-churrasco", "Kit Churrasco Tramontina · faca e garfo", "churrasco",
     { en: "Barbecue carving set · knife & fork", pt: "Jogo para churrasco · faca e garfo trinchante", es: "Juego para asado · cuchillo y tenedor" },
