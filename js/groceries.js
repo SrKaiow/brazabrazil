@@ -174,9 +174,10 @@ window.GROUPS.groceries = [
     { en: "Stock cubes for rice, beans, soups and stews.", pt: "Caldo para arroz, feijão, sopas e ensopados.", es: "Cubitos para arroz, sopas y guisos." },
     [["knorr-carne", "Carne · 6 cubos", 1.99, "knorr-carne"], ["knorr-galinha", "Galinha · 6 cubos", 1.99, "knorr-galinha"],
      ["knorr-legumes", "Legumes · 6 cubos", 1.99, "knorr-legumes"], ["knorr-marisco", "Marisco · 8 cubos", 1.99, "knorr-marisco"]]);
-  S("louro", "Louro em Folhas Margão", "molhos", 1.20, "louro",
+  G("louro-g", "Louro em Folhas", "molhos",
     { en: "Dried bay leaves", pt: "Folhas de louro", es: "Hojas de laurel" },
-    { en: "Essential for feijão, feijoada and stews.", pt: "Indispensável no feijão, na feijoada e nos cozidos.", es: "Imprescindible en frijoles y guisos." }, { tags: ["portuguese"] });
+    { en: "Essential for feijão, feijoada and stews.", pt: "Indispensável no feijão, na feijoada e nos cozidos.", es: "Imprescindible en frijoles y guisos." },
+    [["louro", "Margão", 1.20, "louro"], ["louro-duarte", "Dom Duarte", 1.99, "louro-duarte"]], { tags: ["portuguese"] });
   S("kitano-baiano", "Tempero Baiano Kitano · 40 g", "molhos", 2.20, "kitano-baiano",
     { en: "Bahian spice mix", pt: "Tempero baiano", es: "Condimento bahiano" },
     { en: "Warm Bahian spice blend for meat, chicken and moqueca.", pt: "O tempero baiano para carnes, frango e moqueca.", es: "Mezcla de especias de Bahía." });
@@ -195,6 +196,36 @@ window.GROUPS.groceries = [
   S("granulado", "Granulado Dori · 1 kg", "bolos", 2.50, "granulado",
     { en: "Chocolate sprinkles", pt: "Granulado de chocolate", es: "Fideos de chocolate" },
     { en: "The real sprinkles for brigadeiro and cakes.", pt: "O granulado do brigadeiro e dos bolos.", es: "Para brigadeiros y tartas." });
+  /* ---------- remessa geleias / farinhas / azeite ---------- */
+  G("geleia", "Geleia", "matinais",
+    { en: "Fruit jam", pt: "Geleia de fruta", es: "Mermelada" },
+    { en: "Brazilian fruit jams for toast, cakes and cheese.", pt: "Geleias brasileiras para o pão, bolos e queijo.", es: "Mermeladas brasileñas." },
+    [["geleia-goiaba", "Goiaba Val · 230 g", 2.99, "geleia-goiaba"], ["geleia-uva", "Uva Val · 230 g", 3.20, "geleia-uva"], ["geleia-jabuticaba", "Jabuticaba Reserva de Minas · 240 g", 3.99, "geleia-jabuticaba"]]);
+  S("guarana-po", "Guaraná Ralado Cuiabano · 60 g", "matinais", 12.50, "guarana-po",
+    { en: "Pure grated guaraná powder", pt: "Guaraná em pó legítimo", es: "Guaraná rallado en polvo" },
+    { en: "Natural energy from the Amazon — stir into juice or water.", pt: "Energia natural da Amazônia — misture no suco ou na água.", es: "Energía natural del Amazonas." }, { tags: ["vegan"] });
+  G("flocao", "Flocão de Milho · 500 g", "geral",
+    { en: "Corn flakes flour for cuscuz", pt: "Farinha de milho flocada para cuscuz", es: "Harina de maíz en copos para cuscuz" },
+    { en: "The base for a proper cuscuz nordestino.", pt: "A base do cuscuz nordestino.", es: "La base del cuscuz nordestino." },
+    [["flocao-sinha", "Sinhá", 1.99, "flocao-sinha"], ["kimilho", "Kimilho Yoki", 2.99, "kimilho"]], { tags: ["gf"] });
+  S("fuba-yoki", "Fubá Mimoso Yoki · 500 g", "geral", 2.49, "fuba-yoki",
+    { en: "Fine cornmeal", pt: "Fubá mimoso", es: "Harina de maíz fina" },
+    { en: "For bolo de fubá, polenta and angu.", pt: "Para bolo de fubá, polenta e angu.", es: "Para bizcocho de maíz y polenta." }, { tags: ["gf"] });
+  S("grao-bico", "Grão-de-Bico Fugini · 290 g", "geral", 2.30, "grao-bico",
+    { en: "Ready-cooked chickpeas", pt: "Grão-de-bico em conserva", es: "Garbanzos cocidos" },
+    { en: "Ready to use in salads, stews and hummus.", pt: "Pronto para saladas, ensopados e homus.", es: "Listos para ensaladas y guisos." }, { tags: ["vegan", "gf"] });
+  S("guariroba", "Guariroba Fatiada Aroma D’Minas · 500 g", "geral", 10.99, "guariroba",
+    { en: "Sliced bitter palm heart in brine", pt: "Conserva de guariroba", es: "Palmito amargo en conserva" },
+    { en: "The bitter palm heart of Goiás — for rice, chicken and empadão.", pt: "O palmito amargo goiano — para arroz, frango e empadão.", es: "Palmito amargo de Goiás." });
+  S("azeite-gallo", "Azeite Gallo Subtil · 750 ml", "geral", 13.50, "azeite-gallo",
+    { en: "Portuguese olive oil", pt: "Azeite português", es: "Aceite de oliva portugués" },
+    { en: "Smooth Portuguese olive oil for cooking and bacalhau.", pt: "Azeite português suave para cozinhar e para o bacalhau.", es: "Aceite de oliva portugués suave." }, { tags: ["portuguese"] });
+  S("vinagre-gallo", "Vinagre de Sidra Gallo · 250 ml", "geral", 1.99, "vinagre-gallo",
+    { en: "Apple cider vinegar", pt: "Vinagre de maçã", es: "Vinagre de sidra" },
+    { en: "For salads and marinades.", pt: "Para saladas e marinadas.", es: "Para ensaladas y adobos." }, { tags: ["portuguese"] });
+  S("gelatina-condi", "Gelatina em Folhas Incolor Condi", "bolos", 1.50, "gelatina-condi",
+    { en: "Gelatine leaves · unflavoured", pt: "Gelatina incolor em folhas", es: "Gelatina en hojas neutra" },
+    { en: "For mousses, cheesecakes and pavês.", pt: "Para mousses, cheesecakes e pavês.", es: "Para mousses y tartas frías." }, { tags: ["portuguese"] });
   const SOON = new Set(["muenster", "llanero", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);

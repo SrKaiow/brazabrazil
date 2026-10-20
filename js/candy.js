@@ -36,13 +36,18 @@ window.GROUPS.candy = [
     { en: "Brazilian peanut sweet", pt: "Paçoca de amendoim", es: "Dulce de cacahuete" },
     { en: "Crumbly peanut sweet — a Brazilian childhood favourite.", pt: "Paçoca de amendoim que derrete na boca — sabor de infância.", es: "Dulce de cacahuete que se deshace — un clásico de la infancia en Brasil." },
     [["pacoca-un", "Unidade", 0.60, "pacoca-un"], ["pacoca-zero", "Zero açúcar · caixa", 5.99, "pacoca-zero"]], { tags: ["gf"] });
-  S("goiabada-val", "Goiabada Val · 250 g", "brasil", 2.50, "goiabada-val",
+  G("goiabada-val-g", "Goiabada Val", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
-    { en: "Sweet guava paste — with cheese it’s a Romeu e Julieta.", pt: "Goiabada — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso, un clásico." }, { tags: ["gf", "vegan"] });
+    { en: "Sweet guava paste — with cheese it’s a Romeu e Julieta.", pt: "Goiabada — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso, un clásico." },
+    [["goiabada-val", "Pote · 250 g", 2.50, "goiabada-val"], ["val-cascao", "Cascão · 400 g", 2.99, "val-cascao"]], { tags: ["gf", "vegan"] });
+  G("goiabada-reserva", "Goiabada Cascão Reserva de Minas", "brasil",
+    { en: "Farmhouse guava paste with peel", pt: "Goiabada cascão caseira", es: "Dulce de guayaba casero" },
+    { en: "Rustic, chunky guava paste straight from Minas Gerais.", pt: "Goiabada cascão rústica, direto de Minas.", es: "Dulce de guayaba rústico de Minas Gerais." },
+    [["reserva-caseira", "Caseira · 500 g", 3.99, "reserva-caseira"], ["reserva-colher", "De colher · vidro 650 g", 7.50, "reserva-colher"]], { tags: ["gf"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
-    [["goiabada", "Bloco · 30 g", 0.80, "goiabada"], ["goiabada-cascao", "Cascão · 350 g", 2.99, "goiabada-cascao"], ["goiabada-cremosa", "Cremosa · vidro 230 g", 2.99, "goiabada-cremosa"]], { tags: ["gf", "vegan"] });
+    [["goiabada", "Bloco · 30 g", 0.80, "goiabada"], ["goiabada-cascao", "Cascão · 350 g", 2.99, "goiabada-cascao"], ["goiabada-cremosa", "Cremosa · vidro 230 g", 2.99, "goiabada-cremosa"], ["predilecta-600", "Lata · 600 g", 4.50, "predilecta-600"]], { tags: ["gf", "vegan"] });
   S("pao-de-mel", "Pão de Mel", "brasil", 2.50, "pao-de-mel",
     { en: "Honey cake with chocolate coating", pt: "Pão de mel com cobertura de chocolate", es: "Pastel de miel con chocolate" },
     { en: "Spiced honey cake filled with doce de leite and coated in chocolate.", pt: "Pão de mel recheado com doce de leite e coberto de chocolate.", es: "Bizcocho de miel relleno de dulce de leche y cubierto de chocolate." });
@@ -223,6 +228,10 @@ window.GROUPS.candy = [
     [["amendoas-benfica", "Benfica", 4.99, "amendoas-benfica"], ["amendoas-porto", "Porto", 4.99, "amendoas-porto"],
      ["amendoas-sporting", "Sporting", 4.99, "amendoas-sporting"], ["amendoas-portugal", "Portugal", 4.99, "amendoas-portugal"]], { tags: ["portuguese"] });
 
+  G("filipinos", "Filipinos Artiach", "chocolates",
+    { en: "Chocolate-coated biscuit rings", pt: "Rosquinhas cobertas de chocolate", es: "Galletas bañadas en chocolate" },
+    { en: "Crunchy biscuit rings coated in real chocolate.", pt: "Rosquinhas crocantes cobertas de chocolate.", es: "Rosquillas crujientes bañadas en chocolate." },
+    [["filipinos-leite", "Chocolate ao leite", 2.50, "filipinos-leite"], ["filipinos-branco", "Chocolate branco", 2.50, "filipinos-branco"]]);
   /* ---------- SNACKS ---------- */
   S("gulozitos", "Gulozitos", "snacks", 1.99, "gulozitos",
     { en: "Portuguese corn puffs", pt: "Salgadinho de milho", "pt-PT": "Aperitivo de milho", es: "Aperitivo de maíz" },
