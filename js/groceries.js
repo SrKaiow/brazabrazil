@@ -5,11 +5,13 @@ window.GROUPS = window.GROUPS || {};
 window.GROUPS.groceries = [
   { id: "laticinios", label: { en: "Cheese, milk & butter", "pt-BR": "Queijos, leite & manteiga", "pt-PT": "Queijos, leite & manteiga", es: "Quesos, leche y mantequilla" } },
   { id: "matinais", label: { en: "Breakfast, cereals & chocolate drinks", "pt-BR": "Café da manhã & achocolatados", "pt-PT": "Pequeno-almoço & achocolatados", es: "Desayuno y cacao" } },
+  { id: "cafe", label: { en: "Coffee, tea & mate", "pt-BR": "Café, chás & chimarrão", "pt-PT": "Café, chás & chimarrão", es: "Café, té y mate" } },
+  { id: "biscoitos", label: { en: "Biscuits & wafers", "pt-BR": "Biscoitos & bolachas", "pt-PT": "Bolachas & biscoitos", es: "Galletas y barquillos" } },
   { id: "massas", label: { en: "Pasta & instant noodles", "pt-BR": "Massas & miojo", "pt-PT": "Massas", es: "Pasta y fideos" } },
   { id: "bolos", label: { en: "Cake & cheese-bread mixes", "pt-BR": "Misturas para bolo & pão de queijo", "pt-PT": "Misturas para bolo & pão de queijo", es: "Mezclas para bizcocho y pan de queso" } },
   { id: "molhos", label: { en: "Sauces, chilli & seasonings", "pt-BR": "Molhos, pimentas & temperos", "pt-PT": "Molhos, piri-piri & temperos", es: "Salsas, picantes y condimentos" } },
   { id: "conservas", label: { en: "Portuguese tinned food", "pt-BR": "Conservas portuguesas", "pt-PT": "Conservas", es: "Conservas portuguesas" } },
-  { id: "graos", label: { en: "Beans, flours & farofa", "pt-BR": "Feijão, farinhas & farofas", "pt-PT": "Feijão, farinhas & farofas", es: "Frijoles, harinas y farofa" } },
+  { id: "graos", label: { en: "Rice, beans, flours & farofa", "pt-BR": "Arroz, feijão, farinhas & farofas", "pt-PT": "Arroz, feijão, farinhas & farofas", es: "Arroz, frijoles, harinas y farofa" } },
   { id: "geral", label: { en: "Pantry, tins & jars", "pt-BR": "Mercearia, enlatados & temperos", "pt-PT": "Mercearia, enlatados & temperos", es: "Despensa y conservas" } }
 ];
 (function () {
@@ -153,9 +155,10 @@ window.GROUPS.groceries = [
   S("canjica", "Milho para Canjica Branca Sinhá · 500 g", "geral", 2.99, "canjica",
     { en: "White hominy corn", pt: "Canjica de milho branca", es: "Maíz blanco para canjica" },
     { en: "For canjica (mungunzá) — the creamy festa junina dessert.", pt: "Para canjica ou mungunzá — o doce da festa junina.", es: "Para canjica, el postre de las fiestas de junio." }, { tags: ["gf"] });
-  S("pipoca", "Milho para Pipoca Yoki · 400 g", "geral", 2.99, "pipoca",
+  G("pipoca-g", "Milho para Pipoca", "geral",
     { en: "Popcorn kernels", pt: "Milho de pipoca", es: "Maíz para palomitas" },
-    { en: "Selected kernels that pop big and fluffy.", pt: "Grãos selecionados que estouram grandes.", es: "Granos seleccionados." });
+    { en: "Selected kernels that pop big and fluffy.", pt: "Grãos selecionados que estouram grandes.", es: "Granos seleccionados." },
+    [["pipoca", "Yoki · 400 g", 2.99, "pipoca"], ["pipoca-amafil", "Amafil Premium", 3.29, "pipoca-amafil"]]);
   S("mimosa-natas", "Natas Culinária Mimosa · 200 ml", "laticinios", 2.25, "mimosa-natas",
     { en: "Portuguese cooking cream", pt: "Creme de leite culinário", "pt-PT": "Natas para culinária", es: "Nata para cocinar" },
     { en: "Light cooking cream for sauces and bacalhau com natas.", pt: "Para molhos e bacalhau com natas.", es: "Para salsas y bacalao con nata." }, { tags: ["portuguese"] });
@@ -167,7 +170,7 @@ window.GROUPS.groceries = [
   S("nido", "Leite em Pó Nido Nestlé · 900 g", "matinais", 10.99, "nido",
     { en: "Full cream milk powder", pt: "Leite em pó integral", es: "Leche en polvo entera" },
     { en: "Creamy powdered milk — for drinks, brigadeiro and recipes.", pt: "Leite em pó cremoso — para beber, brigadeiro e receitas.", es: "Leche en polvo cremosa." });
-  S("mabel-coco", "Rosquinhas de Coco Mabel · 300 g", "matinais", 2.99, "mabel-coco",
+  S("mabel-coco", "Rosquinhas de Coco Mabel · 300 g", "biscoitos", 2.99, "mabel-coco",
     { en: "Coconut ring biscuits", pt: "Rosquinha sabor coco", es: "Rosquillas de coco" },
     { en: "The classic rosquinha to dunk in your cafezinho.", pt: "A rosquinha clássica para molhar no cafezinho.", es: "La rosquilla clásica para el café." });
   G("knorr", "Caldo Knorr", "molhos",
@@ -222,7 +225,9 @@ window.GROUPS.groceries = [
   G("azeite", "Azeite", "geral",
     { en: "Olive oil", pt: "Azeite de oliva", es: "Aceite de oliva" },
     { en: "For cooking, salads and bacalhau.", pt: "Para cozinhar, saladas e bacalhau.", es: "Para cocinar, ensaladas y bacalao." },
-    [["azeite-ktc", "Extra virgem KTC · 250 ml", 5.50, "azeite-ktc"], ["azeite-gallo", "Gallo Subtil · 750 ml", 13.50, "azeite-gallo"]]);
+    [["azeite-ktc", "Extra virgem KTC · 250 ml", 5.50, "azeite-ktc"], ["azeite-oliveira-serra", "Oliveira da Serra Tradicional", 7.50, "azeite-oliveira-serra"],
+     ["azeite-gallo", "Gallo Subtil · 750 ml", 13.50, "azeite-gallo"], ["azeite-gallo-classico", "Gallo Clássico", 15.00, "azeite-gallo-classico"],
+     ["azeite-gallo-reserva", "Gallo Reserva", 15.00, "azeite-gallo-reserva"], ["azeite-gallo-classico-extra", "Gallo Clássico Extra", 25.00, "azeite-gallo-classico-extra"]]);
   S("vinagre-gallo", "Vinagre de Sidra Gallo · 250 ml", "geral", 1.99, "vinagre-gallo",
     { en: "Apple cider vinegar", pt: "Vinagre de maçã", es: "Vinagre de sidra" },
     { en: "For salads and marinades.", pt: "Para saladas e marinadas.", es: "Para ensaladas y adobos." }, { tags: ["portuguese"] });
@@ -237,7 +242,7 @@ window.GROUPS.groceries = [
   G("farofa", "Farofa Pronta", "graos",
     { en: "Ready-to-eat seasoned cassava flour", pt: "Farofa de mandioca temperada, pronta", es: "Farofa lista para servir" },
     { en: "The must-have side for churrasco, feijoada and rice and beans — just open and serve.", pt: "O acompanhamento indispensável do churrasco e da feijoada — é só abrir e servir.", es: "El acompañamiento del churrasco y la feijoada." },
-    [["farofa-amafil-baiana", "Amafil Baiana · 250 g", 2.49, "farofa-amafil-baiana"], ["farofa-amafil", "Amafil Tradicional · 500 g", 2.80, "farofa-amafil"],
+    [["farofa-amafil-baiana", "Amafil Baiana · 250 g", 2.49, "farofa-amafil-baiana"], ["farofa-amafil-carne", "Amafil Carne seca", 2.49, "farofa-amafil-carne"], ["farofa-amafil", "Amafil Tradicional · 500 g", 2.80, "farofa-amafil"],
      ["farofa-zaeli", "Zaeli Calabresa · 500 g", 3.20, "farofa-zaeli"], ["farofa-yoki", "Yoki Tradicional · 400 g", 3.50, "farofa-yoki"],
      ["farofa-bomgosto", "Bom Gosto Tradicional · 300 g", 3.50, "farofa-bomgosto"], ["farofa-bomgosto-bacon", "Bom Gosto Bacon · 300 g", 3.70, "farofa-bomgosto-bacon"],
      ["farofa-yoki-milho", "Yoki de Milho · 400 g", 4.50, "farofa-yoki-milho"]], { tags: ["best"] });
@@ -279,10 +284,11 @@ window.GROUPS.groceries = [
   S("sriracha", "Sriracha Flying Goose · pack 3 sabores", "molhos", 10.99, "sriracha",
     { en: "Sriracha mixed pack · Original, Mayoo & Super Hot", pt: "Kit sriracha · Original, Mayoo e Super Hot", es: "Pack sriracha · 3 sabores" },
     { en: "Three Sriracha sauces in one pack.", pt: "Três molhos sriracha num só pack.", es: "Tres salsas sriracha en un pack." });
-  S("erva-mate", "Erva-Mate Barão de Cotegipe · 1 kg", "matinais", 3.99, "erva-mate",
+  G("erva-mate-g", "Erva-Mate para Chimarrão", "cafe",
     { en: "Yerba mate for chimarrão", pt: "Erva-mate para chimarrão", es: "Yerba mate" },
-    { en: "Native yerba mate, vacuum-packed — for chimarrão and tereré.", pt: "Erva-mate nativa, embalada a vácuo — para chimarrão e tereré.", es: "Yerba mate nativa al vacío." }, { tags: ["vegan"] });
-  G("chas-dd", "Chás Dom Duarte · 20 saquetas", "matinais",
+    { en: "Fresh green yerba mate for chimarrão and tereré.", pt: "Erva-mate verdinha para chimarrão e tereré.", es: "Yerba mate para mate y tereré." },
+    [["erva-mate", "Barão de Cotegipe · 1 kg", 3.99, "erva-mate"], ["chimarrao-nativa", "Erva nativa", 4.50, "chimarrao-nativa"], ["chimarrao-trad", "Tradicional", 4.80, "chimarrao-trad"]], { tags: ["vegan"] });
+  G("chas-dd", "Chás Dom Duarte · 20 saquetas", "cafe",
     { en: "Herbal teas · 20 bags", pt: "Chás e infusões · 20 saquetas", es: "Infusiones · 20 bolsitas" },
     { en: "Portuguese herbal infusions — pick your blend.", pt: "Infusões portuguesas — escolha a sua.", es: "Infusiones portuguesas." },
     [["cha-camomila", "Camomila", 2.60, "cha-camomila"], ["cha-cidreira", "Cidreira", 2.60, "cha-cidreira"],
@@ -305,16 +311,141 @@ window.GROUPS.groceries = [
   S("pequi-fatiado", "Pequi Fatiado D’Horta · 370 g", "geral", 6.99, "pequi-fatiado",
     { en: "Sliced pequi in brine", pt: "Pequi fatiado em conserva", es: "Pequi en conserva" },
     { en: "For arroz com pequi and frango com pequi.", pt: "Para arroz e frango com pequi.", es: "Para arroz con pequi." });
-  G("bolacha-cuetara", "Bolacha Cuétara", "matinais",
+  G("bolacha-cuetara", "Bolacha Cuétara", "biscoitos",
     { en: "Portuguese biscuits", pt: "Bolacha portuguesa", es: "Galletas Cuétara" },
     { en: "The classic biscuit to dunk in milk or coffee.", pt: "A bolacha clássica para molhar no leite ou no café.", es: "La galleta clásica para mojar." },
     [["bolacha-oro", "Oro", 3.80, "bolacha-maria"], ["bolacha-maria", "Maria", 3.90, "bolacha-maria"]], { tags: ["portuguese"] });
-  S("cream-cracker", "Biscoito Cream Cracker Renata · 360 g", "matinais", 2.18, "cream-cracker",
+  S("cream-cracker", "Biscoito Cream Cracker Renata · 360 g", "biscoitos", 2.18, "cream-cracker",
     { en: "Cream crackers", pt: "Biscoito água e sal", es: "Galletas saladas" },
     { en: "Crunchy crackers for butter, requeijão and soups.", pt: "Crocantes, para manteiga, requeijão e sopas.", es: "Crujientes, para untar." });
-  S("diatosta", "Mini Tostas Diatosta Mini Grill", "matinais", 3.49, "diatosta",
+  S("diatosta", "Mini Tostas Diatosta Mini Grill", "biscoitos", 3.49, "diatosta",
     { en: "Mini toasts", pt: "Mini torradas", es: "Mini tostadas" },
     { en: "Crunchy mini toasts for breakfast and snacks.", pt: "Torradinhas crocantes para o café e petiscos.", es: "Tostaditas crujientes." }, { tags: ["portuguese", "vegan"] });
+  /* ---------- cadastro do PDV (mercearia) ---------- */
+  G("arroz", "Arroz", "graos",
+    { en: "Rice", pt: "Arroz", es: "Arroz" },
+    { en: "The base of every Brazilian meal — arroz e feijão.", pt: "A base de toda refeição — arroz com feijão.", es: "La base de toda comida brasileña." },
+    [["arroz-camil-1", "Camil · 1 kg", 2.49, "arroz-camil-1"], ["arroz-tiojoao-1", "Tio João · 1 kg", 2.80, "arroz-tiojoao-1"], ["arroz-cigala", "Cigala", 3.60, "arroz-cigala"],
+     ["arroz-camil-5", "Camil · 5 kg", 11.50, "arroz-camil-5"], ["arroz-tiojoao-5", "Tio João · 5 kg", 12.50, "arroz-tiojoao-5"]], { tags: ["gf", "vegan"] });
+  G("canjiquinha", "Canjiquinha / Xerém · 500 g", "graos",
+    { en: "Cracked corn grits", pt: "Quirera de milho", es: "Maíz quebrado" },
+    { en: "For canjiquinha com costela and angu.", pt: "Para canjiquinha com costela e angu.", es: "Para guisos de maíz." },
+    [["xerem-sinha", "Sinhá", 2.99, "xerem-sinha"], ["xerem-yoki", "Yoki", 2.99, "xerem-yoki"]], { tags: ["gf"] });
+  G("acucar", "Açúcar", "bolos",
+    { en: "Sugar", pt: "Açúcar", es: "Azúcar" },
+    { en: "For cakes, coffee and desserts.", pt: "Para bolos, café e sobremesas.", es: "Para bizcochos y café." },
+    [["acucar-silver", "Silver Spoon", 1.99, "acucar-silver"], ["acucar-uniao", "União refinado · 1 kg", 2.80, "acucar-uniao"]]);
+  S("adocante", "Adoçante Zero Cal Líquido", "bolos", 3.99, "adocante",
+    { en: "Liquid sweetener", pt: "Adoçante líquido", es: "Edulcorante líquido" },
+    { en: "Zero-calorie sweetener for coffee and juices.", pt: "Adoçante zero caloria para café e sucos.", es: "Edulcorante sin calorías." });
+  G("polvilho", "Polvilho Amafil Premium · 500 g", "bolos",
+    { en: "Tapioca starch", pt: "Polvilho", es: "Almidón de yuca" },
+    { en: "For homemade pão de queijo, biscoito de polvilho and tapioca.", pt: "Para pão de queijo caseiro e biscoito de polvilho.", es: "Para pan de queso casero." },
+    [["polvilho-doce", "Doce", 5.99, "polvilho-doce"], ["polvilho-azedo", "Azedo", 5.99, "polvilho-azedo"]], { tags: ["gf"] });
+  S("branca-neve", "Farinha de Trigo Branca de Neve", "bolos", 2.50, "branca-neve",
+    { en: "Plain wheat flour", pt: "Farinha de trigo", es: "Harina de trigo" },
+    { en: "Portuguese flour for cakes, bread and frying.", pt: "Farinha portuguesa para bolos, pães e fritos.", es: "Harina portuguesa." }, { tags: ["portuguese"] });
+  G("cafe-pilao", "Café Pilão Tradicional", "cafe",
+    { en: "Brazilian ground coffee", pt: "Café torrado e moído", es: "Café molido brasileño" },
+    { en: "Brazil’s strong, classic coffee.", pt: "O café forte e clássico do Brasil.", es: "El clásico café brasileño." },
+    [["pilao-250", "250 g", 5.99, "pilao-250"], ["pilao-500", "500 g", 9.99, "pilao-500"]], { tags: ["best"] });
+  G("cafe-3coracoes", "Café 3 Corações", "cafe",
+    { en: "Brazilian ground coffee", pt: "Café torrado e moído", es: "Café molido brasileño" },
+    { en: "Smooth Brazilian coffee for the daily cafezinho.", pt: "Café brasileiro para o cafezinho de todo dia.", es: "Café brasileño suave." },
+    [["3coracoes-250", "Tradicional · 250 g", 5.99, "3coracoes-250"], ["3coracoes-extraforte", "Extra forte", 9.90, "3coracoes-extraforte"]]);
+  G("cafe-outros", "Café Brasileiro", "cafe",
+    { en: "Brazilian & Portuguese ground coffee", pt: "Café torrado e moído", es: "Café molido" },
+    { en: "More coffees from Brazil and Portugal.", pt: "Mais cafés do Brasil e de Portugal.", es: "Más cafés de Brasil y Portugal." },
+    [["cafe-uniao", "União tradicional · 250 g", 4.99, "cafe-uniao"], ["cafe-brasileiro", "Café brasileiro", 5.99, "cafe-brasileiro"],
+     ["buondi-robusto", "Buondi Robusto", 6.99, "buondi-robusto"], ["cafe-sao-francisco", "São Francisco · 250 g", 9.50, "cafe-sao-francisco"],
+     ["cafe-caboclo", "Caboclo", 11.50, "cafe-caboclo"]]);
+  G("chas-barao", "Chás Barão", "cafe",
+    { en: "Brazilian herbal teas", pt: "Chás e infusões Barão", es: "Infusiones Barão" },
+    { en: "Brazilian herbal teas — pick your favourite.", pt: "Chás brasileiros — escolha o seu.", es: "Infusiones brasileñas." },
+    [["barao-camomila", "Camomila", 1.99, "barao-camomila"], ["barao-carqueja", "Carqueja", 1.99, "barao-carqueja"], ["barao-cidreira", "Cidreira", 1.99, "barao-cidreira"],
+     ["barao-hortela", "Hortelã", 1.99, "barao-hortela"], ["barao-erva-doce", "Erva-doce", 2.18, "barao-erva-doce"], ["barao-hibisco", "Hibisco", 2.20, "barao-hibisco"],
+     ["barao-maracuja", "Maracujá", 2.20, "barao-maracuja"], ["barao-melissa", "Melissa", 2.20, "barao-melissa"], ["barao-limao-gengibre", "Misto limão, gengibre e mel", 2.20, "barao-limao-gengibre"]], { tags: ["vegan"] });
+  G("chas-outros", "Chás", "cafe",
+    { en: "Herbal teas", pt: "Chás", es: "Infusiones" },
+    { en: "Traditional Brazilian herbal teas.", pt: "Chás tradicionais.", es: "Infusiones tradicionales." },
+    [["cha-cavalinha", "Cavalinha", 1.99, "cha-cavalinha"], ["cha-boldo", "Boldo", 2.50, "cha-boldo"], ["cha-durma", "Durma melhor", 2.89, "cha-durma"], ["cha-hibisco", "Hibisco", 2.89, "cha-hibisco"]], { tags: ["vegan"] });
+  G("matte-leao", "Chá Matte Leão", "cafe",
+    { en: "Roasted mate tea", pt: "Chá mate tostado", es: "Té mate tostado" },
+    { en: "The famous Rio de Janeiro mate tea — hot or iced with lemon.", pt: "O famoso mate carioca — quente ou gelado com limão.", es: "El famoso mate de Río." },
+    [["matte-sachets", "Sachês", 3.40, "matte-sachets"], ["matte-granel", "A granel", 5.80, "matte-granel"]], { tags: ["vegan"] });
+  S("bolo-arminda", "Bolo Arminda Neto", "matinais", 6.99, "bolo-arminda",
+    { en: "Portuguese cake", pt: "Bolo português", es: "Bizcocho portugués" },
+    { en: "Traditional Portuguese cake for coffee time.", pt: "Bolo tradicional português para a hora do café.", es: "Bizcocho tradicional portugués." }, { tags: ["portuguese"] });
+  G("wafer-bauducco", "Wafer Bauducco", "biscoitos",
+    { en: "Wafer biscuits", pt: "Biscoito wafer", es: "Barquillos" },
+    { en: "Crispy Bauducco wafers.", pt: "Wafers crocantes Bauducco.", es: "Barquillos crujientes." },
+    [["bauducco-chocolate", "Chocolate", 2.20, "bauducco-chocolate"], ["bauducco-morango", "Morango", 2.20, "bauducco-morango"],
+     ["bauducco-baunilha", "Baunilha", 2.20, "bauducco-baunilha"], ["bauducco-pistache", "Pistache", 2.20, "bauducco-pistache"]]);
+  G("bono", "Biscoito Bono", "biscoitos",
+    { en: "Cream-filled biscuits", pt: "Biscoito recheado", es: "Galletas rellenas" },
+    { en: "The classic Brazilian filled biscuit.", pt: "O clássico biscoito recheado.", es: "La clásica galleta rellena." },
+    [["bono-chocolate", "Chocolate", 2.20, "bono-chocolate"], ["bono-morango", "Morango", 2.20, "bono-morango"]]);
+  G("recheados", "Biscoitos Recheados", "biscoitos",
+    { en: "Filled biscuits", pt: "Biscoitos recheados", es: "Galletas rellenas" },
+    { en: "Brazilian favourites for the lunchbox.", pt: "Os preferidos da lancheira.", es: "Las favoritas de la merienda." },
+    [["oreo", "Oreo", 0.99, "oreo"], ["trakinas-morango", "Trakinas morango", 1.99, "trakinas-morango"], ["biscoito-prestigio", "Prestígio", 1.99, "biscoito-prestigio"],
+     ["recheado-nescau", "Nescau", 2.50, "recheado-nescau"], ["biscoito-tortuguita", "Tortuguita", 2.80, "biscoito-tortuguita"], ["recheado-moca", "Nestlé Moça", 2.99, "recheado-moca"]]);
+  G("biscoito-polvilho", "Biscoito de Polvilho", "biscoitos",
+    { en: "Tapioca crisps (polvilho)", pt: "Biscoito de polvilho", es: "Rosquillas de almidón" },
+    { en: "Light, crunchy and gluten-free.", pt: "Leve, crocante e sem glúten.", es: "Ligeras y crujientes." },
+    [["polvilho-trad", "Tradicional", 2.30, "polvilho-trad"], ["polvilho-queijo", "Queijo", 2.30, "polvilho-queijo"], ["polvilho-parmesao", "Parmesão", 2.35, "polvilho-parmesao"]], { tags: ["gf"] });
+  S("maizena-piraque", "Bolacha Maizena Piraquê", "biscoitos", 2.99, "maizena-piraque",
+    { en: "Cornflour biscuits", pt: "Biscoito maisena", es: "Galletas maría" },
+    { en: "Light, crunchy biscuits for coffee.", pt: "Biscoito leve e crocante para o café.", es: "Galletas ligeras." });
+  S("ricanela", "Bolacha Ricanela", "biscoitos", 3.50, "ricanela",
+    { en: "Cinnamon biscuits", pt: "Bolacha de canela", es: "Galletas de canela" },
+    { en: "Portuguese cinnamon biscuits.", pt: "Bolachas de canela portuguesas.", es: "Galletas portuguesas de canela." }, { tags: ["portuguese"] });
+  G("dende", "Azeite de Dendê", "molhos",
+    { en: "Red palm oil", pt: "Azeite de dendê", es: "Aceite de palma" },
+    { en: "Essential for moqueca, acarajé and vatapá.", pt: "Indispensável na moqueca, acarajé e vatapá.", es: "Para moqueca y vatapá." },
+    [["dende-kidende", "Kidendê · 200 ml", 3.50, "dende-kidende"], ["dende-cepera", "Cepêra", 3.79, "dende-cepera"]], { tags: ["vegan"] });
+  G("chimichurri", "Chimichurri", "molhos",
+    { en: "Chimichurri", pt: "Chimichurri", es: "Chimichurri" },
+    { en: "The herby sauce for churrasco.", pt: "O molho de ervas do churrasco.", es: "La salsa del asado." },
+    [["chimichurri-essenciati", "Essenciati", 6.99, "chimichurri-essenciati"], ["chimichurri-sauce", "Sauce", 6.99, "chimichurri-sauce"]]);
+  S("colorifico", "Colorífico Sinhá · 100 g", "molhos", 1.49, "colorifico",
+    { en: "Annatto seasoning (colorau)", pt: "Colorau", es: "Achiote en polvo" },
+    { en: "Gives rice, chicken and stews that golden colour.", pt: "Dá cor ao arroz, frango e ensopados.", es: "Da color a arroz y guisos." }, { tags: ["vegan"] });
+  S("aji-sal", "Aji-Sal Churrasco", "molhos", 6.99, "aji-sal",
+    { en: "Barbecue seasoning salt", pt: "Sal temperado para churrasco", es: "Sal sazonada para asado" },
+    { en: "Seasoned salt for churrasco.", pt: "Sal temperado para o churrasco.", es: "Sal sazonada para el asado." });
+  S("caseirinho", "Molho de Pimenta Caseirinho", "molhos", 2.20, "caseirinho",
+    { en: "Chilli sauce", pt: "Molho de pimenta", es: "Salsa picante" },
+    { en: "Classic Brazilian chilli sauce.", pt: "Molho de pimenta clássico.", es: "Salsa picante brasileña." });
+  S("carolina-reaper", "Molho Carolina Reaper · 90 g", "molhos", 6.99, "carolina-reaper",
+    { en: "Extremely hot chilli sauce", pt: "Molho de pimenta extremamente forte", es: "Salsa extremadamente picante" },
+    { en: "Made with one of the hottest chillies in the world — use with care!", pt: "Feito com uma das pimentas mais fortes do mundo — use com cuidado!", es: "¡Una de las más picantes del mundo!" });
+  S("canja-maggi", "Canja de Galinha Maggi · 82 g", "molhos", 2.50, "canja-maggi",
+    { en: "Chicken & rice soup mix", pt: "Sopa canja de galinha", es: "Sopa de pollo con arroz" },
+    { en: "Comforting canja in minutes.", pt: "Canja quentinha em minutos.", es: "Sopa reconfortante en minutos." });
+  G("feijao-compal", "Feijão Cozido Compal", "geral",
+    { en: "Cooked beans · tinned", pt: "Feijão cozido em lata", "pt-PT": "Feijão cozido", es: "Alubias cocidas" },
+    { en: "Ready-cooked Portuguese beans — just heat.", pt: "Feijão português já cozido — é só aquecer.", es: "Alubias ya cocidas." },
+    [["compal-amanteigado", "Amanteigado", 2.30, "compal-amanteigado"], ["compal-branco", "Branco", 2.30, "compal-branco"], ["compal-encarnado", "Encarnado", 2.30, "compal-encarnado"],
+     ["compal-frade", "Frade", 2.30, "compal-frade"], ["compal-preto", "Preto", 2.30, "compal-preto"]], { tags: ["portuguese", "vegan"] });
+  S("cogumelos-compal", "Cogumelos Cortados Compal", "geral", 2.50, "cogumelos-compal",
+    { en: "Sliced mushrooms · tinned", pt: "Cogumelos fatiados", es: "Champiñones laminados" },
+    { en: "For strogonoff, pizza and sauces.", pt: "Para strogonoff, pizza e molhos.", es: "Para salsas y pizza." }, { tags: ["portuguese", "vegan"] });
+  G("azeitonas", "Azeitonas", "geral",
+    { en: "Olives", pt: "Azeitonas", es: "Aceitunas" },
+    { en: "For petiscos, pizza and salads.", pt: "Para petiscos, pizza e saladas.", es: "Para aperitivos y ensaladas." },
+    [["azeitona-crespo", "Crespo", 1.49, "azeitona-crespo"], ["azeitona-preta", "Preta com caroço", 2.99, "azeitona-preta"], ["azeitona-manzanilla", "Manzanilla", 4.99, "azeitona-manzanilla"]], { tags: ["vegan"] });
+  S("pequi-caroco", "Pequi com Caroço Aroma D’Minas", "geral", 7.99, "pequi-caroco",
+    { en: "Whole pequi in brine", pt: "Pequi inteiro em conserva", es: "Pequi entero en conserva" },
+    { en: "For arroz com pequi and frango com pequi.", pt: "Para arroz e frango com pequi.", es: "Para arroz con pequi." });
+  G("batata-palha", "Batata Palha", "geral",
+    { en: "Potato sticks", pt: "Batata palha", es: "Patatas paja" },
+    { en: "The crunchy topping for strogonoff and hot dogs.", pt: "A crocância do strogonoff e do cachorro-quente.", es: "Para strogonoff y perritos." },
+    [["batata-palha-yoki", "Yoki tradicional", 2.99, "batata-palha-yoki"], ["batata-palha-yoki-extrafina", "Yoki extrafina", 2.99, "batata-palha-yoki-extrafina"],
+     ["batata-palha-barrosa", "Barrosa", 4.99, "batata-palha-barrosa"]]);
+  S("amendoim-pinduca", "Amendoim Vermelho Pinduca · 400 g", "geral", 1.99, "amendoim-pinduca",
+    { en: "Raw red-skin peanuts", pt: "Amendoim cru com pele", es: "Cacahuetes crudos" },
+    { en: "For paçoca, pé-de-moleque and roasting.", pt: "Para paçoca, pé-de-moleque e torrar.", es: "Para dulces y tostar." }, { tags: ["vegan", "gf"] });
   const SOON = new Set(["muenster", "llanero", "gota-alho", "creme-cebola"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);

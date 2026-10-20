@@ -57,6 +57,19 @@ window.GROUPS.candy = [
   S("doce-abobora-coco", "Doce de Abóbora com Coco Duas Irmãs · 400 g", "brasil", 7.50, "doce-abobora-coco",
     { en: "Pumpkin & coconut sweet", pt: "Doce de abóbora cremoso com coco", es: "Dulce de calabaza con coco" },
     { en: "Creamy pumpkin and coconut — a grandma’s classic.", pt: "Cremoso, de abóbora com coco — clássico da vó.", es: "Dulce cremoso de calabaza." }, { tags: ["gf"] });
+  G("cocada-sococo", "Cocada Cremosa Sococo", "brasil",
+    { en: "Creamy coconut sweet", pt: "Cocada cremosa", es: "Dulce cremoso de coco" },
+    { en: "Creamy coconut cocada in a jar.", pt: "Cocada cremosa no pote.", es: "Cocada cremosa en tarro." },
+    [["cocada-branca", "Branca", 3.99, "cocada-branca"], ["cocada-queimada", "Queimada", 3.99, "cocada-queimada"]], { tags: ["gf"] });
+  S("bananada-val", "Bananada Val", "brasil", 2.80, "bananada-val",
+    { en: "Banana paste", pt: "Bananada", es: "Dulce de plátano" },
+    { en: "Classic Brazilian banana sweet.", pt: "A clássica bananada.", es: "Dulce de plátano clásico." }, { tags: ["gf", "vegan"] });
+  S("brigadeiro-junco", "Brigadeiro de Pote Junco", "brasil", 7.00, "brigadeiro-junco",
+    { en: "Brigadeiro spread in a jar", pt: "Brigadeiro de colher", es: "Brigadeiro para untar" },
+    { en: "Eat it with a spoon or fill cakes.", pt: "Para comer de colher ou rechear bolos.", es: "Para comer a cucharadas." });
+  S("canudos-rebequi", "Canudos Rebequi · 24 un", "brasil", 7.99, "canudos-rebequi",
+    { en: "Pastry tubes for filling · 24", pt: "Canudinhos para rechear · 24", es: "Canutillos para rellenar · 24" },
+    { en: "Crispy little tubes — fill with doce de leite or brigadeiro.", pt: "Canudinhos crocantes — recheie com doce de leite ou brigadeiro.", es: "Canutillos crujientes para rellenar." });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
@@ -243,6 +256,15 @@ window.GROUPS.candy = [
     { en: "Crunchy biscuit rings coated in real chocolate.", pt: "Rosquinhas crocantes cobertas de chocolate.", es: "Rosquillas crujientes bañadas en chocolate." },
     [["filipinos-leite", "Chocolate ao leite", 2.50, "filipinos-leite"], ["filipinos-branco", "Chocolate branco", 2.50, "filipinos-branco"]]);
   /* ---------- SNACKS ---------- */
+  S("bis-branco", "Bis Branco Lacta", "chocolates", 3.99, "bis-branco",
+    { en: "White chocolate wafers", pt: "Bis chocolate branco", es: "Barquillos de chocolate blanco" },
+    { en: "The beloved Bis, in white chocolate.", pt: "O Bis, em versão chocolate branco.", es: "Bis de chocolate blanco." });
+  S("amendoim-japones", "Amendoim Japonês", "snacks", 2.50, "amendoim-japones",
+    { en: "Crunchy coated peanuts", pt: "Amendoim japonês", es: "Cacahuetes japoneses" },
+    { en: "Crunchy coated peanuts — the boteco classic.", pt: "Crocante, o clássico do boteco.", es: "Crujientes, clásico de bar." });
+  S("batata-barrosa", "Batata Frita Barrosa", "snacks", 2.70, "batata-barrosa",
+    { en: "Potato crisps", pt: "Batata frita", "pt-PT": "Batatas fritas", es: "Patatas fritas" },
+    { en: "Portuguese crisps.", pt: "Batata frita portuguesa.", es: "Patatas fritas portuguesas." }, { tags: ["portuguese"] });
   S("fandangos", "Fandangos Elma Chips", "snacks", 2.50, "fandangos",
     { en: "Baked corn snack", pt: "Salgadinho de milho assado", es: "Aperitivo de maíz" },
     { en: "The classic Brazilian corn snack.", pt: "O clássico salgadinho de milho.", es: "El clásico aperitivo de maíz." });
