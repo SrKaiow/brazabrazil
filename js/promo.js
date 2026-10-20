@@ -5,14 +5,14 @@
    ============================================================ */
 (function () {
   const PROMO = {
-    "acem": 12.99, "alcatra": 14.99, "barriga": 5.99, "costela-porco": 5.50, "colchao-mole": 13.99, "cupim": 16.99,
-    "fraldinha": 14.99, "patinho": 13.99
+    "barriga": 5.99, "costela-porco": 5.50, "colchao-mole": 13.99, "patinho": 13.99
   };
   const L = (en, pt, es) => ({ en, pt, es });
   const N = (id, name, cat, group, unit, price, sub, desc, img) => window.PRODUCTS.push({ id, name, cat, group, unit, price, tags: [], promo: true,
     image: "assets/products/" + (img || cat + "/" + id) + ".webp", available: true, sub, desc });
   N("miolo-paleta", "Miolo da Paleta Australiano", "beef", "slow", "kg", 12.99, L("Australian chuck tender · per kg", "Miolo da paleta · por kg", "Centro de paleta · por kg"), L("Tender cut for roasts and stews.", "Corte macio para assados e ensopados.", "Corte tierno para asados."));
   N("bisteca-bovina", "Bisteca Bovina", "beef", "steak", "kg", 13.99, L("Beef T-bone style steak · per kg", "Bisteca de boi · por kg", "Chuleta de ternera · por kg"), L("Great on the grill or the frying pan.", "Ótima na brasa ou na frigideira.", "Ideal a la parrilla."));
+  window.PRODUCTS[window.PRODUCTS.length - 1].step = 1;
   N("costela-prime", "Costela Bovina Prime", "beef", "bbq", "kg", 8.99, L("Prime beef ribs · per kg", "Costela bovina prime · por kg", "Costilla prime · por kg"), L("Slow-cook on the grill for hours.", "Na brasa, devagar, por horas.", "A la brasa lentamente."));
   N("sobrecoxa", "Sobrecoxa de Frango", "chicken", "cortes", "kg", 4.50, L("Chicken thighs · per kg", "Sobrecoxa · por kg", "Contramuslo de pollo · por kg"), L("Juicy and cheap — perfect for the churrasco.", "Suculenta — perfeita para o churrasco.", "Jugosa y económica."));
   N("tilapia-kg", "Tilápia Congelada · por kg", "frozen", "fish", "kg", 7.50, L("Frozen tilapia · per kg", "Tilápia congelada · por kg", "Tilapia congelada · por kg"), L("Mild white fish — fry, grill or bake.", "Peixe branco suave — frito, grelhado ou assado.", "Pescado blanco suave."), "frozen/tilapia");
