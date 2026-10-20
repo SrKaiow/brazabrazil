@@ -192,6 +192,7 @@
       </article>`;
   }
 
+  const GRID_PAGE = 24; let gridLimit = GRID_PAGE, gridKey = "";
   function renderGrid() {
     const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
     const list = P.filter(p => !p.hidden &&
@@ -200,8 +201,13 @@
       (!onlyIds || onlyIds.includes(p.id)) &&
       (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
+    // "Todos": show a first batch and a "show more" button (keeps phones fast and short)
+    const key = activeCat + "|" + activeGroup + "|" + query + "|" + (onlyIds ? 1 : 0);
+    if (key !== gridKey) { gridKey = key; gridLimit = GRID_PAGE; }
+    const capped = activeCat === "all" && !query && !onlyIds && list.length > gridLimit;
+    const shown = capped ? list.slice(0, gridLimit) : list;
     let html = "", lastHead = null;
-    list.forEach(p => {
+    shown.forEach(p => {
       if (p.group) {
         const head = p.cat + ":" + p.group;
         if (head !== lastHead) {
@@ -216,6 +222,7 @@
       }
       html += card(p);
     });
+    if (capped) html += `<div class="more-wrap"><button class="more-btn" data-more>${t("more_btn")}<small>${list.length - gridLimit}</small></button></div>`;
     $("#grid").innerHTML = html;
   }
 
@@ -226,6 +233,7 @@
     if (el) { el.outerHTML = card(byId[sel.dataset.group]); }
   });
   $("#grid").addEventListener("click", e => {
+    if (e.target.closest("[data-more]")) { gridLimit += GRID_PAGE * 2; renderGrid(); return; }
     const b = e.target.closest("button[data-act]"); if (!b) return;
     const p = byId[b.dataset.id], s = step(p);
     const cur = picks[p.id] ?? s;

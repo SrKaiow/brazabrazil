@@ -771,3 +771,83 @@ html{scroll-padding-top:110px}
 .tab[data-cat="chicken"]::before{content:"🐔 "}
 .tab[data-cat="groceries"]::before{content:"🛒 "}
 .tab[data-cat="kitchen"]::before{content:"🍳 "}
+
+/* ============================================================
+   MOBILE POLISH (phones, iOS Safari) — kept last so it wins the cascade
+   ============================================================ */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+img{max-width:100%}
+.more-wrap{grid-column:1/-1;display:flex;justify-content:center;padding:18px 0 4px}
+.more-btn{border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:999px;padding:13px 26px;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer}
+.more-btn small{opacity:.75;margin-left:6px;font-weight:500}
+@media (max-width:1000px){
+  .about{grid-template-columns:1fr;gap:36px}
+  .about__photo{position:static;max-width:440px;margin:0 auto;width:100%}
+}
+@media (max-width:640px){
+  /* iOS zooms into inputs smaller than 16px — keep them at 16px */
+  input,textarea,.search input,.field input,.field textarea{font-size:16px!important}
+  .opt select{font-size:.8rem!important}
+  .section{padding:52px 0}
+  .wrap{width:calc(100% - 28px)}
+  h2{font-size:clamp(1.7rem,7.4vw,2.2rem)!important;line-height:1.15}
+  .hero h1{font-size:clamp(2rem,9vw,2.6rem)!important;line-height:1.12}
+  .hero__in{padding:36px 0 44px;gap:30px}
+  .hero__facts{margin-top:28px}
+  .hero__facts strong{font-size:.95rem!important}
+  .hero__facts span{font-size:.72rem}
+
+  /* category tabs: one swipeable row instead of a tall wall of pills */
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -14px;padding:2px 14px 6px;scroll-snap-type:x proximity}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;padding:8px 14px;font-size:.84rem;scroll-snap-align:start}
+  #subtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:2px 14px 6px}
+  #subtabs::-webkit-scrollbar{display:none}
+  #subtabs > *{flex:none}
+
+  /* product grid: two compact columns */
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .grid__head{font-size:1.15rem!important;margin:14px 0 -2px;gap:8px;flex-wrap:wrap}
+  .grid__head small{font-size:.62rem}
+  .card{border-radius:14px}
+  .card__media{aspect-ratio:1}
+  .card__media .cat{display:none}
+  .card__tags{top:8px;left:8px;gap:4px}
+  .card__tags .tag{font-size:.58rem;padding:3px 7px}
+  .card__body{padding:10px 10px 12px}
+  .card__name{font-size:.98rem;line-height:1.22}
+  .card__en{font-size:.6rem;letter-spacing:.08em;margin:3px 0 6px;line-height:1.3}
+  .card__desc{display:none}
+  .opt{margin-bottom:8px}
+  .opt span{font-size:.6rem}
+  .opt select{padding:8px 26px 8px 8px;background-position:right 8px center}
+  .card__row{flex-direction:column;align-items:stretch;gap:8px;padding-top:10px;margin-top:auto}
+  .price{font-size:1.08rem}
+  .card__buy{justify-content:space-between;gap:6px}
+  .qty{height:36px;flex:1;justify-content:space-between}
+  .qty button{width:30px}
+  .qty span{min-width:0;font-size:.78rem}
+  .add{width:36px;height:36px;flex:none}
+  .btn--similar{width:100%;padding:9px 8px;font-size:.78rem}
+
+  /* floating helpers: smaller and clear of the iPhone home bar */
+  .wa-float{width:50px;height:50px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
+  .braza{left:12px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .braza__btn{width:54px!important;height:54px!important}
+  .vip-tab{bottom:calc(76px + env(safe-area-inset-bottom))!important;padding:6px!important;gap:0!important;border-radius:14px 0 0 14px}
+  .vip-tab__text{display:none}
+  .vip-tab__icon{width:36px!important;height:36px!important}
+  .toast{top:calc(84px + env(safe-area-inset-top));bottom:auto;max-width:calc(100% - 32px);text-align:center;z-index:90}
+  .braza__bubble{display:none!important}
+  .drawer{padding-bottom:env(safe-area-inset-bottom)}
+
+  .about__lead{font-size:1.12rem}
+  .about__quote{font-size:1.12rem;padding-left:16px}
+  .about__photo figcaption span{font-size:1.05rem}
+}
+@media (max-width:360px){
+  .grid{gap:8px}
+  .card__name{font-size:.9rem}
+  .qty button{width:26px}
+}
