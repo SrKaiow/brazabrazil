@@ -169,6 +169,7 @@ window.I18N = {
   ft_sub: { en: "Butcher &amp; Groceries · Brazilian · Portuguese Shop", "pt-BR": "Açougue &amp; Mercearia · Brasileira · Portuguesa", "pt-PT": "Talho &amp; Mercearia · Brasileira · Portuguesa", es: "Carnicería &amp; Tienda · Brasileña · Portuguesa" },
   ft_cuts: { en: "Cuts guide", "pt-BR": "Guia de cortes", "pt-PT": "Guia de cortes", es: "Guía de cortes" },
   ft_contact: { en: "Contact", "pt-BR": "Contato", "pt-PT": "Contacto", es: "Contacto" },
+  ft_dev: { en: "Site by", "pt-BR": "Desenvolvido por", "pt-PT": "Desenvolvido por", es: "Desarrollado por" },
   ft_rights: { en: "BrazaBrazil. All rights reserved.", "pt-BR": "BrazaBrazil. Todos os direitos reservados.", "pt-PT": "BrazaBrazil. Todos os direitos reservados.", es: "BrazaBrazil. Todos los derechos reservados." },
   vt_title: { en: "Daily offers", "pt-BR": "Ofertas do dia", "pt-PT": "Ofertas do dia", es: "Ofertas del día" },
   vt_text: { en: "Join our VIP group", "pt-BR": "Entre no grupo VIP", "pt-PT": "Entre no grupo VIP", es: "Únete al grupo VIP" },
