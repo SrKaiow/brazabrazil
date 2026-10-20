@@ -54,7 +54,7 @@ window.GROUPS.candy = [
   S("doce-amendoim", "Doce de Amendoim DaColônia · 120 g", "brasil", 1.50, "doce-amendoim",
     { en: "Peanut fudge bar", pt: "Doce de amendoim caseiro", es: "Dulce de cacahuete" },
     { en: "Homestyle peanut sweet bar.", pt: "Doce de amendoim tipo caseiro.", es: "Dulce de cacahuete casero." }, { tags: ["gf"] });
-  S("doce-abobora", "Doce de Abóbora com Coco Duas Irmãs · 400 g", "brasil", 7.50, "doce-abobora",
+  S("doce-abobora-coco", "Doce de Abóbora com Coco Duas Irmãs · 400 g", "brasil", 7.50, "doce-abobora-coco",
     { en: "Pumpkin & coconut sweet", pt: "Doce de abóbora cremoso com coco", es: "Dulce de calabaza con coco" },
     { en: "Creamy pumpkin and coconut — a grandma’s classic.", pt: "Cremoso, de abóbora com coco — clássico da vó.", es: "Dulce cremoso de calabaza." }, { tags: ["gf"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
@@ -106,9 +106,6 @@ window.GROUPS.candy = [
   S("docinhos", "Docinhos de Festa", "brasil", 2.20, "docinhos",
     { en: "Brazilian party sweets", pt: "Brigadeiro, beijinho e mais", es: "Dulces de fiesta brasileños" },
     { en: "Brigadeiro, beijinho and friends — the sweets of every Brazilian party.", pt: "Brigadeiro, beijinho e companhia — os docinhos de toda festa.", es: "Brigadeiro, beijinho y más — los dulces de toda fiesta brasileña." });
-  S("doce-amendoim", "Doce de Amendoim Caseiro DaColônia", "brasil", 2.99, "doce-amendoim",
-    { en: "Homemade-style peanut bar · 120 g", pt: "Doce de amendoim tipo caseiro · 120 g", es: "Dulce de cacahuete casero · 120 g" },
-    { en: "Traditional peanut sweet with a homemade taste.", pt: "Doce de amendoim tradicional, com gostinho de caseiro.", es: "Dulce de cacahuete tradicional con sabor casero." }, { tags: ["gf"] });
   G("gomets", "Gomets Dori", "balas",
     { en: "Fruit gummies", pt: "Balas de goma", es: "Gominolas de frutas" },
     { en: "Soft sugar-coated fruit gummies.", pt: "Balas de goma macias, sabor frutas sortidas.", es: "Gominolas suaves de frutas surtidas." },
