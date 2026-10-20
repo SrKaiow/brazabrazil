@@ -153,9 +153,9 @@ window.GROUPS.kitchen = [
   S("baralho-copag", "Baralho Copag 157", "variedades", 5.99, "baralho-copag",
     { en: "Brazilian playing cards", pt: "Baralho Copag", es: "Baraja Copag" },
     { en: "The classic Brazilian deck — for truco, buraco and family nights.", pt: "O baralho clássico — para truco, buraco e a noite em família.", es: "La baraja clásica brasileña — para truco y noches en familia." });
-  S("chaveiros", "Chaveiros Variados", "variedades", 0, "",
-    { en: "Assorted keyrings", pt: "Chaveiros variados", es: "Llaveros variados" },
-    { en: "Assorted Brazilian and Portuguese keyrings — photos coming soon.", pt: "Chaveiros variados do Brasil e de Portugal — fotos em breve.", es: "Llaveros variados — fotos pronto." }, { available: false, soon: true });
+  S("chaveiros", "Chaveiros Ateliê Lírio · 1 por £2.75 · 2 por £5", "variedades", 2.75, "chaveiros",
+    { en: "3D-printed keyrings · 2 for £5", pt: "Chaveiros em impressão 3D · 2 por £5", es: "Llaveros impresos en 3D · 2 por £5" },
+    { en: "Football clubs, characters and more — handmade by Ateliê Lírio. Buy 2 for £5. Tell us the model you want in the order notes.", pt: "Times de futebol, personagens e muito mais — feitos à mão pelo Ateliê Lírio. Leve 2 por £5. Diga o modelo que quer nas observações do pedido.", es: "Clubes de fútbol, personajes y más — hechos a mano por Ateliê Lírio. 2 por £5." }, { multi: { n: 2, price: 5 } });
 
   const order = window.GROUPS.kitchen.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));

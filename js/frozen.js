@@ -156,7 +156,7 @@ window.GROUPS.frozen = [
     { en: "Tender and ready — just grill with olive oil and garlic.", pt: "Macios e prontos — é só grelhar com azeite e alho.", es: "Tiernos y listos — a la plancha con aceite y ajo." }, { tags: ["frozen", "portuguese"] });
   S("frango-campestre", "Frango Campestre", "poultry", 10.99, "frango-campestre",
     { en: "Free-range style whole chicken · per kg", pt: "Frango caipira · por kg", es: "Pollo de campo · por kg" },
-    { en: "Firmer, tastier country chicken — the real frango caipira flavour.", pt: "Frango de carne firme e saborosa — o verdadeiro sabor caipira.", es: "Pollo de campo, carne firme y sabrosa." }, { unit: "kg" });
+    { en: "Firmer, tastier country chicken — the real frango caipira flavour.", pt: "Frango de carne firme e saborosa — o verdadeiro sabor caipira.", es: "Pollo de campo, carne firme y sabrosa." }, { unit: "kg", step: 1 });
   S("cornfed", "Cornfed Chicken", "poultry", 10.99, "cornfed",
     { en: "Corn-fed whole chicken", pt: "Frango alimentado com milho", es: "Pollo alimentado con maíz" },
     { en: "Golden-skinned corn-fed chicken — juicy and full of flavour.", pt: "Frango de pele dourada alimentado com milho — suculento e saboroso.", es: "Pollo de piel dorada alimentado con maíz — jugoso y sabroso." });

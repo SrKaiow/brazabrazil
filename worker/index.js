@@ -72,7 +72,7 @@ async function createCheckout(request, env) {
     const qty = Number(rawQty);
     if (!p || p.isGroup) return json({ error: "unknown_item", id }, 400);
     if (p.available === false) return json({ error: "out_of_stock", id }, 409);
-    const step = p.unit === "kg" ? 0.5 : 1;
+    const step = BB.step(p);
     if (!(qty > 0) || qty > 50 || Math.abs(qty / step - Math.round(qty / step)) > 1e-9)
       return json({ error: "bad_quantity", id }, 400);
     items.push({ p, qty });
@@ -91,17 +91,17 @@ async function createCheckout(request, env) {
   }
 
   const line_items = items.map(({ p, qty }) => {
-    const label = p.unit === "kg" ? `${qty} kg` : `x${qty}`;
+    const label = (p.unit === "kg" ? `${qty} kg` : `x${qty}`) + (p.multi && qty >= p.multi.n ? ` (${p.multi.n} for £${p.multi.price.toFixed(2)})` : "");
     return {
       quantity: 1,
       price_data: {
         currency: "gbp",
-        unit_amount: pence(p.price * qty),
+        unit_amount: pence(BB.lineTotal(p, qty)),
         product_data: { name: `${p.name} — ${label}`, description: p.sub?.en || undefined }
       }
     };
   });
-  const subtotal = items.reduce((s, { p, qty }) => s + p.price * qty, 0);
+  const subtotal = items.reduce((s, { p, qty }) => s + BB.lineTotal(p, qty), 0);
   const freeOver = S.delivery?.freeOver;
   let fee = quote?.status === "ok" ? quote.fee : 0;
   if (isDelivery && freeOver && subtotal >= freeOver) fee = 0;

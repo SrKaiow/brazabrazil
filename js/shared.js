@@ -27,5 +27,13 @@
     return { status: "out", fee: null, postcode };
   }
 
-  root.BB = { normPostcode, isValidPostcode, quoteDelivery };
+  // quantity step: kg items 0.5 kg unless the product sets its own step
+  const step = p => p.step || (p.unit === "kg" ? 0.5 : 1);
+  // line total with multi-buy offers, e.g. multi: { n: 2, price: 5 } = "2 for £5"
+  const lineTotal = (p, q) => {
+    const m = p.multi;
+    const t = m ? Math.floor(q / m.n) * m.price + (q % m.n) * p.price : p.price * q;
+    return Math.round(t * 100) / 100;
+  };
+  root.BB = { normPostcode, isValidPostcode, quoteDelivery, step, lineTotal };
 })(typeof window !== "undefined" ? window : globalThis);

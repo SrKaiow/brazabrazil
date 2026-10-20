@@ -63,7 +63,7 @@
   });
   const save = () => store.set("bb_cart", JSON.stringify(cart));
 
-  const step = p => (p.unit === "kg" ? KG_STEP : 1);
+  const step = p => window.BB.step(p);
   const fmtQty = (p, q) => (p.unit === "kg" ? (q % 1 ? q.toFixed(1) : q) + " kg" : "× " + q);
   const unitLabel = p => (p.unit === "kg" ? "/kg" : "");
   const icon = cat => `<svg viewBox="0 0 120 90" aria-hidden="true"><use href="#i-${cat}"/></svg>`;
@@ -297,7 +297,7 @@
     toast(`${p.name} ${t("added")} — ${fmtQty(p, q)}`);
     if (!silentAdd) brazaReact(p);
   }
-  const total = () => Object.entries(cart).reduce((s, [id, q]) => s + byId[id].price * q, 0);
+  const total = () => Object.entries(cart).reduce((s, [id, q]) => s + window.BB.lineTotal(byId[id], q), 0);
 
   function renderCart() {
     const ids = Object.keys(cart);
@@ -308,7 +308,7 @@
       const p = byId[id], q = cart[id];
       return `<div class="line">
         <div><div class="line__name">${p.name}</div><div class="line__en">${pick(p.sub)} · ${money(p.price)}${unitLabel(p)}</div></div>
-        <div class="line__price">${money(p.price * q)}</div>
+        <div class="line__price">${money(window.BB.lineTotal(p, q))}</div>
         <div class="line__ctrl">
           <div class="qty"><button data-c="dec" data-id="${id}" aria-label="−">−</button><span>${fmtQty(p, q)}</span><button data-c="inc" data-id="${id}" aria-label="+">+</button></div>
           <button class="remove" data-c="rm" data-id="${id}">${t("remove")}</button>
@@ -406,9 +406,9 @@
   function orderMessage(o, paidRef) {
     const lines = Object.entries(o.items).filter(([id]) => byId[id]).map(([id, q]) => {
       const p = byId[id];
-      return `• ${p.name} (${pick(p.sub)}) — ${fmtQty(p, q)} — ${money(p.price * q)}`;
+      return `• ${p.name} (${pick(p.sub)}) — ${fmtQty(p, q)} — ${money(window.BB.lineTotal(p, q))}`;
     });
-    const sub = Object.entries(o.items).reduce((s, [id, q]) => s + (byId[id] ? byId[id].price * q : 0), 0);
+    const sub = Object.entries(o.items).reduce((s, [id, q]) => s + (byId[id] ? window.BB.lineTotal(byId[id], q) : 0), 0);
     const del = o.mode === "delivery";
     const fee = typeof o.fee === "number" ? o.fee : 0;
     return [
@@ -607,14 +607,14 @@
   function renderCalc() {
     $("#bzPeople").textContent = bz.people;
     const plan = churrascoPlan();
-    const total = plan.items.reduce((s, [id, q]) => s + byId[id].price * q, 0);
+    const total = plan.items.reduce((s, [id, q]) => s + window.BB.lineTotal(byId[id], q), 0);
     const box = bz.people <= 4 ? byId.box4 : bz.people <= 8 ? byId.box8 : null;
     const kg = (Math.round(plan.totalKg * 10) / 10).toString();
     $("#bzResult").innerHTML = `
       <p>${t("bz_result").replace("{n}", plan.n).replace("{kg}", kg)}</p>
       <ul class="braza__list">${plan.items.map(([id, q]) => {
         const p = byId[id];
-        return `<li><span>${p.name}</span><em>${fmtQty(p, q)}</em><b>${money(p.price * q)}</b></li>`;
+        return `<li><span>${p.name}</span><em>${fmtQty(p, q)}</em><b>${money(window.BB.lineTotal(p, q))}</b></li>`;
       }).join("")}</ul>
       <div class="braza__total"><span>${plain("d_total")}</span><strong>${money(total)}</strong></div>
       <button class="btn btn--pay btn--block" data-bz="addall">${t("bz_add_all")}</button>
