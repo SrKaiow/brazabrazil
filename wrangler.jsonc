@@ -5,6 +5,8 @@
   "compatibility_date": "2025-09-01",
   // Required by `wrangler preview` (preview builds for non-main branches)
   "previews": {},
+  // Database for the admin panel (orders, finance, price changes)
+  "d1_databases": [{ "binding": "DB", "database_name": "brazabrazil-admin", "database_id": "5df07bdc-808a-41e9-b1bc-abaabf121cbf" }],
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
