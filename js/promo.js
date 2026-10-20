@@ -6,8 +6,7 @@
 (function () {
   const PROMO = {
     "acem": 12.99, "alcatra": 14.99, "barriga": 5.99, "costela-porco": 5.50, "colchao-mole": 13.99, "cupim": 16.99,
-    "fraldinha": 14.99, "patinho": 13.99, "picanha-angus": 15.99, "picanha-argentina": 20.99,
-    "picanha-irish-lifey": 13.99, "picanha-irlandesa": 14.99
+    "fraldinha": 14.99, "patinho": 13.99
   };
   const L = (en, pt, es) => ({ en, pt, es });
   const N = (id, name, cat, group, unit, price, sub, desc, img) => window.PRODUCTS.push({ id, name, cat, group, unit, price, tags: [], promo: true,
