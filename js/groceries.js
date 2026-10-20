@@ -9,6 +9,7 @@ window.GROUPS.groceries = [
   { id: "bolos", label: { en: "Cake & cheese-bread mixes", "pt-BR": "Misturas para bolo & pão de queijo", "pt-PT": "Misturas para bolo & pão de queijo", es: "Mezclas para bizcocho y pan de queso" } },
   { id: "molhos", label: { en: "Sauces, chilli & seasonings", "pt-BR": "Molhos, pimentas & temperos", "pt-PT": "Molhos, piri-piri & temperos", es: "Salsas, picantes y condimentos" } },
   { id: "conservas", label: { en: "Portuguese tinned food", "pt-BR": "Conservas portuguesas", "pt-PT": "Conservas", es: "Conservas portuguesas" } },
+  { id: "graos", label: { en: "Beans, flours & farofa", "pt-BR": "Feijão, farinhas & farofas", "pt-PT": "Feijão, farinhas & farofas", es: "Frijoles, harinas y farofa" } },
   { id: "geral", label: { en: "Pantry, tins & jars", "pt-BR": "Mercearia, enlatados & temperos", "pt-PT": "Mercearia, enlatados & temperos", es: "Despensa y conservas" } }
 ];
 (function () {
@@ -204,13 +205,14 @@ window.GROUPS.groceries = [
   S("guarana-po", "Guaraná Ralado Cuiabano · 60 g", "matinais", 12.50, "guarana-po",
     { en: "Pure grated guaraná powder", pt: "Guaraná em pó legítimo", es: "Guaraná rallado en polvo" },
     { en: "Natural energy from the Amazon — stir into juice or water.", pt: "Energia natural da Amazônia — misture no suco ou na água.", es: "Energía natural del Amazonas." }, { tags: ["vegan"] });
-  G("flocao", "Flocão de Milho · 500 g", "geral",
+  G("flocao", "Flocão de Milho · 500 g", "graos",
     { en: "Corn flakes flour for cuscuz", pt: "Farinha de milho flocada para cuscuz", es: "Harina de maíz en copos para cuscuz" },
     { en: "The base for a proper cuscuz nordestino.", pt: "A base do cuscuz nordestino.", es: "La base del cuscuz nordestino." },
     [["flocao-sinha", "Sinhá", 1.99, "flocao-sinha"], ["kimilho", "Kimilho Yoki", 2.99, "kimilho"]], { tags: ["gf"] });
-  S("fuba-yoki", "Fubá Mimoso Yoki · 500 g", "geral", 2.49, "fuba-yoki",
-    { en: "Fine cornmeal", pt: "Fubá mimoso", es: "Harina de maíz fina" },
-    { en: "For bolo de fubá, polenta and angu.", pt: "Para bolo de fubá, polenta e angu.", es: "Para bizcocho de maíz y polenta." }, { tags: ["gf"] });
+  G("fuba", "Fubá Yoki · 500 g", "graos",
+    { en: "Cornmeal", pt: "Fubá", es: "Harina de maíz" },
+    { en: "Mimoso for bolo de fubá and angu, pré-cozido for quick polenta.", pt: "Mimoso para bolo de fubá e angu; pré-cozido para polenta rápida.", es: "Para bizcocho de maíz y polenta." },
+    [["fuba-yoki", "Mimoso", 2.49, "fuba-yoki"], ["fuba-precozido", "Pré-cozido", 3.99, "fuba-precozido"]], { tags: ["gf"] });
   S("grao-bico", "Grão-de-Bico Fugini · 290 g", "geral", 2.30, "grao-bico",
     { en: "Ready-cooked chickpeas", pt: "Grão-de-bico em conserva", es: "Garbanzos cocidos" },
     { en: "Ready to use in salads, stews and hummus.", pt: "Pronto para saladas, ensopados e homus.", es: "Listos para ensaladas y guisos." }, { tags: ["vegan", "gf"] });
@@ -226,6 +228,35 @@ window.GROUPS.groceries = [
   S("gelatina-condi", "Gelatina em Folhas Incolor Condi", "bolos", 1.50, "gelatina-condi",
     { en: "Gelatine leaves · unflavoured", pt: "Gelatina incolor em folhas", es: "Gelatina en hojas neutra" },
     { en: "For mousses, cheesecakes and pavês.", pt: "Para mousses, cheesecakes e pavês.", es: "Para mousses y tartas frías." }, { tags: ["portuguese"] });
+  /* ---------- remessa feijões / farinhas / farofas ---------- */
+  G("feijao", "Feijão", "graos",
+    { en: "Dried beans", pt: "Feijão", es: "Frijoles" },
+    { en: "The everyday Brazilian feijão — and white beans for Portuguese dishes.", pt: "O feijão de todo dia — e o branco para os pratos portugueses.", es: "Los frijoles de cada día." },
+    [["feijao-branco", "Branco Caçarola", 3.50, "feijao-branco"], ["feijao-carioca", "Carioca Camil · 1 kg", 3.99, "feijao-carioca"], ["feijao-preto", "Preto Camil · 1 kg", 3.99, "feijao-preto"]], { tags: ["vegan", "gf"] });
+  G("farofa", "Farofa Pronta", "graos",
+    { en: "Ready-to-eat seasoned cassava flour", pt: "Farofa de mandioca temperada, pronta", es: "Farofa lista para servir" },
+    { en: "The must-have side for churrasco, feijoada and rice and beans — just open and serve.", pt: "O acompanhamento indispensável do churrasco e da feijoada — é só abrir e servir.", es: "El acompañamiento del churrasco y la feijoada." },
+    [["farofa-amafil-baiana", "Amafil Baiana · 250 g", 2.49, "farofa-amafil-baiana"], ["farofa-amafil", "Amafil Tradicional · 500 g", 2.80, "farofa-amafil"],
+     ["farofa-zaeli", "Zaeli Calabresa · 500 g", 3.20, "farofa-zaeli"], ["farofa-yoki", "Yoki Tradicional · 400 g", 3.50, "farofa-yoki"],
+     ["farofa-bomgosto", "Bom Gosto Tradicional · 300 g", 3.50, "farofa-bomgosto"], ["farofa-bomgosto-bacon", "Bom Gosto Bacon · 300 g", 3.70, "farofa-bomgosto-bacon"],
+     ["farofa-yoki-milho", "Yoki de Milho · 400 g", 4.50, "farofa-yoki-milho"]], { tags: ["best"] });
+  G("farinha-mandioca", "Farinha de Mandioca Yoki · 500 g", "graos",
+    { en: "Cassava flour", pt: "Farinha de mandioca", es: "Harina de yuca" },
+    { en: "For homemade farofa, pirão and to sprinkle on feijão.", pt: "Para farofa caseira, pirão e para pôr no feijão.", es: "Para farofa casera y pirão." },
+    [["farinha-torrada", "Torrada", 2.49, "farinha-torrada"], ["farinha-biju", "Flocada biju", 4.50, "farinha-biju"]], { tags: ["gf"] });
+  S("maizena", "Amido de Milho Maizena · 720 g", "bolos", 3.50, "maizena",
+    { en: "Cornflour", pt: "Amido de milho", es: "Maicena" },
+    { en: "For mingau, cakes, biscuits and thickening sauces.", pt: "Para mingau, bolos, biscoitos e engrossar molhos.", es: "Para natillas, bizcochos y espesar salsas." }, { tags: ["gf"] });
+  G("fermento", "Fermento", "bolos",
+    { en: "Raising agents", pt: "Fermento", es: "Levadura" },
+    { en: "Baking powder for cakes or dried yeast for bread.", pt: "Fermento químico para bolos ou biológico para pães.", es: "Levadura química o de panadero." },
+    [["fermento-condi", "Biológico de padeiro Condi · carteira", 2.20, "fermento-condi"], ["royal", "Químico em pó Royal · 100 g", 2.85, "royal"]]);
+  S("marmelada", "Marmelada Extra Ferbar · 400 g", "matinais", 2.99, "marmelada",
+    { en: "Portuguese quince paste", pt: "Marmelada portuguesa", es: "Dulce de membrillo" },
+    { en: "Classic Portuguese quince paste — perfect with cheese.", pt: "A clássica marmelada portuguesa — perfeita com queijo.", es: "Dulce de membrillo portugués, perfecto con queso." }, { tags: ["portuguese", "vegan"] });
+  S("feijoada-lata", "Feijoada à Brasileira Sabor a Mundo · 415 g", "conservas", 3.99, "feijoada-lata",
+    { en: "Ready-made Brazilian feijoada · tinned", pt: "Feijoada pronta em lata", es: "Feijoada lista en lata" },
+    { en: "Heat and serve in minutes — microwave or pan.", pt: "É só aquecer — micro-ondas ou panela.", es: "Calentar y servir." });
   const SOON = new Set(["muenster", "llanero", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);

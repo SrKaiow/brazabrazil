@@ -44,6 +44,9 @@ window.GROUPS.candy = [
     { en: "Farmhouse guava paste with peel", pt: "Goiabada cascão caseira", es: "Dulce de guayaba casero" },
     { en: "Rustic, chunky guava paste straight from Minas Gerais.", pt: "Goiabada cascão rústica, direto de Minas.", es: "Dulce de guayaba rústico de Minas Gerais." },
     [["reserva-caseira", "Caseira · 500 g", 3.99, "reserva-caseira"], ["reserva-colher", "De colher · vidro 650 g", 7.50, "reserva-colher"]], { tags: ["gf"] });
+  S("figo-calda", "Figo em Calda Bom Princípio · 600 g", "brasil", 7.99, "figo-calda",
+    { en: "Figs in syrup", pt: "Figo em calda", es: "Higos en almíbar" },
+    { en: "Whole green figs in syrup — a traditional Brazilian dessert.", pt: "Figos inteiros em calda — sobremesa tradicional.", es: "Higos enteros en almíbar." }, { tags: ["gf", "vegan"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
