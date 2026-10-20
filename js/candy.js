@@ -62,10 +62,6 @@ window.GROUPS.candy = [
   S("mms", "M&M’s Chocolate", "chocolates", 1.50, "mms",
     { en: "Milk chocolate candies", pt: "Confeitos de chocolate", es: "Grageas de chocolate" },
     { en: "Colourful candy-coated milk chocolate.", pt: "Chocolate ao leite com cobertura colorida.", es: "Chocolate con leche con cobertura de colores." });
-  S("especialidades", "Nestlé Especialidades", "chocolates", 11.99, "especialidades",
-    { en: "Assorted chocolates gift box", pt: "Caixa de bombons sortidos", es: "Caja de bombones surtidos" },
-    { en: "The classic Brazilian box of bombons — Prestígio, Alpino, Charge and more.", pt: "A clássica caixa de bombons — Prestígio, Alpino, Charge e mais.", es: "La clásica caja de bombones brasileña — Prestígio, Alpino, Charge y más." });
-
   /* ---------- GUM, MINTS & LOLLIPOPS ---------- */
   S("pastilha-hortela", "Pastilha Garoto Hortelã", "balas", 0.80, "pastilha-hortela",
     { en: "Mint pastilles", pt: "Pastilhas de hortelã", es: "Pastillas de menta" },
@@ -100,10 +96,6 @@ window.GROUPS.candy = [
     { en: "Kinder chocolate", pt: "Chocolate Kinder", es: "Chocolate Kinder" },
     { en: "Milk chocolate with a creamy milky filling.", pt: "Chocolate ao leite com recheio cremoso de leite.", es: "Chocolate con leche con relleno cremoso." },
     [["kinder-choc", "Chocolate · barra 21 g", 0.50, "kinder-choc"], ["kinder-bueno", "Bueno", 1.50, "kinder-bueno"], ["kinder-bueno-white", "Bueno White", 1.50, "kinder-bueno-white"]]);
-  G("lacta-bombom", "Bombom Lacta", "chocolates",
-    { en: "Lacta chocolate bonbon", pt: "Bombom Lacta", es: "Bombón Lacta" },
-    { en: "Brazil’s favourite bonbons.", pt: "Os bombons preferidos do Brasil.", es: "Los bombones favoritos de Brasil." },
-    [["ouro-branco", "Ouro Branco", 1.20, "ouro-branco"], ["sonho-valsa", "Sonho de Valsa", 1.20, "sonho-valsa"]]);
   G("lacta-barra", "Chocolate Lacta", "chocolates",
     { en: "Lacta chocolate bar", pt: "Chocolate Lacta em barra", es: "Chocolate Lacta" },
     { en: "Creamy Brazilian milk chocolate.", pt: "Chocolate cremoso, o sabor do Brasil.", es: "Chocolate cremoso brasileño." },
@@ -160,6 +152,52 @@ window.GROUPS.candy = [
   S("amendoim", "Amendoim Salgado DaColônia", "snacks", 2.99, "amendoim",
     { en: "Roasted salted peanuts · 450 g", pt: "Amendoim torrado salgado · 450 g", es: "Cacahuetes tostados salados · 450 g" },
     { en: "Roasted, not fried — perfect with a cold beer.", pt: "Torrado, não frito — perfeito com uma cerveja gelada.", es: "Tostados, no fritos — perfectos con una cerveza fría." }, { tags: ["gf", "vegan"] });
+
+  /* ---------- batch 4 ---------- */
+  G("bombom", "Bombom", "chocolates",
+    { en: "Brazilian chocolate bonbon", pt: "Bombom unidade", es: "Bombón brasileño" },
+    { en: "Brazil’s favourite bonbons — pick yours.", pt: "Os bombons preferidos do Brasil — escolha o seu.", es: "Los bombones favoritos de Brasil — elige el tuyo." },
+    [["ouro-branco", "Ouro Branco Lacta", 1.20, "ouro-branco"], ["sonho-valsa", "Sonho de Valsa Lacta", 1.20, "sonho-valsa"], ["serenata", "Serenata de Amor Garoto", 1.20, "serenata"]]);
+  G("caixa-bombons", "Caixa de Bombons", "chocolates",
+    { en: "Assorted chocolates gift box", pt: "Caixa de bombons sortidos", es: "Caja de bombones surtidos" },
+    { en: "The classic Brazilian box of bombons — perfect as a gift.", pt: "A clássica caixa de bombons — perfeita para presentear.", es: "La clásica caja de bombones brasileña — ideal para regalar." },
+    [["lacta-favoritos", "Lacta Favoritos · 250 g", 9.90, "lacta-favoritos"], ["bombom-garoto", "Garoto · 250 g", 9.98, "bombom-garoto"],
+     ["especialidades", "Nestlé Especialidades", 11.99, "especialidades"], ["crocribe", "Garoto Crocribe", 11.99, "crocribe"]]);
+  G("barra-recheada", "Barra Lacta Recheada · 98 g", "chocolates",
+    { en: "Filled chocolate bar · 98 g", pt: "Chocolate recheado · 98 g", es: "Chocolate relleno · 98 g" },
+    { en: "Your favourite bonbon, now as a big bar.", pt: "O seu bombom preferido em versão barra.", es: "Tu bombón favorito, en tableta." },
+    [["barra-ouro-branco", "Ouro Branco", 3.99, "barra-ouro-branco"], ["barra-sonho-valsa", "Sonho de Valsa", 3.99, "barra-sonho-valsa"]]);
+  G("baton", "Baton Garoto", "chocolates",
+    { en: "Chocolate stick", pt: "Chocolate em bastão", es: "Barrita de chocolate" },
+    { en: "The classic Baton — a Brazilian childhood favourite.", pt: "O clássico Baton — sabor de infância.", es: "El clásico Baton — un favorito de la infancia." },
+    [["baton-black", "Black", 1.20, "baton-black"], ["baton-branco", "Branco", 1.20, "baton-branco"]]);
+  S("surpresa", "Chocolate Surpresa Nestlé", "chocolates", 1.50, "surpresa",
+    { en: "Milk chocolate · 20 g", pt: "Chocolate ao leite · 20 g", es: "Chocolate con leche · 20 g" },
+    { en: "The return of a Brazilian classic, with Brazilian animals on the pack.", pt: "A volta de um clássico, com os animais brasileiros na embalagem.", es: "El regreso de un clásico brasileño." });
+  S("bolo-pote", "Bolo de Pote", "brasil", 3.99, "bolo-pote",
+    { en: "Cake in a jar", pt: "Bolo de pote", es: "Pastel en vaso" },
+    { en: "Layers of soft cake and creamy filling — eat it with a spoon.", pt: "Camadas de bolo fofinho e recheio cremoso — é só pegar a colher.", es: "Capas de bizcocho y relleno cremoso — a cucharadas." });
+  S("beliscao", "Beliscão de Goiabada", "brasil", 2.50, "beliscao",
+    { en: "Guava-filled butter biscuits", pt: "Biscoito amanteigado com goiabada", es: "Galletas rellenas de guayaba" },
+    { en: "Buttery biscuits pinched around a piece of guava paste.", pt: "Biscoitinhos amanteigados com goiabada no meio.", es: "Galletas de mantequilla con un trocito de guayaba." });
+  G("bananinha", "Bananinha", "brasil",
+    { en: "Banana sweet", pt: "Doce de banana", es: "Dulce de plátano" },
+    { en: "Made from real bananas — soft, sweet and naturally fruity.", pt: "Feita com banana de verdade — macia e docinha.", es: "Hecho con plátano de verdad — suave y dulce." },
+    [["bananinha-paraibuna", "Paraibuna · unidade 36 g", 1.50, "bananinha-paraibuna"], ["bananinha-monica", "Turma da Mônica mini · 70 g", 3.69, "bananinha-monica"],
+     ["bananinha-13", "Pacote 13 unidades", 6.50, "bananinha-paraibuna"], ["bananinha-200g", "Guimarães cristalizada · 200 g", 6.99, "bananinha-200g"]], { tags: ["gf", "vegan"] });
+  G("sete-belo", "Bala 7 Belo · 90 g", "balas",
+    { en: "Chewy candy", pt: "Bala mastigável", es: "Caramelo masticable" },
+    { en: "The chewy candy of every Brazilian childhood.", pt: "A bala de toda infância brasileira.", es: "El caramelo masticable de la infancia brasileña." },
+    [["sete-belo-framboesa", "Framboesa (original)", 3.50, "sete-belo-framboesa"], ["sete-belo-iogurte", "Iogurte", 3.50, "sete-belo-iogurte"]]);
+  S("bala-yogurte", "Bala de Yogurte 100 Dori", "balas", 2.59, "bala-yogurte",
+    { en: "Strawberry yoghurt chewy candy", pt: "Bala mastigável de iogurte", es: "Caramelo masticable de yogur" },
+    { en: "Creamy strawberry-yoghurt chews.", pt: "Bala cremosa sabor iogurte de morango.", es: "Caramelos cremosos de yogur de fresa." });
+  S("bolete", "Bala Chicle Bolete 100 g", "balas", 2.99, "bolete",
+    { en: "Candy with bubble-gum centre", pt: "Bala recheada com chiclete", es: "Caramelo con chicle" },
+    { en: "Hard candy with a bubble-gum centre.", pt: "Bala com chiclete dentro.", es: "Caramelo con centro de chicle." });
+  S("bala-banana", "Bala de Banana DaColônia", "balas", 2.99, "bala-banana",
+    { en: "Banana candy · 160 g", pt: "Bala de banana · 160 g", es: "Caramelo de plátano · 160 g" },
+    { en: "Real-fruit banana candies.", pt: "Balas feitas com banana de verdade.", es: "Caramelos de plátano de verdad." }, { tags: ["gf", "vegan"] });
 
   /* ---------- SNACKS ---------- */
   S("wotsits", "Wotsits That’s Nuts", "snacks", 2.99, "wotsits",
