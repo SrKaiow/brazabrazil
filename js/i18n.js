@@ -217,6 +217,7 @@ window.I18N = {
     es: "Paçoca, brigadeiro, Bis, Sonho de Valsa, goiabada… todos los dulces brasileños de la infancia, aquí en Epsom." },
   sw_all: { en: "See all sweets", "pt-BR": "Ver todos os doces", "pt-PT": "Ver todos os doces", es: "Ver todos los dulces" },
   sw_from: { en: "from", "pt-BR": "a partir de", "pt-PT": "desde", es: "desde" },
+  cat_home: { en: "Cleaning & care", "pt-BR": "Limpeza & higiene", "pt-PT": "Limpeza & higiene", es: "Limpieza e higiene" },
   cat_candy: { en: "Sweets & snacks", "pt-BR": "Doces & snacks", "pt-PT": "Doces & snacks", es: "Dulces y snacks" },
   cat_deli: { en: "Deli & smoked", "pt-BR": "Embutidos & defumados", "pt-PT": "Enchidos & fumados", es: "Embutidos y ahumados" },
   cat_frozen: { en: "Frozen", "pt-BR": "Congelados", "pt-PT": "Congelados", es: "Congelados" },

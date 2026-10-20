@@ -766,3 +766,5 @@ html{scroll-padding-top:110px}
 .tab[data-cat="candy"]::before{content:"🍬 "}
 @media (max-width:640px){.sweets__rail{grid-auto-columns:150px}}
 @media (prefers-reduced-motion:reduce){.sweet{animation:none}}
+
+.tab[data-cat="home"]::before{content:"🧼 "}
