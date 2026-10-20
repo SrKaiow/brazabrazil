@@ -24,11 +24,18 @@ import "../js/promo.js";
 import "../js/drinks.js";
 import "../js/softdrinks.js";
 import "../js/shared.js";
+import { handleAdmin, getOverrides, recordOrder, markPaid } from "./admin.js";
 
 const S = globalThis.SITE;
 const P = globalThis.PRODUCTS;
 const BB = globalThis.BB;
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
+// catalogue for the admin panel: every sellable product with its catalogue prices
+const groupLabel = p => ((globalThis.GROUPS || {})[p.cat] || []).find(g => g.id === p.group)?.label?.["pt-BR"] || "";
+const CATALOGUE = P.filter(p => !p.isGroup).map(p => ({ id: p.id, name: p.name, cat: p.cat, group: groupLabel(p), unit: p.unit,
+  price: p.was || p.price, promo: p.was ? p.price : null, available: p.available !== false, soon: !!p.soon, image: p.image || "" }));
+// product as it is right now (catalogue + admin changes)
+const live = (p, ov) => p ? BB.applyOverride({ ...p, base: undefined }, ov[p.id]) : null;
 const STRIPE_LOCALE = { en: "en-GB", "pt-BR": "pt-BR", "pt-PT": "pt", es: "es" };
 
 /* ---------- security ---------- */
@@ -114,8 +121,6 @@ async function stripe(env, method, path, body) {
 }
 
 async function createCheckout(request, env) {
-  if (!env.STRIPE_SECRET_KEY) return json({ error: "not_configured" }, 503);
-
   if (!sameOrigin(request)) return json({ error: "forbidden" }, 403);
   if (limited(request, "co", 8, 60_000)) return json({ error: "too_many_requests" }, 429, { "retry-after": "60" });
   if (!(request.headers.get("content-type") || "").toLowerCase().startsWith("application/json")) return json({ error: "bad_request" }, 415);
@@ -135,10 +140,11 @@ async function createCheckout(request, env) {
   b.day = clip(b.day, 20); b.notes = clip(b.notes, 400); b.postcode = clip(b.postcode, 10);
   if (b.phone && !/^[+()\d\s-]{7,30}$/.test(b.phone)) return json({ error: "bad_phone" }, 400);
 
-  // ---- Rebuild the order from the catalogue ----
+  // ---- Rebuild the order from the catalogue (+ admin price/stock changes) ----
+  const ov = await getOverrides(env).catch(() => ({}));
   const items = [];
   for (const [id, rawQty] of Object.entries(b.items || {})) {
-    const p = Object.prototype.hasOwnProperty.call(byId, id) ? byId[id] : null;
+    const p = Object.prototype.hasOwnProperty.call(byId, id) ? live(byId[id], ov) : null;
     const qty = typeof rawQty === "number" ? rawQty : Number(rawQty);
     if (!p || p.isGroup) return json({ error: "unknown_item" }, 400);
     if (p.available === false || !(p.price > 0)) return json({ error: "out_of_stock", id: p.id }, 409);
@@ -184,6 +190,15 @@ async function createCheckout(request, env) {
   const origin = new URL(request.url).origin;
   const lang = STRIPE_LOCALE[b.lang] ? b.lang : "en";
 
+  const orderRow = { mode: isDelivery ? "delivery" : "collect", name: b.name, phone: b.phone, address: isDelivery ? b.address : "",
+    postcode: isDelivery ? quote.postcode : "", day: b.day, notes: b.notes, subtotal: Math.round(subtotal * 100) / 100, fee,
+    total: Math.round((subtotal + fee) * 100) / 100,
+    items: items.map(({ p, qty }) => ({ id: p.id, name: p.name, cat: p.cat, unit: p.unit, qty, price: p.price, total: BB.lineTotal(p, qty) })) };
+  if (!env.STRIPE_SECRET_KEY) {
+    // online payment not switched on yet: the customer sends the order on WhatsApp — keep it in the panel
+    await recordOrder(env, { ...orderRow, id: "wa_" + crypto.randomUUID().slice(0, 13), status: "whatsapp" });
+    return json({ error: "not_configured" }, 503);
+  }
   const session = await stripe(env, "POST", "checkout/sessions", {
     mode: "payment",
     locale: STRIPE_LOCALE[lang],
@@ -208,6 +223,7 @@ async function createCheckout(request, env) {
     }
   });
 
+  await recordOrder(env, { ...orderRow, id: session.id, status: "pending" });
   return json({ url: session.url });
 }
 
@@ -217,6 +233,7 @@ async function checkSession(request, url, env) {
   if (!env.STRIPE_SECRET_KEY || !/^cs_(test|live)_[A-Za-z0-9]{10,200}$/.test(id)) return json({ paid: false }, 400);
   try {
     const s = await stripe(env, "GET", "checkout/sessions/" + id);
+    if (s.payment_status === "paid") await markPaid(env, id);
     return json({ paid: s.payment_status === "paid", ref: id.slice(-8).toUpperCase(), amount: (s.amount_total || 0) / 100 });
   } catch {
     return json({ paid: false }, 404);
@@ -235,6 +252,14 @@ export default {
         if (url.pathname === "/api/session") {
           if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { allow: "GET" });
           return await checkSession(request, url, env);
+        }
+        if (url.pathname === "/api/overrides") {
+          if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { allow: "GET" });
+          return json({ overrides: await getOverrides(env).catch(() => ({})) }, 200, { "cache-control": "public, max-age=20" });
+        }
+        if (url.pathname === "/api/admin" || url.pathname.startsWith("/api/admin/")) {
+          if (limited(request, "adm", 240, 60_000)) return json({ error: "too_many_requests" }, 429, { "retry-after": "60" });
+          return await handleAdmin(request, env, url, { json, sameOrigin, catalogue: () => CATALOGUE, stripe });
         }
         return json({ error: "not_found" }, 404);
       } catch (e) {

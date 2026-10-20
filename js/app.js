@@ -738,6 +738,18 @@
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   applyLang();
+  // live price / stock changes made in the admin panel
+  fetch("/api/overrides").then(r => r.ok ? r.json() : null).then(d => {
+    const ov = d && d.overrides; if (!ov || !Object.keys(ov).length) return;
+    P.forEach(p => { if (!p.isGroup) window.BB.applyOverride(p, ov[p.id]); });
+    P.forEach(g => { if (g.isGroup) {
+      const vs = g.variants.map(id => byId[id]);
+      const ps = vs.filter(v => v.available !== false && v.price > 0).map(v => v.price);
+      if (ps.length) g.price = Math.min(...ps);
+      g.promo = vs.some(v => v.was); } });
+    Object.keys(cart).forEach(id => { if (byId[id] && byId[id].available === false) delete cart[id]; });
+    save(); applyLang();
+  }).catch(() => {});
   if (droppedOos.length) setTimeout(() => toast(`${droppedOos.join(", ")} ${t("removed_oos")}`), 600);
   handleReturn();
 })();

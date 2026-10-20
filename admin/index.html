@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel BrazaBrazil</title>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<!-- ===== Login ===== -->
+<section class="login" id="login" hidden>
+  <form class="login__card" id="loginForm" autocomplete="on">
+    <img src="/assets/logo.png" alt="BrazaBrazil" width="86" height="97">
+    <h1>Painel administrativo</h1>
+    <p class="muted">Acesso restrito à equipe BrazaBrazil.</p>
+    <label class="fld"><span>Usuário</span><input id="lgUser" name="username" autocomplete="username" required></label>
+    <label class="fld"><span>Senha</span><input id="lgPass" name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn btn--primary" type="submit" id="lgBtn">Entrar</button>
+    <p class="err" id="lgErr" role="alert"></p>
+  </form>
+</section>
+
+<!-- ===== Setup notice (database not linked yet) ===== -->
+<section class="login" id="setup" hidden>
+  <div class="login__card">
+    <img src="/assets/logo.png" alt="BrazaBrazil" width="86" height="97">
+    <h1>Banco de dados não conectado</h1>
+    <p class="muted">O painel precisa do banco <b>brazabrazil-admin</b> (Cloudflare D1) ligado ao site. Assim que ele for conectado, esta página abre o login.</p>
+  </div>
+</section>
+
+<!-- ===== App ===== -->
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <a class="side__brand" href="/" target="_blank" rel="noopener"><img src="/assets/logo.png" alt="" width="40" height="45"><span>BrazaBrazil<small>Painel admin</small></span></a>
+    <nav class="side__nav" id="nav">
+      <button data-view="overview" aria-current="page">Visão geral</button>
+      <button data-view="orders">Pedidos <b class="badge" id="badgeOrders" hidden></b></button>
+      <button data-view="products">Produtos & preços</button>
+      <button data-view="finance">Financeiro</button>
+      <button data-view="customers">Clientes</button>
+      <button data-view="reports">Relatórios</button>
+      <button data-view="activity">Atividade</button>
+      <button data-view="settings">Configurações</button>
+    </nav>
+    <div class="side__foot"><span id="meUser"></span><button class="link" id="logout">Sair</button></div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <h1 id="viewTitle">Visão geral</h1>
+      <div class="top__tools">
+        <label class="sr" for="period">Período</label>
+        <select id="period">
+          <option value="today">Hoje</option>
+          <option value="7">Últimos 7 dias</option>
+          <option value="30" selected>Últimos 30 dias</option>
+          <option value="month">Este mês</option>
+          <option value="lastmonth">Mês passado</option>
+          <option value="365">Últimos 12 meses</option>
+          <option value="all">Tudo</option>
+        </select>
+        <button class="btn" id="refresh" title="Atualizar dados">Atualizar</button>
+      </div>
+    </header>
+    <div class="alert" id="pwAlert" hidden>Você ainda usa a senha inicial. <button class="link" data-goto="settings">Trocar agora</button></div>
+    <div class="alert alert--info" id="stripeAlert" hidden>Pagamento online ainda não ativado (falta a chave do Stripe). Os pedidos chegam como <b>WhatsApp</b> e você marca como pagos aqui.</div>
+
+    <section class="view" id="v-overview"></section>
+    <section class="view" id="v-orders" hidden></section>
+    <section class="view" id="v-products" hidden></section>
+    <section class="view" id="v-finance" hidden></section>
+    <section class="view" id="v-customers" hidden></section>
+    <section class="view" id="v-reports" hidden></section>
+    <section class="view" id="v-activity" hidden></section>
+    <section class="view" id="v-settings" hidden></section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
