@@ -136,7 +136,7 @@ window.GROUPS.candy = [
     { en: "Brazilian peanut sweet", pt: "Paçoca de amendoim", es: "Dulce de cacahuete" },
     { en: "Traditional crumbly peanut sweet.", pt: "Paçoca tradicional de amendoim.", es: "Dulce de cacahuete tradicional." },
     [["pacoca-rolha", "Rolha · pote 210 g", 4.50, "pacoca-rolha"], ["pacoca-ret", "Retangular · display", 5.99, "pacoca-ret"]], { tags: ["gf"] });
-  G("dadinho", "Dadinho", "brasil",
+  G("dadinho-doces", "Dadinho", "brasil",
     { en: "Peanut sweets since 1954", pt: "Doces de amendoim desde 1954", es: "Dulces de cacahuete desde 1954" },
     { en: "The famous Dadinho peanut sweets.", pt: "Os famosos docinhos de amendoim Dadinho.", es: "Los famosos dulces de cacahuete Dadinho." },
     [["dadinho-sortidos", "Doces sortidos · 600 g", 4.99, "dadinho-sortidos"], ["dadinho-pacoca", "Paçoca quadrada · caixa 800 g", 10.80, "dadinho-pacoca"]], { tags: ["gf"] });
