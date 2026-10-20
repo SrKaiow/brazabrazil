@@ -76,9 +76,21 @@ window.GROUPS.kitchen = [
     { en: "Mini non-stick couscous steamer", pt: "Mini cuscuzeira antiaderente", es: "Mini cuscusera antiadherente" },
     { en: "Non-stick mini steamer with glass lid — the perfect cuscuz for one or two.", pt: "Mini cuscuzeira antiaderente com tampa de vidro — cuscuz na medida para 1 ou 2.", es: "Mini cuscusera antiadherente con tapa de vidrio." },
     [["mini-cuscuzeira-preta", "Preta", 18.99, "mini-cuscuzeira-preta"], ["mini-cuscuzeira-vermelha", "Vermelha", 18.99, "mini-cuscuzeira-vermelha"]]);
-  S("jogo-facas-4", "Jogo de Facas Tramontina Plenus · 4 pç", "cozinha", 19.00, "jogo-facas-4",
-    { en: "Knife & fork set · 4 pieces", pt: "Jogo de faca e garfo · 4 peças", es: "Juego de cuchillos y tenedor · 4 piezas" },
-    { en: "Chef, boning and vegetable knives plus carving fork — made in Brazil.", pt: "Faca do chef, desossa, legumes e garfo trinchante — feito no Brasil.", es: "Cuchillo de chef, deshuesador, verduras y tenedor trinchante." });
+  G("jogo-facas", "Jogo de Facas Tramontina", "cozinha",
+    { en: "Kitchen knife set", pt: "Jogo de facas de cozinha", es: "Juego de cuchillos de cocina" },
+    { en: "Tramontina knife sets made in Brazil — for meat, vegetables, bread and more.", pt: "Jogos de facas Tramontina feitos no Brasil — para carne, legumes, pão e mais.", es: "Juegos de cuchillos Tramontina hechos en Brasil." },
+    [["kit-colorido", "Plenus colorido · 6 pç", 17.60, "kit-colorido"], ["jogo-facas-4", "Plenus preto · 4 pç (com garfo)", 19.00, "jogo-facas-4"]]);
+  S("pedra-amolar", "Pedra de Amolar Faca", "cozinha", 3.99, "pedra-amolar",
+    { en: "Knife sharpening stone", pt: "Pedra para afiar facas", es: "Piedra de afilar cuchillos" },
+    { en: "Double-sided sharpening stone — keep your knives butcher-sharp.", pt: "Pedra dupla face — faca sempre afiada como de açougue.", es: "Piedra de doble cara — cuchillos siempre afilados." });
+  G("pilao", "Pilão Socador de Alho", "cozinha",
+    { en: "Wooden pestle & mortar", pt: "Pilão de madeira para alho", es: "Mortero de madera" },
+    { en: "Crush garlic and salt the Brazilian way for the perfect tempero.", pt: "Soque alho e sal do jeito brasileiro para o tempero perfeito.", es: "Machaca ajo y sal para el aliño perfecto." },
+    [["pilao-bambu", "Bamboo", 10.99, "pilao-bambu"], ["pilao-madeira", "Madeira", 10.99, "pilao-madeira"], ["pilao-grande", "Madeira · grande", 18.99, "pilao-grande"]]);
+  G("panela-pressao", "Panela de Pressão Tramontina", "cozinha",
+    { en: "Non-stick pressure cooker", pt: "Panela de pressão antiaderente", es: "Olla a presión antiadherente" },
+    { en: "Cooks feijão, ribs and stews in a fraction of the time — with safety valve.", pt: "Feijão, costela e cozidos em muito menos tempo — com válvula de segurança.", es: "Frijoles, costillas y guisos en mucho menos tiempo." },
+    [["pressao-45", "4,5 L", 49.90, "pressao-45"], ["pressao-6", "6 L", 65.00, "pressao-6"]]);
 
   /* ---------- COFFEE & WATER FILTERS ---------- */
   G("melitta-filtro", "Filtro de Papel Melitta · 30 un", "cafe",
@@ -96,6 +108,13 @@ window.GROUPS.kitchen = [
     { en: "Vacuum flask for coffee", pt: "Garrafa térmica para café", es: "Termo para café" },
     { en: "Keeps the cafezinho hot for hours.", pt: "Mantém o cafezinho quente por horas.", es: "Mantiene el café caliente durante horas." },
     [["garrafa-bege", "Bege", 19.90, "garrafa-bege"], ["garrafa-preta", "Preta", 19.90, "garrafa-preta"], ["garrafa-preta-1l", "Preta de pressão · 1 L", 32.50, "garrafa-preta-1l"]]);
+  S("torneira-filtro", "Torneira para Filtro de Barro São Pedro", "cafe", 3.50, "torneira-filtro",
+    { en: "Replacement tap for clay water filter", pt: "Torneira de reposição para filtro de barro", es: "Grifo de repuesto para filtro de barro" },
+    { en: "Spare tap that fits São Pedro and most Brazilian clay filters.", pt: "Torneira de reposição para filtro São Pedro e similares.", es: "Grifo de repuesto para filtros de barro brasileños." });
+  G("vela-filtro", "Vela para Filtro de Barro", "cafe",
+    { en: "Replacement ceramic filter candle", pt: "Vela de reposição para filtro", es: "Vela cerámica de repuesto" },
+    { en: "Replace every 6 months for pure, great-tasting water.", pt: "Troque a cada 6 meses para uma água sempre pura e saborosa.", es: "Cambiar cada 6 meses para un agua pura." },
+    [["vela-simples", "Vela simples", 13.97, "vela-filtro"], ["vela-stefani", "Stefani tradicional", 13.99, "vela-stefani"], ["vela-tripla", "Elite São Pedro · tripla ação (carvão + prata)", 14.99, "vela-tripla"]]);
   G("filtro-barro", "Filtro de Barro São Pedro", "cafe",
     { en: "Brazilian clay water filter", pt: "Filtro de barro", es: "Filtro de agua de barro" },
     { en: "The famous Brazilian clay water filter — keeps water naturally cool and pure.", pt: "O famoso filtro de barro brasileiro — água sempre fresquinha e filtrada.", es: "El famoso filtro de barro brasileño — agua fresca y filtrada." },
@@ -109,6 +128,14 @@ window.GROUPS.kitchen = [
   S("churrasqueira-barril", "Churrasqueira Barril Tramontina", "churrasco", 80.00, "churrasqueira-barril",
     { en: "Stainless-steel barrel charcoal grill", pt: "Churrasqueira a carvão em aço inox", es: "Parrilla de carbón tipo barril" },
     { en: "Portable charcoal barrel grill — perfect for the garden churrasco.", pt: "Churrasqueira barril a carvão, portátil — perfeita para o churrasco no quintal.", es: "Parrilla de carbón portátil — perfecta para el jardín." });
+
+  S("espetos-bambu", "Espetos de Bambu Bompack · 25 cm", "churrasco", 2.50, "espetos-bambu",
+    { en: "Bamboo skewers · 50 pcs", pt: "Palitos de bambu para espetinho · 50 un", es: "Brochetas de bambú · 50 un" },
+    { en: "For espetinhos, kebabs and party snacks.", pt: "Para espetinhos de churrasco e petiscos.", es: "Para brochetas y aperitivos." });
+  G("kit-churrasco", "Kit Churrasco Tramontina · faca e garfo", "churrasco",
+    { en: "Barbecue carving set · knife & fork", pt: "Jogo para churrasco · faca e garfo trinchante", es: "Juego para asado · cuchillo y tenedor" },
+    { en: "Carving knife and fork with wooden handles — the churrasqueiro’s essentials.", pt: "Faca e garfo trinchante com cabo de madeira — o essencial do churrasqueiro.", es: "Cuchillo y tenedor trinchante con mango de madera." },
+    [["kit-churrasco-2", "Natural wood · 2 pç", 19.00, "kit-churrasco-2"], ["faca-garfo-madeira", "Polywood vermelho · 2 pç", 25.00, "faca-garfo-madeira"]]);
 
   const order = window.GROUPS.kitchen.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));

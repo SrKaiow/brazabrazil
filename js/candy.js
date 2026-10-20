@@ -62,9 +62,10 @@ window.GROUPS.candy = [
   S("mms", "M&M’s Chocolate", "chocolates", 1.50, "mms",
     { en: "Milk chocolate candies", pt: "Confeitos de chocolate", es: "Grageas de chocolate" },
     { en: "Colourful candy-coated milk chocolate.", pt: "Chocolate ao leite com cobertura colorida.", es: "Chocolate con leche con cobertura de colores." });
-  S("chocottone", "Chocottone Bauducco Trufa · 450 g", "chocolates", 9.99, "chocottone",
-    { en: "Chocolate-chip panettone with truffle filling", pt: "Panetone com gotas de chocolate e recheio trufado", es: "Panettone con chocolate y relleno de trufa" },
-    { en: "Bauducco’s famous chocottone — soft, naturally fermented, with chocolate chips and a rich truffle filling.", pt: "O famoso Chocottone Bauducco — fofinho, fermentação natural, com gotas de chocolate e recheio sabor trufa.", es: "El famoso chocottone de Bauducco — esponjoso, con pepitas de chocolate y relleno de trufa." });
+  G("panetone-bauducco", "Panettone Bauducco", "chocolates",
+    { en: "Brazilian panettone", pt: "Panetone", es: "Panettone" },
+    { en: "Bauducco’s famous naturally fermented panettone — classic with fruits or the chocolate Chocottone with truffle filling.", pt: "O famoso panetone Bauducco de fermentação natural — tradicional com frutas ou o Chocottone recheado sabor trufa.", es: "El famoso panettone Bauducco — clásico con frutas o Chocottone relleno de trufa." },
+    [["panettone", "Tradicional com frutas · 400 g", 9.99, "panettone"], ["chocottone", "Chocottone recheio trufa · 450 g", 9.99, "chocottone"]]);
 
   /* ---------- GUM, MINTS & LOLLIPOPS ---------- */
   S("pastilha-hortela", "Pastilha Garoto Hortelã", "balas", 0.80, "pastilha-hortela",

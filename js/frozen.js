@@ -54,9 +54,10 @@ window.GROUPS.frozen = [
   S("rez-chipa", "Chipa Rez", "cheesebread", 12.99, "rez-chipa",
     { en: "Cheese biscuit rings · 20 units", pt: "Biscoito de queijo · 20 unidades", es: "Chipá de queso · 20 unidades" },
     { en: "Crunchy outside, cheesy inside — bake from frozen.", pt: "Crocante por fora, queijo por dentro — direto do freezer.", es: "Crujiente por fuera, con queso por dentro — del congelador al horno." }, { tags: ["frozen", "gf"] });
-  S("pao-frances", "Pão Francês", "cheesebread", 5.99, "pao-frances",
-    { en: "Brazilian bread rolls · part-baked pack", pt: "Pacote · pré-assado", es: "Panecillos brasileños · precocidos" },
-    { en: "Crusty Brazilian rolls, from freezer to oven — like the padaria back home.", pt: "Pãozinho crocante do freezer direto para o forno — igual ao da padaria.", es: "Panecillos crujientes del congelador al horno — como en la panadería." });
+  G("pao-frances-g", "Pão Francês", "cheesebread",
+    { en: "Brazilian bread rolls", pt: "Pãozinho francês", es: "Panecillos brasileños" },
+    { en: "Crusty Brazilian rolls — like the padaria back home. Buy by the roll or a part-baked pack to bake at home.", pt: "Pãozinho crocante igual ao da padaria — por unidade ou no pacote pré-assado para assar em casa.", es: "Panecillos crujientes como en la panadería — por unidad o en paquete precocido." },
+    [["pao-frances-un", "Unidade", 0.85, "pao-frances-un"], ["pao-frances", "Pacote pré-assado", 5.99, "pao-frances"]]);
 
   /* ---------- AÇAÍ & FRUIT PULPS ---------- */
   G("acai-polpanorte", "Açaí Polpa Norte com Guaraná", "acai",

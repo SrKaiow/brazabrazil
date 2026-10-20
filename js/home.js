@@ -127,6 +127,10 @@ window.GROUPS.home = [
     { en: "Kids’ curly hair kit", pt: "Kit infantil para cachinhos", es: "Kit infantil para rizos" },
     { en: "Gentle hydrating line for children’s curls — coconut oil, aloe vera and vitamins.", pt: "Linha suave para cachinhos — óleo de coco, aloe vera e vitaminas.", es: "Línea suave para rizos infantiles." });
 
+  S("sos-cachos", "Salon Line S.O.S Cachos Óleo de Manga · 500 g", "cabelo", 14.99, "sos-cachos",
+    { en: "Curl activator · mango oil", pt: "Ativador de cachos · óleo de manga", es: "Activador de rizos · aceite de mango" },
+    { en: "Ultra-hydrating curl activator for defined, frizz-free curls.", pt: "Ativador de cachos ultra-hidratante — definição, brilho e antifrizz.", es: "Activador de rizos ultrahidratante, sin frizz." });
+
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
   out.forEach(p => { if (p.isGroup) p.price = Math.min(...p.variants.map(v => byId[v].price)); });
   const order = window.GROUPS.home.map(g => g.id);
