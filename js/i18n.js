@@ -207,6 +207,7 @@ window.I18N = {
   tag_ie: { en: "🇮🇪 Irish", "pt-BR": "🇮🇪 Irlanda", "pt-PT": "🇮🇪 Irlanda", es: "🇮🇪 Irlanda" },
   tag_au: { en: "🇦🇺 Australian", "pt-BR": "🇦🇺 Austrália", "pt-PT": "🇦🇺 Austrália", es: "🇦🇺 Australia" },
   tag_pl: { en: "🇵🇱 Polish", "pt-BR": "🇵🇱 Polônia", "pt-PT": "🇵🇱 Polónia", es: "🇵🇱 Polonia" },
+  cat_candy: { en: "Sweets & snacks", "pt-BR": "Doces & snacks", "pt-PT": "Doces & snacks", es: "Dulces y snacks" },
   cat_deli: { en: "Deli & smoked", "pt-BR": "Embutidos & defumados", "pt-PT": "Enchidos & fumados", es: "Embutidos y ahumados" },
   cat_frozen: { en: "Frozen", "pt-BR": "Congelados", "pt-PT": "Congelados", es: "Congelados" },
   tag_frozen: { en: "❄ Frozen", "pt-BR": "❄ Congelado", "pt-PT": "❄ Congelado", es: "❄ Congelado" },

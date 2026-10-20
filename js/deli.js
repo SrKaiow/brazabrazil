@@ -111,6 +111,6 @@ window.GROUPS.deli = [
   window.PRODUCTS.push(...out);
   window.CATEGORIES = window.CATEGORIES.filter(c => c !== "sausages");
   if (!window.CATEGORIES.includes("deli")) window.CATEGORIES.push("deli");
-  const ORDER = ["all", "beef", "pork", "deli", "frozen", "drinks"];
+  const ORDER = ["all", "beef", "pork", "deli", "frozen", "candy", "drinks"];
   window.CATEGORIES.sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
 })();
