@@ -47,6 +47,10 @@ window.GROUPS.candy = [
   S("figo-calda", "Figo em Calda Bom Princípio · 600 g", "brasil", 7.99, "figo-calda",
     { en: "Figs in syrup", pt: "Figo em calda", es: "Higos en almíbar" },
     { en: "Whole green figs in syrup — a traditional Brazilian dessert.", pt: "Figos inteiros em calda — sobremesa tradicional.", es: "Higos enteros en almíbar." }, { tags: ["gf", "vegan"] });
+  G("doce-leite", "Doce de Leite", "brasil",
+    { en: "Milk caramel spread (dulce de leche)", pt: "Doce de leite cremoso", es: "Dulce de leche" },
+    { en: "Creamy doce de leite — on toast, in cakes or straight from the spoon.", pt: "Doce de leite cremoso — no pão, no bolo ou de colher.", es: "Dulce de leche cremoso." },
+    [["dl-ipanema", "Ipanema", 4.99, "dl-ipanema"], ["dl-uai", "Uai Delícias · 300 g", 6.75, "dl-uai"], ["dl-gaucho", "Don Gaucho", 7.99, "dl-gaucho"]], { tags: ["gf"] });
   G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
     { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
     { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
@@ -236,6 +240,9 @@ window.GROUPS.candy = [
     { en: "Crunchy biscuit rings coated in real chocolate.", pt: "Rosquinhas crocantes cobertas de chocolate.", es: "Rosquillas crujientes bañadas en chocolate." },
     [["filipinos-leite", "Chocolate ao leite", 2.50, "filipinos-leite"], ["filipinos-branco", "Chocolate branco", 2.50, "filipinos-branco"]]);
   /* ---------- SNACKS ---------- */
+  S("fandangos", "Fandangos Elma Chips", "snacks", 2.50, "fandangos",
+    { en: "Baked corn snack", pt: "Salgadinho de milho assado", es: "Aperitivo de maíz" },
+    { en: "The classic Brazilian corn snack.", pt: "O clássico salgadinho de milho.", es: "El clásico aperitivo de maíz." });
   S("gulozitos", "Gulozitos", "snacks", 1.99, "gulozitos",
     { en: "Portuguese corn puffs", pt: "Salgadinho de milho", "pt-PT": "Aperitivo de milho", es: "Aperitivo de maíz" },
     { en: "The Portuguese childhood snack — crunchy corn puffs.", pt: "O salgadinho de infância português — crocante.", es: "El aperitivo de la infancia portuguesa." }, { tags: ["portuguese"] });

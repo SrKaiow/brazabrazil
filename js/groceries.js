@@ -115,7 +115,7 @@ window.GROUPS.groceries = [
   G("dona-benta", "Mistura para Bolo Dona Benta · 450 g", "bolos",
     { en: "Brazilian cake mix", pt: "Mistura para bolo caseiro", es: "Mezcla para bizcocho" },
     { en: "Fluffy home-style Brazilian cake — just add eggs, milk and oil.", pt: "Bolo caseiro fofinho — é só juntar ovos, leite e óleo.", es: "Bizcocho casero esponjoso — solo añade huevos, leche y aceite." },
-    [["db-aipim", "Aipim / macaxeira", 2.99, "db-aipim"], ["db-fuba", "Fubá", 2.99, "db-fuba"], ["db-laranja", "Laranja", 2.99, "db-laranja"], ["db-milho", "Milho", 2.99, "db-milho"]]);
+    [["db-aipim", "Aipim / macaxeira", 2.99, "db-aipim"], ["db-fuba", "Fubá", 2.99, "db-fuba"], ["db-coco", "Coco", 2.99, "db-coco"], ["db-laranja", "Laranja", 2.99, "db-laranja"], ["db-milho", "Milho", 2.99, "db-milho"]]);
   S("renata-abacaxi", "Mistura para Bolo Renata Abacaxi · 400 g", "bolos", 2.50, "renata-abacaxi",
     { en: "Pineapple cake mix", pt: "Mistura para bolo sabor abacaxi", es: "Mezcla para bizcocho de piña" },
     { en: "Moist pineapple cake, easy to make.", pt: "Bolo de abacaxi molhadinho e fácil de fazer.", es: "Bizcocho de piña jugoso y fácil." });
@@ -219,9 +219,10 @@ window.GROUPS.groceries = [
   S("guariroba", "Guariroba Fatiada Aroma D’Minas · 500 g", "geral", 10.99, "guariroba",
     { en: "Sliced bitter palm heart in brine", pt: "Conserva de guariroba", es: "Palmito amargo en conserva" },
     { en: "The bitter palm heart of Goiás — for rice, chicken and empadão.", pt: "O palmito amargo goiano — para arroz, frango e empadão.", es: "Palmito amargo de Goiás." });
-  S("azeite-gallo", "Azeite Gallo Subtil · 750 ml", "geral", 13.50, "azeite-gallo",
-    { en: "Portuguese olive oil", pt: "Azeite português", es: "Aceite de oliva portugués" },
-    { en: "Smooth Portuguese olive oil for cooking and bacalhau.", pt: "Azeite português suave para cozinhar e para o bacalhau.", es: "Aceite de oliva portugués suave." }, { tags: ["portuguese"] });
+  G("azeite", "Azeite", "geral",
+    { en: "Olive oil", pt: "Azeite de oliva", es: "Aceite de oliva" },
+    { en: "For cooking, salads and bacalhau.", pt: "Para cozinhar, saladas e bacalhau.", es: "Para cocinar, ensaladas y bacalao." },
+    [["azeite-ktc", "Extra virgem KTC · 250 ml", 5.50, "azeite-ktc"], ["azeite-gallo", "Gallo Subtil · 750 ml", 13.50, "azeite-gallo"]]);
   S("vinagre-gallo", "Vinagre de Sidra Gallo · 250 ml", "geral", 1.99, "vinagre-gallo",
     { en: "Apple cider vinegar", pt: "Vinagre de maçã", es: "Vinagre de sidra" },
     { en: "For salads and marinades.", pt: "Para saladas e marinadas.", es: "Para ensaladas y adobos." }, { tags: ["portuguese"] });
@@ -240,10 +241,10 @@ window.GROUPS.groceries = [
      ["farofa-zaeli", "Zaeli Calabresa · 500 g", 3.20, "farofa-zaeli"], ["farofa-yoki", "Yoki Tradicional · 400 g", 3.50, "farofa-yoki"],
      ["farofa-bomgosto", "Bom Gosto Tradicional · 300 g", 3.50, "farofa-bomgosto"], ["farofa-bomgosto-bacon", "Bom Gosto Bacon · 300 g", 3.70, "farofa-bomgosto-bacon"],
      ["farofa-yoki-milho", "Yoki de Milho · 400 g", 4.50, "farofa-yoki-milho"]], { tags: ["best"] });
-  G("farinha-mandioca", "Farinha de Mandioca Yoki · 500 g", "graos",
+  G("farinha-mandioca", "Farinha de Mandioca · 500 g", "graos",
     { en: "Cassava flour", pt: "Farinha de mandioca", es: "Harina de yuca" },
     { en: "For homemade farofa, pirão and to sprinkle on feijão.", pt: "Para farofa caseira, pirão e para pôr no feijão.", es: "Para farofa casera y pirão." },
-    [["farinha-torrada", "Torrada", 2.49, "farinha-torrada"], ["farinha-biju", "Flocada biju", 4.50, "farinha-biju"]], { tags: ["gf"] });
+    [["farinha-branca", "Yoki branca fina", 2.49, "farinha-branca"], ["farinha-torrada", "Yoki torrada", 2.49, "farinha-torrada"], ["farinha-deusa", "Deusa biju", 3.99, "farinha-deusa"], ["farinha-biju", "Yoki flocada biju", 4.50, "farinha-biju"]], { tags: ["gf"] });
   S("maizena", "Amido de Milho Maizena · 720 g", "bolos", 3.50, "maizena",
     { en: "Cornflour", pt: "Amido de milho", es: "Maicena" },
     { en: "For mingau, cakes, biscuits and thickening sauces.", pt: "Para mingau, bolos, biscoitos e engrossar molhos.", es: "Para natillas, bizcochos y espesar salsas." }, { tags: ["gf"] });
@@ -257,6 +258,33 @@ window.GROUPS.groceries = [
   S("feijoada-lata", "Feijoada à Brasileira Sabor a Mundo · 415 g", "conservas", 3.99, "feijoada-lata",
     { en: "Ready-made Brazilian feijoada · tinned", pt: "Feijoada pronta em lata", es: "Feijoada lista en lata" },
     { en: "Heat and serve in minutes — microwave or pan.", pt: "É só aquecer — micro-ondas ou panela.", es: "Calentar y servir." });
+  /* ---------- remessa farinhas / especiarias / chás ---------- */
+  S("milho-biju", "Farinha de Milho Biju Sinhá · 500 g", "graos", 3.50, "milho-biju",
+    { en: "Yellow corn flakes flour", pt: "Farinha de milho amarela flocada", es: "Harina de maíz en copos" },
+    { en: "For farofa de milho and cuscuz — crunchy golden flakes.", pt: "Para farofa de milho e cuscuz — flocos crocantes.", es: "Para farofa de maíz." }, { tags: ["gf"] });
+  S("puba", "Farinha Puba Líder · 500 g", "graos", 4.99, "puba",
+    { en: "Fermented cassava flour (puba)", pt: "Farinha de puba", es: "Harina de yuca fermentada" },
+    { en: "For bolo de puba and northern Brazilian recipes.", pt: "Para bolo de puba e receitas nordestinas.", es: "Para el bizcocho de puba." }, { tags: ["gf"] });
+  S("pao-ralado", "Pão Ralado Rialto · 1 kg", "graos", 3.80, "pao-ralado",
+    { en: "Breadcrumbs", pt: "Farinha de rosca", "pt-PT": "Pão ralado", es: "Pan rallado" },
+    { en: "For breaded steaks, coxinhas and croquettes.", pt: "Para empanar bife, coxinha e croquete.", es: "Para empanar." }, { tags: ["portuguese"] });
+  G("especiarias", "Especiarias Dom Duarte", "molhos",
+    { en: "Herbs & spices", pt: "Especiarias e temperos", es: "Especias" },
+    { en: "Portuguese herbs and spices for everyday cooking.", pt: "Especiarias portuguesas para o dia a dia.", es: "Especias portuguesas." },
+    [["acafrao", "Açafrão-da-índia (cúrcuma)", 1.99, "acafrao"], ["bicarbonato", "Bicarbonato de sódio", 1.99, "bicarbonato"],
+     ["oregano", "Orégano", 1.99, "oregano"], ["pimenta-preta", "Pimenta preta em grão", 2.80, "pimenta-preta"]], { tags: ["portuguese"] });
+  S("massa-alho", "Massa de Alho Dom Duarte", "molhos", 2.19, "massa-alho",
+    { en: "Garlic paste", pt: "Pasta de alho", "pt-PT": "Massa de alho", es: "Pasta de ajo" },
+    { en: "Ready garlic paste — season meat, rice and beans in seconds.", pt: "Alho pronto — tempere carne, arroz e feijão em segundos.", es: "Pasta de ajo lista." }, { tags: ["portuguese"] });
+  S("sriracha", "Sriracha Flying Goose · pack 3 sabores", "molhos", 10.99, "sriracha",
+    { en: "Sriracha mixed pack · Original, Mayoo & Super Hot", pt: "Kit sriracha · Original, Mayoo e Super Hot", es: "Pack sriracha · 3 sabores" },
+    { en: "Three Sriracha sauces in one pack.", pt: "Três molhos sriracha num só pack.", es: "Tres salsas sriracha en un pack." });
+  S("erva-mate", "Erva-Mate Barão de Cotegipe · 1 kg", "matinais", 3.99, "erva-mate",
+    { en: "Yerba mate for chimarrão", pt: "Erva-mate para chimarrão", es: "Yerba mate" },
+    { en: "Native yerba mate, vacuum-packed — for chimarrão and tereré.", pt: "Erva-mate nativa, embalada a vácuo — para chimarrão e tereré.", es: "Yerba mate nativa al vacío." }, { tags: ["vegan"] });
+  S("cha-cidreira", "Chá de Cidreira Dom Duarte · 20 saquetas", "matinais", 2.60, "cha-cidreira",
+    { en: "Lemon balm tea", pt: "Chá de erva-cidreira", es: "Infusión de melisa" },
+    { en: "Calming lemon balm infusion.", pt: "Infusão calmante de erva-cidreira.", es: "Infusión relajante de melisa." }, { tags: ["portuguese", "vegan"] });
   const SOON = new Set(["muenster", "llanero", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
