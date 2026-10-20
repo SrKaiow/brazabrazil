@@ -9,7 +9,7 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const money = n => S.currency + n.toFixed(2);
   const byId = Object.fromEntries(P.map(p => [p.id, p]));
-  const KG_STEP = 0.5;
+  const KG_STEP = 1;
   const store = {
     get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
     set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -645,7 +645,7 @@
     const n = bz.people, totalKg = n * (hungry ? .55 : .4);
     const avail = MIX.filter(([id]) => byId[id] && byId[id].available !== false);
     const share = avail.reduce((s, [, f]) => s + f, 0) || 1;
-    const items = avail.map(([id, f]) => [id, Math.max(.5, Math.round((totalKg * f / share) * 2) / 2)]);
+    const items = avail.map(([id, f]) => [id, Math.max(1, Math.round(totalKg * f / share))]);
     const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["rez-18", Math.ceil(n / 15)], ["salsicha-calabresa", Math.ceil(n / 8)]]
       .filter(([id]) => byId[id] && byId[id].available !== false);
     return { n, totalKg, items: items.concat(extra) };

@@ -27,8 +27,8 @@
     return { status: "out", fee: null, postcode };
   }
 
-  // quantity step: kg items 0.5 kg unless the product sets its own step
-  const step = p => p.step || (p.unit === "kg" ? 0.5 : 1);
+  // quantity step: whole kilos or whole units
+  const step = p => p.step || 1;
   // line total with multi-buy offers, e.g. multi: { n: 2, price: 5 } = "2 for £5"
   const lineTotal = (p, q) => {
     const m = p.multi;
