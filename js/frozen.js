@@ -66,11 +66,12 @@ window.GROUPS.frozen = [
     [["acai-200g", "200 g", 2.99, "acai-200g"], ["acai-500g", "500 g", 6.99, "acai-500g"], ["acai-1kg", "1,02 kg", 11.99, "acai-1kg"],
      ["acai-12kg", "1,2 kg", 14.99, "acai-12kg"], ["acai-3kg", "3,6 kg", 38.00, "acai-3kg"]],
     { tags: ["frozen", "best"] });
-  G("polpas", "Polpa de Fruta", "acai",
-    { en: "Frozen fruit pulp · 100 g", pt: "Polpa congelada · 100 g", es: "Pulpa de fruta congelada · 100 g" },
+  G("polpas", "Polpa de Fruta Polpa Norte", "acai",
+    { en: "Polpa Norte frozen fruit pulp · 100 g", pt: "Polpa congelada Polpa Norte · 100 g", es: "Pulpa de fruta congelada Polpa Norte · 100 g" },
     { en: "100% fruit pulp for juices, smoothies and desserts.", pt: "100% polpa de fruta para sucos, vitaminas e sobremesas.", es: "100% pulpa de fruta para zumos, batidos y postres." },
-    [["polpa-acai", "Açaí", 1.99, "polpa-acai"], ["polpa-maracuja", "Maracujá", 1.99, "polpa-maracuja"], ["brasfrut-cacau", "Cacau Brasfrut", 1.99, "brasfrut-cacau"],
-     ["brasfrut-cupuacu", "Cupuaçu Brasfrut", 1.99, "brasfrut-cupuacu"], ["polpa-cupuacu", "Cupuaçu Polpa Norte", 13.99, "polpa-cupuacu"]],
+    [["polpa-maracuja", "Maracujá", 1.99, "polpa-maracuja"], ["polpa-manga", "Manga", 0, "polpa-maracuja"],
+     ["polpa-caja", "Cajá", 0, "polpa-maracuja"], ["polpa-acerola", "Acerola", 0, "polpa-maracuja"],
+     ["polpa-cupuacu-1kg", "Cupuaçu · 1 kg", 0, "polpa-maracuja"]],
     { tags: ["frozen", "vegan"] });
   S("cupuacu", "Creme de Cupuaçu Polpa Norte", "acai", 9.99, "cupuacu",
     { en: "Cupuaçu cream · 1.02 kg", pt: "Creme de cupuaçu · 1,02 kg", es: "Crema de cupuaçu · 1,02 kg" },
@@ -131,8 +132,8 @@ window.GROUPS.frozen = [
      ["beths-enrolado-12", "Enroladinho de salsicha · 12 un", 5.99, "beths-enrolado-12"],
      ["beths-coxinha", "Coxinha de frango · 50 un", 19.90, "beths-coxinha"], ["beths-kibe", "Kibe · 50 un", 19.90, "beths-kibe"],
      ["beths-bolinha", "Bolinha 4 queijos · 50 un", 19.90, "beths-bolinha"], ["beths-enrolado", "Enrolado de salsicha · 50 un", 19.90, "beths-enrolado"]], { tags: ["frozen", "best"] });
-  S("croquete", "Croquete", "salgados", 3.50, "croquete",
-    { en: "Brazilian beef croquette", pt: "Croquete de carne", es: "Croqueta de carne" },
+  S("croquete", "Croquete de Carne Prosilar · 12 un", "salgados", 3.50, "croquete",
+    { en: "Meat croquettes · 12 units", pt: "Croquete de carne · 12 unidades", es: "Croquetas de carne · 12 unidades" },
     { en: "Crispy outside, tasty filling inside — fry or air-fry.", pt: "Crocante por fora, recheio saboroso — frito ou na air fryer.", es: "Crujiente por fuera, sabroso por dentro — frito o en freidora de aire." });
   S("dadinho", "Dadinho de Tapioca Sol", "salgados", 5.99, "dadinho",
     { en: "Tapioca cheesy dice · 300 g", pt: "Dadinho de tapioca · 300 g", es: "Dados de tapioca con queso · 300 g" },
@@ -179,11 +180,23 @@ window.GROUPS.frozen = [
   G("bacalhau-postas", "Bacalhau em Postas", "fish",
     { en: "Salt cod loins", pt: "Postas de bacalhau", es: "Lomos de bacalao" },
     { en: "Thick Portuguese cod loins — for bacalhau assado or à lagareiro.", pt: "Postas altas de bacalhau — para assado ou à lagareiro.", es: "Lomos gruesos de bacalao — al horno o a la lagareira." },
-    [["bacalhau-postas-lugrade", "Lugrade · 1 kg", 25.99, "bacalhau-postas-lugrade"], ["bacalhau-posta-brites", "Brites congelada · kg", 30.00, "bacalhau-posta-brites", "kg"]], { tags: ["frozen", "portuguese"] });
+    [["bacalhau-postas-lugrade", "Lugrade salgado seco · 1 kg", 25.99, "bacalhau-postas-lugrade"], ["bacalhau-posta-brites", "Brites congelada · kg", 30.00, "bacalhau-posta-brites", "kg"]], { tags: ["frozen", "portuguese"] });
 
+  S("pasteis-bacalhau", "Pastéis de Bacalhau Sr. Bacalhau · 360 g", "salgados", 0, "pasteis-bacalhau",
+    { en: "Portuguese codfish cakes", pt: "Pastéis de bacalhau", "pt-PT": "Pastéis de bacalhau", es: "Buñuelos de bacalao" },
+    { en: "Traditional recipe — fry from frozen until golden.", pt: "Receita tradicional — frite direto do congelador até dourar.", es: "Receta tradicional — freír desde congelado." }, { tags: ["frozen", "portuguese"] });
+  G("geladinho", "Geladinho Gourmet Icy Love", "sweets",
+    { en: "Brazilian gourmet ice lollies", pt: "Geladinho gourmet · vários sabores", es: "Helados caseros brasileños" },
+    { en: "Creamy Brazilian geladinhos (sacolé / chup-chup) — lots of flavours.", pt: "Geladinho cremoso (sacolé / chup-chup) — vários sabores.", es: "Helados cremosos brasileños — muchos sabores." },
+    [["gel-maracuja", "Maracujá", 0, "geladinho"], ["gel-leite-condensado", "Leite condensado", 0, "geladinho"], ["gel-morango-nutella", "Morango com Nutella", 0, "geladinho"],
+     ["gel-pudim", "Pudim de leite condensado", 0, "geladinho"], ["gel-coco-queimado", "Coco queimado", 0, "geladinho"], ["gel-acai-ninho", "Açaí com Ninho", 0, "geladinho"],
+     ["gel-ninho-morango", "Ninho com morango", 0, "geladinho"], ["gel-abacate", "Abacate", 0, "geladinho"], ["gel-ninho-nutella", "Ninho com Nutella", 0, "geladinho"],
+     ["gel-doce-leite", "Doce de leite", 0, "geladinho"]]);
+  const SOON = new Set(["polpa-manga", "polpa-caja", "polpa-acerola", "polpa-cupuacu-1kg", "pasteis-bacalhau", "geladinho", "gel-maracuja", "gel-leite-condensado", "gel-morango-nutella", "gel-pudim", "gel-coco-queimado", "gel-acai-ninho", "gel-ninho-morango", "gel-abacate", "gel-ninho-nutella", "gel-doce-leite"]);
+  out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   // sort: by group order, then lowest price (groups use their cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
-  out.forEach(p => { if (p.isGroup) p.price = Math.min(...p.variants.map(v => byId[v].price)); });
+  out.forEach(p => { if (p.isGroup) { const ps = p.variants.map(v => byId[v].price).filter(x => x > 0); p.price = ps.length ? Math.min(...ps) : 0; } });
   const order = window.GROUPS.frozen.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
 

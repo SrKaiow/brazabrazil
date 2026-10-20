@@ -44,6 +44,23 @@ window.GROUPS.groceries = [
     { en: "Portuguese butter", pt: "Manteiga portuguesa", es: "Mantequilla portuguesa" },
     { en: "Creamy Portuguese butter for bread, pão na chapa and cooking.", pt: "Manteiga portuguesa cremosa para o pão, pão na chapa e cozinhar.", es: "Mantequilla portuguesa cremosa." },
     [["manteiga-mimosa", "Mimosa tradicional com sal", 4.20, "manteiga-mimosa"], ["manteiga-matinal", "Matinal magra · −45% gordura", 4.99, "manteiga-matinal"]], { tags: ["portuguese"] });
+  S("muenster", "Queijo Muenster Paisa · 283 g", "laticinios", 0, "muenster",
+    { en: "Muenster cheese", pt: "Queijo muenster", es: "Queso Muenster" },
+    { en: "Mild, creamy and great for melting.", pt: "Suave, cremoso e ótimo para derreter.", es: "Suave, cremoso e ideal para fundir." });
+  S("llanero", "Queso Llanero Paisa · 283 g", "laticinios", 0, "llanero",
+    { en: "Venezuelan-style hard cheese", pt: "Queijo duro estilo venezuelano", es: "Queso duro estilo venezolano" },
+    { en: "Salty and firm — for arepas, cachapas and grating.", pt: "Salgado e firme — para arepas e para ralar.", es: "Salado y firme — para arepas y cachapas." });
+  S("requeijao-mabiju", "Requeijão Cremoso Mabiju · 220 g", "laticinios", 0, "requeijao-mabiju",
+    { en: "Brazilian cream cheese spread", pt: "Requeijão cremoso", es: "Queso crema brasileño" },
+    { en: "The creamy requeijão Brazilians love on bread and in recipes.", pt: "O requeijão cremoso para o pão e as receitas.", es: "El requeijão cremoso para el pan y recetas." });
+  G("tang", "Refresco em Pó Tang · 18 g", "geral",
+    { en: "Powdered drink mix · makes 1 L", pt: "Refresco em pó · faz 1 litro", es: "Refresco en polvo · rinde 1 L" },
+    { en: "The classic Brazilian powdered juice — just add water. Lots of flavours.", pt: "O clássico suco em pó — é só misturar com água. Vários sabores.", es: "El clásico refresco en polvo — solo añade agua." },
+    [["tang-abacaxi", "Abacaxi", 1.50, "tang-abacaxi"], ["tang-goiaba", "Goiaba", 1.50, "tang-goiaba"], ["tang-laranja", "Laranja", 1.50, "tang-laranja"],
+     ["tang-limao", "Limão", 1.50, "tang-limao"], ["tang-manga", "Manga", 1.50, "tang-manga"], ["tang-maracuja", "Maracujá", 1.50, "tang-maracuja"],
+     ["tang-morango", "Morango", 1.50, "tang-morango"], ["tang-tangerina", "Tangerina", 1.50, "tang-tangerina"], ["tang-uva", "Uva", 1.50, "tang-uva"]]);
+  const SOON = new Set(["muenster", "llanero", "requeijao-mabiju"]);
+  out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
   window.PRODUCTS.push(...out);

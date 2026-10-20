@@ -158,7 +158,7 @@
     const out = g.isGroup ? g.variants.every(id => byId[id].available === false) : p.available === false;
     const optsHtml = g.isGroup ? `<label class="opt"><span>${t("opt_choose")}</span><select data-group="${g.id}">${g.variants.map(id => {
       const v = byId[id];
-      return `<option value="${id}"${id === p.id ? " selected" : ""}${v.available === false ? " disabled" : ""}>${v.optionLabel} — ${money(v.price)}${v.available === false ? " · " + t("out") : ""}</option>`;
+      return `<option value="${id}"${id === p.id ? " selected" : ""}${v.available === false ? " disabled" : ""}>${v.optionLabel} — ${v.soon ? t("soon") : money(v.price) + (v.available === false ? " · " + t("out") : "")}</option>`;
     }).join("")}</select></label>` : "";
     const media = p.image ? `<img src="${p.image}" alt="${p.name} — ${pick(p.sub)}" loading="lazy">` : icon(p.cat);
     return `

@@ -29,9 +29,6 @@ window.GROUPS.pork = [
     K("bisteca", "Bisteca de Porco", "cuts", 7.50, "kg", "bisteca",
       { en: "Pork striploin chops", pt: "Bisteca suína", "pt-PT": "Costeletas de porco", es: "Chuletas de cerdo" },
       { en: "Juicy chops for the frying pan or grill.", pt: "Bistecas suculentas para frigideira ou grelha.", es: "Chuletas jugosas para la sartén o la parrilla." }),
-    K("costelinha-sem-barriga", "Costelinha de Porco sem Barriga", "cuts", 7.99, "kg", "costelinha-sem-barriga",
-      { en: "Trimmed pork ribs · no belly", pt: "Costelinha limpa, sem barriga", es: "Costillar de cerdo sin panceta" },
-      { en: "Lean, trimmed ribs — perfect for barbecue ribs.", pt: "Costelinha magra e limpa — perfeita para costelinha barbecue.", es: "Costillar magro y limpio — perfecto para costillas a la barbacoa." }),
 
     /* ---------- FEIJOADA & STEWS ---------- */
     K("joelho", "Joelho de Porco", "feijoada", 6.99, "kg", "joelho",

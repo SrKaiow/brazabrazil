@@ -34,21 +34,10 @@ window.GROUPS.deli = [
   G("salsicha-prisca", "Salsicha Prisca", "linguicas",
     { en: "Brazilian BBQ sausage · Prisca", pt: "Salsicha para churrasco · Prisca", es: "Salchicha para barbacoa · Prisca" },
     { en: "Juicy Brazilian-style sausages made for the grill.", pt: "Salsichas suculentas no estilo brasileiro, feitas para a brasa.", es: "Salchichas jugosas estilo brasileño, hechas para la brasa." },
-    [["salsicha-calabresa", "Calabresa", 3.99, "salsicha-calabresa"], ["salsicha-crioula", "Crioula", 3.99, "salsicha-crioula"]], { tags: ["best"] });
+    [["salsicha-calabresa", "Calabresa", 3.99, "salsicha-calabresa"], ["salsicha-crioula", "Crioula", 3.99, "salsicha-crioula"], ["salsicha-toscana", "Toscana BBQ", 0, "salsicha-toscana"]], { tags: ["best"] });
   S("linguica-calabresa-prisca", "Linguiça Calabresa Prisca", "linguicas", 5.50, "linguica-calabresa-prisca",
     { en: "Smoked calabresa sausage", pt: "Calabresa defumada", es: "Longaniza calabresa ahumada" },
     { en: "Smoked and lightly spicy — fry with onions or add to feijoada.", pt: "Defumada e levemente picante — acebolada ou na feijoada.", es: "Ahumada y ligeramente picante — con cebolla o en feijoada." });
-  G("linguica-fresca", "Linguiça Fresca · por kg", "linguicas",
-    { en: "Fresh Brazilian sausages · sold by weight", pt: "Linguiças frescas · vendidas a peso", es: "Longanizas frescas · al peso" },
-    { en: "Fresh Brazilian-style sausages for the churrasco — choose your flavour and the weight you need.", pt: "Linguiças frescas para o churrasco — escolha o sabor e o peso que precisa.", es: "Longanizas frescas para el churrasco — elige sabor y peso." },
-    [["lf-fina", "Tradicional fina", 10.99, "lf-fina", "kg"],
-     ["lf-toscana", "Tradicional toscana", 10.99, "lf-toscana", "kg"],
-     ["lf-frango", "Frango", 10.99, "lf-frango", "kg"],
-     ["lf-frango-cs", "Frango (chicken sausage)", 11.99, "lf-frango-cs", "kg"],
-     ["lf-porco-jlp", "Porco JLP", 11.99, "lf-porco-jlp", "kg"],
-     ["lf-apimentada", "Porco apimentada", 11.99, "lf-apimentada", "kg"],
-     ["lf-porco-queijo", "Porco e queijo", 12.99, "lf-porco-queijo", "kg"],
-     ["lf-costela-bacon", "Costela e bacon", 12.99, "lf-costela-bacon", "kg"]], { unit: "kg", tags: ["best"] });
   G("linguica-topking-g", "Linguiça Top King Gourmet · 1 kg", "linguicas",
     { en: "Premium gourmet sausages · 1 kg pack", pt: "Linguiça gourmet premium · pacote 1 kg", es: "Longaniza gourmet premium · paquete 1 kg" },
     { en: "Top King premium Brazilian-style sausages — six flavours made for the grill.", pt: "Linguiças premium Top King no estilo brasileiro — vários sabores feitos para a brasa.", es: "Longanizas premium Top King — varios sabores para la brasa." },
@@ -101,26 +90,34 @@ window.GROUPS.deli = [
   S("costela-defumada", "Costela de Porco Defumada", "defumados", 13.99, "costela-defumada",
     { en: "Smoked pork ribs · per kg", pt: "Costela suína defumada · por kg", es: "Costillas de cerdo ahumadas · por kg" },
     { en: "Essential for feijoada and feijão tropeiro.", pt: "Essencial na feijoada e no feijão tropeiro.", es: "Imprescindible en la feijoada." }, { unit: "kg" });
-  S("bacon", "Bacon Defumado", "defumados", 14.90, "bacon",
-    { en: "Smoked bacon slab · per kg", pt: "Bacon defumado em manta · por kg", es: "Panceta ahumada · por kg" },
+  S("bacon", "Bacon Extra Slices JLP", "defumados", 14.90, "bacon",
+    { en: "Smoked bacon slices · per kg", pt: "Bacon defumado em fatias · por kg", es: "Panceta ahumada en lonchas · por kg" },
     { en: "Smoky bacon for farofa, feijão and everything else.", pt: "Bacon defumado para farofa, feijão e tudo mais.", es: "Panceta ahumada para farofa, frijoles y más." }, { unit: "kg" });
   S("carne-salgada", "Carne Salgada", "defumados", 14.99, "carne-salgada",
     { en: "Salted beef (carne seca) · per kg", pt: "Carne seca · por kg", es: "Carne salada · por kg" },
     { en: "Desalt overnight — for feijoada, escondidinho and paçoca.", pt: "Dessalgue de véspera — para feijoada, escondidinho e paçoca.", es: "Desalar la víspera — para feijoada y escondidinho." }, { unit: "kg" });
 
+  S("orelheira", "Orelheira Fumada Terras do Demo", "defumados", 0, "orelheira",
+    { en: "Smoked boneless pork head", pt: "Orelheira defumada", "pt-PT": "Orelheira fumada", es: "Cabeza de cerdo ahumada" },
+    { en: "Traditional Portuguese smoked orelheira — for feijoada and cozido.", pt: "Orelheira defumada tradicional — para feijoada e cozido.", es: "Oreja de cerdo ahumada tradicional." }, { tags: ["portuguese"] });
+  S("hotdog-ipanema", "Salsicha Hot Dog Ipanema · 186 g", "linguicas", 0, "hotdog-ipanema",
+    { en: "Brazilian hot dog sausages", pt: "Salsicha para cachorro-quente", es: "Salchichas para perrito caliente" },
+    { en: "The real taste of a Brazilian cachorro-quente.", pt: "O sabor do cachorro-quente brasileiro.", es: "El sabor del perrito caliente brasileño." });
+
   /* ---------- FEIJOADA ---------- */
-  G("kit-feijoada", "Kit Feijoada", "feijoada",
-    { en: "All the meats for a feijoada", pt: "Todas as carnes da feijoada", es: "Todas las carnes para la feijoada" },
-    { en: "Smoked and salted cuts ready to go — just add black beans.", pt: "Carnes defumadas e salgadas prontas — é só juntar o feijão preto.", es: "Cortes ahumados y salados listos — solo añade frijoles negros." },
-    [["kit-feijoada-kg", "Kit da casa · por kg", 14.99, "kit-feijoada", "kg"], ["kit-feijoada-1kg", "Kit Granum · 1 kg", 19.99, "kit-feijoada-1kg"]], { tags: ["best"] });
+  S("kit-feijoada-1kg", "Kit Feijoada · 1 kg", "feijoada", 19.99, "kit-feijoada",
+    { en: "All the meats for a feijoada · 1 kg pack", pt: "Todas as carnes da feijoada · pacote 1 kg", es: "Todas las carnes para la feijoada · 1 kg" },
+    { en: "Smoked and salted cuts ready to go — just add black beans.", pt: "Carnes defumadas e salgadas prontas — é só juntar o feijão preto.", es: "Cortes ahumados y salados listos — solo añade frijoles negros." }, { tags: ["best"] });
 
   // the example Toscana sausage joins this category (still example price)
   const tosc = window.PRODUCTS.find(p => p.id === "toscana");
   if (tosc) { tosc.cat = "deli"; tosc.group = "linguicas"; out.push(tosc); window.PRODUCTS = window.PRODUCTS.filter(p => p !== tosc); }
 
+  const SOON = new Set(["salsicha-toscana", "orelheira", "hotdog-ipanema"]);
+  out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   // sort by group then price (groups use cheapest option)
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
-  out.forEach(p => { if (p.isGroup) p.price = Math.min(...p.variants.map(v => byId[v].price)); });
+  out.forEach(p => { if (p.isGroup) { const ps = p.variants.map(v => byId[v].price).filter(x => x > 0); p.price = ps.length ? Math.min(...ps) : 0; } });
   const order = window.GROUPS.deli.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
 
