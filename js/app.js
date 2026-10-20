@@ -54,7 +54,7 @@
   let picks = {};
   let activeCat = "all", query = "", activeGroup = "all", onlyIds = null;
   const groupsFor = cat => (window.GROUPS || {})[cat] || [];
-  const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && byId[id].cat === "drinks");
+  const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && (byId[id].tags || []).includes("adult"));
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
   const droppedOos = [];
   Object.keys(cart).forEach(id => {
@@ -182,7 +182,7 @@
       <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}${g.isGroup ? " card--group" : ""}" id="p-${g.id}">
         <div class="card__media">
           ${media}
-          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t(p.soon ? "soon" : "out")}</span>` : ""}</div>
+          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${(g.promo || p.was) ? `<span class="tag tag--promo">${t("tag_promo")}</span>` : ""}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t(p.soon ? "soon" : "out")}</span>` : ""}</div>
           <span class="cat">${t("cat_" + p.cat)}</span>
         </div>
         <div class="card__body">
@@ -191,7 +191,7 @@
           <p class="card__desc">${pick(p.desc)}</p>
           ${optsHtml}
           <div class="card__row">
-            <span class="price">${p.soon ? `<small>${t("soon")}</small>` : `${money(p.price)}<small>${unitLabel(p)}</small>`}</span>
+            <span class="price">${p.soon ? `<small>${t("soon")}</small>` : `${p.was ? `<s class="was">${money(p.was)}</s>` : ""}${money(p.price)}<small>${unitLabel(p)}</small>`}</span>
             ${p.soon ? "" : out ? `
             <button class="btn btn--similar" data-act="similar" data-id="${g.id}">${t("similar_btn")}</button>` : `
             <div class="card__buy">
@@ -214,16 +214,20 @@
   function renderGrid() {
     const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
     const list = P.filter(p => !p.hidden &&
-      (activeCat === "all" || p.cat === activeCat) &&
-      (activeCat === "all" || activeGroup === "all" || p.group === activeGroup) &&
+      (activeCat === "all" || p.cat === activeCat || (activeCat === "promo" && p.promo)) &&
+      (activeCat === "all" || activeCat === "promo" || activeGroup === "all" || p.group === activeGroup) &&
       (!onlyIds || onlyIds.includes(p.id)) &&
       (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
+    if (activeCat === "promo") {
+      const gi = p => groupsFor(p.cat).findIndex(g => g.id === p.group);
+      list.sort((a, b) => CATS.indexOf(a.cat) - CATS.indexOf(b.cat) || gi(a) - gi(b) || a.price - b.price);
+    }
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
     // "Todos": a tidy showcase — a few products per department + "see all" button
     if (activeCat === "all" && !query && !onlyIds) {
       let html = "";
       CATS.filter(c => c !== "all").forEach(c => {
-        const inCat = list.filter(p => p.cat === c);
+        const inCat = list.filter(p => c === "promo" ? p.promo : p.cat === c);
         if (!inCat.length) return;
         const pickN = [...inCat.filter(p => (p.tags || []).includes("best") && p.available !== false),
                        ...inCat.filter(p => !(p.tags || []).includes("best") && p.available !== false)].slice(0, SHOW_N);

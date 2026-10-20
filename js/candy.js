@@ -255,6 +255,21 @@ window.GROUPS.candy = [
     { en: "Chocolate-coated biscuit rings", pt: "Rosquinhas cobertas de chocolate", es: "Galletas bañadas en chocolate" },
     { en: "Crunchy biscuit rings coated in real chocolate.", pt: "Rosquinhas crocantes cobertas de chocolate.", es: "Rosquillas crujientes bañadas en chocolate." },
     [["filipinos-leite", "Chocolate ao leite", 2.50, "filipinos-leite"], ["filipinos-branco", "Chocolate branco", 2.50, "filipinos-branco"]]);
+  /* ---------- SNACKS (PDV) ---------- */
+  G("ruffles", "Ruffles", "snacks", { en: "Ridged potato crisps", pt: "Batata ondulada", es: "Patatas onduladas" }, { en: "Brazil’s favourite crisps.", pt: "A batata preferida do Brasil.", es: "Las patatas favoritas de Brasil." },
+    [["ruffles-45", "Original · 45 g", 1.99, "ruffles-45"], ["ruffles-presunto", "Presunto", 3.10, "ruffles-presunto"], ["ruffles-original", "Original", 3.80, "ruffles-original"]]);
+  G("super-dourada", "Batata Super Dourada · 150 g", "snacks", { en: "Brazilian potato crisps", pt: "Batata frita ondulada", es: "Patatas fritas" }, { en: "Bold Brazilian flavours.", pt: "Sabores brasileiros.", es: "Sabores brasileños." },
+    [["dourada-churrasco", "Churrasco", 3.50, "dourada-churrasco"], ["dourada-leitao", "Molho de leitão", 3.50, "dourada-leitao"]]);
+  G("cheetos", "Cheetos", "snacks", { en: "Cheesy corn snacks", pt: "Salgadinho de milho", es: "Aperitivo de maíz" }, { en: "The cheesy classic.", pt: "O clássico de queijo.", es: "El clásico de queso." },
+    [["cheetos-futebolas", "Futebolas", 3.25, "cheetos-futebolas"], ["cheetos-palito", "Palito", 3.70, "cheetos-palito"]]);
+  G("torcida", "Torcida Lucky", "snacks", { en: "Brazilian corn snack", pt: "Salgadinho Torcida", es: "Aperitivo Torcida" }, { en: "The cheap and cheerful boteco snack.", pt: "O salgadinho do boteco.", es: "El aperitivo de bar." },
+    [["torcida-bacon", "Bacon", 1.50, "torcida-bacon"], ["torcida-costelinha", "Costelinha com limão", 1.50, "torcida-costelinha"], ["torcida-pimenta", "Pimenta", 1.50, "torcida-pimenta"], ["torcida-queijo", "Queijo", 1.50, "torcida-queijo"]]);
+  G("piraque-salgados", "Biscoitos Salgados Piraquê", "snacks", { en: "Savoury crackers", pt: "Biscoitos salgados", es: "Galletas saladas" }, { en: "The classic Piraquê crackers.", pt: "Os clássicos Piraquê.", es: "Los clásicos Piraquê." },
+    [["presuntinho", "Presuntinho", 2.50, "presuntinho"], ["queijinho", "Queijinho", 2.50, "queijinho"]]);
+  G("nuts", "Amendoins Doritos & Walkers", "snacks", { en: "Flavoured nuts", pt: "Amendoins temperados", es: "Frutos secos" }, { en: "Crunchy flavoured nuts.", pt: "Amendoins crocantes temperados.", es: "Frutos secos crujientes." },
+    [["doritos-nuts", "Doritos Nuts", 2.99, "doritos-nuts"], ["walkers-nuts", "Walkers Nuts", 2.99, "walkers-nuts"]]);
+  S("pipoca-vovozinha", "Pipoca Vovozinha", "snacks", 1.20, "pipoca-vovozinha", { en: "Sweet popcorn", pt: "Pipoca doce", es: "Palomitas dulces" }, { en: "Sweet caramel popcorn.", pt: "Pipoca doce caramelizada.", es: "Palomitas caramelizadas." });
+  S("yokitos", "Yokitos Assado", "snacks", 2.50, "yokitos", { en: "Baked corn snack", pt: "Salgadinho assado", es: "Aperitivo horneado" }, { en: "Baked, not fried.", pt: "Assado, não frito.", es: "Horneado." });
   /* ---------- SNACKS ---------- */
   S("bis-branco", "Bis Branco Lacta", "chocolates", 3.99, "bis-branco",
     { en: "White chocolate wafers", pt: "Bis chocolate branco", es: "Barquillos de chocolate blanco" },

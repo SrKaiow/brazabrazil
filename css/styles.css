@@ -891,3 +891,11 @@ img{max-width:100%}
 .shop-bar.is-stuck .search{display:none}
 .shop-bar.is-stuck{padding:8px 0 8px}
 .shop-bar.is-stuck .subtabs{padding:8px 10px;margin-top:2px}
+
+.tab[data-cat="promo"]::before{content:"🔥 "}
+.tab[data-cat="ready"]::before{content:"🍖 "}
+.tab[data-cat="estufa"]::before{content:"🥟 "}
+.tab[data-cat="promo"]{border-color:#d93a2b;color:#d93a2b;font-weight:700}
+.tab[data-cat="promo"][aria-selected="true"]{background:#d93a2b;color:#fff}
+.tag--promo{background:#d93a2b;color:#fff}
+.price .was{font-size:.72em;color:var(--muted);margin-right:6px;font-family:var(--sans)}

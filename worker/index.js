@@ -19,7 +19,10 @@ import "../js/home.js";
 import "../js/chicken.js";
 import "../js/kitchen.js";
 import "../js/groceries.js";
+import "../js/ready.js";
+import "../js/promo.js";
 import "../js/drinks.js";
+import "../js/softdrinks.js";
 import "../js/shared.js";
 
 const S = globalThis.SITE;
@@ -146,7 +149,7 @@ async function createCheckout(request, env) {
   }
   if (!items.length) return json({ error: "empty" }, 400);
   if (!b.name || !b.phone) return json({ error: "missing_contact" }, 400);
-  if (items.some(({ p }) => p.cat === "drinks") && b.adult !== true) return json({ error: "age_required" }, 400);
+  if (items.some(({ p }) => (p.tags || []).includes("adult")) && b.adult !== true) return json({ error: "age_required" }, 400);
 
   if (b.mode !== "delivery" && b.mode !== "collect") return json({ error: "bad_request" }, 400);
   const isDelivery = b.mode === "delivery";
@@ -197,7 +200,7 @@ async function createCheckout(request, env) {
       delivery_fee: isDelivery ? (quote.status === "tbc" ? "TBC" : fee.toFixed(2)) : "",
       preferred_day: clip(b.day, 20),
       notes: clip(b.notes),
-      age_18_confirmed: items.some(({ p }) => p.cat === "drinks") ? "yes" : "n/a",
+      age_18_confirmed: items.some(({ p }) => (p.tags || []).includes("adult")) ? "yes" : "n/a",
       items: clip(summary)
     },
     payment_intent_data: {
