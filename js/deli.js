@@ -38,6 +38,9 @@ window.GROUPS.deli = [
   S("linguica-calabresa-prisca", "Linguiça Calabresa Prisca", "linguicas", 5.50, "linguica-calabresa-prisca",
     { en: "Smoked calabresa sausage", pt: "Calabresa defumada", es: "Longaniza calabresa ahumada" },
     { en: "Smoked and lightly spicy — fry with onions or add to feijoada.", pt: "Defumada e levemente picante — acebolada ou na feijoada.", es: "Ahumada y ligeramente picante — con cebolla o en feijoada." });
+  S("linguica-topking", "Linguiça de Porco Pura Top King", "linguicas", 12.96, "linguica-topking",
+    { en: "Fresh Brazilian-style pork sausage · Toscana", pt: "Linguiça toscana de porco pura", es: "Salchicha fresca de cerdo · Toscana" },
+    { en: "Pure pork, Brazilian-style — the sausage that opens every churrasco.", pt: "Linguiça de porco pura, no estilo brasileiro — a que abre todo churrasco.", es: "Cerdo puro al estilo brasileño — la que abre todo churrasco." });
   S("calabresa-jlp", "Calabresa JLP", "linguicas", 14.90, "calabresa-jlp",
     { en: "Smoked sausage · per kg", pt: "Calabresa defumada · por kg", es: "Salchicha ahumada · por kg" },
     { en: "The classic smoked calabresa, sold by weight.", pt: "A clássica calabresa defumada, vendida a peso.", es: "La clásica calabresa ahumada, al peso." }, { unit: "kg" });
@@ -108,6 +111,6 @@ window.GROUPS.deli = [
   window.PRODUCTS.push(...out);
   window.CATEGORIES = window.CATEGORIES.filter(c => c !== "sausages");
   if (!window.CATEGORIES.includes("deli")) window.CATEGORIES.push("deli");
-  const ORDER = ["all", "beef", "deli", "frozen", "drinks"];
+  const ORDER = ["all", "beef", "pork", "deli", "frozen", "drinks"];
   window.CATEGORIES.sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
 })();
