@@ -5,10 +5,11 @@ window.GROUPS = window.GROUPS || {};
 window.GROUPS.groceries = [
   { id: "laticinios", label: { en: "Cheese, milk & butter", "pt-BR": "Queijos, leite & manteiga", "pt-PT": "Queijos, leite & manteiga", es: "Quesos, leche y mantequilla" } },
   { id: "matinais", label: { en: "Breakfast, cereals & chocolate drinks", "pt-BR": "Café da manhã & achocolatados", "pt-PT": "Pequeno-almoço & achocolatados", es: "Desayuno y cacao" } },
-  { id: "massas", label: { en: "Instant noodles", "pt-BR": "Miojo & massas instantâneas", "pt-PT": "Massas instantâneas", es: "Fideos instantáneos" } },
+  { id: "massas", label: { en: "Pasta & instant noodles", "pt-BR": "Massas & miojo", "pt-PT": "Massas", es: "Pasta y fideos" } },
+  { id: "bolos", label: { en: "Cake & cheese-bread mixes", "pt-BR": "Misturas para bolo & pão de queijo", "pt-PT": "Misturas para bolo & pão de queijo", es: "Mezclas para bizcocho y pan de queso" } },
   { id: "molhos", label: { en: "Hot sauces & sauces", "pt-BR": "Molhos & pimentas", "pt-PT": "Molhos & piri-piri", es: "Salsas y picantes" } },
   { id: "conservas", label: { en: "Portuguese tinned food", "pt-BR": "Conservas portuguesas", "pt-PT": "Conservas", es: "Conservas portuguesas" } },
-  { id: "geral", label: { en: "Pantry", "pt-BR": "Mercearia", "pt-PT": "Mercearia", es: "Despensa" } }
+  { id: "geral", label: { en: "Pantry, tins & jars", "pt-BR": "Mercearia, enlatados & temperos", "pt-PT": "Mercearia, enlatados & temperos", es: "Despensa y conservas" } }
 ];
 (function () {
   const I = f => "assets/products/groceries/" + f + ".webp";
@@ -54,7 +55,7 @@ window.GROUPS.groceries = [
   S("llanero", "Queso Llanero Paisa · 283 g", "laticinios", 0, "llanero",
     { en: "Venezuelan-style hard cheese", pt: "Queijo duro estilo venezuelano", es: "Queso duro estilo venezolano" },
     { en: "Salty and firm — for arepas, cachapas and grating.", pt: "Salgado e firme — para arepas e para ralar.", es: "Salado y firme — para arepas y cachapas." });
-  S("requeijao-mabiju", "Requeijão Cremoso Mabiju · 220 g", "laticinios", 0, "requeijao-mabiju",
+  S("requeijao-mabiju", "Requeijão Cremoso Mabiju · 220 g", "laticinios", 3.49, "requeijao-mabiju",
     { en: "Brazilian cream cheese spread", pt: "Requeijão cremoso", es: "Queso crema brasileño" },
     { en: "The creamy requeijão Brazilians love on bread and in recipes.", pt: "O requeijão cremoso para o pão e as receitas.", es: "El requeijão cremoso para el pan y recetas." });
   G("tang", "Refresco em Pó Tang · 18 g", "geral",
@@ -107,7 +108,55 @@ window.GROUPS.groceries = [
   S("nobre-chourico", "Chouriço em Lata Nobre", "conservas", 9.50, "nobre-chourico",
     { en: "Smoked pork sausage in oil · tinned", pt: "Chouriço de porco em óleo", es: "Chorizo ahumado en aceite" },
     { en: "Smoked Portuguese chouriço preserved in oil — slice and serve.", pt: "Chouriço fumado conservado em óleo — é só fatiar.", es: "Chorizo portugués ahumado en aceite." }, { tags: ["portuguese"] });
-  const SOON = new Set(["muenster", "llanero", "requeijao-mabiju", "gota-alho"]);
+  /* ---------- remessa misturas / massas / enlatados ---------- */
+  G("dona-benta", "Mistura para Bolo Dona Benta · 450 g", "bolos",
+    { en: "Brazilian cake mix", pt: "Mistura para bolo caseiro", es: "Mezcla para bizcocho" },
+    { en: "Fluffy home-style Brazilian cake — just add eggs, milk and oil.", pt: "Bolo caseiro fofinho — é só juntar ovos, leite e óleo.", es: "Bizcocho casero esponjoso — solo añade huevos, leche y aceite." },
+    [["db-aipim", "Aipim / macaxeira", 2.99, "db-aipim"], ["db-fuba", "Fubá", 2.99, "db-fuba"], ["db-laranja", "Laranja", 2.99, "db-laranja"], ["db-milho", "Milho", 2.99, "db-milho"]]);
+  S("renata-abacaxi", "Mistura para Bolo Renata Abacaxi · 400 g", "bolos", 2.50, "renata-abacaxi",
+    { en: "Pineapple cake mix", pt: "Mistura para bolo sabor abacaxi", es: "Mezcla para bizcocho de piña" },
+    { en: "Moist pineapple cake, easy to make.", pt: "Bolo de abacaxi molhadinho e fácil de fazer.", es: "Bizcocho de piña jugoso y fácil." });
+  G("mistura-paoqueijo", "Mistura para Pão de Queijo", "bolos",
+    { en: "Cheese bread mix · gluten-free", pt: "Mistura para pão de queijo", es: "Mezcla para pan de queso" },
+    { en: "Make warm pão de queijo at home — naturally gluten-free.", pt: "Pão de queijo quentinho feito em casa — sem glúten.", es: "Pan de queso casero — sin gluten." },
+    [["mix-lopes", "Mix Lopes · polvilho 1 kg", 2.95, "mix-lopes"], ["yoki-paoqueijo", "Yoki", 2.99, "yoki-paoqueijo"]], { tags: ["gf"] });
+  S("espaguete", "Macarrão Espaguete Milaneza · 500 g", "massas", 1.50, "espaguete",
+    { en: "Spaghetti", pt: "Espaguete", es: "Espaguetis" },
+    { en: "Classic spaghetti for the Sunday macarronada.", pt: "Espaguete clássico para a macarronada de domingo.", es: "Espaguetis clásicos." });
+  S("fusilli", "Macarrão Fusilli Tricolor Continente · 500 g", "massas", 1.99, "fusilli",
+    { en: "Tricolour fusilli · tomato & spinach", pt: "Parafuso tricolor · tomate e espinafre", es: "Fusilli tricolor" },
+    { en: "Colourful pasta spirals — kids love them.", pt: "Parafusos coloridos — as crianças adoram.", es: "Espirales de colores." }, { tags: ["portuguese"] });
+  S("lacos", "Macarrão Laços Granoro · 500 g", "massas", 2.20, "lacos",
+    { en: "Farfalloni bow-tie pasta", pt: "Macarrão gravatinha", "pt-PT": "Massa laços", es: "Pasta lacitos" },
+    { en: "Italian bow-tie pasta, great for salads and bakes.", pt: "Gravatinha italiana, ótima para saladas e forno.", es: "Lacitos italianos." });
+  S("malagueta", "Pimenta Malagueta Misturada Aroma D’Minas", "molhos", 3.99, "malagueta",
+    { en: "Whole mixed chillies in vinegar", pt: "Pimenta malagueta em conserva", es: "Guindillas en vinagre" },
+    { en: "Whole malagueta peppers in vinegar — a drop goes a long way.", pt: "Malagueta inteira em conserva — poucas gotas bastam.", es: "Guindillas enteras en vinagre." });
+  S("massa-pimentao", "Massa de Pimentão Dom Duarte", "molhos", 2.19, "massa-pimentao",
+    { en: "Portuguese red pepper paste", pt: "Massa de pimentão", es: "Pasta de pimiento rojo" },
+    { en: "The secret of Portuguese marinades — rub it on pork and chicken.", pt: "O segredo do tempero português — para porco e frango.", es: "El secreto de los adobos portugueses." }, { tags: ["portuguese"] });
+  S("vinha-alho", "Massa de Vinha d’Alhos Espiga", "molhos", 2.19, "vinha-alho",
+    { en: "Garlic & wine marinade paste", pt: "Tempero vinha d’alhos", es: "Adobo de ajo y vino" },
+    { en: "Ready-made vinha d’alhos — marinate pork overnight.", pt: "Vinha d’alhos pronta — tempere o porco de véspera.", es: "Adobo listo para el cerdo." }, { tags: ["portuguese"] });
+  S("milho-verde", "Milho Verde Green Giant", "geral", 1.99, "milho-verde",
+    { en: "Sweetcorn · tinned", pt: "Milho verde em lata", es: "Maíz dulce en lata" },
+    { en: "Naturally sweet corn for salads, pizza and cuscuz.", pt: "Milho docinho para salada, pizza e cuscuz.", es: "Maíz dulce para ensaladas y pizza." });
+  S("pickles", "Mix Pickles Bodrum", "geral", 3.99, "pickles",
+    { en: "Mixed pickles in vinegar", pt: "Picles misto em conserva", es: "Encurtidos variados" },
+    { en: "Crunchy mixed vegetables in vinegar.", pt: "Legumes crocantes em conserva.", es: "Verduras crujientes en vinagre." });
+  S("tremocos", "Tremoços Extra Maçarico · 550 g", "geral", 3.69, "tremocos",
+    { en: "Lupin beans in brine", pt: "Tremoços em conserva", es: "Altramuces" },
+    { en: "The Portuguese snack for a cold beer.", pt: "O petisco português para acompanhar a cerveja.", es: "El aperitivo portugués con una cerveza." }, { tags: ["portuguese", "vegan"] });
+  S("canjica", "Milho para Canjica Branca Sinhá · 500 g", "geral", 2.99, "canjica",
+    { en: "White hominy corn", pt: "Canjica de milho branca", es: "Maíz blanco para canjica" },
+    { en: "For canjica (mungunzá) — the creamy festa junina dessert.", pt: "Para canjica ou mungunzá — o doce da festa junina.", es: "Para canjica, el postre de las fiestas de junio." }, { tags: ["gf"] });
+  S("pipoca", "Milho para Pipoca Yoki · 400 g", "geral", 2.99, "pipoca",
+    { en: "Popcorn kernels", pt: "Milho de pipoca", es: "Maíz para palomitas" },
+    { en: "Selected kernels that pop big and fluffy.", pt: "Grãos selecionados que estouram grandes.", es: "Granos seleccionados." });
+  S("mimosa-natas", "Natas Culinária Mimosa · 200 ml", "laticinios", 2.25, "mimosa-natas",
+    { en: "Portuguese cooking cream", pt: "Creme de leite culinário", "pt-PT": "Natas para culinária", es: "Nata para cocinar" },
+    { en: "Light cooking cream for sauces and bacalhau com natas.", pt: "Para molhos e bacalhau com natas.", es: "Para salsas y bacalao con nata." }, { tags: ["portuguese"] });
+  const SOON = new Set(["muenster", "llanero", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
