@@ -36,9 +36,10 @@ window.GROUPS.candy = [
     { en: "Brazilian peanut sweet", pt: "Paçoca de amendoim", es: "Dulce de cacahuete" },
     { en: "Crumbly peanut sweet — a Brazilian childhood favourite.", pt: "Paçoca de amendoim que derrete na boca — sabor de infância.", es: "Dulce de cacahuete que se deshace — un clásico de la infancia en Brasil." },
     [["pacoca-un", "Unidade", 0.60, "pacoca-un"], ["pacoca-zero", "Zero açúcar · caixa", 5.99, "pacoca-zero"]], { tags: ["gf"] });
-  S("goiabada", "Goiabada Predilecta", "brasil", 0.80, "goiabada",
-    { en: "Guava paste bar · 30 g", pt: "Goiabada em barra · 30 g", es: "Dulce de guayaba · 30 g" },
-    { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada cremosa — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." });
+  G("goiabada-predilecta", "Goiabada Predilecta", "brasil",
+    { en: "Guava paste", pt: "Goiabada", es: "Dulce de guayaba" },
+    { en: "Sweet guava paste — try it with cheese for a ‘Romeu e Julieta’.", pt: "Goiabada de verdade — com queijo vira Romeu e Julieta.", es: "Dulce de guayaba — con queso es el clásico ‘Romeu e Julieta’." },
+    [["goiabada", "Bloco · 30 g", 0.80, "goiabada"], ["goiabada-cascao", "Cascão · 350 g", 2.99, "goiabada-cascao"], ["goiabada-cremosa", "Cremosa · vidro 230 g", 2.99, "goiabada-cremosa"]], { tags: ["gf", "vegan"] });
   S("pao-de-mel", "Pão de Mel", "brasil", 2.50, "pao-de-mel",
     { en: "Honey cake with chocolate coating", pt: "Pão de mel com cobertura de chocolate", es: "Pastel de miel con chocolate" },
     { en: "Spiced honey cake filled with doce de leite and coated in chocolate.", pt: "Pão de mel recheado com doce de leite e coberto de chocolate.", es: "Bizcocho de miel relleno de dulce de leche y cubierto de chocolate." });
@@ -77,6 +78,44 @@ window.GROUPS.candy = [
     [["trident-canela", "Canela", 1.33, "trident-canela"], ["trident-frutas", "Frutas silvestres", 1.50, "trident-frutas"],
      ["trident-melancia", "Melancia", 1.50, "trident-melancia"], ["trident-menta", "Menta verde", 1.50, "trident-menta"],
      ["trident-senses", "Senses variados", 1.50, ""]]);
+
+  /* ---------- batch 2 ---------- */
+  S("docinhos", "Docinhos de Festa", "brasil", 2.20, "docinhos",
+    { en: "Brazilian party sweets", pt: "Brigadeiro, beijinho e mais", es: "Dulces de fiesta brasileños" },
+    { en: "Brigadeiro, beijinho and friends — the sweets of every Brazilian party.", pt: "Brigadeiro, beijinho e companhia — os docinhos de toda festa.", es: "Brigadeiro, beijinho y más — los dulces de toda fiesta brasileña." });
+  S("doce-amendoim", "Doce de Amendoim Caseiro DaColônia", "brasil", 2.99, "doce-amendoim",
+    { en: "Homemade-style peanut bar · 120 g", pt: "Doce de amendoim tipo caseiro · 120 g", es: "Dulce de cacahuete casero · 120 g" },
+    { en: "Traditional peanut sweet with a homemade taste.", pt: "Doce de amendoim tradicional, com gostinho de caseiro.", es: "Dulce de cacahuete tradicional con sabor casero." }, { tags: ["gf"] });
+  G("gomets", "Gomets Dori", "balas",
+    { en: "Fruit gummies", pt: "Balas de goma", es: "Gominolas de frutas" },
+    { en: "Soft sugar-coated fruit gummies.", pt: "Balas de goma macias, sabor frutas sortidas.", es: "Gominolas suaves de frutas surtidas." },
+    [["gomets-gomas", "Gomas", 0.90, "gomets"], ["gomets-minhocas", "Minhocas", 1.50, "gomets-minhocas"]]);
+  G("halls", "Halls", "balas",
+    { en: "Hard candy", pt: "Drops Halls", "pt-PT": "Rebuçados Halls", es: "Caramelos Halls" },
+    { en: "Refreshing Halls — choose your flavour.", pt: "Halls refrescante — escolha o sabor.", es: "Halls refrescante — elige tu sabor." },
+    [["halls-extra", "Extra forte", 1.00, "halls-extra"], ["halls-melancia", "Melancia", 1.00, "halls-melancia"],
+     ["halls-morango", "Morango", 1.00, "halls-morango"], ["halls-uva", "Uva verde", 1.00, "halls-uva"]]);
+  G("kinder", "Kinder", "chocolates",
+    { en: "Kinder chocolate", pt: "Chocolate Kinder", es: "Chocolate Kinder" },
+    { en: "Milk chocolate with a creamy milky filling.", pt: "Chocolate ao leite com recheio cremoso de leite.", es: "Chocolate con leche con relleno cremoso." },
+    [["kinder-choc", "Chocolate · barra 21 g", 0.50, "kinder-choc"], ["kinder-bueno", "Bueno", 1.50, "kinder-bueno"], ["kinder-bueno-white", "Bueno White", 1.50, "kinder-bueno-white"]]);
+  G("lacta-bombom", "Bombom Lacta", "chocolates",
+    { en: "Lacta chocolate bonbon", pt: "Bombom Lacta", es: "Bombón Lacta" },
+    { en: "Brazil’s favourite bonbons.", pt: "Os bombons preferidos do Brasil.", es: "Los bombones favoritos de Brasil." },
+    [["ouro-branco", "Ouro Branco", 1.20, "ouro-branco"], ["sonho-valsa", "Sonho de Valsa", 1.20, "sonho-valsa"]]);
+  G("lacta-barra", "Chocolate Lacta", "chocolates",
+    { en: "Lacta chocolate bar", pt: "Chocolate Lacta em barra", es: "Chocolate Lacta" },
+    { en: "Creamy Brazilian milk chocolate.", pt: "Chocolate cremoso, o sabor do Brasil.", es: "Chocolate cremoso brasileño." },
+    [["lacta-leite", "Ao leite", 1.20, "lacta-leite"], ["diamante-negro", "Diamante Negro", 1.20, "diamante-negro"]]);
+  S("guarda-chuva", "Guarda-Chuva de Chocolate", "chocolates", 1.20, "guarda-chuva",
+    { en: "Chocolate umbrella", pt: "Guarda-chuvinha de chocolate", es: "Paraguas de chocolate" },
+    { en: "The little chocolate umbrella — pure childhood memories.", pt: "O guarda-chuvinha de chocolate — puro sabor de infância.", es: "El paragüitas de chocolate — puros recuerdos de infancia." });
+  S("bis", "Bis Lacta", "chocolates", 3.60, "bis",
+    { en: "Chocolate-coated wafers", pt: "Wafer coberto de chocolate", es: "Barquillos con chocolate" },
+    { en: "Crispy wafers covered in chocolate — impossible to eat just one.", pt: "Wafer crocante coberto de chocolate — impossível comer um só.", es: "Barquillos crujientes con chocolate — imposible comer solo uno." });
+  S("ferrero", "Ferrero Rocher · 16 un", "chocolates", 15.00, "ferrero",
+    { en: "Hazelnut chocolates gift box · 16", pt: "Caixa com 16 bombons", es: "Caja de 16 bombones" },
+    { en: "The perfect gift: crispy hazelnut chocolates.", pt: "O presente perfeito: bombons crocantes de avelã.", es: "El regalo perfecto: bombones crujientes de avellana." });
 
   /* ---------- SNACKS ---------- */
   S("wotsits", "Wotsits That’s Nuts", "snacks", 2.99, "wotsits",
