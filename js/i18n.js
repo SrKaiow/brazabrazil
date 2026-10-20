@@ -235,6 +235,8 @@ window.I18N = {
   age_short: { en: "customer confirmed 18 or over", "pt-BR": "cliente confirmou ter 18 anos ou mais", "pt-PT": "cliente confirmou ter 18 anos ou mais", es: "cliente confirmó tener 18 años o más" },
   cat_groceries: { en: "Groceries", "pt-BR": "Mercearia", "pt-PT": "Mercearia", es: "Despensa" },
   cat_kitchen: { en: "Kitchen & home", "pt-BR": "Utensílios & casa", "pt-PT": "Utensílios & casa", es: "Cocina y hogar" },
+  see_all: { en: "See all", "pt-BR": "Ver todos", "pt-PT": "Ver todos", es: "Ver todo" },
+  n_products: { en: "products", "pt-BR": "produtos", "pt-PT": "produtos", es: "productos" },
   more_btn: { en: "Show more products", "pt-BR": "Ver mais produtos", "pt-PT": "Ver mais produtos", es: "Ver más productos" },
   soon: { en: "Coming soon", "pt-BR": "Em breve", "pt-PT": "Em breve", es: "Próximamente" },
   out: { en: "Out of stock", "pt-BR": "Esgotado", "pt-PT": "Esgotado", es: "Agotado" },

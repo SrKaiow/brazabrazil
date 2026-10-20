@@ -58,7 +58,8 @@
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
   const droppedOos = [];
   Object.keys(cart).forEach(id => {
-    if (!byId[id]) delete cart[id];
+    const q = Number(cart[id]), st = byId[id] ? window.BB.step(byId[id]) : 1;
+    if (!byId[id] || byId[id].isGroup || !(q > 0) || q > 50 || Math.abs(q / st - Math.round(q / st)) > 1e-9) delete cart[id];
     else if (byId[id].available === false) { droppedOos.push(byId[id].name); delete cart[id]; }
   });
   const save = () => store.set("bb_cart", JSON.stringify(cart));
@@ -138,11 +139,27 @@
   }
   $("#subtabs").addEventListener("click", e => {
     const b = e.target.closest(".subtab"); if (!b) return;
-    activeGroup = b.dataset.group; onlyIds = null; renderTabs(); renderGrid();
+    activeGroup = b.dataset.group; onlyIds = null; renderTabs(); renderGrid(); toShop();
   });
+  // department bar: when it sticks under the header, hide the search box to keep it slim
+  const shopBar = $(".shop-bar");
+  const stuck = () => {
+    const top = parseFloat(getComputedStyle(shopBar).top) || 0;
+    const on = shopBar.getBoundingClientRect().top <= top + 1 && scrollY > 200;
+    shopBar.classList.toggle("is-stuck", on && !$("#search").value && document.activeElement !== $("#search"));
+  };
+  addEventListener("scroll", stuck, { passive: true }); addEventListener("resize", stuck);
+  // after switching department, bring the first products into view (only if we have scrolled past them)
+  function toShop() {
+    const bar = $(".shop-bar"), grid = $("#grid");
+    const y = grid.getBoundingClientRect().top + scrollY - bar.offsetHeight - ($(".header") ? $(".header").offsetHeight : 0) - 12;
+    if (scrollY > y) window.scrollTo({ top: y, behavior: "smooth" });
+  }
   tabs.addEventListener("click", e => {
     const b = e.target.closest(".tab"); if (!b) return;
-    activeCat = b.dataset.cat; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid();
+    activeCat = b.dataset.cat; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid(); toShop();
+    const sel = $(".tab[aria-selected=true]");
+    if (sel && tabs.scrollWidth > tabs.clientWidth) tabs.scrollTo({ left: sel.offsetLeft - tabs.clientWidth / 2 + sel.offsetWidth / 2, behavior: "smooth" });
   });
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); onlyIds = null; renderGrid(); });
 
@@ -192,7 +209,8 @@
       </article>`;
   }
 
-  const GRID_PAGE = 24; let gridLimit = GRID_PAGE, gridKey = "";
+  const GRID_PAGE = 36; let gridLimit = GRID_PAGE, gridKey = "";
+  const SHOW_N = 4;
   function renderGrid() {
     const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
     const list = P.filter(p => !p.hidden &&
@@ -201,10 +219,24 @@
       (!onlyIds || onlyIds.includes(p.id)) &&
       (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
-    // "Todos": show a first batch and a "show more" button (keeps phones fast and short)
+    // "Todos": a tidy showcase — a few products per department + "see all" button
+    if (activeCat === "all" && !query && !onlyIds) {
+      let html = "";
+      CATS.filter(c => c !== "all").forEach(c => {
+        const inCat = list.filter(p => p.cat === c);
+        if (!inCat.length) return;
+        const pickN = [...inCat.filter(p => (p.tags || []).includes("best") && p.available !== false),
+                       ...inCat.filter(p => !(p.tags || []).includes("best") && p.available !== false)].slice(0, SHOW_N);
+        html += `<div class="dept" data-dept="${c}"><h3 class="dept__head"><span>${t("cat_" + c)}</span><small>${inCat.length} ${t("n_products")}</small>
+          <button class="dept__all" data-goto="${c}">${t("see_all")} →</button></h3></div>`;
+        html += pickN.map(card).join("");
+      });
+      $("#grid").innerHTML = html;
+      return;
+    }
     const key = activeCat + "|" + activeGroup + "|" + query + "|" + (onlyIds ? 1 : 0);
     if (key !== gridKey) { gridKey = key; gridLimit = GRID_PAGE; }
-    const capped = activeCat === "all" && !query && !onlyIds && list.length > gridLimit;
+    const capped = !onlyIds && list.length > gridLimit;
     const shown = capped ? list.slice(0, gridLimit) : list;
     let html = "", lastHead = null;
     shown.forEach(p => {
@@ -234,6 +266,8 @@
   });
   $("#grid").addEventListener("click", e => {
     if (e.target.closest("[data-more]")) { gridLimit += GRID_PAGE * 2; renderGrid(); return; }
+    const go = e.target.closest("[data-goto]");
+    if (go) { activeCat = go.dataset.goto; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid(); toShop(); return; }
     const b = e.target.closest("button[data-act]"); if (!b) return;
     const p = byId[b.dataset.id], s = step(p);
     const cur = picks[p.id] ?? s;
