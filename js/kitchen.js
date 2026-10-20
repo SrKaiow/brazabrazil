@@ -59,13 +59,43 @@ window.GROUPS.kitchen = [
     { en: "Professional chef’s knife · 8 in", pt: "Faca do chef profissional · 8 polegadas", es: "Cuchillo de chef profesional · 8\"" },
     { en: "The butcher’s favourite — stainless steel blade with a white non-slip handle.", pt: "A preferida dos açougueiros — lâmina de aço inox e cabo branco antiderrapante.", es: "El favorito de los carniceros — hoja de acero inoxidable y mango antideslizante." });
 
+  G("forma-pudim", "Forma de Pudim", "cozinha",
+    { en: "Flan / pudim ring tin", pt: "Forma para pudim com furo", es: "Molde para flan" },
+    { en: "Aluminium ring tin for the classic Brazilian pudim de leite.", pt: "Forma de alumínio com furo para o clássico pudim de leite.", es: "Molde de aluminio para el clásico flan brasileño." },
+    [["forma-pudim-22", "Nº 22", 13.99, "forma-pudim-22"], ["forma-pudim-26", "Nº 26", 14.99, "forma-pudim-26"]]);
+  S("forminhas", "Forminhas para Docinhos de Festa", "cozinha", 2.14, "forminhas",
+    { en: "Paper cases for party sweets", pt: "Forminhas de papel para brigadeiro", es: "Cápsulas de papel para dulces" },
+    { en: "Colourful paper cases for brigadeiros, beijinhos and party sweets.", pt: "Forminhas coloridas para brigadeiro, beijinho e docinhos de festa.", es: "Cápsulas de colores para brigadeiros y dulces de fiesta." });
+  S("copo-americano", "Copo Americano Nadir", "cozinha", 1.80, "copo-americano",
+    { en: "The classic Brazilian bar glass · 190 ml", pt: "O clássico copo americano · 190 ml", es: "El clásico vaso americano brasileño" },
+    { en: "The iconic Nadir glass found in every Brazilian bar and kitchen.", pt: "O icônico copo Nadir de todo boteco e cozinha brasileira.", es: "El icónico vaso Nadir de todos los bares brasileños." });
+  S("acendedor-jacks", "Acendedor Jacks", "cozinha", 1.99, "acendedor-jacks",
+    { en: "Long gas lighter for hob & barbecue", pt: "Acendedor para fogão e churrasqueira", es: "Encendedor largo para cocina y barbacoa" },
+    { en: "Long-reach lighter — safe for lighting hobs, ovens and the grill.", pt: "Acendedor de cabo longo — seguro para fogão, forno e churrasqueira.", es: "Encendedor de cuello largo — para fogones, hornos y parrilla." });
+  G("mini-cuscuzeira", "Mini Cuscuzeira · 250 ml", "cozinha",
+    { en: "Mini non-stick couscous steamer", pt: "Mini cuscuzeira antiaderente", es: "Mini cuscusera antiadherente" },
+    { en: "Non-stick mini steamer with glass lid — the perfect cuscuz for one or two.", pt: "Mini cuscuzeira antiaderente com tampa de vidro — cuscuz na medida para 1 ou 2.", es: "Mini cuscusera antiadherente con tapa de vidrio." },
+    [["mini-cuscuzeira-preta", "Preta", 18.99, "mini-cuscuzeira-preta"], ["mini-cuscuzeira-vermelha", "Vermelha", 18.99, "mini-cuscuzeira-vermelha"]]);
+  S("jogo-facas-4", "Jogo de Facas Tramontina Plenus · 4 pç", "cozinha", 19.00, "jogo-facas-4",
+    { en: "Knife & fork set · 4 pieces", pt: "Jogo de faca e garfo · 4 peças", es: "Juego de cuchillos y tenedor · 4 piezas" },
+    { en: "Chef, boning and vegetable knives plus carving fork — made in Brazil.", pt: "Faca do chef, desossa, legumes e garfo trinchante — feito no Brasil.", es: "Cuchillo de chef, deshuesador, verduras y tenedor trinchante." });
+
   /* ---------- COFFEE & WATER FILTERS ---------- */
-  S("filtro-melitta", "Filtro de Papel Melitta 103 · 30 un", "cafe", 3.48, "filtro-melitta",
-    { en: "Paper coffee filters · size 103", pt: "Filtro de papel para café · 103", es: "Filtros de papel para café · 103" },
-    { en: "Melitta’s original micro-perforated filters for a fresh cafezinho.", pt: "O filtro original Melitta com microfuros, para um cafezinho fresquinho.", es: "Los filtros originales de Melitta, microperforados." });
-  S("coador-pano", "Coador de Pano · Médio", "cafe", 3.98, "coador-pano",
-    { en: "Cloth coffee strainer · medium", pt: "Coador de café de pano", es: "Colador de tela para café" },
-    { en: "The traditional cloth strainer — grandma’s way to make coffee.", pt: "O coador de pano tradicional — o café passado da vó.", es: "El colador de tela tradicional — el café de la abuela." });
+  G("melitta-filtro", "Filtro de Papel Melitta · 30 un", "cafe",
+    { en: "Paper coffee filters", pt: "Filtro de papel para café", es: "Filtros de papel para café" },
+    { en: "Melitta’s original micro-perforated filters for a fresh cafezinho.", pt: "O filtro original Melitta com microfuros, para um cafezinho fresquinho.", es: "Los filtros originales de Melitta, microperforados." },
+    [["melitta-102", "102", 2.99, "melitta-102"], ["filtro-melitta", "103", 3.48, "filtro-melitta"]]);
+  S("melitta-suporte", "Suporte para Filtro Melitta 102", "cafe", 7.99, "melitta-suporte",
+    { en: "Coffee filter holder · size 102", pt: "Porta-filtro para café · 102", es: "Portafiltro para café · 102" },
+    { en: "Melitta’s classic cone holder — brew coffee straight into the cup or pot.", pt: "O clássico porta-filtro Melitta — café passado direto na xícara ou na garrafa.", es: "El clásico portafiltro Melitta." });
+  G("coador", "Coador de Café de Pano", "cafe",
+    { en: "Cloth coffee strainer", pt: "Coador de café de pano", es: "Colador de tela para café" },
+    { en: "The traditional cloth strainer — grandma’s way to make coffee.", pt: "O coador de pano tradicional — o café passado da vó.", es: "El colador de tela tradicional — el café de la abuela." },
+    [["coador-michelon", "Mini de mesa Michelon · pequeno", 2.99, "coador-michelon"], ["coador-pano", "Médio", 3.98, "coador-pano"]]);
+  G("garrafa-termica", "Garrafa Térmica", "cafe",
+    { en: "Vacuum flask for coffee", pt: "Garrafa térmica para café", es: "Termo para café" },
+    { en: "Keeps the cafezinho hot for hours.", pt: "Mantém o cafezinho quente por horas.", es: "Mantiene el café caliente durante horas." },
+    [["garrafa-bege", "Bege", 19.90, "garrafa-bege"], ["garrafa-preta", "Preta", 19.90, "garrafa-preta"], ["garrafa-preta-1l", "Preta de pressão · 1 L", 32.50, "garrafa-preta-1l"]]);
   G("filtro-barro", "Filtro de Barro São Pedro", "cafe",
     { en: "Brazilian clay water filter", pt: "Filtro de barro", es: "Filtro de agua de barro" },
     { en: "The famous Brazilian clay water filter — keeps water naturally cool and pure.", pt: "O famoso filtro de barro brasileiro — água sempre fresquinha e filtrada.", es: "El famoso filtro de barro brasileño — agua fresca y filtrada." },

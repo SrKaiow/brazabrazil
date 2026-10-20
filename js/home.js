@@ -113,6 +113,20 @@ window.GROUPS.home = [
     { en: "Professional Brazilian cuticle nippers — sharp and precise.", pt: "Alicate profissional — afiado e preciso.", es: "Alicate profesional — afilado y preciso." },
     [["alicate-vermelho", "Ponto Vermelho", 14.00, "alicate-vermelho"], ["alicate-preto", "Professional 722 (preto)", 16.00, "alicate-preto"]]);
 
+  S("mistolin", "Mistolin Tira-Gorduras Original · 545 ml", "limpeza", 7.50, "mistolin",
+    { en: "Kitchen degreaser spray", pt: "Desengordurante em spray", "pt-PT": "Tira-gorduras", es: "Desengrasante en spray" },
+    { en: "Portugal’s No.1 degreaser — cuts through grease on hobs, ovens and extractor hoods.", pt: "O tira-gorduras nº 1 de Portugal — limpa fogão, forno e exaustor.", es: "El desengrasante nº 1 de Portugal." }, { tags: ["portuguese"] });
+  G("kolene", "Kolene", "cabelo",
+    { en: "Brazilian hair care", pt: "Cuidados para os cabelos", es: "Cuidado capilar brasileño" },
+    { en: "Kolene — Brazilian hair care since forever. Choose your treatment.", pt: "Kolene, desde sempre — escolha o tratamento ideal para o seu cabelo.", es: "Kolene — cuidado capilar brasileño. Elige tu tratamiento." },
+    [["kolene-danos", "Danos Extremos · óleo em creme 200 ml", 9.40, "kolene-danos"],
+     ["kolene-cronograma", "Creme de pentear Cronograma · 500 ml", 9.49, "kolene-cronograma"],
+     ["kolene-original", "Creme de pentear Original · 500 ml", 9.50, "kolene-original"],
+     ["kolene-curvaturas", "Creme de tratamento Curvaturas · 1 kg", 14.50, "kolene-curvaturas"]]);
+  S("kolene-kids", "Kolene Cachinhos · Kit Kids", "cabelo", 14.99, "kolene-kids",
+    { en: "Kids’ curly hair kit", pt: "Kit infantil para cachinhos", es: "Kit infantil para rizos" },
+    { en: "Gentle hydrating line for children’s curls — coconut oil, aloe vera and vitamins.", pt: "Linha suave para cachinhos — óleo de coco, aloe vera e vitaminas.", es: "Línea suave para rizos infantiles." });
+
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
   out.forEach(p => { if (p.isGroup) p.price = Math.min(...p.variants.map(v => byId[v].price)); });
   const order = window.GROUPS.home.map(g => g.id);
