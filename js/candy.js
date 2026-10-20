@@ -62,6 +62,10 @@ window.GROUPS.candy = [
   S("mms", "M&M’s Chocolate", "chocolates", 1.50, "mms",
     { en: "Milk chocolate candies", pt: "Confeitos de chocolate", es: "Grageas de chocolate" },
     { en: "Colourful candy-coated milk chocolate.", pt: "Chocolate ao leite com cobertura colorida.", es: "Chocolate con leche con cobertura de colores." });
+  S("chocottone", "Chocottone Bauducco Trufa · 450 g", "chocolates", 9.99, "chocottone",
+    { en: "Chocolate-chip panettone with truffle filling", pt: "Panetone com gotas de chocolate e recheio trufado", es: "Panettone con chocolate y relleno de trufa" },
+    { en: "Bauducco’s famous chocottone — soft, naturally fermented, with chocolate chips and a rich truffle filling.", pt: "O famoso Chocottone Bauducco — fofinho, fermentação natural, com gotas de chocolate e recheio sabor trufa.", es: "El famoso chocottone de Bauducco — esponjoso, con pepitas de chocolate y relleno de trufa." });
+
   /* ---------- GUM, MINTS & LOLLIPOPS ---------- */
   S("pastilha-hortela", "Pastilha Garoto Hortelã", "balas", 0.80, "pastilha-hortela",
     { en: "Mint pastilles", pt: "Pastilhas de hortelã", es: "Pastillas de menta" },

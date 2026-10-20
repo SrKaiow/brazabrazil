@@ -233,6 +233,7 @@ window.I18N = {
   age_needed: { en: "Please confirm you are 18 or over to buy alcohol.", "pt-BR": "Confirme que tem 18 anos ou mais para comprar bebidas alcoólicas.", "pt-PT": "Confirme que tem 18 anos ou mais para comprar bebidas alcoólicas.", es: "Confirma que tienes 18 años o más para comprar alcohol." },
   age_short: { en: "customer confirmed 18 or over", "pt-BR": "cliente confirmou ter 18 anos ou mais", "pt-PT": "cliente confirmou ter 18 anos ou mais", es: "cliente confirmó tener 18 años o más" },
   cat_groceries: { en: "Groceries", "pt-BR": "Mercearia", "pt-PT": "Mercearia", es: "Despensa" },
+  cat_kitchen: { en: "Kitchen & home", "pt-BR": "Utensílios & casa", "pt-PT": "Utensílios & casa", es: "Cocina y hogar" },
   out: { en: "Out of stock", "pt-BR": "Esgotado", "pt-PT": "Esgotado", es: "Agotado" },
   none: { en: "No products found. Try another search.", "pt-BR": "Nenhum produto encontrado. Tente outra busca.", "pt-PT": "Nenhum produto encontrado. Tente outra pesquisa.", es: "No hay productos. Prueba otra búsqueda." },
   add: { en: "Add to basket", "pt-BR": "Adicionar", "pt-PT": "Adicionar", es: "Añadir" },

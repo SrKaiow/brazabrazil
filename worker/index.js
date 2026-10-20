@@ -17,6 +17,7 @@ import "../js/deli.js";
 import "../js/candy.js";
 import "../js/home.js";
 import "../js/chicken.js";
+import "../js/kitchen.js";
 import "../js/groceries.js";
 import "../js/drinks.js";
 import "../js/shared.js";

@@ -770,3 +770,4 @@ html{scroll-padding-top:110px}
 .tab[data-cat="home"]::before{content:"🧼 "}
 .tab[data-cat="chicken"]::before{content:"🐔 "}
 .tab[data-cat="groceries"]::before{content:"🛒 "}
+.tab[data-cat="kitchen"]::before{content:"🍳 "}

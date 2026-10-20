@@ -16,6 +16,6 @@ window.GROUPS.groceries = [
   out.sort((a, b) => a.price - b.price);
   window.PRODUCTS.push(...out);
   if (!window.CATEGORIES.includes("groceries")) window.CATEGORIES.push("groceries");
-  const ORDER = ["all", "beef", "pork", "chicken", "deli", "frozen", "groceries", "candy", "drinks", "home"];
+  const ORDER = ["all", "beef", "pork", "chicken", "deli", "frozen", "groceries", "candy", "drinks", "kitchen", "home"];
   window.CATEGORIES.sort((a, b) => (ORDER.indexOf(a) + 99) % 99 - (ORDER.indexOf(b) + 99) % 99);
 })();
