@@ -52,20 +52,23 @@
   /* ---------- State ---------- */
   let cart = {};
   let picks = {};
-  let activeCat = "all", query = "";
+  let activeCat = "all", query = "", activeGroup = "all", onlyIds = null;
+  const groupsFor = cat => (window.GROUPS || {})[cat] || [];
+  const hasAlcohol = () => Object.keys(cart).some(id => byId[id] && (byId[id].tags || []).includes("adult"));
   try { cart = JSON.parse(store.get("bb_cart") || "{}"); } catch (e) { cart = {}; }
   const droppedOos = [];
   Object.keys(cart).forEach(id => {
-    if (!byId[id]) delete cart[id];
+    const q = Number(cart[id]), st = byId[id] ? window.BB.step(byId[id]) : 1;
+    if (!byId[id] || byId[id].isGroup || !(q > 0) || q > 50 || Math.abs(q / st - Math.round(q / st)) > 1e-9) delete cart[id];
     else if (byId[id].available === false) { droppedOos.push(byId[id].name); delete cart[id]; }
   });
   const save = () => store.set("bb_cart", JSON.stringify(cart));
 
-  const step = p => (p.unit === "kg" ? KG_STEP : 1);
+  const step = p => window.BB.step(p);
   const fmtQty = (p, q) => (p.unit === "kg" ? (q % 1 ? q.toFixed(1) : q) + " kg" : "× " + q);
   const unitLabel = p => (p.unit === "kg" ? "/kg" : "");
   const icon = cat => `<svg viewBox="0 0 120 90" aria-hidden="true"><use href="#i-${cat}"/></svg>`;
-  const tagHtml = k => `<span class="tag${["gf", "vegan", "portuguese"].includes(k) ? " tag--green" : ""}">${t("tag_" + k)}</span>`;
+  const tagHtml = k => `<span class="tag${["gf", "vegan", "portuguese"].includes(k) ? " tag--green" : k === "adult" ? " tag--adult" : ""}">${t("tag_" + k)}</span>`;
   const wa = text => `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(text ?? t("wa_hi"))}`;
 
   /* ---------- Static config content ---------- */
@@ -119,7 +122,7 @@
     $("#waLink").href = wa(t("wa_q"));
     $("#waFloat").href = wa();
 
-    renderTabs(); renderGrid(); renderBoxes(); renderCuts(); renderCart();
+    renderTabs(); renderGrid(); renderBoxes(); renderCuts(); renderCart(); if (typeof renderSweets === "function") renderSweets();
     if (bz.calc && !bz.calc.hidden) renderCalc();
   }
 
@@ -127,34 +130,70 @@
   const tabs = $("#tabs");
   function renderTabs() {
     tabs.innerHTML = CATS.map(c =>
-      `<button class="tab" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
+      `<button class="tab${c === "drinks" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
+    const st = $("#subtabs");
+    const gs = groupsFor(activeCat);
+    st.hidden = !gs.length;
+    st.innerHTML = [{ id: "all", label: null }, ...gs].map(g =>
+      `<button class="subtab" data-group="${g.id}" aria-pressed="${g.id === activeGroup}">${g.label ? pick(g.label) : t("cat_all")}</button>`).join("");
+  }
+  $("#subtabs").addEventListener("click", e => {
+    const b = e.target.closest(".subtab"); if (!b) return;
+    activeGroup = b.dataset.group; onlyIds = null; renderTabs(); renderGrid(); toShop();
+  });
+  // department bar: when it sticks under the header, hide the search box to keep it slim
+  const shopBar = $(".shop-bar");
+  const stuck = () => {
+    const top = parseFloat(getComputedStyle(shopBar).top) || 0;
+    const on = shopBar.getBoundingClientRect().top <= top + 1 && scrollY > 200;
+    shopBar.classList.toggle("is-stuck", on && !$("#search").value && document.activeElement !== $("#search"));
+  };
+  addEventListener("scroll", stuck, { passive: true }); addEventListener("resize", stuck);
+  // after switching department, bring the first products into view (only if we have scrolled past them)
+  function toShop() {
+    const bar = $(".shop-bar"), grid = $("#grid");
+    const y = grid.getBoundingClientRect().top + scrollY - bar.offsetHeight - ($(".header") ? $(".header").offsetHeight : 0) - 12;
+    if (scrollY > y) window.scrollTo({ top: y, behavior: "smooth" });
   }
   tabs.addEventListener("click", e => {
     const b = e.target.closest(".tab"); if (!b) return;
-    activeCat = b.dataset.cat; renderTabs(); renderGrid();
+    activeCat = b.dataset.cat; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid(); toShop();
+    const sel = $(".tab[aria-selected=true]");
+    if (sel && tabs.scrollWidth > tabs.clientWidth) tabs.scrollTo({ left: sel.offsetLeft - tabs.clientWidth / 2 + sel.offsetWidth / 2, behavior: "smooth" });
   });
-  $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderGrid(); });
+  $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); onlyIds = null; renderGrid(); });
 
   /* ---------- Product grid ---------- */
-  function card(p) {
+  const vsel = {};   // chosen option for grouped products
+  const variantOf = g => {
+    const opts = g.variants.map(id => byId[id]);
+    return byId[vsel[g.id]] || opts.find(v => v.available !== false) || opts[0];
+  };
+  function card(g) {
+    const p = g.isGroup ? variantOf(g) : g;
     const q = picks[p.id] ?? step(p);
-    const out = p.available === false;
+    const out = g.isGroup ? g.variants.every(id => byId[id].available === false) : p.available === false;
+    const optsHtml = g.isGroup ? `<label class="opt"><span>${t("opt_choose")}</span><select data-group="${g.id}">${g.variants.map(id => {
+      const v = byId[id];
+      return `<option value="${id}"${id === p.id ? " selected" : ""}${v.available === false ? " disabled" : ""}>${v.optionLabel} — ${v.soon ? t("soon") : money(v.price) + (v.available === false ? " · " + t("out") : "")}</option>`;
+    }).join("")}</select></label>` : "";
     const media = p.image ? `<img src="${p.image}" alt="${p.name} — ${pick(p.sub)}" loading="lazy">` : icon(p.cat);
     return `
-      <article class="card${out ? " card--out" : ""}" id="p-${p.id}">
+      <article class="card${out ? " card--out" : ""}${p.image && p.image.includes("assets/products/") ? " card--framed" : ""}${g.isGroup ? " card--group" : ""}" id="p-${g.id}">
         <div class="card__media">
           ${media}
-          <div class="card__tags">${(p.tags || []).map(tagHtml).join("")}${out ? `<span class="tag">${t("out")}</span>` : ""}</div>
+          <div class="card__tags">${(g.tags || []).map(tagHtml).join("")}${(g.promo || p.was) ? `<span class="tag tag--promo">${t("tag_promo")}</span>` : ""}${g.isGroup ? `<span class="tag tag--opts">${g.variants.length} ${t("opt_n")}</span>` : ""}${out ? `<span class="tag">${t(p.soon ? "soon" : "out")}</span>` : ""}</div>
           <span class="cat">${t("cat_" + p.cat)}</span>
         </div>
         <div class="card__body">
-          <h3 class="card__name">${p.name}</h3>
+          <h3 class="card__name">${g.name}</h3>
           <p class="card__en">${pick(p.sub)}</p>
           <p class="card__desc">${pick(p.desc)}</p>
+          ${optsHtml}
           <div class="card__row">
-            <span class="price">${money(p.price)}<small>${unitLabel(p)}</small></span>
-            ${out ? `
-            <button class="btn btn--similar" data-act="similar" data-id="${p.id}">${t("similar_btn")}</button>` : `
+            <span class="price">${p.soon ? `<small>${t("soon")}</small>` : `${p.was ? `<s class="was">${money(p.was)}</s>` : ""}${money(p.price)}<small>${unitLabel(p)}</small>`}</span>
+            ${p.soon ? "" : out ? `
+            <button class="btn btn--similar" data-act="similar" data-id="${g.id}">${t("similar_btn")}</button>` : `
             <div class="card__buy">
               <div class="qty">
                 <button data-act="dec" data-id="${p.id}" aria-label="−">−</button>
@@ -170,14 +209,69 @@
       </article>`;
   }
 
+  const GRID_PAGE = 36; let gridLimit = GRID_PAGE, gridKey = "";
+  const SHOW_N = 4;
   function renderGrid() {
-    const list = P.filter(p =>
-      (activeCat === "all" || p.cat === activeCat) &&
-      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc)].join(" ").toLowerCase().includes(query)));
-    $("#grid").innerHTML = list.length ? list.map(card).join("") : `<p class="empty-state">${t("none")}</p>`;
+    const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
+    const list = P.filter(p => !p.hidden &&
+      (activeCat === "all" || p.cat === activeCat || (activeCat === "promo" && p.promo)) &&
+      (activeCat === "all" || activeCat === "promo" || activeGroup === "all" || p.group === activeGroup) &&
+      (!onlyIds || onlyIds.includes(p.id)) &&
+      (!query || [p.name, p.sub.en, pick(p.sub), pick(p.desc), p.group ? gLabel(p) : ""].join(" ").toLowerCase().includes(query)));
+    if (activeCat === "promo") {
+      const gi = p => groupsFor(p.cat).findIndex(g => g.id === p.group);
+      list.sort((a, b) => CATS.indexOf(a.cat) - CATS.indexOf(b.cat) || gi(a) - gi(b) || a.price - b.price);
+    }
+    if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
+    // "Todos": a tidy showcase — a few products per department + "see all" button
+    if (activeCat === "all" && !query && !onlyIds) {
+      let html = "";
+      CATS.filter(c => c !== "all").forEach(c => {
+        const inCat = list.filter(p => c === "promo" ? p.promo : p.cat === c);
+        if (!inCat.length) return;
+        const pickN = [...inCat.filter(p => (p.tags || []).includes("best") && p.available !== false),
+                       ...inCat.filter(p => !(p.tags || []).includes("best") && p.available !== false)].slice(0, SHOW_N);
+        html += `<div class="dept" data-dept="${c}"><h3 class="dept__head"><span>${t("cat_" + c)}</span><small>${inCat.length} ${t("n_products")}</small>
+          <button class="dept__all" data-goto="${c}">${t("see_all")} →</button></h3></div>`;
+        html += pickN.map(card).join("");
+      });
+      $("#grid").innerHTML = html;
+      return;
+    }
+    const key = activeCat + "|" + activeGroup + "|" + query + "|" + (onlyIds ? 1 : 0);
+    if (key !== gridKey) { gridKey = key; gridLimit = GRID_PAGE; }
+    const capped = !onlyIds && list.length > gridLimit;
+    const shown = capped ? list.slice(0, gridLimit) : list;
+    let html = "", lastHead = null;
+    shown.forEach(p => {
+      if (p.group) {
+        const head = p.cat + ":" + p.group;
+        if (head !== lastHead) {
+          const n = list.filter(x => x.cat === p.cat && x.group === p.group).length;
+          const pre = activeCat === "all" ? `${t("cat_" + p.cat)} · ` : "";
+          html += `<h3 class="grid__head"><span>${pre}${gLabel(p)}</span><small>${n} · ${t("sorted_price")}</small></h3>`;
+          lastHead = head;
+        }
+      } else if (lastHead !== null && lastHead !== "cat:" + p.cat) {
+        html += `<h3 class="grid__head"><span>${t("cat_" + p.cat)}</span></h3>`;
+        lastHead = "cat:" + p.cat;
+      }
+      html += card(p);
+    });
+    if (capped) html += `<div class="more-wrap"><button class="more-btn" data-more>${t("more_btn")}<small>${list.length - gridLimit}</small></button></div>`;
+    $("#grid").innerHTML = html;
   }
 
+  $("#grid").addEventListener("change", e => {
+    const sel = e.target.closest("select[data-group]"); if (!sel) return;
+    vsel[sel.dataset.group] = sel.value;
+    const el = document.getElementById("p-" + sel.dataset.group);
+    if (el) { el.outerHTML = card(byId[sel.dataset.group]); }
+  });
   $("#grid").addEventListener("click", e => {
+    if (e.target.closest("[data-more]")) { gridLimit += GRID_PAGE * 2; renderGrid(); return; }
+    const go = e.target.closest("[data-goto]");
+    if (go) { activeCat = go.dataset.goto; activeGroup = "all"; onlyIds = null; renderTabs(); renderGrid(); toShop(); return; }
     const b = e.target.closest("button[data-act]"); if (!b) return;
     const p = byId[b.dataset.id], s = step(p);
     const cur = picks[p.id] ?? s;
@@ -221,9 +315,14 @@
     g.setAttribute("tabindex", "0");
     g.setAttribute("role", "button");
     const go = () => {
-      activeCat = "beef"; query = ""; $("#search").value = "";
+      const key = { contrafile: "contrafile" }[g.dataset.cut] || g.dataset.cut;
+      activeCat = "beef"; activeGroup = "all";
+      const hit = P.filter(p => p.cat === "beef" && p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(key));
+      query = ""; $("#search").value = "";
+      onlyIds = hit.length > 1 ? hit.map(p => p.id) : null;
       renderTabs(); renderGrid();
-      const el = document.getElementById("p-" + g.dataset.cut);
+      if (!hit.length) toast(t("cut_ask").replace("{cut}", g.querySelector("text").textContent));
+      const el = hit.length ? document.getElementById("p-" + hit[0].id) : $("#grid");
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "center" });
         el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600);
@@ -244,7 +343,7 @@
     toast(`${p.name} ${t("added")} — ${fmtQty(p, q)}`);
     if (!silentAdd) brazaReact(p);
   }
-  const total = () => Object.entries(cart).reduce((s, [id, q]) => s + byId[id].price * q, 0);
+  const total = () => Object.entries(cart).reduce((s, [id, q]) => s + window.BB.lineTotal(byId[id], q), 0);
 
   function renderCart() {
     const ids = Object.keys(cart);
@@ -255,13 +354,15 @@
       const p = byId[id], q = cart[id];
       return `<div class="line">
         <div><div class="line__name">${p.name}</div><div class="line__en">${pick(p.sub)} · ${money(p.price)}${unitLabel(p)}</div></div>
-        <div class="line__price">${money(p.price * q)}</div>
+        <div class="line__price">${money(window.BB.lineTotal(p, q))}</div>
         <div class="line__ctrl">
           <div class="qty"><button data-c="dec" data-id="${id}" aria-label="−">−</button><span>${fmtQty(p, q)}</span><button data-c="inc" data-id="${id}" aria-label="+">+</button></div>
           <button class="remove" data-c="rm" data-id="${id}">${t("remove")}</button>
         </div>
       </div>`;
     }).join("");
+    const ac = $("#ageCheck");
+    if (ac) { ac.hidden = !hasAlcohol(); form.adult.required = hasAlcohol(); }
     updateTotals();
   }
 
@@ -329,6 +430,7 @@
     updateTotals();
   });
   form.postcode.addEventListener("input", updateTotals);
+  form.adult.addEventListener("change", () => $("#ageCheck").classList.remove("age-check--err"));
   form.postcode.addEventListener("blur", () => { if (form.postcode.value.trim()) form.postcode.value = window.BB.normPostcode(form.postcode.value); });
 
   /* ---------- Checkout: pay online, then send details on WhatsApp ---------- */
@@ -342,16 +444,17 @@
       name: d.get("name"), phone: d.get("phone"),
       address: d.get("address") || "", postcode: q && q.postcode ? q.postcode : "",
       fee: q && q.status === "ok" ? q.fee : (q && q.status === "tbc" ? "tbc" : 0),
-      day: d.get("day") || "", notes: d.get("notes") || ""
+      day: d.get("day") || "", notes: d.get("notes") || "",
+      adult: hasAlcohol() ? !!form.adult.checked : undefined
     };
   }
 
   function orderMessage(o, paidRef) {
     const lines = Object.entries(o.items).filter(([id]) => byId[id]).map(([id, q]) => {
       const p = byId[id];
-      return `• ${p.name} (${pick(p.sub)}) — ${fmtQty(p, q)} — ${money(p.price * q)}`;
+      return `• ${p.name} (${pick(p.sub)}) — ${fmtQty(p, q)} — ${money(window.BB.lineTotal(p, q))}`;
     });
-    const sub = Object.entries(o.items).reduce((s, [id, q]) => s + (byId[id] ? byId[id].price * q : 0), 0);
+    const sub = Object.entries(o.items).reduce((s, [id, q]) => s + (byId[id] ? window.BB.lineTotal(byId[id], q) : 0), 0);
     const del = o.mode === "delivery";
     const fee = typeof o.fee === "number" ? o.fee : 0;
     return [
@@ -367,7 +470,8 @@
       del ? `*${plain("o_address")}:* ${o.address}` : "",
       del ? `*${plain("o_postcode")}:* ${o.postcode}` : "",
       o.day ? `*${plain("d_day")}:* ${o.day}` : "",
-      o.notes ? `*${plain("d_notes")}:* ${o.notes}` : ""
+      o.notes ? `*${plain("d_notes")}:* ${o.notes}` : "",
+      o.adult ? `*18+:* ✅ ${plain("age_short")}` : ""
     ].filter((l, i, arr) => l !== "" || arr[i - 1] !== "").join("\n");
   }
 
@@ -382,6 +486,9 @@
     const q = currentQuote();
     if (q && (q.status === "invalid" || q.status === "out" || q.status === "empty")) {
       updateTotals(); form.postcode.focus(); return;
+    }
+    if (hasAlcohol() && !form.adult.checked) {
+      $("#ageCheck").classList.add("age-check--err"); form.adult.focus(); toast(t("age_needed")); return;
     }
     const o = snapshot();
     if (!S.onlinePayment) { sendManual(o); toast(t("opening")); return; }
@@ -401,6 +508,7 @@
         return;
       }
       if (res.status === 409) { toast(t("err_oos")); }
+      else if (data.error === "age_required") { toast(t("age_needed")); }
       else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); sendManual(o); }
       else { toast(t("err_generic")); }
     } catch (err) {
@@ -439,7 +547,9 @@
   /* ---------- Out of stock → similar products ---------- */
   function similarTo(p) {
     const chosen = (p.similar || []).map(id => byId[id]).filter(x => x && x.available !== false);
-    const sameCat = P.filter(x => x.cat === p.cat && x.id !== p.id && x.available !== false && !chosen.includes(x));
+    const ok = x => !x.hidden && x.id !== p.id && x.id !== p.parent && x.available !== false && !chosen.includes(x);
+    const sameCat = [...P.filter(x => ok(x) && x.cat === p.cat && x.group && x.group === p.group),
+                     ...P.filter(x => ok(x) && x.cat === p.cat && (!x.group || x.group !== p.group))];
     return [...chosen, ...sameCat].slice(0, 3);
   }
   function openSimilar(id) {
@@ -457,7 +567,7 @@
   }
   $("#similarList").addEventListener("click", e => {
     const b = e.target.closest("[data-add-similar]"); if (!b) return;
-    const p = byId[b.dataset.addSimilar];
+    let p = byId[b.dataset.addSimilar]; if (p.isGroup) p = variantOf(p);
     addToCart(p.id, step(p)); closeModals();
   });
 
@@ -506,8 +616,12 @@
     if (ms) bz.timer = setTimeout(() => { bz.bubble.hidden = true; }, ms);
   }
   function brazaReact(p) {
-    if (p.id === "picanha") return brazaSay(t("bz_r_picanha"));
+    if (p.id.startsWith("picanha")) return brazaSay(t("bz_r_picanha"));
     if (p.cat === "boxes") return brazaSay(t("bz_r_box"));
+    if (p.cat === "drinks") {
+      const k = p.group === "beer" ? "bz_r_beer" : p.group === "cachaca" ? "bz_r_cachaca" : p.group === "wine" ? "bz_r_wine" : "bz_r_cheers";
+      return brazaSay(t(k), 3800);
+    }
     const hasFarofa = cart.farofa;
     const pool = ["bz_r1", "bz_r2"].concat(hasFarofa || p.cat === "groceries" ? [] : ["bz_r3"]);
     brazaSay(t(pool[Math.floor(Math.random() * pool.length)]), 3800);
@@ -525,28 +639,28 @@
   }
 
   /* --- Churrasco calculator --- */
-  const MIX = [ ["picanha", .30], ["fraldinha", .20], ["toscana", .20], ["coracao", .10], ["asinha", .10], ["panceta", .10] ];
+  const MIX = [ ["picanha-angus", .35], ["fraldinha", .20], ["contrafile-br", .15], ["maminha", .15], ["calabresa-jlp", .15] ];
   function churrascoPlan() {
     const hungry = (document.querySelector('input[name="bzApp"]:checked') || {}).value === "hungry";
     const n = bz.people, totalKg = n * (hungry ? .55 : .4);
     const avail = MIX.filter(([id]) => byId[id] && byId[id].available !== false);
     const share = avail.reduce((s, [, f]) => s + f, 0) || 1;
     const items = avail.map(([id, f]) => [id, Math.max(.5, Math.round((totalKg * f / share) * 2) / 2)]);
-    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["paodequeijo", Math.ceil(n / 8)]]
+    const extra = [["farofa", Math.ceil(n / 6)], ["salgrosso", Math.ceil(n / 15)], ["rez-18", Math.ceil(n / 15)], ["salsicha-calabresa", Math.ceil(n / 8)]]
       .filter(([id]) => byId[id] && byId[id].available !== false);
     return { n, totalKg, items: items.concat(extra) };
   }
   function renderCalc() {
     $("#bzPeople").textContent = bz.people;
     const plan = churrascoPlan();
-    const total = plan.items.reduce((s, [id, q]) => s + byId[id].price * q, 0);
+    const total = plan.items.reduce((s, [id, q]) => s + window.BB.lineTotal(byId[id], q), 0);
     const box = bz.people <= 4 ? byId.box4 : bz.people <= 8 ? byId.box8 : null;
     const kg = (Math.round(plan.totalKg * 10) / 10).toString();
     $("#bzResult").innerHTML = `
       <p>${t("bz_result").replace("{n}", plan.n).replace("{kg}", kg)}</p>
       <ul class="braza__list">${plan.items.map(([id, q]) => {
         const p = byId[id];
-        return `<li><span>${p.name}</span><em>${fmtQty(p, q)}</em><b>${money(p.price * q)}</b></li>`;
+        return `<li><span>${p.name}</span><em>${fmtQty(p, q)}</em><b>${money(window.BB.lineTotal(p, q))}</b></li>`;
       }).join("")}</ul>
       <div class="braza__total"><span>${plain("d_total")}</span><strong>${money(total)}</strong></div>
       <button class="btn btn--pay btn--block" data-bz="addall">${t("bz_add_all")}</button>
@@ -583,12 +697,59 @@
   if (!ssGet("bz_seen")) setTimeout(() => { brazaSay(t("bz_greet"), 9000); ssSet("bz_seen", "1"); }, 2600);
   else bz.btn.querySelector(".braza__dot").hidden = true;
 
+  /* ---------- Sweets showcase ---------- */
+  const SWEETS_TOP = ["docinhos", "pacoca", "prestigio", "bis", "bombom", "caixa-bombons", "goiabada-predilecta", "fondant",
+                      "pe-moleque", "bananinha", "tortuguita", "barra-recheada", "baton", "amendoas", "cocada", "sete-belo"];
+  function renderSweets() {
+    const rail = $("#sweetsRail"); if (!rail) return;
+    const items = SWEETS_TOP.map(id => byId[id]).filter(Boolean);
+    rail.innerHTML = items.map((g, i) => {
+      const p = g.isGroup ? variantOf(g) : g;
+      return `<button class="sweet" data-sweet="${g.id}" style="--d:${(i % 8) * 60}ms">
+        <span class="sweet__img"><img src="${p.image}" alt="${g.name}" decoding="async"></span>
+        <span class="sweet__name">${g.name}</span>
+        <span class="sweet__price">${g.isGroup ? t("sw_from") + " " : ""}${money(g.price)}</span>
+      </button>`;
+    }).join("");
+    $("#sweetsCount").textContent = "(" + P.filter(p => p.cat === "candy" && !p.hidden).length + ")";
+  }
+  function goSweets(focusId) {
+    activeCat = "candy"; activeGroup = "all"; onlyIds = null; query = ""; $("#search").value = "";
+    renderTabs(); renderGrid();
+    const el = focusId && document.getElementById("p-" + focusId);
+    (el || document.getElementById("shop")).scrollIntoView({ behavior: "smooth", block: el ? "center" : "start" });
+    if (el) { el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600); }
+  }
+  $("#sweetsRail") && $("#sweetsRail").addEventListener("click", e => { const b = e.target.closest("[data-sweet]"); if (b) goSweets(b.dataset.sweet); });
+  $("#sweetsAll") && $("#sweetsAll").addEventListener("click", () => goSweets());
+
+  /* No BBQ boxes in the catalogue yet → hide that section; "Build your churrasco" opens Seu Braza's calculator */
+  if (!P.some(p => p.cat === "boxes")) {
+    const sec = document.getElementById("boxes"); if (sec) sec.hidden = true;
+    $$('a[href="#boxes"]').forEach(a => {
+      if (a.classList.contains("btn")) a.addEventListener("click", e => { e.preventDefault(); brazaOpen(true); showView("calc"); });
+      else a.remove();
+    });
+  }
+
   /* Header shrinks on scroll */
   const header = $(".header");
   const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
   window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
   applyLang();
+  // live price / stock changes made in the admin panel
+  fetch("/api/overrides").then(r => r.ok ? r.json() : null).then(d => {
+    const ov = d && d.overrides; if (!ov || !Object.keys(ov).length) return;
+    P.forEach(p => { if (!p.isGroup) window.BB.applyOverride(p, ov[p.id]); });
+    P.forEach(g => { if (g.isGroup) {
+      const vs = g.variants.map(id => byId[id]);
+      const ps = vs.filter(v => v.available !== false && v.price > 0).map(v => v.price);
+      if (ps.length) g.price = Math.min(...ps);
+      g.promo = vs.some(v => v.was); } });
+    Object.keys(cart).forEach(id => { if (byId[id] && byId[id].available === false) delete cart[id]; });
+    save(); applyLang();
+  }).catch(() => {});
   if (droppedOos.length) setTimeout(() => toast(`${droppedOos.join(", ")} ${t("removed_oos")}`), 600);
   handleReturn();
 })();
