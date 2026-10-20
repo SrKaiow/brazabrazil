@@ -4,6 +4,10 @@
 window.GROUPS = window.GROUPS || {};
 window.GROUPS.groceries = [
   { id: "laticinios", label: { en: "Cheese, milk & butter", "pt-BR": "Queijos, leite & manteiga", "pt-PT": "Queijos, leite & manteiga", es: "Quesos, leche y mantequilla" } },
+  { id: "matinais", label: { en: "Breakfast, cereals & chocolate drinks", "pt-BR": "Café da manhã & achocolatados", "pt-PT": "Pequeno-almoço & achocolatados", es: "Desayuno y cacao" } },
+  { id: "massas", label: { en: "Instant noodles", "pt-BR": "Miojo & massas instantâneas", "pt-PT": "Massas instantâneas", es: "Fideos instantáneos" } },
+  { id: "molhos", label: { en: "Hot sauces & sauces", "pt-BR": "Molhos & pimentas", "pt-PT": "Molhos & piri-piri", es: "Salsas y picantes" } },
+  { id: "conservas", label: { en: "Portuguese tinned food", "pt-BR": "Conservas portuguesas", "pt-PT": "Conservas", es: "Conservas portuguesas" } },
   { id: "geral", label: { en: "Pantry", "pt-BR": "Mercearia", "pt-PT": "Mercearia", es: "Despensa" } }
 ];
 (function () {
@@ -21,7 +25,7 @@ window.GROUPS.groceries = [
       out.push({ id: vid, name: name + " · " + label, optionLabel: label, parent: id, hidden: true, cat: "groceries", group,
                  unit: unit || "each", price, tags: (extra && extra.tags) || [], image: I(image), available: true, sub, desc });
     });
-    out.push(Object.assign({ id, name, cat: "groceries", group, unit: "each", price: Math.min(...variants.map(v => v[2])), isGroup: true, variants: ids, tags: [],
+    out.push(Object.assign({ id, name, cat: "groceries", group, unit: "each", price: Math.min(...variants.map(v => v[2]).filter(x => x > 0)), isGroup: true, variants: ids, tags: [],
                  image: I(first), available: true, sub, desc }, extra || {}));
   };
   const S = (id, name, group, price, image, sub, desc, extra) =>
@@ -59,7 +63,51 @@ window.GROUPS.groceries = [
     [["tang-abacaxi", "Abacaxi", 1.50, "tang-abacaxi"], ["tang-goiaba", "Goiaba", 1.50, "tang-goiaba"], ["tang-laranja", "Laranja", 1.50, "tang-laranja"],
      ["tang-limao", "Limão", 1.50, "tang-limao"], ["tang-manga", "Manga", 1.50, "tang-manga"], ["tang-maracuja", "Maracujá", 1.50, "tang-maracuja"],
      ["tang-morango", "Morango", 1.50, "tang-morango"], ["tang-tangerina", "Tangerina", 1.50, "tang-tangerina"], ["tang-uva", "Uva", 1.50, "tang-uva"]]);
-  const SOON = new Set(["muenster", "llanero", "requeijao-mabiju"]);
+  /* ---------- remessa Nestlé / Nissin / molhos / Nobre ---------- */
+  S("creme-leite", "Creme de Leite Nestlé · 200 g", "laticinios", 3.69, "creme-leite",
+    { en: "Brazilian table cream · UHT", pt: "Creme de leite leve", es: "Nata para cocinar" },
+    { en: "For strogonoff, mousse and every Brazilian dessert.", pt: "Para strogonoff, mousse e as sobremesas brasileiras.", es: "Para strogonoff, mousse y postres." });
+  S("leite-cond-cozido", "Leite Condensado Cozido Nestlé · 397 g", "laticinios", 3.49, "leite-cond-cozido",
+    { en: "Ready-made caramel (dulce de leche)", pt: "Leite condensado cozido · doce de leite", es: "Dulce de leche listo" },
+    { en: "Already cooked and creamy — for banoffee, cakes and straight from the spoon.", pt: "Já cozido e cremoso — para banoffee, bolos ou de colher.", es: "Ya cocido y cremoso — para tartas o a cucharadas." }, { tags: ["portuguese"] });
+  S("nescau", "Nescau · 350 g", "matinais", 3.80, "nescau",
+    { en: "Brazilian chocolate drink powder", pt: "Achocolatado em pó", es: "Cacao en polvo brasileño" },
+    { en: "The Brazilian chocolate milk everyone grew up with.", pt: "O achocolatado de toda infância brasileira.", es: "El cacao con el que crecieron todos los brasileños." });
+  S("nestum-mel", "Nestum Mel Nestlé", "matinais", 4.99, "nestum-mel",
+    { en: "Honey cereal flakes", pt: "Cereal de trigo com mel", es: "Cereal con miel" },
+    { en: "Classic Portuguese honey cereal — with milk or yoghurt.", pt: "O clássico Nestum de mel — com leite ou iogurte.", es: "El clásico cereal portugués con miel." }, { tags: ["portuguese"] });
+  S("cerelac", "Cerelac Farinha Láctea Nestlé", "matinais", 8.99, "cerelac",
+    { en: "Milk cereal · from 6 months", pt: "Farinha láctea · a partir de 6 meses", es: "Papilla de cereales con leche" },
+    { en: "The original farinha láctea — for babies and grown-up cravings.", pt: "A farinha láctea original — para os bebês e para a saudade dos grandes.", es: "La papilla original con leche." }, { tags: ["portuguese"] });
+  G("nissin", "Nissin Lámen · Miojo", "massas",
+    { en: "Brazilian instant noodles · ready in 3 min", pt: "Macarrão instantâneo · pronto em 3 min", es: "Fideos instantáneos · listos en 3 min" },
+    { en: "The real Brazilian miojo — pick your flavour.", pt: "O miojo de verdade — escolha o sabor.", es: "El auténtico miojo brasileño — elige el sabor." },
+    [["nissin-carne", "Noodle Carne", 1.59, "nissin-carne"], ["nissin-feijao", "Caldinho de Feijão · Chico Bento", 1.59, "nissin-feijao"],
+     ["nissin-costela", "Costela", 1.99, "nissin-costela"], ["nissin-galinha", "Galinha Caipira", 1.99, "nissin-galinha"],
+     ["nissin-legumes", "Legumes", 1.99, "nissin-legumes"], ["nissin-picanha", "Picanha", 1.99, "nissin-picanha"]]);
+  G("gota", "Molho Gota Maratá", "molhos",
+    { en: "Brazilian sauces · Gota", pt: "Molhos Gota", es: "Salsas brasileñas Gota" },
+    { en: "Maratá’s classic Gota sauces — red chilli, green chilli or garlic.", pt: "Os clássicos molhos Gota da Maratá — pimenta vermelha, verde ou alho.", es: "Las clásicas salsas Gota de Maratá." },
+    [["gota-vermelha", "Pimenta vermelha", 2.50, "gota-vermelha"], ["gota-verde", "Pimenta verde · 150 ml", 2.50, "gota-verde"], ["gota-alho", "Alho · 150 ml", 0, "gota-alho"]]);
+  S("cepera-extra", "Molho de Pimenta Extra Forte Cepêra · 60 ml", "molhos", 2.20, "cepera-extra",
+    { en: "Extra-hot chilli sauce", pt: "Pimenta extra forte", es: "Salsa picante extra fuerte" },
+    { en: "For those who like it really hot.", pt: "Para quem gosta de pimenta de verdade.", es: "Para los que lo quieren bien picante." });
+  S("molho-calabresa", "Molho de Pimenta Calabresa D’Horta · 150 ml", "molhos", 2.50, "molho-calabresa",
+    { en: "Creamy calabresa chilli sauce", pt: "Pimenta calabresa cremosa", es: "Salsa cremosa de guindilla" },
+    { en: "Creamy and spicy — great on pastel, coxinha and churrasco.", pt: "Cremosa e picante — ótima no pastel, coxinha e churrasco.", es: "Cremosa y picante." });
+  S("murupi", "Molho de Pimenta Murupi Campilar · 150 ml", "molhos", 2.50, "murupi",
+    { en: "Amazonian murupi chilli sauce", pt: "Pimenta murupi da Amazônia", es: "Salsa de ají murupi" },
+    { en: "The aromatic chilli of the Amazon, in a creamy sauce.", pt: "A pimenta aromática da Amazônia, em molho cremoso.", es: "El ají aromático del Amazonas." });
+  S("nobre-chispalhada", "Chispalhada Nobre", "conservas", 2.99, "nobre-chispalhada",
+    { en: "Portuguese pork & bean stew · tinned", pt: "Chispalhada em lata", es: "Guiso portugués de cerdo y alubias" },
+    { en: "Home-style Portuguese stew, ready in 3 minutes.", pt: "Receita caseira portuguesa, pronta em 3 minutos.", es: "Guiso casero portugués, listo en 3 minutos." }, { tags: ["portuguese"] });
+  S("nobre-dobrada", "Dobrada com Feijão Branco Nobre", "conservas", 3.50, "nobre-dobrada",
+    { en: "Tripe with white beans · tinned", pt: "Dobrada com feijão branco em lata", es: "Callos con alubias blancas" },
+    { en: "The Portuguese classic, ready in 3 minutes.", pt: "O clássico português, pronto em 3 minutos.", es: "El clásico portugués, listo en 3 minutos." }, { tags: ["portuguese"] });
+  S("nobre-chourico", "Chouriço em Lata Nobre", "conservas", 9.50, "nobre-chourico",
+    { en: "Smoked pork sausage in oil · tinned", pt: "Chouriço de porco em óleo", es: "Chorizo ahumado en aceite" },
+    { en: "Smoked Portuguese chouriço preserved in oil — slice and serve.", pt: "Chouriço fumado conservado em óleo — é só fatiar.", es: "Chorizo portugués ahumado en aceite." }, { tags: ["portuguese"] });
+  const SOON = new Set(["muenster", "llanero", "requeijao-mabiju", "gota-alho"]);
   out.forEach(p => { if (SOON.has(p.id)) { p.available = false; p.soon = true; } });
   const order = window.GROUPS.groceries.map(g => g.id);
   out.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || a.price - b.price || a.name.localeCompare(b.name));
