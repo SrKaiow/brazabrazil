@@ -185,10 +185,10 @@ window.GROUPS.candy = [
     { en: "Made from real bananas — soft, sweet and naturally fruity.", pt: "Feita com banana de verdade — macia e docinha.", es: "Hecho con plátano de verdad — suave y dulce." },
     [["bananinha-paraibuna", "Paraibuna · unidade 36 g", 1.50, "bananinha-paraibuna"], ["bananinha-monica", "Turma da Mônica mini · 70 g", 3.69, "bananinha-monica"],
      ["bananinha-13", "Pacote 13 unidades", 6.50, "bananinha-paraibuna"], ["bananinha-200g", "Guimarães cristalizada · 200 g", 6.99, "bananinha-200g"]], { tags: ["gf", "vegan"] });
-  G("sete-belo", "Bala 7 Belo · 90 g", "balas",
+  G("sete-belo", "Bala 7 Belo", "balas",
     { en: "Chewy candy", pt: "Bala mastigável", es: "Caramelo masticable" },
     { en: "The chewy candy of every Brazilian childhood.", pt: "A bala de toda infância brasileira.", es: "El caramelo masticable de la infancia brasileña." },
-    [["sete-belo-framboesa", "Framboesa (original)", 3.50, "sete-belo-framboesa"], ["sete-belo-iogurte", "Iogurte", 3.50, "sete-belo-iogurte"]]);
+    [["sete-belo-pacote", "Framboesa · pacote", 2.99, "sete-belo-pacote"], ["sete-belo-framboesa", "Framboesa · 90 g", 3.50, "sete-belo-framboesa"], ["sete-belo-iogurte", "Iogurte · 90 g", 3.50, "sete-belo-iogurte"]]);
   S("bala-yogurte", "Bala de Yogurte 100 Dori", "balas", 2.59, "bala-yogurte",
     { en: "Strawberry yoghurt chewy candy", pt: "Bala mastigável de iogurte", es: "Caramelo masticable de yogur" },
     { en: "Creamy strawberry-yoghurt chews.", pt: "Bala cremosa sabor iogurte de morango.", es: "Caramelos cremosos de yogur de fresa." });
@@ -198,6 +198,22 @@ window.GROUPS.candy = [
   S("bala-banana", "Bala de Banana DaColônia", "balas", 2.99, "bala-banana",
     { en: "Banana candy · 160 g", pt: "Bala de banana · 160 g", es: "Caramelo de plátano · 160 g" },
     { en: "Real-fruit banana candies.", pt: "Balas feitas com banana de verdade.", es: "Caramelos de plátano de verdad." }, { tags: ["gf", "vegan"] });
+
+  /* ---------- batch 5 ---------- */
+  S("bala-canela", "Bala de Canela Florestal", "balas", 0.20, "bala-canela",
+    { en: "Cinnamon hard candy · unit", pt: "Bala de canela · unidade", es: "Caramelo de canela · unidad" },
+    { en: "The classic cinnamon candy.", pt: "A clássica bala de canela.", es: "El clásico caramelo de canela." });
+  S("algodao-doce", "Bala Algodão Doce Junco", "balas", 1.80, "algodao-doce",
+    { en: "Cotton-candy flavour melt-in-the-mouth sweets", pt: "Bala de aniversário sabor algodão doce", es: "Caramelos sabor algodón de azúcar" },
+    { en: "The melt-in-your-mouth party sweets of every Brazilian birthday.", pt: "As balinhas que derretem na boca, de toda festa de aniversário.", es: "Los caramelos que se deshacen en la boca de todo cumpleaños." });
+  S("bala-coco", "Bala de Coco Guimarães 100 g", "brasil", 2.99, "bala-coco",
+    { en: "Melt-in-the-mouth coconut sweets", pt: "Bala de coco receita da vovó", es: "Caramelos de coco" },
+    { en: "Grandma’s recipe — soft coconut sweets that melt in your mouth.", pt: "Receita da vovó — bala de coco que derrete na boca.", es: "Receta de la abuela — caramelos de coco que se deshacen." }, { tags: ["gf"] });
+  G("amendoas", "Amêndoas de Chocolate", "chocolates",
+    { en: "Chocolate almonds · Portuguese football clubs", pt: "Amêndoas de chocolate · clubes portugueses", es: "Almendras de chocolate · clubes portugueses" },
+    { en: "Chocolate-coated almonds in your club’s colours — the perfect gift.", pt: "Amêndoas cobertas de chocolate nas cores do seu clube — o presente perfeito.", es: "Almendras con chocolate con los colores de tu club." },
+    [["amendoas-benfica", "Benfica", 4.99, "amendoas-benfica"], ["amendoas-porto", "Porto", 4.99, "amendoas-porto"],
+     ["amendoas-sporting", "Sporting", 4.99, "amendoas-sporting"], ["amendoas-portugal", "Portugal", 4.99, "amendoas-portugal"]], { tags: ["portuguese"] });
 
   /* ---------- SNACKS ---------- */
   S("wotsits", "Wotsits That’s Nuts", "snacks", 2.99, "wotsits",

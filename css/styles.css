@@ -730,3 +730,39 @@ html{scroll-padding-top:110px}
 .tag--opts{background:var(--navy);color:#fff}
 .tab[data-cat="frozen"]::before{content:"❄ "}
 .card--framed .card__tags{max-width:calc(100% - 90px)}
+
+/* ============================================================
+   SWEETS SHOWCASE — "Doces do Brasil"
+   ============================================================ */
+.sweets{position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(160deg,#fff4f8 0%,#fff9ee 45%,#f2fbf5 100%);border-block:1px solid rgba(214,174,72,.25)}
+.sweets__confetti{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:
+    radial-gradient(circle at 8% 20%, #f2c230 0 5px, transparent 6px),
+    radial-gradient(circle at 92% 14%, #e8508a 0 6px, transparent 7px),
+    radial-gradient(circle at 18% 82%, #0b7a3b 0 4px, transparent 5px),
+    radial-gradient(circle at 78% 78%, #2e3a94 0 5px, transparent 6px),
+    radial-gradient(circle at 50% 8%, #e8508a 0 3px, transparent 4px),
+    radial-gradient(circle at 64% 92%, #f2c230 0 4px, transparent 5px),
+    radial-gradient(circle at 34% 30%, #2e3a94 0 2px, transparent 3px),
+    radial-gradient(circle at 86% 46%, #0b7a3b 0 3px, transparent 4px)}
+.sweets .eyebrow{color:#c2336f}
+.sweets h2 em{color:#c2336f}
+.sweets__rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(178px,1fr);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:8px 4px 22px;margin:0 -4px;scrollbar-width:thin}
+.sweet{scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border:0;cursor:pointer;
+  background:#fff;border-radius:22px;padding:12px 12px 16px;box-shadow:0 14px 30px -18px rgba(194,51,111,.45),0 0 0 1px rgba(214,174,72,.25);
+  transition:transform .25s,box-shadow .25s;animation:sweetIn .6s both;animation-delay:var(--d)}
+.sweet:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 22px 40px -18px rgba(194,51,111,.55),0 0 0 2px #f2c230}
+.sweet__img{width:100%;aspect-ratio:1;border-radius:16px;overflow:hidden;background:#faf7f0}
+.sweet__img img{width:100%;height:100%;object-fit:cover}
+.sweet__name{font-family:var(--serif);font-weight:500;color:var(--navy);font-size:1rem;line-height:1.2}
+.sweet__price{font-family:var(--cond);letter-spacing:.06em;font-size:.86rem;color:#c2336f;background:#fff0f6;border-radius:99px;padding:3px 12px}
+@keyframes sweetIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+.sweets__cta{text-align:center;margin-top:10px}
+.btn--sweet{background:linear-gradient(135deg,#e8508a,#c2336f);color:#fff;box-shadow:0 14px 28px -14px rgba(194,51,111,.8)}
+.btn--sweet b{font-weight:500;opacity:.85}
+.btn--sweet:hover{filter:brightness(1.07)}
+.tab[data-cat="candy"]::before{content:"🍬 "}
+@media (max-width:640px){.sweets__rail{grid-auto-columns:150px}}
+@media (prefers-reduced-motion:reduce){.sweet{animation:none}}

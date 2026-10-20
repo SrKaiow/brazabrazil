@@ -121,7 +121,7 @@
     $("#waLink").href = wa(t("wa_q"));
     $("#waFloat").href = wa();
 
-    renderTabs(); renderGrid(); renderBoxes(); renderCuts(); renderCart();
+    renderTabs(); renderGrid(); renderBoxes(); renderCuts(); renderCart(); if (typeof renderSweets === "function") renderSweets();
     if (bz.calc && !bz.calc.hidden) renderCalc();
   }
 
@@ -650,6 +650,32 @@
   // Greeting once per visit
   if (!ssGet("bz_seen")) setTimeout(() => { brazaSay(t("bz_greet"), 9000); ssSet("bz_seen", "1"); }, 2600);
   else bz.btn.querySelector(".braza__dot").hidden = true;
+
+  /* ---------- Sweets showcase ---------- */
+  const SWEETS_TOP = ["docinhos", "pacoca", "prestigio", "bis", "bombom", "caixa-bombons", "goiabada-predilecta", "fondant",
+                      "pe-moleque", "bananinha", "tortuguita", "barra-recheada", "baton", "amendoas", "cocada", "sete-belo"];
+  function renderSweets() {
+    const rail = $("#sweetsRail"); if (!rail) return;
+    const items = SWEETS_TOP.map(id => byId[id]).filter(Boolean);
+    rail.innerHTML = items.map((g, i) => {
+      const p = g.isGroup ? variantOf(g) : g;
+      return `<button class="sweet" data-sweet="${g.id}" style="--d:${(i % 8) * 60}ms">
+        <span class="sweet__img"><img src="${p.image}" alt="${g.name}" decoding="async"></span>
+        <span class="sweet__name">${g.name}</span>
+        <span class="sweet__price">${g.isGroup ? t("sw_from") + " " : ""}${money(g.price)}</span>
+      </button>`;
+    }).join("");
+    $("#sweetsCount").textContent = "(" + P.filter(p => p.cat === "candy" && !p.hidden).length + ")";
+  }
+  function goSweets(focusId) {
+    activeCat = "candy"; activeGroup = "all"; onlyIds = null; query = ""; $("#search").value = "";
+    renderTabs(); renderGrid();
+    const el = focusId && document.getElementById("p-" + focusId);
+    (el || document.getElementById("shop")).scrollIntoView({ behavior: "smooth", block: el ? "center" : "start" });
+    if (el) { el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1600); }
+  }
+  $("#sweetsRail") && $("#sweetsRail").addEventListener("click", e => { const b = e.target.closest("[data-sweet]"); if (b) goSweets(b.dataset.sweet); });
+  $("#sweetsAll") && $("#sweetsAll").addEventListener("click", () => goSweets());
 
   /* No BBQ boxes in the catalogue yet → hide that section; "Build your churrasco" opens Seu Braza's calculator */
   if (!P.some(p => p.cat === "boxes")) {
