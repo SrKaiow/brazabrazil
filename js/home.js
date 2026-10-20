@@ -7,6 +7,7 @@ window.GROUPS = window.GROUPS || {};
 window.GROUPS.home = [
   { id: "limpeza", label: { en: "Cleaning & laundry", "pt-BR": "Limpeza & lavanderia", "pt-PT": "Limpeza & lavandaria", es: "Limpieza y lavandería" } },
   { id: "higiene", label: { en: "Personal care",      "pt-BR": "Higiene pessoal",      "pt-PT": "Higiene pessoal",      es: "Higiene personal" } },
+  { id: "farmacia", label: { en: "Pharmacy & first aid", "pt-BR": "Farmácia & primeiros socorros", "pt-PT": "Farmácia & primeiros socorros", es: "Farmacia y primeros auxilios" } },
   { id: "cabelo",  label: { en: "Hair care",          "pt-BR": "Cabelos",              "pt-PT": "Cabelos",              es: "Cabello" } },
   { id: "unhas",   label: { en: "Nails & manicure",   "pt-BR": "Unhas & manicure",     "pt-PT": "Unhas & manicura",     es: "Uñas y manicura" } }
 ];
@@ -48,7 +49,7 @@ window.GROUPS.home = [
   S("phebo", "Sabonete Phebo Odor de Rosas", "higiene", 2.50, "phebo",
     { en: "Classic Brazilian soap bar", pt: "Sabonete clássico desde 1930", es: "Jabón clásico brasileño" },
     { en: "The iconic black rose soap, made in Brazil since 1930.", pt: "O icônico sabonete preto de rosas, desde 1930.", es: "El icónico jabón negro de rosas, desde 1930." });
-  S("soro", "Soro Fisiológico AGA · 100 ml", "higiene", 2.50, "soro",
+  S("soro", "Soro Fisiológico AGA · 100 ml", "farmacia", 2.50, "soro",
     { en: "Saline solution for nasal rinse", pt: "Soro para lavagem nasal", es: "Suero fisiológico" },
     { en: "Sterile saline solution for cleaning the nose.", pt: "Solução salina para higiene nasal.", es: "Solución salina para la higiene nasal." });
   G("tenys-pe", "Talco Tenys Pé Baruel · 100 g", "higiene",
@@ -79,6 +80,38 @@ window.GROUPS.home = [
   S("tesoura", "Tesoura para Unhas Mundial", "unhas", 6.99, "tesoura",
     { en: "Nail scissors · Mundial Classic", pt: "Tesoura reta para unhas", es: "Tijeras para uñas" },
     { en: "Classic Mundial straight nail scissors.", pt: "Clássica tesoura reta da Mundial.", es: "Clásicas tijeras rectas Mundial." });
+
+  /* ---------- batch 2 ---------- */
+  S("bombril", "Bombril · 8 un", "limpeza", 2.20, "bombril",
+    { en: "Steel wool scourers · 60 g", pt: "Esponja de aço · 60 g", es: "Estropajo de acero · 60 g" },
+    { en: "The original ‘1001 utilidades’ steel wool for pans and grills.", pt: "A original esponja de aço de 1001 utilidades.", es: "El estropajo original de las 1001 utilidades." });
+  S("bucha", "Bucha para Banho Natural", "higiene", 3.50, "bucha",
+    { en: "Natural loofah sponge", pt: "Bucha vegetal natural", es: "Esponja de lufa natural" },
+    { en: "100% natural loofah for gentle exfoliation.", pt: "Bucha vegetal 100% natural para esfoliar.", es: "Lufa 100% natural para exfoliar." }, { tags: ["vegan"] });
+  S("leite-rosas", "Leite de Rosas Tradicional · 310 ml", "higiene", 4.80, "leite-rosas",
+    { en: "Classic Brazilian deodorant lotion", pt: "Desodorante clássico desde 1929", es: "Loción desodorante clásica" },
+    { en: "The iconic pink bottle every Brazilian grandmother had — since 1929.", pt: "O frasco cor-de-rosa que toda avó tinha — desde 1929.", es: "El icónico frasco rosa de todas las abuelas brasileñas." });
+  G("agua-oxigenada-g", "Água Oxigenada 10 vol.", "farmacia",
+    { en: "Hydrogen peroxide · antiseptic", pt: "Antisséptico", es: "Agua oxigenada · antiséptico" },
+    { en: "Antiseptic for cleaning small cuts and grazes.", pt: "Antisséptico para limpar pequenos cortes e arranhões.", es: "Antiséptico para pequeños cortes." },
+    [["agua-oxigenada", "ADV Farma · 100 ml", 1.99, "agua-oxigenada"], ["agua-oxigenada-hidro", "Hidro · 250 ml", 2.50, "agua-oxigenada-hidro"]]);
+  S("alcool", "Álcool Etílico 96%", "farmacia", 2.99, "alcool",
+    { en: "Ethyl alcohol 96%", pt: "Álcool etílico 96%", es: "Alcohol etílico 96%" },
+    { en: "Multipurpose ethyl alcohol for cleaning and disinfecting.", pt: "Álcool para limpeza e desinfecção.", es: "Alcohol para limpieza y desinfección." });
+  S("eno", "Sal de Fruta Eno Tradicional", "farmacia", 8.99, "eno",
+    { en: "Antacid fruit salts", pt: "Sal de fruta · azia e má digestão", es: "Sal de frutas · antiácido" },
+    { en: "Fast relief from heartburn and indigestion.", pt: "Alívio rápido da azia e má digestão.", es: "Alivio rápido de la acidez." });
+  S("acetona", "Removedor de Esmalte Be Beauty", "unhas", 3.20, "acetona",
+    { en: "Acetone-free nail polish remover", pt: "Acetona sem acetona · removedor", es: "Quitaesmalte sin acetona" },
+    { en: "Gentle, acetone-free remover with pump dispenser.", pt: "Removedor suave, sem acetona, com dosador.", es: "Quitaesmalte suave sin acetona con dosificador." });
+  G("cortador", "Cortador de Unhas", "unhas",
+    { en: "Nail clipper", pt: "Cortador de unhas", es: "Cortaúñas" },
+    { en: "Chrome-plated nail clipper for a precise cut.", pt: "Cortador cromado para um corte preciso.", es: "Cortaúñas cromado de corte preciso." },
+    [["cortador-p", "Pequeno · Mundial", 3.99, "cortador-p"], ["cortador-g", "Grande · Lanossi", 4.50, "cortador-g"]]);
+  G("alicate", "Alicate de Cutícula Mundial", "unhas",
+    { en: "Cuticle nipper", pt: "Alicate para cutículas", es: "Alicate para cutículas" },
+    { en: "Professional Brazilian cuticle nippers — sharp and precise.", pt: "Alicate profissional — afiado e preciso.", es: "Alicate profesional — afilado y preciso." },
+    [["alicate-vermelho", "Ponto Vermelho", 14.00, "alicate-vermelho"], ["alicate-preto", "Professional 722 (preto)", 16.00, "alicate-preto"]]);
 
   const byId = Object.fromEntries(out.map(p => [p.id, p]));
   out.forEach(p => { if (p.isGroup) p.price = Math.min(...p.variants.map(v => byId[v].price)); });
