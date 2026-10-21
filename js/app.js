@@ -128,9 +128,11 @@
 
   /* ---------- Tabs & search ---------- */
   const tabs = $("#tabs");
+  // number of products (every option counts) in a department
+  const tabCount = c => P.filter(p => !p.isGroup && (c === "promo" ? p.promo || p.was : p.cat === c)).length;
   function renderTabs() {
     tabs.innerHTML = CATS.map(c =>
-      `<button class="tab${c === "drinks" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}</button>`).join("");
+      `<button class="tab${c === "alcohol" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}${c === "all" ? "" : `<span class="tab__n">${tabCount(c)}</span>`}</button>`).join("");
     const st = $("#subtabs");
     const gs = groupsFor(activeCat);
     st.hidden = !gs.length;
@@ -225,13 +227,15 @@
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
     // "Todos": a tidy showcase — a few products per department + "see all" button
     if (activeCat === "all" && !query && !onlyIds) {
-      let html = "";
+      const EMO = { promo: "🔥", beef: "🥩", pork: "🐖", chicken: "🐔", ready: "🍖", deli: "🌭", dairy: "🧀", fish: "🐟", frozen: "❄️", estufa: "🥟", groceries: "🛒",
+        sauces: "🌶️", breakfast: "☕", candy: "🍬", snacks: "🍿", drinks: "🥤", alcohol: "🍺", kitchen: "🍳", home: "🧼" };
+      let html = `<div class="depts">${CATS.filter(c => c !== "all").map(c => `<button class="dept-tile${c === "promo" ? " dept-tile--promo" : ""}" data-goto="${c}"><span class="dept-tile__e" aria-hidden="true">${EMO[c] || "🛍️"}</span><b>${t("cat_" + c)}</b><small>${tabCount(c)} ${t("n_products")}</small></button>`).join("")}</div>`;
       CATS.filter(c => c !== "all").forEach(c => {
         const inCat = list.filter(p => c === "promo" ? p.promo : p.cat === c);
         if (!inCat.length) return;
         const pickN = [...inCat.filter(p => (p.tags || []).includes("best") && p.available !== false),
                        ...inCat.filter(p => !(p.tags || []).includes("best") && p.available !== false)].slice(0, SHOW_N);
-        html += `<div class="dept" data-dept="${c}"><h3 class="dept__head"><span>${t("cat_" + c)}</span><small>${inCat.length} ${t("n_products")}</small>
+        html += `<div class="dept" data-dept="${c}"><h3 class="dept__head"><span>${t("cat_" + c)}</span><small>${tabCount(c)} ${t("n_products")}</small>
           <button class="dept__all" data-goto="${c}">${t("see_all")} →</button></h3></div>`;
         html += pickN.map(card).join("");
       });
@@ -618,7 +622,7 @@
   function brazaReact(p) {
     if (p.id.startsWith("picanha")) return brazaSay(t("bz_r_picanha"));
     if (p.cat === "boxes") return brazaSay(t("bz_r_box"));
-    if (p.cat === "drinks") {
+    if (p.cat === "drinks" || p.cat === "alcohol") {
       const k = p.group === "beer" ? "bz_r_beer" : p.group === "cachaca" ? "bz_r_cachaca" : p.group === "wine" ? "bz_r_wine" : "bz_r_cheers";
       return brazaSay(t(k), 3800);
     }

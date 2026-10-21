@@ -21,6 +21,7 @@ import "../js/kitchen.js";
 import "../js/groceries.js";
 import "../js/ready.js";
 import "../js/promo.js";
+import "../js/departments.js";
 import "../js/drinks.js";
 import "../js/softdrinks.js";
 import "../js/shared.js";

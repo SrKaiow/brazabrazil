@@ -14,8 +14,9 @@
   const fmtDate = t => new Date(t).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" });
   const fmtDT = t => new Date(t).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
   const isoDay = t => { const d = new Date(t); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
-  const CAT = { beef: "Bovinos", pork: "Suínos", chicken: "Frango", ready: "Temperados & recheados", deli: "Embutidos & defumados", frozen: "Congelados",
-    estufa: "Salgados da estufa", groceries: "Mercearia", candy: "Doces & snacks", drinks: "Bebidas", kitchen: "Utensílios & casa", home: "Limpeza & higiene", boxes: "Kits" };
+  const CAT = { beef: "Bovinos", pork: "Suínos", chicken: "Frango", ready: "Temperados & recheados", deli: "Embutidos & defumados", dairy: "Laticínios & frios",
+    fish: "Peixes & bacalhau", frozen: "Congelados", estufa: "Salgados da estufa", groceries: "Mercearia", sauces: "Temperos & molhos", breakfast: "Café, chás & biscoitos",
+    candy: "Doces & chocolates", snacks: "Salgadinhos", drinks: "Refrigerantes & sucos", alcohol: "Cervejas, vinhos & destilados", kitchen: "Utensílios & casa", home: "Limpeza & higiene", boxes: "Kits" };
   const STATUS = { paid: "Pago online", paid_shop: "Pago na loja", pending: "Aguardando pagamento", whatsapp: "WhatsApp · a pagar", cancelled: "Cancelado", refunded: "Reembolsado" };
   const FULFIL = { novo: "Novo", preparando: "Preparando", pronto: "Pronto", entregue: "Entregue / retirado" };
   const PAID = new Set(["paid", "paid_shop"]);
