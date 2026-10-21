@@ -33,3 +33,22 @@
     "groceries", "sauces", "breakfast", "candy", "snacks", "drinks", "alcohol", "kitchen", "home"]
     .filter(c => c === "all" || c === "promo" || window.PRODUCTS.some(p => p.cat === c));
 })();
+
+/* Mercearia: the Brazilian basics (rice, beans, farofa) open the department */
+(function () {
+  const L = (en, pt, es) => ({ en, "pt-BR": pt, "pt-PT": pt, es });
+  const BASICS = ["arroz", "feijao", "farofa", "farinha-mandioca", "feijao-compal"];
+  const gs = window.GROUPS.groceries || [];
+  window.GROUPS.groceries = [{ id: "basicos", label: L("Rice, beans & farofa", "Arroz, feijão & farofa", "Arroz, frijoles y farofa") }]
+    .concat(gs.map(g => g.id === "graos" ? { id: "graos", label: L("Flours, cornmeal & grains", "Farinhas, fubá & grãos", "Harinas y granos") } : g));
+  const order = window.GROUPS.groceries.map(g => g.id);
+  window.PRODUCTS.forEach(p => {
+    const root = p.parent || p.id;
+    if (p.cat === "groceries" && BASICS.includes(root)) { p.group = "basicos"; if (!p.parent) p.tags = [...new Set([...(p.tags || []), "best"])]; }
+  });
+  // keep each department sorted by sub-group, then cheapest first
+  const gro = window.PRODUCTS.filter(p => p.cat === "groceries"), rest = window.PRODUCTS.filter(p => p.cat !== "groceries");
+  const rank = p => p.group === "basicos" ? BASICS.indexOf(p.parent || p.id) : 0;
+  gro.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group) || rank(a) - rank(b) || a.price - b.price || a.name.localeCompare(b.name));
+  window.PRODUCTS.length = 0; window.PRODUCTS.push(...rest, ...gro);
+})();
