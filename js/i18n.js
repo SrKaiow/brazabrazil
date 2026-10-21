@@ -197,7 +197,7 @@ window.I18N = {
   cat_chicken: { en: "Chicken", "pt-BR": "Frango", "pt-PT": "Frango", es: "Pollo" },
   cat_sausages: { en: "Sausages", "pt-BR": "Linguiças", "pt-PT": "Enchidos", es: "Embutidos" },
   cat_boxes: { en: "BBQ Boxes", "pt-BR": "Kits Churrasco", "pt-PT": "Caixas Churrasco", es: "Cajas BBQ" },
-  cat_drinks: { en: "Soft drinks & juices", "pt-BR": "Refrigerantes & sucos", "pt-PT": "Refrigerantes & sumos", es: "Refrescos y zumos" },
+  cat_drinks: { en: "Drinks", "pt-BR": "Bebidas", "pt-PT": "Bebidas", es: "Bebidas" },
   sorted_price: { en: "from lowest price", "pt-BR": "do menor preço", "pt-PT": "do preço mais baixo", es: "de menor precio" },
   cut_ask: { en: "{cut} isn’t online yet — ask us on WhatsApp!", "pt-BR": "{cut} ainda não está no site — peça pelo WhatsApp!", "pt-PT": "{cut} ainda não está no site — peça pelo WhatsApp!", es: "{cut} aún no está en la web — ¡pídelo por WhatsApp!" },
   tag_wagyu: { en: "Wagyu", "pt-BR": "Wagyu", "pt-PT": "Wagyu", es: "Wagyu" },

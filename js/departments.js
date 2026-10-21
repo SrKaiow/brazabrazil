@@ -13,8 +13,7 @@
     ["frozen", ["poultry"], "chicken"],
     ["groceries", ["molhos"], "sauces"],
     ["groceries", ["matinais", "cafe", "biscoitos"], "breakfast"],
-    ["candy", ["snacks"], "snacks"],
-    ["drinks", ["wine", "beer", "cachaca", "spirits"], "alcohol"]
+    ["candy", ["snacks"], "snacks"]
   ];
   const G = window.GROUPS;
   for (const [from, ids, to] of MOVES) {

@@ -934,3 +934,10 @@ img{max-width:100%}
 .price{display:block}
 .price .was{display:block}
 .vip-tab{display:none!important}
+
+/* desktop: every department visible at once (compact pills, wraps to two lines) */
+@media (min-width:900px){
+  .tabs{flex-wrap:wrap!important;overflow:visible;-webkit-mask-image:none;mask-image:none;gap:6px;padding-bottom:2px}
+  .tab{padding:6px 13px;font-size:.82rem}
+}
+.subtabs{background:none!important;border:0!important;padding:4px 0!important;margin-top:2px}

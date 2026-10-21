@@ -203,7 +203,7 @@
       </article>`;
   }
 
-  const GRID_PAGE = 36; let gridLimit = GRID_PAGE, gridKey = "";
+  const GRID_PAGE = 60; let gridLimit = GRID_PAGE, gridKey = "";
   const SHOW_N = 4;
   function renderGrid() {
     const gLabel = p => { const g = groupsFor(p.cat).find(x => x.id === p.group); return g ? pick(g.label) : ""; };
