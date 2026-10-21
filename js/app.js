@@ -131,7 +131,7 @@
   // number of products (every option counts) in a department
   const tabCount = c => P.filter(p => !p.isGroup && (c === "promo" ? p.promo || p.was : p.cat === c)).length;
   function renderTabs() {
-    tabs.innerHTML = CATS.map(c =>
+    tabs.innerHTML = CATS.filter(c => c !== "promo" || tabCount("promo")).map(c =>
       `<button class="tab${c === "alcohol" ? " tab--drinks" : ""}" role="tab" data-cat="${c}" aria-selected="${c === activeCat}">${t("cat_" + c)}${c === "all" ? "" : `<span class="tab__n">${tabCount(c)}</span>`}</button>`).join("");
     const st = $("#subtabs");
     const gs = groupsFor(activeCat);
@@ -143,14 +143,6 @@
     const b = e.target.closest(".subtab"); if (!b) return;
     activeGroup = b.dataset.group; onlyIds = null; renderTabs(); renderGrid(); toShop();
   });
-  // department bar: when it sticks under the header, hide the search box to keep it slim
-  const shopBar = $(".shop-bar");
-  const stuck = () => {
-    const top = parseFloat(getComputedStyle(shopBar).top) || 0;
-    const on = shopBar.getBoundingClientRect().top <= top + 1 && scrollY > 200;
-    shopBar.classList.toggle("is-stuck", on && !$("#search").value && document.activeElement !== $("#search"));
-  };
-  addEventListener("scroll", stuck, { passive: true }); addEventListener("resize", stuck);
   // after switching department, bring the first products into view (only if we have scrolled past them)
   function toShop() {
     const bar = $(".shop-bar"), grid = $("#grid");
@@ -227,10 +219,8 @@
     if (!list.length) { $("#grid").innerHTML = `<p class="empty-state">${t("none")}</p>`; return; }
     // "Todos": a tidy showcase — a few products per department + "see all" button
     if (activeCat === "all" && !query && !onlyIds) {
-      const EMO = { promo: "🔥", beef: "🥩", pork: "🐖", chicken: "🐔", ready: "🍖", deli: "🌭", dairy: "🧀", fish: "🐟", frozen: "❄️", estufa: "🥟", groceries: "🛒",
-        sauces: "🌶️", breakfast: "☕", candy: "🍬", snacks: "🍿", drinks: "🥤", alcohol: "🍺", kitchen: "🍳", home: "🧼" };
-      let html = `<div class="depts">${CATS.filter(c => c !== "all").map(c => `<button class="dept-tile${c === "promo" ? " dept-tile--promo" : ""}" data-goto="${c}"><span class="dept-tile__e" aria-hidden="true">${EMO[c] || "🛍️"}</span><b>${t("cat_" + c)}</b><small>${tabCount(c)} ${t("n_products")}</small></button>`).join("")}</div>`;
-      CATS.filter(c => c !== "all").forEach(c => {
+      let html = "";
+      CATS.filter(c => c !== "all" && (c !== "promo" || tabCount("promo"))).forEach(c => {
         const inCat = list.filter(p => c === "promo" ? p.promo : p.cat === c);
         if (!inCat.length) return;
         const pickN = [...inCat.filter(p => (p.tags || []).includes("best") && p.available !== false),

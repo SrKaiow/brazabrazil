@@ -919,3 +919,18 @@ img{max-width:100%}
 .dept-tile small{color:var(--muted);font-size:.74rem}
 .dept-tile--promo{border-color:#d93a2b;background:linear-gradient(135deg,#fff 60%,#fdecea)}
 @media (max-width:640px){.depts{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.dept-tile{padding:10px;border-radius:12px}.dept-tile b{font-size:.78rem}.dept-tile__e{font-size:1.3rem}.dept-tile small{font-size:.66rem}}
+
+/* clean pass: no emoji on tabs, no scrollbar, price never pushes the cart button out */
+.tab::before,.tab--drinks::before{content:none!important}
+.tab[data-cat="promo"]{border-color:var(--line);color:#c0392b}
+.tabs{scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tab .tab__n{display:none}
+.depts{display:none}
+.card__row{flex-wrap:wrap;row-gap:10px}
+.price{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+.price .was{font-size:.62em;margin:0 0 2px}
+.card__buy{margin-left:auto;flex:none}
+.shop-bar .search{max-width:420px}
+.price{display:block}
+.price .was{display:block}
+.vip-tab{display:none!important}

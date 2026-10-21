@@ -5,10 +5,10 @@
    ============================================================ */
 (function () {
   const PROMO = {
-    "barriga": 5.99, "costela-porco": 5.50, "colchao-mole": 13.99, "patinho": 13.99
+    // empty: no special offers right now (offers are set in the admin panel)
   };
   const L = (en, pt, es) => ({ en, pt, es });
-  const N = (id, name, cat, group, unit, price, sub, desc, img) => window.PRODUCTS.push({ id, name, cat, group, unit, price, tags: [], promo: true,
+  const N = (id, name, cat, group, unit, price, sub, desc, img) => window.PRODUCTS.push({ id, name, cat, group, unit, price, tags: [],
     image: "assets/products/" + (img || cat + "/" + id) + ".webp", available: true, sub, desc });
   N("miolo-paleta", "Miolo da Paleta Australiano", "beef", "slow", "kg", 12.99, L("Australian chuck tender · per kg", "Miolo da paleta · por kg", "Centro de paleta · por kg"), L("Tender cut for roasts and stews.", "Corte macio para assados e ensopados.", "Corte tierno para asados."));
   N("bisteca-bovina", "Bisteca Bovina", "beef", "steak", "kg", 13.99, L("Beef T-bone style steak · per kg", "Bisteca de boi · por kg", "Chuleta de ternera · por kg"), L("Great on the grill or the frying pan.", "Ótima na brasa ou na frigideira.", "Ideal a la parrilla."));
