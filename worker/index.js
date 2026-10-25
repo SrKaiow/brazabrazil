@@ -25,7 +25,7 @@ import "../js/departments.js";
 import "../js/drinks.js";
 import "../js/softdrinks.js";
 import "../js/shared.js";
-import { handleAdmin, getOverrides, recordOrder, markPaid } from "./admin.js";
+import { handleAdmin, getOverrides, recordOrder, markPaid, newTrackToken, trackOrder } from "./admin.js";
 
 const S = globalThis.SITE;
 const P = globalThis.PRODUCTS;
@@ -112,7 +112,8 @@ async function stripe(env, method, path, body) {
     method,
     headers: {
       authorization: "Bearer " + env.STRIPE_SECRET_KEY,
-      "content-type": "application/x-www-form-urlencoded"
+      "content-type": "application/x-www-form-urlencoded",
+      "stripe-version": "2025-09-30.clover"
     },
     body: body ? form(body) : undefined
   });
@@ -195,18 +196,33 @@ async function createCheckout(request, env) {
     postcode: isDelivery ? quote.postcode : "", day: b.day, notes: b.notes, subtotal: Math.round(subtotal * 100) / 100, fee,
     total: Math.round((subtotal + fee) * 100) / 100,
     items: items.map(({ p, qty }) => ({ id: p.id, name: p.name, cat: p.cat, unit: p.unit, qty, price: p.price, total: BB.lineTotal(p, qty) })) };
+  const track = newTrackToken();
+  const trackUrl = `${new URL(request.url).origin}/pedido/?t=${track}`;
   if (!env.STRIPE_SECRET_KEY) {
     // online payment not switched on yet: the customer sends the order on WhatsApp — keep it in the panel
-    await recordOrder(env, { ...orderRow, id: "wa_" + crypto.randomUUID().slice(0, 13), status: "whatsapp" });
-    return json({ error: "not_configured" }, 503);
+    await recordOrder(env, { ...orderRow, id: "wa_" + crypto.randomUUID().slice(0, 13), status: "whatsapp", track });
+    return json({ error: "not_configured", track: env.DB ? trackUrl : null }, 503);
   }
   const session = await stripe(env, "POST", "checkout/sessions", {
     mode: "payment",
-    locale: STRIPE_LOCALE[lang],
+    locale: "en-GB",
     line_items,
-    success_url: `${origin}/?order=success&session_id={CHECKOUT_SESSION_ID}`,
+    adaptive_pricing: { enabled: "false" }, // always charge in GBP
+    // after paying, the customer lands on their own order-tracking page
+    success_url: env.DB ? `${trackUrl}&s={CHECKOUT_SESSION_ID}` : `${origin}/?order=success&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/?order=cancelled`,
     phone_number_collection: { enabled: "false" },
+    branding_settings: {
+      display_name: "BrazaBrazil",
+      ...(origin.startsWith("https://") ? { logo: { type: "url", url: `${origin}/assets/logo.png` }, icon: { type: "url", url: `${origin}/assets/stripe-icon.png` } } : {}),
+      background_color: "#ffffff", button_color: "#14204a", border_style: "rounded", font_family: "inter"
+    },
+    custom_text: {
+      submit: { message: isDelivery
+        ? "Your order is cut and packed fresh by our butchers in Epsom, then delivered to your door. You will get a link to follow it live."
+        : "Your order is cut and packed fresh by our butchers in Epsom and kept ready for collection at 31 South Street. You will get a link to follow it live." },
+      after_submit: { message: "Payments are processed securely by Stripe. BrazaBrazil never sees or stores your card details." }
+    },
     metadata: {
       order_type: isDelivery ? "delivery" : "collection",
       customer_name: clip(b.name, 100),
@@ -217,14 +233,15 @@ async function createCheckout(request, env) {
       preferred_day: clip(b.day, 20),
       notes: clip(b.notes),
       age_18_confirmed: items.some(({ p }) => (p.tags || []).includes("adult")) ? "yes" : "n/a",
-      items: clip(summary)
+      items: clip(summary),
+      track
     },
     payment_intent_data: {
       description: clip(`${isDelivery ? "DELIVERY" : "COLLECTION"} — ${b.name} — ${summary}`, 900)
     }
   });
 
-  await recordOrder(env, { ...orderRow, id: session.id, status: "pending" });
+  await recordOrder(env, { ...orderRow, id: session.id, status: "pending", track });
   return json({ url: session.url });
 }
 
@@ -234,7 +251,7 @@ async function checkSession(request, url, env) {
   if (!env.STRIPE_SECRET_KEY || !/^cs_(test|live)_[A-Za-z0-9]{10,200}$/.test(id)) return json({ paid: false }, 400);
   try {
     const s = await stripe(env, "GET", "checkout/sessions/" + id);
-    if (s.payment_status === "paid") await markPaid(env, id);
+    if (s.payment_status === "paid") await markPaid(env, id, s.customer_details?.email);
     return json({ paid: s.payment_status === "paid", ref: id.slice(-8).toUpperCase(), amount: (s.amount_total || 0) / 100 });
   } catch {
     return json({ paid: false }, 404);
@@ -253,6 +270,12 @@ export default {
         if (url.pathname === "/api/session") {
           if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { allow: "GET" });
           return await checkSession(request, url, env);
+        }
+        if (url.pathname === "/api/track") {
+          if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { allow: "GET" });
+          if (limited(request, "tr", 60, 60_000)) return json({ error: "too_many_requests" }, 429, { "retry-after": "60" });
+          const o = await trackOrder(env, url.searchParams.get("t"), url.searchParams.get("s"), stripe);
+          return o ? json({ order: o }) : json({ error: "not_found" }, 404);
         }
         if (url.pathname === "/api/overrides") {
           if (request.method !== "GET") return json({ error: "method_not_allowed" }, 405, { allow: "GET" });

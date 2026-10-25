@@ -245,6 +245,7 @@ window.I18N = {
   cat_estufa: { en: "Hot pastries", "pt-BR": "Salgados da estufa", "pt-PT": "Salgados da estufa", es: "Salados calientes" },
   tag_promo: { en: "Offer", "pt-BR": "Promoção", "pt-PT": "Promoção", es: "Oferta" },
   cat_kitchen: { en: "Kitchen & home", "pt-BR": "Utensílios & casa", "pt-PT": "Utensílios & casa", es: "Cocina y hogar" },
+  track_link: { en: "Follow your order", "pt-BR": "Acompanhe seu pedido", "pt-PT": "Acompanhe a sua encomenda", es: "Sigue tu pedido" },
   see_all: { en: "See all", "pt-BR": "Ver todos", "pt-PT": "Ver todos", es: "Ver todo" },
   n_products: { en: "products", "pt-BR": "produtos", "pt-PT": "produtos", es: "productos" },
   more_btn: { en: "Show more products", "pt-BR": "Ver mais produtos", "pt-PT": "Ver mais produtos", es: "Ver más productos" },

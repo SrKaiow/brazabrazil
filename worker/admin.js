@@ -26,6 +26,11 @@ let schemaReady = false;
 export async function ensureSchema(env) {
   if (schemaReady || !env.DB) return !!env.DB;
   await env.DB.batch(SCHEMA.map(s => env.DB.prepare(s)));
+  // later additions to the orders table (ignored when the column already exists)
+  for (const sql of ["ALTER TABLE orders ADD COLUMN track TEXT", "ALTER TABLE orders ADD COLUMN history TEXT", "ALTER TABLE orders ADD COLUMN email TEXT"]) {
+    try { await env.DB.prepare(sql).run(); } catch {}
+  }
+  try { await env.DB.prepare("CREATE UNIQUE INDEX IF NOT EXISTS orders_track ON orders(track)").run(); } catch {}
   schemaReady = true;
   return true;
 }
@@ -74,15 +79,40 @@ export async function recordOrder(env, o) {
   if (!env.DB) return;
   try {
     await ensureSchema(env);
-    await env.DB.prepare(`INSERT OR REPLACE INTO orders (id, created, status, fulfil, mode, name, phone, address, postcode, day, notes, items, subtotal, fee, total)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
+    await env.DB.prepare(`INSERT OR REPLACE INTO orders (id, created, status, fulfil, mode, name, phone, address, postcode, day, notes, items, subtotal, fee, total, track, history)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
       .bind(o.id, now(), o.status, "novo", o.mode, o.name, o.phone, o.address || "", o.postcode || "", o.day || "", o.notes || "",
-        JSON.stringify(o.items), o.subtotal, o.fee, o.total).run();
+        JSON.stringify(o.items), o.subtotal, o.fee, o.total, o.track || null, JSON.stringify([{ s: "novo", at: now() }])).run();
   } catch (e) { console.log("recordOrder", String(e && e.message || e)); }
 }
-export async function markPaid(env, id) {
+export async function markPaid(env, id, email) {
   if (!env.DB) return;
-  try { await ensureSchema(env); await env.DB.prepare("UPDATE orders SET status='paid', paid_at=COALESCE(paid_at, ?) WHERE id=? AND status IN ('pending','paid')").bind(now(), id).run(); } catch {}
+  try { await ensureSchema(env); await env.DB.prepare("UPDATE orders SET status='paid', paid_at=COALESCE(paid_at, ?), email=COALESCE(?, email) WHERE id=? AND status IN ('pending','paid')").bind(now(), email || null, id).run(); } catch {}
+}
+export const newTrackToken = () => randHex(12);
+
+/* ---------- public order tracking (/api/track?t=…) ---------- */
+export async function trackOrder(env, t, sessionId, stripe) {
+  if (!env.DB || !/^[a-f0-9]{24}$/.test(t || "")) return null;
+  await ensureSchema(env);
+  let o = await env.DB.prepare("SELECT * FROM orders WHERE track=?").bind(t).first();
+  if (!o) return null;
+  // back from Stripe: confirm the payment straight away
+  if (o.status === "pending" && env.STRIPE_SECRET_KEY && (sessionId ? sessionId === o.id : true) && /^cs_/.test(o.id)) {
+    try {
+      const s = await stripe(env, "GET", "checkout/sessions/" + o.id);
+      if (s.payment_status === "paid") { await markPaid(env, o.id, s.customer_details?.email); o = await env.DB.prepare("SELECT * FROM orders WHERE track=?").bind(t).first(); }
+      else if (s.status === "expired") { await env.DB.prepare("UPDATE orders SET status='cancelled' WHERE id=?").bind(o.id).run(); o.status = "cancelled"; }
+    } catch {}
+  }
+  let items = [], history = [];
+  try { items = JSON.parse(o.items) || []; } catch {}
+  try { history = JSON.parse(o.history || "[]") || []; } catch {}
+  return {
+    ref: o.id.slice(-8).toUpperCase(), created: o.created, paid_at: o.paid_at, status: o.status, fulfil: o.fulfil, history,
+    mode: o.mode, day: o.day, postcode: o.postcode, name: String(o.name || "").split(" ")[0],
+    items: items.map(i => ({ name: i.name, qty: i.qty, unit: i.unit, total: i.total })), subtotal: o.subtotal, fee: o.fee, total: o.total
+  };
 }
 
 /* ---------- auth ---------- */
@@ -135,7 +165,7 @@ async function syncStripe(env, stripe) {
 
 /* ---------- router ---------- */
 const STATUS = ["pending", "paid", "whatsapp", "cancelled", "refunded", "paid_shop"];
-const FULFIL = ["novo", "preparando", "pronto", "entregue"];
+const FULFIL = ["novo", "aceito", "preparando", "pronto", "saiu", "atrasado", "entregue"];
 const LEDGER_CATS = ["Vendas na loja", "Outras entradas", "Fornecedores", "Aluguel", "Salários", "Energia & água", "Embalagens", "Entregas", "Marketing", "Impostos & taxas", "Manutenção", "Outras saídas"];
 
 export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, stripe }) {
@@ -204,6 +234,11 @@ export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, 
   }
 
   if (path === "orders") {
+    // confirm recent online payments automatically (no need to press "Sincronizar")
+    if (env.STRIPE_SECRET_KEY) {
+      const p = await env.DB.prepare("SELECT COUNT(*) AS n FROM orders WHERE status='pending' AND created>?").bind(now() - 2 * 86400000).first();
+      if (p?.n) { try { await syncStripe(env, stripe); } catch {} }
+    }
     const from = Number(url.searchParams.get("from")) || now() - 90 * 86400000;
     const to = Number(url.searchParams.get("to")) || now() + 86400000;
     const { results } = await env.DB.prepare("SELECT * FROM orders WHERE created BETWEEN ? AND ? ORDER BY created DESC LIMIT 2000").bind(from, to).all();
@@ -217,6 +252,14 @@ export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, 
       if (body.status === "paid_shop") { sets.push("paid_at=COALESCE(paid_at, ?)"); vals.push(now()); } }
     if (body.note !== undefined) { sets.push("note=?"); vals.push(txt(body.note, 500)); }
     if (!sets.length) return json({ error: "bad_request" }, 400);
+    // timeline shown to the customer on the tracking page
+    const step = body.status === "cancelled" ? "cancelado" : body.status === "refunded" ? "reembolsado" : body.fulfil;
+    if (step) {
+      const cur = await env.DB.prepare("SELECT history FROM orders WHERE id=?").bind(id).first();
+      let h = []; try { h = JSON.parse(cur?.history || "[]") || []; } catch {}
+      if (!h.length || h[h.length - 1].s !== step) h.push({ s: step, at: now() });
+      sets.push("history=?"); vals.push(JSON.stringify(h.slice(-30)));
+    }
     const r = await env.DB.prepare(`UPDATE orders SET ${sets.join(", ")} WHERE id=?`).bind(...vals, id).run();
     await audit(env, req, "order", `${id} ${JSON.stringify(body)}`);
     return json({ ok: (r.meta?.changes || 0) > 0 });

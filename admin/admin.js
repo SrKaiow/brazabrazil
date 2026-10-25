@@ -18,7 +18,7 @@
     fish: "Peixes & bacalhau", frozen: "Congelados", estufa: "Salgados da estufa", groceries: "Mercearia", sauces: "Temperos & molhos", breakfast: "Café, chás & biscoitos",
     candy: "Doces & chocolates", snacks: "Salgadinhos", drinks: "Bebidas", kitchen: "Utensílios & casa", home: "Limpeza & higiene", boxes: "Kits" };
   const STATUS = { paid: "Pago online", paid_shop: "Pago na loja", pending: "Aguardando pagamento", whatsapp: "WhatsApp · a pagar", cancelled: "Cancelado", refunded: "Reembolsado" };
-  const FULFIL = { novo: "Novo", preparando: "Preparando", pronto: "Pronto", entregue: "Entregue / retirado" };
+  const FULFIL = { novo: "Recebido", aceito: "Aceito", preparando: "Preparando", pronto: "Pronto p/ retirada", saiu: "Saiu para entrega", atrasado: "Atrasado", entregue: "Entregue / retirado" };
   const PAID = new Set(["paid", "paid_shop"]);
   const OPEN = new Set(["pending", "whatsapp"]);
 
@@ -220,6 +220,7 @@
     $$("#v-orders tr[data-id]").forEach(tr => tr.addEventListener("click", e => { if (e.target.closest("select,button,input,textarea,a")) return; st.open = st.open === tr.dataset.id ? null : tr.dataset.id; orders(); }));
     $$("#v-orders [data-fulfil]").forEach(s => s.addEventListener("change", async () => { await updOrder(s.dataset.fulfil, { fulfil: s.value }); toast("Preparo: " + FULFIL[s.value]); }));
     $$("#v-orders [data-status]").forEach(b => b.addEventListener("click", async () => { await updOrder(b.dataset.id, { status: b.dataset.status }); orders(); toast(STATUS[b.dataset.status]); }));
+    $$("#v-orders [data-copy]").forEach(b => b.addEventListener("click", async () => { try { await navigator.clipboard.writeText(b.dataset.copy); toast("Link copiado"); } catch { prompt("Link de acompanhamento", b.dataset.copy); } }));
     const nb = $("#onote"); if (nb) $("#onoteSave").addEventListener("click", async () => { await updOrder(nb.dataset.id, { note: nb.value }); toast("Observação salva"); });
   }
   function detailRow(o) {
@@ -229,7 +230,8 @@
         <p>Subtotal ${money(o.subtotal)}${o.fee ? ` · Entrega ${money(o.fee)}` : ""} · <b>Total ${money(o.total)}</b></p></div>
       <div><dl class="dl"><dt>Telefone</dt><dd>${esc(o.phone)}${wa ? ` · <a href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener">WhatsApp</a>` : ""}</dd>
         ${o.mode === "delivery" ? `<dt>Endereço</dt><dd>${esc(o.address)} ${esc(o.postcode)}</dd>` : ""}${o.day ? `<dt>Dia</dt><dd>${esc(o.day)}</dd>` : ""}${o.notes ? `<dt>Obs. cliente</dt><dd>${esc(o.notes)}</dd>` : ""}
-        <dt>Pedido</dt><dd>${esc(o.id)}</dd></dl>
+        <dt>Pedido</dt><dd>${esc(o.id)}</dd>${o.email ? `<dt>E-mail</dt><dd>${esc(o.email)}</dd>` : ""}
+        ${o.track ? `<dt>Acompanhamento</dt><dd><a href="/pedido/?t=${esc(o.track)}" target="_blank" rel="noopener">abrir</a> · <button class="link" data-copy="${esc(location.origin + "/pedido/?t=" + o.track)}">copiar link</button>${wa ? ` · <a href="https://wa.me/${esc(wa)}?text=${encodeURIComponent("Olá " + String(o.name || "").split(" ")[0] + "! Acompanhe seu pedido BrazaBrazil aqui: " + location.origin + "/pedido/?t=" + o.track)}" target="_blank" rel="noopener">enviar no WhatsApp</a>` : ""}</dd>` : ""}</dl>
         <div class="toolbar" style="margin-top:10px">
           ${OPEN.has(o.status) ? `<button class="btn btn--gold btn--sm" data-status="paid_shop" data-id="${esc(o.id)}">Marcar como pago na loja</button>` : ""}
           ${o.status !== "cancelled" ? `<button class="btn btn--sm btn--danger" data-status="cancelled" data-id="${esc(o.id)}">Cancelar</button>` : `<button class="btn btn--sm" data-status="whatsapp" data-id="${esc(o.id)}">Reabrir</button>`}

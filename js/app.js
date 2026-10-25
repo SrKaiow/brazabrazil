@@ -465,7 +465,8 @@
       del ? `*${plain("o_postcode")}:* ${o.postcode}` : "",
       o.day ? `*${plain("d_day")}:* ${o.day}` : "",
       o.notes ? `*${plain("d_notes")}:* ${o.notes}` : "",
-      o.adult ? `*18+:* ✅ ${plain("age_short")}` : ""
+      o.adult ? `*18+:* ✅ ${plain("age_short")}` : "",
+      o.track ? `\n${plain("track_link")}: ${o.track}` : ""
     ].filter((l, i, arr) => l !== "" || arr[i - 1] !== "").join("\n");
   }
 
@@ -503,7 +504,7 @@
       }
       if (res.status === 409) { toast(t("err_oos")); }
       else if (data.error === "age_required") { toast(t("age_needed")); }
-      else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); sendManual(o); }
+      else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); if (data.track) o.track = data.track; sendManual(o); }
       else { toast(t("err_generic")); }
     } catch (err) {
       toast(t("pay_fallback")); sendManual(o);
