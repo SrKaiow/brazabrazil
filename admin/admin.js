@@ -465,9 +465,25 @@
             <dt>Pedidos guardados</dt><dd>${st.orders.length}</dd>
             <dt>Site</dt><dd><a href="/" target="_blank" rel="noopener">Abrir a loja</a></dd>
           </dl>
+          <div style="margin-top:14px"><button class="btn btn--primary" id="spSync" ${st.me.stripe ? "" : "disabled"}>Criar / atualizar produtos na Stripe</button>
+            <p class="muted" id="spMsg" style="margin-top:8px">Cria um card na Stripe para cada produto à venda (nome, foto e preço). Rode de novo depois de adicionar produtos ou trocar fotos. Produtos novos também são criados sozinhos na primeira venda.</p></div>
           <p class="muted" style="margin-top:12px">Segurança: senha guardada só como código (hash), sessão expira em 12 horas, bloqueio de 15 minutos após 6 tentativas erradas e registro de toda ação na aba Atividade.</p>
         </div>
       </div>`;
+    $("#spSync").addEventListener("click", async e => {
+      const btn = e.currentTarget; btn.disabled = true; let off = 0, c = 0, u = 0, errs = [];
+      try {
+        do {
+          const r = await api("stripe-products", { offset: off });
+          c += r.created; u += r.updated; errs = errs.concat(r.errors);
+          $("#spMsg").textContent = `Enviando… ${Math.min(r.total, (r.next ?? r.total))} de ${r.total} produtos`;
+          off = r.next;
+        } while (off != null);
+        $("#spMsg").textContent = `Pronto: ${c} criado(s), ${u} atualizado(s)` + (errs.length ? ` · ${errs.length} com erro (${errs.slice(0, 3).join("; ")})` : "") + ".";
+        toast("Produtos enviados para a Stripe");
+      } catch (err) { $("#spMsg").textContent = "Erro na Stripe: " + (err.data?.message || err.message); }
+      btn.disabled = false;
+    });
     $("#pwform").addEventListener("submit", async e => {
       e.preventDefault(); $("#pwerr").textContent = "";
       if ($("#pwnew").value !== $("#pwnew2").value) return $("#pwerr").textContent = "As senhas novas não são iguais.";

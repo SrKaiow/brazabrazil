@@ -37,6 +37,41 @@ const CATALOGUE = P.filter(p => !p.isGroup).map(p => ({ id: p.id, name: p.name, 
   price: p.was || p.price, promo: p.was ? p.price : null, available: p.available !== false, soon: !!p.soon, image: p.image || "" }));
 // product as it is right now (catalogue + admin changes)
 const live = (p, ov) => p ? BB.applyOverride({ ...p, base: undefined }, ov[p.id]) : null;
+// every product has its own card in Stripe (id bb_<site id>), with photo and price
+const stripeId = id => "bb_" + String(id).replace(/[^A-Za-z0-9_-]/g, "_");
+const CAT_EN = { beef: "Beef", pork: "Pork", chicken: "Chicken", deli: "Deli & smoked", frozen: "Frozen", groceries: "Groceries", candy: "Sweets", drinks: "Drinks", kitchen: "Kitchen & home", home: "Home", dairy: "Dairy", fish: "Fish", sauces: "Sauces", breakfast: "Breakfast", snacks: "Snacks", ready: "Ready meals", estufa: "Hot counter" };
+function stripeProductBody(p, origin) {
+  const desc = (p.sub && (p.sub.en || p.sub["pt-BR"])) || "";
+  return {
+    name: p.name + (p.unit === "kg" ? " (per kg)" : ""),
+    description: desc ? String(desc).slice(0, 300) : undefined,
+    images: origin.startsWith("https://") && p.image ? [`${origin}/${p.image}`] : undefined,
+    url: origin.startsWith("https://") ? `${origin}/#p-${p.id}` : undefined,
+    unit_label: p.unit === "kg" ? "kg" : undefined,
+    metadata: { site_id: p.id, category: CAT_EN[p.cat] || p.cat || "", unit: p.unit || "each" }
+  };
+}
+// create or update the Stripe card of one product
+async function upsertStripeProduct(env, p, origin, price) {
+  const id = stripeId(p.id), body = stripeProductBody(p, origin);
+  try { await stripe(env, "POST", "products/" + id, { ...body, active: "true" }); return "updated"; }
+  catch (e) {
+    if (!/no such product/i.test(String(e.message))) throw e;
+    await stripe(env, "POST", "products", { id, ...body, default_price_data: price > 0 ? { currency: "gbp", unit_amount: pence(price) } : undefined });
+    return "created";
+  }
+}
+export async function syncStripeProducts(env, origin, offset = 0, size = 15) {
+  const ov = await getOverrides(env).catch(() => ({}));
+  const list = P.filter(p => !p.isGroup).map(p => live(p, ov)).filter(p => p && p.price > 0 && !p.soon);
+  const out = { total: list.length, created: 0, updated: 0, errors: [] };
+  for (const p of list.slice(offset, offset + size)) {
+    try { out[await upsertStripeProduct(env, p, origin, p.price)]++; }
+    catch (e) { out.errors.push(p.id + ": " + String(e.message).slice(0, 120)); }
+  }
+  out.next = offset + size < list.length ? offset + size : null;
+  return out;
+}
 const STRIPE_LOCALE = { en: "en-GB", "pt-BR": "pt-BR", "pt-PT": "pt", es: "es" };
 
 /* ---------- security ---------- */
@@ -169,16 +204,11 @@ async function createCheckout(request, env) {
     if (quote.status === "invalid" || quote.status === "out") return json({ error: "postcode_" + quote.status }, 400);
   }
 
+  // each line points to the product's own card in Stripe, so payments are reported per product
   const line_items = items.map(({ p, qty }) => {
-    const label = (p.unit === "kg" ? `${qty} kg` : `x${qty}`) + (p.multi && qty >= p.multi.n ? ` (${p.multi.n} for £${p.multi.price.toFixed(2)})` : "");
-    return {
-      quantity: 1,
-      price_data: {
-        currency: "gbp",
-        unit_amount: pence(BB.lineTotal(p, qty)),
-        product_data: { name: `${p.name} — ${label}`, description: p.sub?.en || undefined }
-      }
-    };
+    const total = pence(BB.lineTotal(p, qty));
+    const plain = Number.isInteger(qty) && total === pence(p.price) * qty; // no multi-buy price in play
+    return { quantity: plain ? qty : 1, price_data: { currency: "gbp", unit_amount: plain ? pence(p.price) : total, product: stripeId(p.id) } };
   });
   const subtotal = items.reduce((s, { p, qty }) => s + BB.lineTotal(p, qty), 0);
   const freeOver = S.delivery?.freeOver;
@@ -202,7 +232,7 @@ async function createCheckout(request, env) {
     // payment comes first: without Stripe no order is placed
     return json({ error: "not_configured" }, 503);
   }
-  const session = await stripe(env, "POST", "checkout/sessions", {
+  const sessionBody = {
     mode: "payment",
     locale: "en-GB",
     line_items,
@@ -238,7 +268,15 @@ async function createCheckout(request, env) {
     payment_intent_data: {
       description: clip(`${isDelivery ? "DELIVERY" : "COLLECTION"} — ${b.name} — ${summary}`, 900)
     }
-  });
+  };
+  let session;
+  try { session = await stripe(env, "POST", "checkout/sessions", sessionBody); }
+  catch (e) {
+    if (!/no such product/i.test(String(e.message))) throw e;
+    // a product without a Stripe card yet (new in the shop): create it and try again
+    for (const { p } of items) { try { await upsertStripeProduct(env, p, origin, p.price); } catch (err) { console.log("product", p.id, String(err.message)); } }
+    session = await stripe(env, "POST", "checkout/sessions", sessionBody);
+  }
 
   await recordOrder(env, { ...orderRow, id: session.id, status: "pending", track });
   return json({ url: session.url });
@@ -282,7 +320,7 @@ export default {
         }
         if (url.pathname === "/api/admin" || url.pathname.startsWith("/api/admin/")) {
           if (limited(request, "adm", 240, 60_000)) return json({ error: "too_many_requests" }, 429, { "retry-after": "60" });
-          return await handleAdmin(request, env, url, { json, sameOrigin, catalogue: () => CATALOGUE, stripe });
+          return await handleAdmin(request, env, url, { json, sameOrigin, catalogue: () => CATALOGUE, stripe, syncProducts: (o) => syncStripeProducts(env, url.origin, o) });
         }
         return json({ error: "not_found" }, 404);
       } catch (e) {

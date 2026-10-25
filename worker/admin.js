@@ -168,7 +168,7 @@ const STATUS = ["pending", "paid", "whatsapp", "cancelled", "refunded", "paid_sh
 const FULFIL = ["novo", "aceito", "preparando", "pronto", "saiu", "atrasado", "entregue"];
 const LEDGER_CATS = ["Vendas na loja", "Outras entradas", "Fornecedores", "Aluguel", "Salários", "Energia & água", "Embalagens", "Entregas", "Marketing", "Impostos & taxas", "Manutenção", "Outras saídas"];
 
-export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, stripe }) {
+export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, stripe, syncProducts }) {
   if (!env.DB) return json({ error: "db_missing" }, 503);
   await ensureSchema(env);
   const path = url.pathname.replace(/^\/api\/admin\/?/, "");
@@ -263,6 +263,12 @@ export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, 
     const r = await env.DB.prepare(`UPDATE orders SET ${sets.join(", ")} WHERE id=?`).bind(...vals, id).run();
     await audit(env, req, "order", `${id} ${JSON.stringify(body)}`);
     return json({ ok: (r.meta?.changes || 0) > 0 });
+  }
+  if (path === "stripe-products" && isPost) {
+    if (!env.STRIPE_SECRET_KEY) return json({ error: "not_configured" }, 503);
+    const off = Math.max(0, Math.floor(Number(body.offset) || 0));
+    try { return json(await syncProducts(off)); }
+    catch (e) { return json({ error: "stripe_error", message: String(e && e.message || e).slice(0, 200) }, 502); }
   }
   if (path === "sync" && isPost) {
     try { return json(await syncStripe(env, stripe)); }
