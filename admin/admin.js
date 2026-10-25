@@ -465,7 +465,7 @@
             <dt>Pedidos guardados</dt><dd>${st.orders.length}</dd>
             <dt>Site</dt><dd><a href="/" target="_blank" rel="noopener">Abrir a loja</a></dd>
           </dl>
-          <div style="margin-top:14px"><button class="btn btn--primary" id="spSync" ${st.me.stripe ? "" : "disabled"}>Criar / atualizar produtos na Stripe</button>
+          <div style="margin-top:14px"><button class="btn btn--primary" id="spSync" ${st.me.stripe ? "" : "disabled"}>Criar / atualizar produtos na Stripe</button>${st.me.stripe ? "" : `<p class="err" style="margin-top:8px">Botão bloqueado: este site ainda não recebeu a chave STRIPE_SECRET_KEY na Cloudflare.</p>`}
             <p class="muted" id="spMsg" style="margin-top:8px">Cria um card na Stripe para cada produto à venda (nome, foto e preço). Rode de novo depois de adicionar produtos ou trocar fotos. Produtos novos também são criados sozinhos na primeira venda.</p></div>
           <p class="muted" style="margin-top:12px">Segurança: senha guardada só como código (hash), sessão expira em 12 horas, bloqueio de 15 minutos após 6 tentativas erradas e registro de toda ação na aba Atividade.</p>
         </div>

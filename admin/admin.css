@@ -130,3 +130,4 @@ tr.detail td{background:var(--chip)}
   .kpi b{font-size:1.35rem}
 }
 @media print{.side,.top__tools,.toolbar,.alert,.btn{display:none!important}.app{display:block}.card,.tbl{break-inside:avoid}}
+.btn:disabled,.btn[disabled]{opacity:.45;cursor:not-allowed}
