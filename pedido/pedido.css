@@ -37,3 +37,6 @@ h2{font-size:1.05rem;margin-bottom:10px}
 .btn--wa{background:#1f9d55;border-color:#1f9d55;color:#fff}
 .foot{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 32px}
 @media (prefers-reduced-motion:no-preference){.steps li.now .dot{animation:pulse 1.8s infinite}@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(11,122,59,.08)}}}
+.card--wa{border:2px solid #25d366;background:#f1fdf5;text-align:center}
+.card--wa p{margin:0 0 12px;font-weight:600;color:#14204a}
+.btn--big{width:100%;justify-content:center;padding:15px 18px;font-size:16px}

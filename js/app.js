@@ -504,10 +504,10 @@
       }
       if (res.status === 409) { toast(t("err_oos")); }
       else if (data.error === "age_required") { toast(t("age_needed")); }
-      else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); if (data.track) o.track = data.track; sendManual(o); }
+      else if (res.status === 503 || res.status === 404 || res.status === 405) { toast(t("pay_fallback")); }
       else { toast(t("err_generic")); }
     } catch (err) {
-      toast(t("pay_fallback")); sendManual(o);
+      toast(t("pay_fallback"));
     }
     paying = false; btn.disabled = false; btn.classList.remove("is-loading");
   });

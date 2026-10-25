@@ -9,22 +9,22 @@
   let lang = "en";
   try { const s = localStorage.getItem("bb_lang"); if (s) lang = s; else if (/^pt/i.test(navigator.language)) lang = /PT$/i.test(navigator.language) ? "pt-PT" : "pt-BR"; else if (/^es/i.test(navigator.language)) lang = "es"; } catch {}
   const T = {
-    en: { title: "Your order", hi: "Thank you", ref: "Order", paid: "Payment confirmed — thank you!", wait: "Confirming your payment…", unpaid: "Awaiting payment — the shop will confirm it with you.",
+    en: { last: "Last step: send your order to the shop on WhatsApp so we can start on it.", send: "Send order on WhatsApp", m_title: "New order — BrazaBrazil website", m_paid: "PAID", m_pay: "Payment", m_col: "Collection", m_del: "Delivery", m_track: "Follow the order", title: "Your order", hi: "Thank you", ref: "Order", paid: "Payment confirmed — thank you!", wait: "Confirming your payment…", unpaid: "Awaiting payment — the shop will confirm it with you.",
       cancelled: "This order was cancelled. If you were charged, the shop will refund you.", refunded: "This order was refunded.", late: "Running a little late — sorry! We are on it.",
       steps: "Order status", items: "Your items", subtotal: "Subtotal", delivery: "Delivery", total: "Total", collect: "Collection at 31 South Street, Epsom", deliver: "Delivery",
       novo: "Order received", aceito: "Accepted by the shop", preparando: "Being prepared", pronto: "Ready for collection", saiu: "Out for delivery", entregue_c: "Collected", entregue_d: "Delivered",
       shop: "Back to the shop", wa: "Message the shop", save: "Keep this link to follow your order. This page updates on its own.", notfound: "We couldn't find this order. Please check the link or message the shop.", day: "Preferred day" },
-    "pt-BR": { title: "Seu pedido", hi: "Obrigado", ref: "Pedido", paid: "Pagamento confirmado — obrigado!", wait: "Confirmando seu pagamento…", unpaid: "Aguardando pagamento — a loja vai confirmar com você.",
+    "pt-BR": { last: "Último passo: envie seu pedido para a loja no WhatsApp para começarmos a preparar.", send: "Enviar pedido no WhatsApp", m_title: "Novo pedido — site BrazaBrazil", m_paid: "PAGO", m_pay: "Pagamento", m_col: "Retirada", m_del: "Entrega", m_track: "Acompanhar o pedido", title: "Seu pedido", hi: "Obrigado", ref: "Pedido", paid: "Pagamento confirmado — obrigado!", wait: "Confirmando seu pagamento…", unpaid: "Aguardando pagamento — a loja vai confirmar com você.",
       cancelled: "Este pedido foi cancelado. Se houve cobrança, a loja faz o reembolso.", refunded: "Este pedido foi reembolsado.", late: "Seu pedido está um pouco atrasado — desculpe! Já estamos cuidando.",
       steps: "Andamento do pedido", items: "Seus itens", subtotal: "Subtotal", delivery: "Entrega", total: "Total", collect: "Retirada na 31 South Street, Epsom", deliver: "Entrega",
       novo: "Pedido recebido", aceito: "Aceito pela loja", preparando: "Em preparo", pronto: "Pronto para retirada", saiu: "Saiu para entrega", entregue_c: "Retirado", entregue_d: "Entregue",
       shop: "Voltar à loja", wa: "Falar com a loja", save: "Guarde este link para acompanhar seu pedido. A página se atualiza sozinha.", notfound: "Não encontramos este pedido. Confira o link ou fale com a loja.", day: "Dia preferido" },
-    "pt-PT": { title: "A sua encomenda", hi: "Obrigado", ref: "Encomenda", paid: "Pagamento confirmado — obrigado!", wait: "A confirmar o seu pagamento…", unpaid: "A aguardar pagamento — a loja vai confirmar consigo.",
+    "pt-PT": { last: "Último passo: envie a encomenda para a loja no WhatsApp para começarmos a preparar.", send: "Enviar encomenda no WhatsApp", m_title: "Nova encomenda — site BrazaBrazil", m_paid: "PAGO", m_pay: "Pagamento", m_col: "Levantamento", m_del: "Entrega", m_track: "Acompanhar a encomenda", title: "A sua encomenda", hi: "Obrigado", ref: "Encomenda", paid: "Pagamento confirmado — obrigado!", wait: "A confirmar o seu pagamento…", unpaid: "A aguardar pagamento — a loja vai confirmar consigo.",
       cancelled: "Esta encomenda foi cancelada. Se houve cobrança, a loja faz o reembolso.", refunded: "Esta encomenda foi reembolsada.", late: "A sua encomenda está um pouco atrasada — desculpe! Já estamos a tratar.",
       steps: "Estado da encomenda", items: "Os seus artigos", subtotal: "Subtotal", delivery: "Entrega", total: "Total", collect: "Levantamento na 31 South Street, Epsom", deliver: "Entrega",
       novo: "Encomenda recebida", aceito: "Aceite pela loja", preparando: "Em preparação", pronto: "Pronta para levantar", saiu: "Saiu para entrega", entregue_c: "Levantada", entregue_d: "Entregue",
       shop: "Voltar à loja", wa: "Falar com a loja", save: "Guarde este link para acompanhar a encomenda. A página atualiza-se sozinha.", notfound: "Não encontrámos esta encomenda. Verifique o link ou fale com a loja.", day: "Dia preferido" },
-    es: { title: "Tu pedido", hi: "Gracias", ref: "Pedido", paid: "Pago confirmado — ¡gracias!", wait: "Confirmando tu pago…", unpaid: "Pendiente de pago — la tienda lo confirmará contigo.",
+    es: { last: "Último paso: envía tu pedido a la tienda por WhatsApp para empezar a prepararlo.", send: "Enviar pedido por WhatsApp", m_title: "Nuevo pedido — web BrazaBrazil", m_paid: "PAGADO", m_pay: "Pago", m_col: "Recogida", m_del: "Entrega", m_track: "Seguir el pedido", title: "Tu pedido", hi: "Gracias", ref: "Pedido", paid: "Pago confirmado — ¡gracias!", wait: "Confirmando tu pago…", unpaid: "Pendiente de pago — la tienda lo confirmará contigo.",
       cancelled: "Este pedido fue cancelado. Si hubo cobro, la tienda lo reembolsará.", refunded: "Este pedido fue reembolsado.", late: "Tu pedido va con un poco de retraso — ¡lo sentimos!",
       steps: "Estado del pedido", items: "Tus productos", subtotal: "Subtotal", delivery: "Envío", total: "Total", collect: "Recogida en 31 South Street, Epsom", deliver: "Envío",
       novo: "Pedido recibido", aceito: "Aceptado por la tienda", preparando: "En preparación", pronto: "Listo para recoger", saiu: "En reparto", entregue_c: "Recogido", entregue_d: "Entregado",
@@ -53,16 +53,23 @@
       const t = when[s] || (s === "novo" ? o.created : null);
       return `<li class="${cls}"><span class="dot">${cls === "done" ? "✓" : i + 1}</span><span><b>${esc(label)}</b>${t && (cls || s === "novo") ? `<small>${esc(fmt(t))}</small>` : ""}</span></li>`;
     }).join("");
+    const paid = o.status === "paid" || o.status === "paid_shop";
+    const msg = [`*${L.m_title}*${o.name ? " — " + o.name : ""}`, "", ...(o.items || []).map(i => `• ${i.name} — ${i.unit === "kg" ? i.qty + " kg" : "x" + i.qty} — ${money(i.total)}`), "",
+      o.fee ? `*${L.subtotal}:* ${money(o.subtotal)}\n*${L.delivery}:* ${money(o.fee)}` : "", `*${L.total}:* ${money(o.total)}`,
+      `*${L.m_pay}:* ${L.m_paid} ✅ · ${L.ref} #${o.ref}`, `*${del ? L.m_del : L.m_col}*${o.postcode ? " · " + o.postcode : ""}${o.day ? " · " + L.day + ": " + o.day : ""}`,
+      "", `${L.m_track}: ${location.origin}/pedido/?t=${token}`].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
+    const waSend = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     $("#app").innerHTML = `
       <div><h1>${esc(L.hi)}${o.name ? ", " + esc(o.name) : ""}!</h1><p class="ref">${esc(L.ref)} #${esc(o.ref)} · ${esc(fmt(o.created))}</p></div>
       ${banner}
+      ${paid && !stopped && o.fulfil === "novo" ? `<section class="card card--wa"><p>${esc(L.last)}</p><a class="btn btn--wa btn--big" href="${waSend}" target="_blank" rel="noopener">${esc(L.send)}</a></section>` : ""}
       ${o.fulfil === "atrasado" && !stopped ? `<div class="banner banner--wait">${L.late}</div>` : ""}
       <section class="card"><h2>${L.steps}</h2><ol class="steps">${steps}</ol>
         <p class="muted" style="margin:14px 0 0">${del ? esc(L.deliver) + (o.postcode ? " · " + esc(o.postcode) : "") : esc(L.collect)}${o.day ? " · " + esc(L.day) + ": " + esc(o.day) : ""}</p></section>
       <section class="card"><h2>${L.items}</h2><ul class="items">${(o.items || []).map(i => `<li><span>${esc(i.name)} <span class="muted">× ${esc(i.unit === "kg" ? i.qty + " kg" : i.qty)}</span></span><span>${money(i.total)}</span></li>`).join("")}</ul>
         ${o.fee ? `<div class="sub" style="margin-top:8px"><span>${L.subtotal}</span><span>${money(o.subtotal)}</span></div><div class="sub"><span>${L.delivery}</span><span>${money(o.fee)}</span></div>` : ""}
         <div class="tot"><span>${L.total}</span><span>${money(o.total)}</span></div></section>
-      <div class="row"><a class="btn btn--wa" href="https://wa.me/${WA}?text=${encodeURIComponent(L.ref + " #" + o.ref + " — " + location.href)}" target="_blank" rel="noopener">${L.wa}</a><a class="btn" href="/">${L.shop}</a></div>
+      <div class="row"><a class="btn btn--wa" href="${paid ? waSend : `https://wa.me/${WA}?text=${encodeURIComponent(L.ref + " #" + o.ref + " — " + location.href)}`}" target="_blank" rel="noopener">${L.wa}</a><a class="btn" href="/">${L.shop}</a></div>
       <p class="muted">${L.save}</p>`;
     // paid: the basket on the shop is now empty
     if (o.status === "paid" || o.status === "paid_shop") { try { localStorage.removeItem("bb_cart"); localStorage.removeItem("bb_pending"); } catch {} }

@@ -199,9 +199,8 @@ async function createCheckout(request, env) {
   const track = newTrackToken();
   const trackUrl = `${new URL(request.url).origin}/pedido/?t=${track}`;
   if (!env.STRIPE_SECRET_KEY) {
-    // online payment not switched on yet: the customer sends the order on WhatsApp — keep it in the panel
-    await recordOrder(env, { ...orderRow, id: "wa_" + crypto.randomUUID().slice(0, 13), status: "whatsapp", track });
-    return json({ error: "not_configured", track: env.DB ? trackUrl : null }, 503);
+    // payment comes first: without Stripe no order is placed
+    return json({ error: "not_configured" }, 503);
   }
   const session = await stripe(env, "POST", "checkout/sessions", {
     mode: "payment",
