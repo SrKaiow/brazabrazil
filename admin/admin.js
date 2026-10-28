@@ -80,21 +80,21 @@
   }
 
   /* ---------- navigation ---------- */
-  const TITLES = { overview: "Visão geral", orders: "Pedidos", products: "Produtos & preços", finance: "Financeiro", customers: "Clientes", reports: "Relatórios", activity: "Atividade", settings: "Configurações" };
+  const TITLES = { overview: "Visão geral", orders: "Pedidos", products: "Produtos & preços", finance: "Financeiro", customers: "Clientes", reports: "Relatórios", activity: "Atividade", settings: "Configurações", print: "Impressora" };
   function go(v) {
     if (!TITLES[v]) v = "overview";
     st.view = v; history.replaceState(null, "", "#" + v);
     $$("#nav button").forEach(b => b.dataset.view === v ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
     $$(".view").forEach(s => s.hidden = s.id !== "v-" + v);
     $("#viewTitle").textContent = TITLES[v];
-    $("#period").parentElement.style.visibility = ["products", "activity", "settings"].includes(v) ? "hidden" : "";
+    $("#period").parentElement.style.visibility = ["products", "activity", "settings", "print"].includes(v) ? "hidden" : "";
     render();
   }
   $("#nav").addEventListener("click", e => { const b = e.target.closest("button[data-view]"); if (b) go(b.dataset.view); });
   document.addEventListener("click", e => { const g = e.target.closest("[data-goto]"); if (g) go(g.dataset.goto); });
   $("#period").addEventListener("change", render);
   $("#refresh").addEventListener("click", async () => { await loadAll(); render(); toast("Dados atualizados"); });
-  const R = { overview, orders, products, finance, customers, reports, activity, settings };
+  const R = { overview, orders, products, finance, customers, reports, activity, settings, print: printView };
   function render() { R[st.view](); }
 
   /* ---------- charts (plain SVG, theme-aware) ---------- */
@@ -221,6 +221,7 @@
     $$("#v-orders [data-fulfil]").forEach(s => s.addEventListener("change", async () => { await updOrder(s.dataset.fulfil, { fulfil: s.value }); toast("Preparo: " + FULFIL[s.value]); }));
     $$("#v-orders [data-status]").forEach(b => b.addEventListener("click", async () => { await updOrder(b.dataset.id, { status: b.dataset.status }); orders(); toast(STATUS[b.dataset.status]); }));
     $$("#v-orders [data-copy]").forEach(b => b.addEventListener("click", async () => { try { await navigator.clipboard.writeText(b.dataset.copy); toast("Link copiado"); } catch { prompt("Link de acompanhamento", b.dataset.copy); } }));
+    $$("#v-orders [data-print]").forEach(b => b.addEventListener("click", () => { const o = st.orders.find(x => x.id === b.dataset.print); if (o) printTicket(o); }));
     const nb = $("#onote"); if (nb) $("#onoteSave").addEventListener("click", async () => { await updOrder(nb.dataset.id, { note: nb.value }); toast("Observação salva"); });
   }
   function detailRow(o) {
@@ -235,12 +236,92 @@
         <div class="toolbar" style="margin-top:10px">
           ${OPEN.has(o.status) ? `<button class="btn btn--gold btn--sm" data-status="paid_shop" data-id="${esc(o.id)}">Marcar como pago na loja</button>` : ""}
           ${o.status !== "cancelled" ? `<button class="btn btn--sm btn--danger" data-status="cancelled" data-id="${esc(o.id)}">Cancelar</button>` : `<button class="btn btn--sm" data-status="whatsapp" data-id="${esc(o.id)}">Reabrir</button>`}
+          <button class="btn btn--sm" data-print="${esc(o.id)}">Imprimir comanda</button>
           ${PAID.has(o.status) ? `<button class="btn btn--sm" data-status="refunded" data-id="${esc(o.id)}">Marcar reembolsado</button>` : ""}
         </div>
         <label class="fld"><span>Observação interna</span><textarea id="onote" data-id="${esc(o.id)}" rows="2">${esc(o.note || "")}</textarea></label>
         <button class="btn btn--sm" id="onoteSave" style="margin-top:6px">Salvar observação</button></div></div></td></tr>`;
   }
   async function updOrder(id, ch) { await api("order", { id, ...ch }); const o = st.orders.find(x => x.id === id); if (o) Object.assign(o, ch, ch.status === "paid_shop" ? { paid_at: Date.now() } : {}); }
+
+  /* ---------- IMPRESSORA (comandas automáticas) ---------- */
+  const LS = { get: k => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+  const printed = new Set((() => { try { return JSON.parse(LS.get("bb_printed") || "[]"); } catch { return []; } })());
+  const savePrinted = () => LS.set("bb_printed", JSON.stringify([...printed].slice(-400)));
+  const auto = { on: LS.get("bb_autoprint") === "1", timer: null, last: null, count: 0, queue: Promise.resolve() };
+  function ticketHTML(o) {
+    const L = "<hr>";
+    const items = (o.items || []).map(i => `<tr><td class="q">${i.unit === "kg" ? esc(i.qty) + "kg" : esc(i.qty) + "x"}</td><td>${esc(i.name)}</td><td class="r">${money(i.total)}</td></tr>`).join("");
+    const del = o.mode === "delivery";
+    return `<div class="tk">
+      <div class="c b big">BRAZABRAZIL</div><div class="c">31 South Street, Epsom</div>${L}
+      <div class="row"><b>#${esc(String(o.id).slice(-8).toUpperCase())}</b><span>${fmtDT(o.created)}</span></div>
+      <div class="c b inv">${PAID.has(o.status) ? (o.status === "paid" ? "PAGO ONLINE" : "PAGO NA LOJA") : "NÃO PAGO"}</div>
+      <div class="c b big">${del ? "ENTREGA" : "RETIRADA"}</div>
+      ${o.day ? `<div class="c b">Dia: ${esc(o.day)}</div>` : ""}${L}
+      <div><b>${esc(o.name)}</b></div><div>${esc(o.phone)}</div>
+      ${del ? `<div>${esc(o.address)}</div><div class="b">${esc(o.postcode)}</div>` : ""}${L}
+      <table>${items}</table>${L}
+      ${o.fee ? `<div class="row"><span>Subtotal</span><span>${money(o.subtotal)}</span></div><div class="row"><span>Entrega</span><span>${money(o.fee)}</span></div>` : ""}
+      <div class="row b big"><span>TOTAL</span><span>${money(o.total)}</span></div>
+      ${o.notes ? `${L}<div class="b">OBS:</div><div>${esc(o.notes)}</div>` : ""}${L}
+      <div class="c small">Impresso ${fmtDT(Date.now())}</div></div>`;
+  }
+  function printTicket(o) {
+    auto.queue = auto.queue.then(() => new Promise(res => {
+      let box = $("#ticket"); if (!box) { box = document.createElement("div"); box.id = "ticket"; document.body.appendChild(box); }
+      box.innerHTML = ticketHTML(o);
+      setTimeout(() => { window.print(); setTimeout(res, 600); }, 150);
+    }));
+    return auto.queue;
+  }
+  function beep() { try { const a = new (window.AudioContext || window.webkitAudioContext)(); [0, .25].forEach(t => { const o = a.createOscillator(), g = a.createGain(); o.frequency.value = 880; o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(.25, a.currentTime + t); o.start(a.currentTime + t); o.stop(a.currentTime + t + .18); }); } catch {} }
+  async function pollPrint() {
+    if (!auto.on) return;
+    try {
+      const d = await api("orders?from=" + (Date.now() - 3 * DAY));
+      auto.last = Date.now();
+      const fresh = d.orders.filter(o => PAID.has(o.status) && !printed.has(o.id)).reverse();
+      for (const o of fresh) { printed.add(o.id); savePrinted(); beep(); auto.count++; await printTicket(o); }
+      if (fresh.length) { await loadAll(); toast(fresh.length + " pedido(s) novo(s) impresso(s)"); }
+    } catch {}
+    if (st.view === "print") printView();
+  }
+  function setAuto(on) {
+    auto.on = on; LS.set("bb_autoprint", on ? "1" : "0");
+    clearInterval(auto.timer);
+    if (on) {
+      // only orders paid from now on are printed automatically
+      st.orders.filter(o => PAID.has(o.status)).forEach(o => printed.add(o.id)); savePrinted();
+      auto.timer = setInterval(pollPrint, 15000); pollPrint();
+    }
+    if (st.view === "print") printView();
+  }
+  function printView() {
+    $("#v-print").innerHTML = `
+      <div class="half">
+        <div class="card"><h2>Impressão automática</h2>
+          <p class="muted">Deixe esta página aberta no computador ligado à impressora. A cada pedido <b>pago</b>, toca um aviso e a comanda sai sozinha.</p>
+          <p style="margin:14px 0"><span class="pill ${auto.on ? "pill--paid" : "pill--pending"}">${auto.on ? "LIGADA" : "DESLIGADA"}</span>
+            ${auto.on ? `<span class="muted"> · verificando a cada 15 s${auto.last ? " · última verificação " + new Date(auto.last).toLocaleTimeString("pt-BR") : ""} · ${auto.count} impressa(s) nesta sessão</span>` : ""}</p>
+          <div class="toolbar">
+            <button class="btn ${auto.on ? "btn--danger" : "btn--primary"}" id="apToggle">${auto.on ? "Desligar impressão automática" : "Ligar impressão automática"}</button>
+            <button class="btn" id="apTest">Imprimir teste</button>
+          </div></div>
+        <div class="card"><h2>Como deixar sem perguntar nada</h2>
+          <ol class="muted" style="padding-left:18px;line-height:1.6">
+            <li>Instale o driver da Bixolon SLP-DX220 no computador e deixe-a como <b>impressora padrão</b>.</li>
+            <li>Nas preferências da impressora, papel com <b>largura 56 mm</b> (contínuo).</li>
+            <li>Abra o Chrome pelo atalho com <code>--kiosk-printing</code> (passo a passo enviado pelo desenvolvedor) — assim imprime direto, sem janela.</li>
+            <li>Entre neste painel, abra <b>Impressora</b> e clique em <b>Ligar</b>. Não feche a aba.</li>
+          </ol></div>
+      </div>`;
+    $("#apToggle").addEventListener("click", () => setAuto(!auto.on));
+    $("#apTest").addEventListener("click", () => printTicket({ id: "TESTE0001", created: Date.now(), status: "paid", mode: "delivery", day: "hoje", name: "Cliente Teste", phone: "07700 900123",
+      address: "31 South Street, Epsom", postcode: "KT18 7PJ", items: [{ name: "Picanha Angus", qty: 1, unit: "kg", total: 19.99 }, { name: "Guaraná Antarctica lata", qty: 2, unit: "each", total: 2.4 }],
+      subtotal: 22.39, fee: 3.5, total: 25.89, notes: "Teste de impressão" }));
+  }
+  if (auto.on) { auto.on = false; setTimeout(() => { if (st.me) { auto.on = true; clearInterval(auto.timer); auto.timer = setInterval(pollPrint, 15000); pollPrint(); } }, 3000); }
 
   /* ---------- PRODUTOS ---------- */
   function eff(p) {

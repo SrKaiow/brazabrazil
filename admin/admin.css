@@ -131,3 +131,17 @@ tr.detail td{background:var(--chip)}
 }
 @media print{.side,.top__tools,.toolbar,.alert,.btn{display:none!important}.app{display:block}.card,.tbl{break-inside:avoid}}
 .btn:disabled,.btn[disabled]{opacity:.45;cursor:not-allowed}
+/* ---- comanda (impressora térmica 56 mm) ---- */
+#ticket{display:none}
+@media print{
+  @page{size:56mm auto;margin:1.5mm}
+  body>*:not(#ticket){display:none!important}
+  html,body{background:#fff!important;margin:0}
+  #ticket{display:block;width:52mm;color:#000;font:11px/1.3 "Courier New",monospace}
+  #ticket .c{text-align:center}#ticket .b{font-weight:700}#ticket .big{font-size:15px}#ticket .small{font-size:9px}
+  #ticket .inv{background:#000;color:#fff;padding:2px 0;margin:3px 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #ticket hr{border:0;border-top:1px dashed #000;margin:4px 0}
+  #ticket .row{display:flex;justify-content:space-between;gap:6px}
+  #ticket table{width:100%;border-collapse:collapse}#ticket td{vertical-align:top;padding:1px 0}
+  #ticket td.q{width:9mm;font-weight:700}#ticket td.r{text-align:right;white-space:nowrap}
+}

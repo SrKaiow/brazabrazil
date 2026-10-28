@@ -126,6 +126,11 @@ async function session(env, req) {
   if (!t) return null;
   const s = await env.DB.prepare("SELECT token, expires FROM sessions WHERE token=?").bind(t).first();
   if (!s || s.expires < now()) return null;
+  // in use (e.g. the shop's printer page): keep the session alive; idle sessions still expire
+  if (s.expires - now() < SESSION_HOURS * 1800000) {
+    s.expires = now() + SESSION_HOURS * 3600000; s.renewed = true;
+    await env.DB.prepare("UPDATE sessions SET expires=? WHERE token=?").bind(s.expires, s.token).run();
+  }
   return s;
 }
 const setCookie = (t, maxAge) => `bb_admin=${t}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
@@ -242,7 +247,8 @@ export async function handleAdmin(req, env, url, { json, sameOrigin, catalogue, 
     const from = Number(url.searchParams.get("from")) || now() - 90 * 86400000;
     const to = Number(url.searchParams.get("to")) || now() + 86400000;
     const { results } = await env.DB.prepare("SELECT * FROM orders WHERE created BETWEEN ? AND ? ORDER BY created DESC LIMIT 2000").bind(from, to).all();
-    return json({ orders: (results || []).map(o => ({ ...o, items: (() => { try { return JSON.parse(o.items); } catch { return []; } })() })) });
+    return json({ orders: (results || []).map(o => ({ ...o, items: (() => { try { return JSON.parse(o.items); } catch { return []; } })() })) }, 200,
+      s.renewed ? { "set-cookie": setCookie(s.token, SESSION_HOURS * 3600) } : undefined);
   }
   if (path === "order" && isPost) {
     const id = txt(body.id, 120);
