@@ -311,7 +311,7 @@
         <div class="card"><h2>Como deixar sem perguntar nada</h2>
           <ol class="muted" style="padding-left:18px;line-height:1.6">
             <li>Instale o driver da Bixolon SLP-DX220 no computador e deixe-a como <b>impressora padrão</b>.</li>
-            <li>Nas preferências da impressora, papel com <b>largura 56 mm</b> (contínuo).</li>
+            <li>Nas preferências da impressora, papel com <b>largura 50,8 mm</b>.</li>
             <li>Abra o Chrome pelo atalho com <code>--kiosk-printing</code> (passo a passo enviado pelo desenvolvedor) — assim imprime direto, sem janela.</li>
             <li>Entre neste painel, abra <b>Impressora</b> e clique em <b>Ligar</b>. Não feche a aba.</li>
           </ol></div>
