@@ -393,8 +393,9 @@
     }
     const f = S.delivery.freeOver;
     $("#freeNote").textContent = f && isDelivery() ? (sub >= f ? t("free_ok") : t("free_more").replace("{x}", money(f - sub))) : "";
-    $("#sendLabel").innerHTML = t(S.onlinePayment ? "d_pay" : "d_send");
-    $("#secureNote").innerHTML = t(S.onlinePayment ? "secure" : "secure_manual");
+    $("#sendLabel").innerHTML = t(S.ordersOpen === false ? "closed_btn" : S.onlinePayment ? "d_pay" : "d_send");
+    $("#secureNote").innerHTML = t(S.ordersOpen === false ? "closed_note" : S.onlinePayment ? "secure" : "secure_manual");
+    $("#sendOrder").disabled = S.ordersOpen === false;
   }
 
   $("#cartItems").addEventListener("click", e => {
@@ -485,6 +486,7 @@
     if (hasAlcohol() && !form.adult.checked) {
       $("#ageCheck").classList.add("age-check--err"); form.adult.focus(); toast(t("age_needed")); return;
     }
+    if (S.ordersOpen === false) { toast(t("closed_note")); return; }
     const o = snapshot();
     if (!S.onlinePayment) { sendManual(o); toast(t("opening")); return; }
 

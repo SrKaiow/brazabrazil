@@ -159,6 +159,8 @@ async function stripe(env, method, path, body) {
 
 async function createCheckout(request, env) {
   if (!sameOrigin(request)) return json({ error: "forbidden" }, 403);
+  // online orders switched off in js/config.js (ordersOpen: false)
+  if (S.ordersOpen === false) return json({ error: "orders_closed" }, 503);
   if (limited(request, "co", 8, 60_000)) return json({ error: "too_many_requests" }, 429, { "retry-after": "60" });
   if (!(request.headers.get("content-type") || "").toLowerCase().startsWith("application/json")) return json({ error: "bad_request" }, 415);
   if (Number(request.headers.get("content-length") || 0) > MAX_BODY) return json({ error: "too_large" }, 413);

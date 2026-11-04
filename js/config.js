@@ -57,5 +57,9 @@ window.SITE = {
      "awaiting payment" and the shop sends a payment link. */
   onlinePayment: true,
 
+  /* false = the shop is not taking online orders yet: customers can browse
+     and fill the basket, but cannot pay or send the order. */
+  ordersOpen: false,
+
   currency: "£"
 };
